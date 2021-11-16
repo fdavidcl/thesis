@@ -1,0 +1,204 @@
+\ProvidesPackage{latt}
+
+% From liuthesis:
+% \createvariable{myname} will create commands \myname{Enter a name} and \@myname
+% which will substitute for the entered text
+\def\createvariable#1{%
+  \expandafter\def\csname #1\endcsname{\expandafter\gdef\csname @#1\endcsname}
+  \csname #1\endcsname{\texttt{\textbackslash #1}}
+}
+
+\newcommand{\xr}[1]{{\color{red}#1}}
+
+% List of variables
+
+\createvariable{thetitle}
+\createvariable{theauthor}
+\createvariable{supervisor}
+\createvariable{university}
+\createvariable{department}
+\createvariable{publicationdate}
+\createvariable{publicationurl}
+\createvariable{publicationyear}
+\createvariable{publicationplace}
+
+% From latex-mat-ugr/Plantilla-TFG: resources for the outer page
+
+\RequirePackage{eso-pic}
+\newcommand\BackgroundPic{%
+  \put(0,0){%
+    \parbox[b][\paperheight]{\paperwidth}{%
+      \vfill
+      \centering
+      % Indicar la imagen de fondo en el siguiente comando
+      \includegraphics[width=\paperwidth,height=\paperheight,%
+      keepaspectratio]{portada-ugr-color}%
+      \vfill
+}}}
+
+\RequirePackage{scrextend}
+\RequirePackage{setspace}
+\newcommand{\makeouterpage}{
+  \begin{titlepage}
+    \AddToShipoutPicture*{\BackgroundPic}
+    \phantomsection 
+    \pdfbookmark[1]{Título}{title}
+    \begin{addmargin}[2.6cm]{0cm}
+    \begin{flushleft}
+      \vfill
+      \large{\textsf{\@department}}
+      \vfill\vfill
+      {\large\textsc{tesis doctoral}}
+      \begin{flushleft}
+        \Huge
+        %\setstretch{0.8}
+        \@title
+      \end{flushleft}
+      \vfill\vfill\vfill\vfill
+      \textsf{\normalsize{Autor:}}\\
+      {\normalsize\textrm{\@author}} \\
+      \bigskip
+      \textsf{\normalsize{Directores:}}\\
+      {\normalsize\rmfamily\@supervisor}\\
+      \bigskip
+      \textsf{\normalsize{\@publicationplace, \@publicationdate}}
+    \end{flushleft}  
+    \end{addmargin}
+  \end{titlepage}
+}
+
+% from liuthesis: resources to embed other articles here
+
+\RequirePackage{calc}
+\RequirePackage{ragged2e}
+
+
+\newcommand{\paperprefix}{Artículo}
+\definecolor{nicered}{rgb}{.914,.173,.188}
+\newsavebox{\feline@article}
+\newcommand\feline@article@marker[1][4cm]{%
+  \sbox\feline@article{%
+    \resizebox{!}{#1}{\fboxsep=1pt%
+      \colorbox{nicered!90!black}{\color{white}\bfseries\thearticle\phantom{.}}%
+    }}%
+  \rotatebox{90}{%
+    \resizebox{%
+      \heightof{\usebox{\feline@article}}+\depthof{\usebox{\feline@article}}}%
+    {!}{{\scshape \MakeUppercase \paperprefix}}}\quad%
+  \raisebox{\depthof{\usebox{\feline@article}}}{\usebox{\feline@article}}%
+}
+\newcommand\feline@chm[1][4cm]{%
+  \sbox\feline@article{\feline@article@marker[#1]}%
+  \makebox[0pt][l]{% aka \rlap
+    %\makebox[\spinemargin][r]{
+      \usebox\feline@article
+    %}
+  }
+}
+\RequirePackage{textpos}
+\newcounter{article}
+\setcounter{article}{0}
+\renewcommand{\thearticle}{\Roman{article}}
+\includepdfset{pages=-}
+\setlength{\TPVertModule}{2cm}
+\setlength{\TPHorizModule}{\paperwidth - 4.3cm}
+\newcommand{\papermark}{\paperprefix \thearticle}
+\newcommand{\theoldchapter}{\thechapter}
+
+
+% Layout #1: large margins
+\newcommand{\reducedlayout}{%
+	\newgeometry{
+		top=54.8\vscale,
+		bottom=54.8\vscale,
+		inner=24.8\hscale,
+		textwidth=107\hscale,
+        marginparsep=6.2\hscale,
+		marginparwidth=47.7\hscale,
+    }%
+    \recalchead%
+}
+
+\newcommand{\makearticle}[2]{%
+  \refstepcounter{article}%
+  \renewcommand*{\thechapter}{\thearticle}%
+%   \pagelayout{reduced}
+  \chapter{#1}%
+  \begin{widepar}
+  \begin{kaobox}[frametitle=Source]
+    \fullcite{#2}\\[2\baselineskip]
+  \end{kaobox}
+\end{widepar}
+%   \includepdf[pages=-]{#2}
+  \renewcommand*{\thechapter}{\theoldchapter}%
+}
+
+
+\newcommand{\includearticle}[2][pages=-]{%
+  \@twosidetrue
+  \refstepcounter{article}%
+%   \cleartorecto%
+  \pagelayout{wide}
+  \clearpage
+  \thispagestyle{empty}
+  \mbox{}%
+  \vspace*{\fill}
+   \begin{center}%
+     {\feline@chm[2.5cm]\\[2\baselineskip]}
+     {\fullcite{#2}}
+  \end{center}%
+  \vspace*{\fill}%
+  \clearpage
+%   \cleartorecto%
+  \label{art:#2}%
+  \addcontentsline{toc}{chapter}{\papermark}%
+  \includepdf[#1]{#2}%
+  \pagelayout{margin}
+}
+\newenvironment{papers}{
+%   \makeevenhead{ruled}{\papermark}{}{}
+  \renewcommand*{\thechapter}{\thearticle}
+  \newlength{\numberheight}
+ \makechapterstyle{paperstyle}{%
+    \setlength{\afterchapskip}{40pt}
+    \setlength{\numberheight}{10mm}
+  \renewcommand*{\chapterheadstart}{\vspace*{40pt}}
+    \renewcommand*{\afterchapternum}{\par\nobreak\vskip 25pt}
+    \renewcommand*{\chapnamefont}{\normalfont\LARGE\flushright}
+    \renewcommand*{\chapnumfont}{\normalfont\HUGE}
+    \renewcommand*{\chaptitlefont}{\normalfont\Huge\bfseries\flushright}
+    % \renewcommand*{\printchaptername}{%
+    % }
+    % \renewcommand*{\chapternamenum}{}
+
+    % \renewcommand*{\printchapternum}{%
+    % }%
+    % \makeoddfoot{plain}{}{}{\thepage}
+    }
+    \renewcommand{\@chapapp}{\papermark}
+    \chapterstyle{paperstyle}
+}{}
+\newcommand{\includearticletex}[1]{%
+ \stepcounter{article}%
+%   \cleartorecto%
+  \pagelayout{wide}
+  \thispagestyle{empty}
+  \mbox{}%
+  \vspace*{\fill}
+   \begin{center}%
+     {\hfill \feline@chm[2.5cm]\\[2\baselineskip]}
+     {\fullcite{#1}}
+  \end{center}%
+  \vspace*{\fill}%
+  \clearpage{}
+  \chapter[\papermark][\papermark]{\citetitle{#1}}
+  \label{art:#1}
+ \input{papers/#1}%
+ \pagelayout{margin}
+}
+
+\newcommand{\makepart}[1]{
+    \pagelayout{wide}% No margins
+    \addpart{#1}%
+    \pagelayout{margin}% Restore margins
+}

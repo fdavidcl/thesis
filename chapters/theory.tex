@@ -1,0 +1,123 @@
+\setchapterpreamble[u]{\margintoc}
+\chapter{Theoretical foundation}
+\labch{theory}
+
+
+% The main purpose of this chapter is to make it obvious for
+% the reader that the report authors have made an effort to read
+% up on related research and other information of relevance for
+% the research questions. It is a question of trust. Can I as a
+% reader rely on what the authors are saying? If it is obvious
+% that the authors know the topic area well and clearly present
+% their lessons learned, it raises the perceived quality of the
+% entire report.
+
+% \begin{kaobox}[frametitle=Remark]
+% After having read the theory chapter it shall be obvious for
+% the reader that the research questions are both well
+% formulated and relevant.
+% \end{kaobox}
+
+% The chapter must contain theory of use for the intended
+% study, both in terms of technique and method. If a final thesis
+% project is about the development of a new search engine for
+% a certain application domain, the theory must bring up related
+% work on search algorithms and related techniques, but also
+% methods for evaluating search engines, including
+% performance measures such as precision, accuracy and
+% recall.
+
+% The chapter shall be structured thematically, not per author.
+% A good approach to making a review of scientific literature
+% is to use \emph{Google Scholar} (which also has the useful function
+% \emph{Cite}). By iterating between searching for articles and reading
+% abstracts to find new terms to guide further searches, it is
+% fairly straight forward to locate good and relevant
+% information, such as \cite{test}.
+
+% Having found a relevant article one can use the function for
+% viewing other articles that have cited this particular article,
+% and also go through the article’s own reference list. Among
+% these articles on can often find other interesting articles and
+% thus proceed further.
+
+% It can also be a good idea to consider which sources seem
+% most relevant for the problem area at hand. Are there any
+% special conference or journal that often occurs one can search
+% in more detail in lists of published articles from these venues
+% in particular. One can also search for the web sites of
+% important authors and investigate what they have published
+% in general.
+
+% This chapter is called either \emph{Theory, Related Work}, or
+% \emph{Related Research}. Check with your supervisor.
+
+\section{Machine learning fundamentals}
+
+Machine learning differs from other kinds of computer science disciplines in that its objective is not to give precise instructions for the machine to follow, but instead to provide some form of experience that the machine must learn from in order to extract some information or display some behavior \cite{deisenroth2020mathematics}. The algorithms developed for machine learning are essentially mechanisms that take in a certain amount of data, process it and compute the necessary steps to fulfill a specific objetive related to the data. Their output is usually a \textit{model}, that is, a representation of an approximate solution to the problem. 
+ 
+\subsection{Data and models}
+
+\begin{margintable}
+\caption{\label{tbl:dataset}An example dataset describing features of different kinds of animals. Each feature can be numerical (length, legs) or categorical (wings, species).}\footnotesize
+\begin{tabular}{rrrl}\toprule
+Length & Legs & Wings & Species\\\midrule
+40 & 4 & No & Dog\\
+1 & 6 & Yes & Fly\\
+145 & 0 & No & Dolphin\\\bottomrule
+\end{tabular}
+\end{margintable}
+
+Datum (plural \textit{data}) usually refers to the minimal unit of machine-readable information, for example, the height of a person (numerical value), whether they are an adult or not (binary categorical value), their country of origin (categorical value) or their given name (character string).
+
+A \textit{dataset} is a collection of data, usually organized into a table (an example is shown in \autoref{tbl:dataset}). It contains several \textit{samples}, which correspond to each one of the cases of the problem from which the machine will be able to learn before being presented with new cases. \textit{Variables} are each one of the aspects that have been measured or that characterize each sample. Samples are typically distributed in rows and variables in columns.
+
+% \subsection{Models}
+
+A \textit{model} is an abstraction of a dataset that enables the machine to perform the desired operations, for example, generating new data similar to the available, or assigning a category to new data points. A good model should be faithful to the available data, incorporating enough information to describe its behavior and potential relations between variables, so that it can be used as a description of the data and as a tool for solving tasks related to it. Models typically follow some template which includes a range of parameters that can be adjusted in order for the resulting model to represent the data. We will call these templates \textit{untrained models}, whereas the final results will be \textit{trained models}.
+
+\subsection{Learning and types of learning}
+
+In the context of machines learning from data, several types of learning are usually distinguished, according to the feedback that the machine receives while processing data. This concept is known as \textit{supervision}, and usually relates to whether there are available solved cases for the specific problem at hand. A solved case is composed of an input instance and an associated solution or \textit{label}, which may be a numerical value, a categorical value or a more complex structure.
+ 
+\begin{itemize}
+    \item Supervised learning (SL\nomenclature{SL}{Supervised learning})
+    \item Unsupervised learning
+    \item Semi-supervised learning
+    \item Reinforcement learning
+\end{itemize}
+
+\subsubsection{Supervised learning}
+
+In a supervised learning setting, every observed case of the problem in the dataset is coupled with its solution, so that the machine can learn a mapping out of those associations, from the space of the instances (input space) to the one of the labels (output space). In \autoref{tbl:dataset}, if the objective task is to predict the species of an animal, knowing the rest of its characteristics, this would be appropriate for a supervised learning algorithm. 
+
+Common supervised learning problems are \textit{classification} and \textit{regression}.
+
+\subsubsection{Unsupervised learning}
+
+This scenario consists in problems where the solution is not known for the data that is available and, as a result, the model cannot be provided with supervision. 
+
+\subsubsection{Semi-supervised learning}
+
+\subsubsection{Reinforcement learning}
+
+
+\section{Deep learning}
+
+Traditional algorithms for adjusting models tend to process data "as is", which means that they perform few transformations (or none) to each vector before using them directly to fit model parameters. This causes them to underperform when the representation of the vectors (i.e. the set of features) is not ideal. As a consequence, it is usually convenient to preprocess data beforehand, using one or several tools that will manipulate the features looking to improve the performance of the learning algorithm. This is known as \textit{feature extraction}, feature learning or representation learning. 
+
+An alternative approach is to embed the feature extraction stage within the untrained model itself, and learn the best features at the same time that the final model (a classifier, regressor, segmentor...) is trained. When this process is organized layer-wise, the overall model is called a \textit{deep learning} model.
+
+\section{Encoder-decoder architectures}
+
+There exists a category of deep architectures composed of two components, an \textit{encoder} and a \textit{decoder}, where there is an interest in the model operating first with the features in order to obtain higher-level features (encoding) and then developing these features back onto more detailed and specific versions.
+
+For example, when the objective task is to segment the pixels in an image, that is, label each pixel with one of several classes, a possible solution is to compute abstract, high-level features for the image, and use those to classify each pixel next. This allows to analyze the neighborhoods of each pixel before assigning it to a class, which will probably lead to more cohesive segmentations. Using an encoder-decoder structure, the encoder would compute these low-resolution but high-level features, and the decoder would perform the detailed labeling task out of the extracted information.
+
+A special subset of encoder-decoder architectures are autoencoders, which are further described next.
+
+\subsection{Autoencoders}
+
+Essentially, an \textit{autoencoder} is an encoder-decoder architecture which is trained to map its inputs onto its outputs.
+
+% \section{}
