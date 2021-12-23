@@ -1,7 +1,7 @@
 SHELL=/bin/bash
 MKLATEX = latexmk
 MKLATEXOPTS=-pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-make
-MAIN=main
+MAIN=notes
 ALL=$(MAIN).pdf
 BBL=$(MAIN).bbl
 

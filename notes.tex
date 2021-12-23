@@ -1,6 +1,6 @@
 % Load the kaobook class
 \documentclass[
-	fontsize=10pt, % Base font size
+	fontsize=11pt, % Base font size
 	twoside=true, % Use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
 	open=any, % If twoside=true, uncomment this to force new chapters to start on any page, not only on right (odd) pages
 	secnumdepth=1, % How deep to number headings. Defaults to 1 (sections)
@@ -134,6 +134,34 @@
 
 \input{chapters/intro.tex}
 \input{chapters/theory.tex}
+
+\makearticle{A tutorial on autoencoders}{INFFUS18-AutoencoderTutorial}
+
+% \refstepcounter{article}%
+% \let\oldthechapter\thechapter
+% \renewcommand*{\thechapter}{\thearticle}%
+% \chapter{A tutorial on autoencoders}%
+% \begin{widepar}
+% \begin{kaobox}[frametitle=Source]
+%   \fullcite{INFFUS18-AutoencoderTutorial}\\[2\baselineskip]
+% \end{kaobox}
+% \end{widepar}
+% \includepdf[pages=-]{INFFUS18-AutoencoderTutorial}
+
+\input{chapters/practical.tex}
+
+\makearticle{Software for unsupervised deep learning architectures in R}{knosys-RUTA-FINAL}
+
+% \chapter{Software for unsupervised deep learning architectures in R}%
+% \begin{widepar}
+% \begin{kaobox}[frametitle=Source]
+%   \fullcite{knosys-RUTA-FINAL}\\[2\baselineskip]
+% \end{kaobox}
+% \end{widepar}
+% % \includepdf[pages=-]{knosys-RUTA-FINAL}
+% \renewcommand*{\thechapter}{\oldthechapter}%
+% \pagelayout{margin}
+ 
 
 % % \makepart{Published articles}
 

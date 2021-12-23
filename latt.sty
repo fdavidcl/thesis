@@ -103,7 +103,7 @@
 \setlength{\TPVertModule}{2cm}
 \setlength{\TPHorizModule}{\paperwidth - 4.3cm}
 \newcommand{\papermark}{\paperprefix \thearticle}
-\newcommand{\theoldchapter}{\thechapter}
+\let\theoldchapter\thechapter
 
 
 % Layout #1: large margins
@@ -124,6 +124,7 @@
   \renewcommand*{\thechapter}{\thearticle}%
 %   \pagelayout{reduced}
   \chapter{#1}%
+  \addtocounter{chapter}{-1}
   \begin{widepar}
   \begin{kaobox}[frametitle=Source]
     \fullcite{#2}\\[2\baselineskip]

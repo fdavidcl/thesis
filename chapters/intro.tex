@@ -11,9 +11,35 @@ The general objective in a data science problem is to model a real world scenari
 
 \section{Problem setting}
 
-A great part of the time spent in a data science problem, usually the longest, consists in preparing and preprocessing the available data in order for the posterior learning techniques to extract the maximum possible amount of information.
+A great part of the time spent in a data science problem, usually the longest, consists in preparing and preprocessing the available data in order for the posterior learning techniques to extract the maximum possible amount of information \xr{cita preprocessing}. There exist several traits of the data that can be manipulated to facilitate the work of learning algorithms: missing values, noisy instances, class imbalance, among others.
 
 One aspect of data to which machine learning \xr{definition?} models may be specially sensitive is the set of features, the specific representation of each instance.
+
+- what difficulties can the feature set present
+
+Features that may characterize an event or object adequately for humans may not be ideal for machines to process. For example, a string of text may have meaning for a reader but for the machine it is just a sequence of characters. Furthermore, the techniques used for collecting data can only produce the ``observable'' variables in a dataset, but there may be interesting, ``hidden'' variables which influence the data in a clearer way.
+
+- what problems cause the feature set on classifiers
+
+Providing a learning algorithm with unprocessed features usually leads to sub-par performance due to 
+
+- what is the objective, to get a better feature set
+
+All this leads to a new task that can be performed before the actual knowledge extraction, \textit{feature learning}. The objective when learning features is 
+
+- what are the difficulties of obtaining a new feature set
+
+- what are other possible difficulties: difficult classes and nonstandard problems
+
+Other possible obstacles that one may come across when inspecting the features of a dataset are difficult classes, also known as class complexity. This scenario arises when the variables do not provide sufficient information to allow class separation, the relations between variables and the target are highly nonlinear, or other circumstances prevent a learning method from inferring an adequate mapping from the input features to the target variable.
+
+\section{Tools}
+
+- Qué es el aprendizaje profundo y cómo surge
+
+- Por qué aplicar aprendizaje profundo
+
+
 
 \section{Motivation}
 
@@ -25,15 +51,28 @@ The questions that we are trying to tackle throughout this thesis can be summari
     \item Can one induce specific behavior within the transformations, such as separating different classes?
 \end{itemize}
 
-- Problemas a la hora de generar modelos para los datos: problemáticas no estándares, dimensionalidad y complejidad de clases
+
+- the potential of deep neural models over other methods for feature learning
+
+As the trends in usage of deep learning models to solve machine learning problems continue to increase, we focus our interest in their potential to not only tackle supervised problems such as classification, regression or detection, but also wider problems where solutions are not so easily validated, such as feature learning. Since deep learning allows the integration of the feature extraction stage directly within the predictor itself, these types of models should be valuable feature learners for other tasks as well.
+
+- interest in how to adapt feature generation for different purposes, e.g. multiple outputs
+
+Deep neural models dedicated to generating new feature sets could be adapted, as a result, to different purposes. For instance, one could search for feature spaces where ``ordinary'' data points are very cohesive, and thus anomalous inputs would be easy to identify. Similarly, a transformation of features could allow for better separation of different classes, better distinction between noise and signal, or more meaningful traits that relate to all the original variables.
+
+- interest in multi-view problems
+
+Another potential use of feature learning models that catches our interest is the possibility of capturing more than one aspect of each problem instance, which translates to different \textit{views} of the problem, for example, image and text. These views could be processed by different learners or special algorithms, but one could build feature learners that combine the available information into a more machine-ready feature vector.
+
+- interest in interpretable models
+
+- 
 
 \section{Objective}
 
-\section{Tools}
+- explore ways of learning feature sets by means of deep learning models
 
-- Qué es el aprendizaje profundo y cómo surge
-
-- Por qué aplicar aprendizaje profundo
+- develop new objectives so that features are able to separate different classes better
 
 \section{Thesis structure}
 

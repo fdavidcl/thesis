@@ -52,9 +52,13 @@
 % This chapter is called either \emph{Theory, Related Work}, or
 % \emph{Related Research}. Check with your supervisor.
 
+Machine learning covers a set of problems and tools that overlaps several disciplines. As such, in order to tackle machine learning problems, it is necessary to lay some foundations which help grasp all the concepts involved. Even though this is a rapidly evolving field, there are fundamental topics that remain applicable.
+
+The objective of this chapter is to provide the reader with the definitions, descriptions and examples that allow to understand the rest of this work. We will try to assume little-to-no prior knowledge about machine learning, thus making it as accessible as possible. The following sections go over the basic subjects of machine learning, build the core concepts of deep learning and arrive to the main tools that will be used along the rest of this book, autoencoders.
+
 \section{Machine learning fundamentals}
 
-Machine learning differs from other kinds of computer science disciplines in that its objective is not to give precise instructions for the machine to follow, but instead to provide some form of experience that the machine must learn from in order to extract some information or display some behavior \cite{deisenroth2020mathematics}. The algorithms developed for machine learning are essentially mechanisms that take in a certain amount of data, process it and compute the necessary steps to fulfill a specific objetive related to the data. Their output is usually a \textit{model}, that is, a representation of an approximate solution to the problem. 
+Machine learning differs from other kinds of computer science disciplines in that its objective is not to give precise instructions for the machine to follow, but instead to provide some form of experience that the machine must learn from in order to extract some information or display some behavior \sidecite{deisenroth2020mathematics}. The algorithms developed for machine learning are essentially mechanisms that take in a certain amount of data, process it and compute the necessary steps to fulfill a specific objetive related to the data. Their output is usually a model, that is, a representation of an approximate solution to the problem. 
  
 \subsection{Data and models}
 
@@ -76,12 +80,14 @@ A \textit{dataset} is a collection of data, usually organized into a table (an e
 
 A \textit{model} is an abstraction of a dataset that enables the machine to perform the desired operations, for example, generating new data similar to the available, or assigning a category to new data points. A good model should be faithful to the available data, incorporating enough information to describe its behavior and potential relations between variables, so that it can be used as a description of the data and as a tool for solving tasks related to it. Models typically follow some template which includes a range of parameters that can be adjusted in order for the resulting model to represent the data. We will call these templates \textit{untrained models}, whereas the final results will be \textit{trained models}.
 
+
+
 \subsection{Learning and types of learning}
 
-In the context of machines learning from data, several types of learning are usually distinguished, according to the feedback that the machine receives while processing data. This concept is known as \textit{supervision}, and usually relates to whether there are available solved cases for the specific problem at hand. A solved case is composed of an input instance and an associated solution or \textit{label}, which may be a numerical value, a categorical value or a more complex structure.
+In the context of machines learning from data, several types of learning are usually distinguished, according to the feedback that the machine receives while processing data. This concept is known as \textit{supervision}, and usually relates to whether there are available solved cases for the specific problem at hand. A solved case is composed of an input instance and an associated solution or \textit{label}, which may be a numerical value, a categorical value or a more complex structure. Attending to the availability of labels for the learning algorithm, the following learning paradigms are considered:
  
 \begin{itemize}
-    \item Supervised learning (SL\nomenclature{SL}{Supervised learning})
+    \item Supervised learning %(SL\nomenclature{SL}{Supervised learning})
     \item Unsupervised learning
     \item Semi-supervised learning
     \item Reinforcement learning
@@ -89,26 +95,58 @@ In the context of machines learning from data, several types of learning are usu
 
 \subsubsection{Supervised learning}
 
-In a supervised learning setting, every observed case of the problem in the dataset is coupled with its solution, so that the machine can learn a mapping out of those associations, from the space of the instances (input space) to the one of the labels (output space). In \autoref{tbl:dataset}, if the objective task is to predict the species of an animal, knowing the rest of its characteristics, this would be appropriate for a supervised learning algorithm. 
+In a supervised learning setting, every observed case of the problem in the dataset is coupled with its solution, so that the machine can learn a mapping out of those associations, from the space of the instances (input space) to the one of the labels (output space). Models generated by learning algorithms in this contexts are usually known as \textit{predictors}, since for each new data point they must guess a label in the output space. For example, in \autoref{tbl:dataset}, an appropriate objective task for a supervised learning algorithm is to predict the species of an animal, knowing the rest of its characteristics. 
 
-Common supervised learning problems are \textit{classification} and \textit{regression}.
+Common supervised learning problems are \textit{classification} and \textit{regression}. They differ in the type of output that the predictor must produce: classification implies that the output space is finite, thus the label is just one of a certain number of available \textit{classes}, whereas regression involves guessing a real value from a continuous interval. 
 
 \subsubsection{Unsupervised learning}
 
-This scenario consists in problems where the solution is not known for the data that is available and, as a result, the model cannot be provided with supervision. 
+This scenario covers problems where the solution is not known for the data that is available and, as a result, the model cannot be provided with supervision. Instead, the user of an unsupervised learning algorithm looks to find some sort of inner structure or hidden patterns in the data.
+
+One case where unsupervised learning methods are convenient is when trying to find the most useful variables in a dataset, or even transform the original features onto a more compact set of variables which prevent redundancy and maximize efficiency in relation to information provided per feature. Another typical task is finding associations between items present in the data points, like related articles in a shopping bag or recommended moviess. 
 
 \subsubsection{Semi-supervised learning}
 
+A combination of supervised and unsupervised learning emerges when the presence of labels in the observed data is mixed, that is, there are instances with associated labels and others with missing labels. This learning paradigm is of interest in many real-world problems, since annotating each one of the collected data instances with its corresponding label can be costly and time-consuming~\sidecite{kingma2014semi}. 
+
 \subsubsection{Reinforcement learning}
 
+A different strategy for machines to learn consists in providing them with positive or negative reinforcements according to their behavior. Instead of providing the algorithm with the complete solution for each problem instance, usually a score is given, evaluating the current solution against some criteria. This learning paradigm fits well with problems where multiple solutions can be acceptable, so the actual solving process is not as important as obtaining the desired result, as well as situations where the aim is to find the most efficient solution.
 
-\section{Deep learning}
+% \subsection{Traditional machine learning algorithms}
+
+
+\subsection{Feature learning}
 
 Traditional algorithms for adjusting models tend to process data "as is", which means that they perform few transformations (or none) to each vector before using them directly to fit model parameters. This causes them to underperform when the representation of the vectors (i.e. the set of features) is not ideal. As a consequence, it is usually convenient to preprocess data beforehand, using one or several tools that will manipulate the features looking to improve the performance of the learning algorithm. This is known as \textit{feature extraction}, feature learning or representation learning. 
 
-An alternative approach is to embed the feature extraction stage within the untrained model itself, and learn the best features at the same time that the final model (a classifier, regressor, segmentor...) is trained. When this process is organized layer-wise, the overall model is called a \textit{deep learning} model.
+\section{Obstacles in supervised problems}
 
-\section{Encoder-decoder architectures}
+Although supervised learning tasks provide the desired answer for all observed cases, there are a wide variety of obstacles that can prevent a learning algorithm from finding an acceptable solution.
+
+- small intro to nonstandard problems
+
+
+
+- small intro to difficult classes
+
+\section{Deep learning}
+
+An alternative approach to extracting features before training a predictor 
+is to embed the feature extraction stage within the untrained model itself, and learn the best features at the same time that the final model (a classifier, regressor, segmentor...) is trained. When this process is organized layer-wise, the overall model is called a \textit{deep learning} model.
+
+\subsection{Types of deep networks}
+
+- dense networks
+
+- convolutional networks
+
+- recurrent networks
+
+- transformers
+
+
+\subsection{Encoder-decoder architectures}
 
 There exists a category of deep architectures composed of two components, an \textit{encoder} and a \textit{decoder}, where there is an interest in the model operating first with the features in order to obtain higher-level features (encoding) and then developing these features back onto more detailed and specific versions.
 
@@ -119,5 +157,18 @@ A special subset of encoder-decoder architectures are autoencoders, which are fu
 \subsection{Autoencoders}
 
 Essentially, an \textit{autoencoder} is an encoder-decoder architecture which is trained to map its inputs onto its outputs.
+
+- function version
+
+- some of the basic purposes of an ae
+
+- basic ae variants 
+
+
+\clearpage
+
+% article: autoencoder overview
+
+% article: nonstandard problems overview
 
 % \section{}
