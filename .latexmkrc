@@ -3,7 +3,7 @@ $pdf_mode = 1;
 $pdflatex = 'pdflatex -output-directory=. -shell-escape %O %S';
 
 # By default compile only the file called 'main.tex'
-@default_files = ('main.tex');
+@default_files = ('notes.tex');
 
 # Compile the glossary and acronyms list (package 'glossaries')
 add_cus_dep( 'acn', 'acr', 0, 'makeglossaries' );

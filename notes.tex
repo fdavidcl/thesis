@@ -1,7 +1,7 @@
 % Load the kaobook class
 \documentclass[
 	fontsize=11pt, % Base font size
-	twoside=true, % Use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
+	twoside=false, % Use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
 	open=any, % If twoside=true, uncomment this to force new chapters to start on any page, not only on right (odd) pages
 	secnumdepth=1, % How deep to number headings. Defaults to 1 (sections)
 ]{kaobook}
@@ -135,8 +135,6 @@
 \input{chapters/intro.tex}
 \input{chapters/theory.tex}
 
-\makearticle{A tutorial on autoencoders}{INFFUS18-AutoencoderTutorial}
-
 % \refstepcounter{article}%
 % \let\oldthechapter\thechapter
 % \renewcommand*{\thechapter}{\thearticle}%
@@ -149,6 +147,8 @@
 % \includepdf[pages=-]{INFFUS18-AutoencoderTutorial}
 
 \input{chapters/practical.tex}
+
+\makearticle{A tutorial on autoencoders}{INFFUS18-AutoencoderTutorial}
 
 \makearticle{Software for unsupervised deep learning architectures in R}{knosys-RUTA-FINAL}
 
@@ -171,14 +171,16 @@
 
 % % \includepdf{INFFUS18-AutoencoderTutorial}
 
+\input{chapters/conclusions.tex}
+
 % \pagelayout{margin}
-\appendix % From here onwards, chapters are numbered with letters, as is the appendix convention
+% \appendix % From here onwards, chapters are numbered with letters, as is the appendix convention
 
-\makepart{Appendix}
+% \makepart{Appendix}
 
-\chapter{Some more blindtext}
+% \chapter{Some more blindtext}
 
-\blindtext
+% \blindtext
 
 %----------------------------------------------------------------------------------------
 
