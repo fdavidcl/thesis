@@ -1,0 +1,1468 @@
+%%%%%%%%%%%%%%%%%%%%%%% file template.tex %%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is a general template file for the LaTeX package SVJour3
+% for Springer journals.          Springer Heidelberg 2010/09/16
+%
+% Copy it to a new file with a new name and use it as the basis
+% for your article. Delete % signs as needed.
+%
+% This template includes a few options for different layouts and
+% content for various journals. Please consult a previous issue of
+% your journal as needed.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% First comes an example EPS file -- just ignore it and
+% proceed on the \documentclass line
+% your LaTeX will extract the file if required
+
+%
+% \RequirePackage{fix-cm}
+%
+%\documentclass{svjour3}                     % onecolumn (standard format)
+%\documentclass[smallcondensed]{svjour3}     % onecolumn (ditto)
+%\documentclass[smallextended]{svjour3}       % onecolumn (second format)
+% \documentclass[twocolumn]{svjour3}          % twocolumn
+% \documentclass[
+% 	fontsize=11pt, % Base font size
+% 	twoside=false, % Use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
+% 	open=any, % If twoside=true, uncomment this to force new chapters to start on any page, not only on right (odd) pages
+% 	secnumdepth=1, % How deep to number headings. Defaults to 1 (sections)
+% ]{kaobook}
+% \setchapterstyle{kao} % Choose the default chapter heading style
+% % change draft by referee for submission!!
+% %
+% \usepackage{kaobiblio}
+
+% \bibliography{references.bib}
+% \smartqed  % flush right qed marks, e.g. at end of proof
+
+% \usepackage[utf8]{inputenc}
+%
+% \usepackage{graphicx}
+%
+% \usepackage{mathptmx}      % use Times fonts if available on your TeX system
+%
+% insert here the call for the packages your document requires
+%\usepackage{latexsym}
+% etc.
+%
+% please place your own definitions here and don't use \def but
+% \newcommand{}{}
+%
+% Insert the name of "your journal" with
+% \journalname{myjournal}
+%
+% \begin{document}
+
+%%% Highlight revisions in blue
+% \newcommand{}[1]{#1}
+% Remove the following line to remove highlights
+% \renewcommand{}[1]{\textcolor{blue}{#1}}
+
+
+% \renewcommand*{\thechapter}{\Roman{chapter}}
+% \addtocounter{chapter}{2}
+\makearticle{A snapshot on nonstandard supervised learning problems}{charte2019snapshot}
+% \chapter{}
+
+% \begin{widepar}
+%   \begin{kaobox}[frametitle=Source]
+%     Charte, D., Charte, F., García, S., \& Herrera, F. (2019). A snapshot on nonstandard supervised learning problems: taxonomy, relationships, problem transformations and algorithm adaptations. \textit{Progress in Artificial Intelligence, 8(1)}, 1-14.
+%   \end{kaobox}
+% \end{widepar}
+% aka The Zoo of Supervised Learning
+
+%\titlerunning{Short form of title}        % if too long for running head
+
+% \author{David Charte
+%   \and Francisco Charte
+%   \and Salvador Garc{\'i}a
+%   \and Francisco Herrera
+% }
+
+
+%\authorrunning{Short form of author list} % if too long for running head
+
+% \institute{D. Charte \at
+%               CITIC IB14, Universidad de Granada, Granada, Spain \\
+%               Tel.: +34-958241719\\ % (Tfno de conserjería del CITIC)
+%               \email{fdavidcl@ugr.es}           %  \\
+% %             \emph{Present address:} of F. Author  %  if needed
+%            \and
+%            F. Charte \at
+%            \email{fcharte@ujaen.es}
+%            \and
+%            S. Garc{\'i}a \at
+%            \email{salvagl@decsai.ugr.es}
+%            \and
+%            F. Herrera \at
+%            \email{herrera@decsai.ugr.es}
+% }
+
+%\author{}
+%\institute{F. Author \at address \\ Tel.: +123-45-678910\\Fax: +123-45-678910\\ \email{email}}
+
+% \date{Received: date / Accepted: date}
+% The correct dates will be entered by the editor
+
+
+% \maketitle
+
+% \begin{abstract}
+  \section*{Abstract}
+Machine learning is a field which studies how machines can alter and adapt their behavior, improving their actions according to the information they are given. This field is subdivided into multiple areas, among which the best known are supervised learning (e.g. classification and regression) and unsupervised learning (e.g. clustering and association rules).
+
+Within supervised learning, most studies and research are focused on well known standard tasks, such as binary classification, multiclass classification and regression with one dependent variable. However, there are many other less known problems. These are what we generically call nonstandard supervised learning problems. The literature about them is much more sparse, and each study is directed to a specific task. Therefore, the definitions, relations and applications of this kind of learners are hard to find.
+
+The goal of this paper is to provide the reader with a broad view on the distinct variations of nonstandard supervised problems. A comprehensive taxonomy summarizing their traits is proposed. A review of the common approaches followed to accomplish them and their main applications is provided as well.
+
+\section*{Keywords}
+Machine learning - Supervised learning - Nonstandard learning
+% \PACS{PACS code1 \and PACS code2 \and more}
+% \subclass{MSC 68T05 \and MSC 68T10}
+% \end{abstract}
+
+\section{Introduction}
+\label{p3intro}
+
+According to Mitchell \cite{learning-mitchell}, a machine is said to learn from experience $E$ related to a class of tasks $T$ and performance metric $P$, when its performance at tasks in $T$  improves according to $P$ after experience $E$.
+
+Supervised learning is one of the fundamental areas of machine learning \cite{learning-marsland}. From object detection to ecological modeling to emotion recognition, it covers all kinds of applications. It essentially consists in learning a function by training with a set of input-output pairs. The training stage can be seen as $E$ in the previous definition, and the specific task $T$ may vary, but usually involves predicting an appropriate output given a new input.
+
+Traditionally, supervised learning problems have been spread into two categories: classification and regression \cite{classification,pattern-rec}. In the first, information is divided into discrete categories, while the latter involves patterns associated to a value in a continuous spectrum.
+
+These problems can be processed by learning from a training dataset, which is composed of instances. Typically, these instances or samples take the form $(x, y)$ where $x$ is a vector of values in the space of input variables and $y$ is a value in the target variable. Each problem can be described by the type of its instances: inputs will usually belong to a subset of $\mathbb R^n$, and outputs will take values in a specific one-dimensional set, finite or continuous. Once trained, the obtained model can be used to predict the target variable on unseen instances.
+
+Standard classification problems are those where labels are either binary or multiclass \cite{classification-duda,multiclass}. In the binary case, an instance can only be associated with one of two values: positive or negative, which is equivalent to 0 or 1. For example, email messages may be classified into spam or legit, and tumours can be categorized as either benign or malign. Multiclass problems, on the other hand, involve any finite number of classes. That is, any given instance will belong to one of possibly many categories, which is equivalent to it being assigned a natural number below a convenient threshold. As an example, a photograph of a plant or a sound recording from an animal could correspond to one of a variety of species. 
+
+A standard regression problem \cite{learning-tibshirani,regression} consists in finding a function which is able to predict, for a given example, a real value among a continuous range, usually an interval or the set of real numbers $\mathbb R$. For example, the height of a person may be estimated out of several characteristics such as age or country of origin.
+
+Even though these standard problems are applicable in a multitude of cases, there are situations whose correct modeling requires modifications of their structure. For example, a newspaper article can be categorized according to its contents, but it could be desirable to assign several categories simultaneously. Similarly, a social media post could be described by not one but two input vectors, an image and a piece of text. These special circumstances cannot be covered by the traditional one-vector input and one-dimensional output schema. As a consequence, since performance metrics which measure improvements in standard tasks assume the common structure, they lose applicability or sense in these cases. Thus, not only new techniques are needed to tackle the problems, but also new ways of measuring and comparing their success.
+
+This work studies variations on classic supervised problems where the traditional structure is not obeyed, which we call nonstandard variations. These emerge when the structure of the classical components of the problems does not suffice to describe complex situations, such as multiplicity of inputs or outputs, or order restrictions. As a consequence, this manuscript does not cover other singular supervised problems, such as high dimensionality of the feature space \cite{highdim} or unbalanced training sets \cite{imbalanced,imbalanced-krawczyk}, nor time-dependent problems, such as data streams \cite{streams,streams2} or time series \cite{timeseries}.
+
+The rest of the paper is structured as follows. Section \ref{p3sec:definitions} formally defines and describes each nonstandard variation. This is followed by Section \ref{p3sec:taxonomy} establishing relations among the introduced problems and proposing a taxonomy of them. Section \ref{p3sec:algorithms} describes the most common techniques used to solve them. After that, Section \ref{p3sec:applications} enumerates popular applications of each problem. {Section \ref{p3sec:othervariations} covers other variations further from the ones previously detailed.} Lastly, Section \ref{p3sec:conclusions} draws some conclusions.
+
+\section{Definitions of nonstandard variations}
+\label{p3sec:definitions}
+
+The problems introduced in this section are generalizations over the traditional versions of classification and regression. The focus is on fully supervised problems, where inputs are always paired with outputs during training. An alternative taxonomy based on different supervision models is introduced in \cite{weak-nonstandard}.
+
+
+\subsection{Notation}
+\label{p3sec:notation}
+
+In this work we will establish a notation which intends to be as simple to understand as possible, while being able to encompass every nonstandard variation. First, any supervised learning problem consists in finding a function which will classify, rank or perform regression. It will be noted as
+\begin{equation}
+  f: X\rightarrow Y
+\end{equation}
+where $X$ is an input set, or domain, and $Y$ is an output set, or codomain. It will be assumed that a training dataset $S$ is provided, including a finite number of input-output pairs:
+\begin{equation}
+  (x, y)\in S\subset X\times Y~.
+\end{equation}
+This way, a learning algorithm will be able to generate the desired function $f$. An additional notation will be the set of labels $\mathcal L$ where convenient. 
+
+For example, in standard binary classification $X\subset\mathbb R^n$ and $Y=\mathcal L=\{0, 1\}$. Similarly, standard regression problems can be defined with the same kind of $X$ set and $Y\subset \mathbb R$. Thus, we can define very distinct supervised problems by particularizing sets $X$ or $Y$ in different ways.
+
+Other usual notations are based in probability theory, thus involving random variables and probability distributions \cite{gaussianproc,learning-murphy}. In that case, $X$ and $Y$ would be the sample spaces of the input and output variables $\mathbf X$ and $\mathbf Y$, respectively. Predictors would usually attempt to infer a discriminant model $P(\mathbf Y|\mathbf X)$ from the training dataset.
+
+\subsection{Multi-instance}
+\label{p3sec:minstance}
+
+The multi-instance (MI) framework \cite{mil} assumes a single feature space for all instances, but each training pattern may consist of more than one instance. In this case, a training pattern is composed of a finite multiset or \emph{bag} of instances and a label. Formally, assuming instances are drawn from a set $A\subset\mathbb R^n$, the domain can be described as follows:
+\begin{equation}
+  X=\left\{b\subset A\mid b \mbox{ finite}\right\}~.
+  \end{equation} 
+
+In this case, the learning algorithm will not know labels associated to each instance but to a bag of them. In addition to this, not all instances may share the same relevance or are equally related to the label.
+
+Some MI problems assume that hidden labels are present for each instance in a bag: for example, a training set of drug tests where, for each test, several drug types are analyzed. Additionally, a typical MI assumption in the binary scenario states that a bag is positive when at least one of its instances is positive, and it is negative otherwise \cite{mil-assumptions}.
+
+Other MI problems differ in that a per-instance labeling may not be possible or may not make sense: for example, if each bag represents an image and instances are image segments, class \emph{beach} can only apply to bags with water and sand segments, but it cannot apply to an individual instance.
+
+
+\subsection{Multi-view}
+\label{p3sec:mview}
+
+A learning problem is considered to be multi-view (MV) \cite{mviewl} when inputs are composed of several components of very different nature. 
+
+For example, if a learning pattern consists of an image as well as a piece of text representing the same instance, they can be seen as two \emph{views} on it. In that case, images and texts would belong to distinct feature spaces $A$ and $B$ respectively, an input pattern being $(a,b)\in A\times B$ . More generally, we can describe the input space as:
+\begin{equation}
+  X=\prod_{i=1}^{t}A_{i}~\mbox{, where }A_i\subset\mathbb R^{n_i},
+  \end{equation}
+where $t$ is the number of views offered by the problem and $n_i$ is the dimension of the feature space of the $i$-th view.
+
+\subsection{Multi-label}
+\label{p3sec:mlabel}
+
+The multi-label (ML) learning field \cite{mlc,mltutorial} studies problems related to simultaneously assigning multiple labels to a single instance. That is, if $\mathcal L = \{l_1,\dots,l_p\}$ the codomain consists of all possible selections of these $p$ labels, also known as \emph{labelsets}:
+\begin{equation}
+  Y=2^{\mathcal L}\cong\left\{0,1\right\}^p~.
+  \end{equation} 
+As shown by this formulation, it is equivalent to think of a selection of labels as a subset of $\mathcal L$ and as a binary vector. For example, the labelset composed of the first and third labels can be represented either by $\{l_1,l_3\}$ or $(1,0,1,0,\dots,0)$.
+
+
+The difference that arises when comparing ML problems to binary or multiclass ones is that labels may interact with each other. For example, a news piece classified in \emph{economy} is more likely to be labeled \emph{politics} than \emph{sports}. Similarly, a photograph labeled \emph{ocean} is less likely to have the \emph{mountains} label rather than \emph{beach}. Methods may take advantage of label co-ocurrence \cite{scumble} in order to reduce the search space when predicting a labelset. 
+
+
+  A constrained version of ML classification is hierarchical ML classification \cite{hierarchical}, where labels are organized in a class hierarchy, usually a tree or a direct acyclic graph. A predicted labelset for a given instance is only consistent if parents of all labels in the labelset are also predicted.
+  
+
+\subsection{Multi-dimensional}
+\label{p3sec:mdim}
+
+Multi-dimensional (MD) learning \cite{mdc} is a generalized classification problem where categorization is performed simultaneously along several dimensions. Each instance can belong to one of many classes in each dimension, thus the output space can be formally described as:
+\begin{equation}
+  Y=\mathcal L_1\times\mathcal L_2\times\dots\times\mathcal L_p,
+  \end{equation}
+where $\mathcal L_i$ is the label space for the $i$-th dimension. 
+
+As with ML learning, label dimensions may be related in some way and treating them independently would only be a naive solution to the problem.
+
+\subsection{Label distribution learning}
+\label{p3sec:ldl}
+
+In label distribution learning (LDL) problems \cite{ldl}, otherwise known as probabilistic class label problems \cite{ldl-prob}, any instance can be described in different degrees by each label. This can be modeled as a discrete distribution over the labels, where the probability of a label given a specific instance is called its \emph{degree of description}. Analitically, the objective is, for each instance, to predict a real-valued vector which sums exactly 1:
+\begin{equation}
+  Y=\left\{y\in\left[0,1\right]^p:\sum_{i=1}^p y_i = 1\right\}~.
+  \end{equation}
+  
+In this case, we would say that the $i$-th label in $\mathcal L$ describes an instance $(x, y)$ with degree $y_i$.
+
+\subsection{Label ranking}
+
+In a label ranking (LR) problem \cite{lrankpairwise,lranksurvey} the objective is not to find a function able to choose one or several labels from the label space. Instead, it must evaluate their relevance for each unseen instance. The most general version of the problem involves a training set where $Y$ is the set of all partial orders of $\mathcal L$, and the obtained function also maps individual instances to partial orders. This way, for each test instance the function will output a sequence of preferences where some labels will be seen as more relevant than others. 
+
+However, the typical situation in label ranking problems is that the orders are total, which means any two labels can always be compared. This is called a \emph{ranking} and does not exclude the possibility of ties. When ties are not allowed it is said to be a \emph{sorting} or \emph{permutation}, and can be formulated as follows:
+\begin{equation}
+Y=\left\{\sigma:\{1,\dots,p\}\rightarrow \mathcal L\mid\sigma\mbox{ is bijective}\right\}~,
+\end{equation}
+where $p$ is the amount of labels. $Y$ can also be seen as the set of all permutations of the labels in $\mathcal L$, usually known as the symmetric group of order $p$, and noted as $S_p$. 
+
+\subsection{Multi-target regression}
+\label{p3sec:mtarget}
+
+A regression problem where the output space has more than just one dimension is usually called multi-target regression (MTR) and is also known as multi-output, multi-variate or multi-response \cite{moutr}. In this case, a formal description is simply that the codomain is a continuous multi-dimensional real set:
+\begin{equation}
+  Y=\prod_{i=1}^p Y_i~\mbox{, where }Y_i\subset\mathbb R~\forall i
+  \end{equation}
+and $p$ is the number of target variables.
+ 
+As with other multiple target extensions, the key difference with single-target regression in this case is the possible interactions among output variables.
+
+%\subsection{Learning to rank (ordered inputs)}
+%The objective in learning to rank is not to label unseen instances, but to find a ranking for a sequence of them.
+%\begin{equation}
+%\forall n\in \mathbb N, f\mbox{ maps }\mathit{subsets}(X, n)\rightarrow S_n
+%\end{equation}
+%where $\mathit{subsets}(X,n)$ stands for the set of all subsets of $X$ of size $n$, and $S_n$ is the symmetric group of order $n$, i.e. the set of all permutations of $n$ elements. Training data consists of a partially-ordered set of instances.
+%{\color{red}Discuss whether ties are allowed.}
+  
+\subsection{Ordinal regression}
+
+A problem where the target space is discrete but ordered is called ordinal regression (OR) or, alternatively, ordinal classification \cite{ord-survey}. It can be located midway between classification and regression. More specifically, it consists in labeling instances with a finite number of choices where these are ordered
+\begin{equation}
+Y=\left\{1,2,\dots,c\right\},~1<2<\dots<c~.
+\end{equation}
+
+In OR, the training phase consists in learning from a set of feature vectors which have a specific label associated to them, and testing can be performed over individual instances. This means that, although labels are ordered, the main objective is not to rank or sort instances as in learning to rank \cite{ltr}, but to simply classify them. The labels themselves do not provide any metric information either, they only carry qualitative information about the order among themselves.
+
+\subsection{Monotonicity constraints}
+
+Order relations can exist not only in the label space but in the feature space as well. Partial orders among real-valued feature vectors are always possible, and there may be cases where the order among instances is determined by just one or a few of their attributes.
+
+When inputs as well as outputs are at least partially ordered, it is common to look for predictions which respect their order relations. In that case, the objective is to obtain a classifier or regression function which enforces the following constraint:
+\begin{equation}
+x_1<x_2\Rightarrow f(x_1)<f(x_2)~\forall x_1,x_2\in X~.
+\end{equation}
+
+When $Y$ is discrete the problem is usually called \emph{monotone classification} (MC), monotonic classification or ordinal classification with monotonicity constraints \cite{mc-salva}. If, on the contrary, $Y$ is continuous, it is known as \emph{isotonic regression} (IR) \cite{ir-book}.
+
+\subsection{Absence or partiality of information}
+
+Some problems do not directly alter the structure of $X$ and $Y$ from the standard supervised problem. Instead, they restrict which data can belong to a training set, or remove labelings from training examples. In this case, training information is presented partially or with some exclusions.
+
+According to which kind of information is missing from the training set, a learning task  can usually be categorized as semi-supervised \cite{semi-sup}, one-class learning \cite{oneclass}, PU-learning \cite{pu-learn}, zero-shot learning \cite{zeroshot} or one-shot learning \cite{oneshot}. These are described further in Section \ref{p3sec:partial}.
+
+\subsection{Variation combinations}
+
+Some of the components described above can be combined to compose a more complex problem overall. Usually, one of these combinations will take components from different variation types, for example, simultaneous multiplicity of inputs and outputs. 
+
+More specifically, there exist several studies involving MI ML scenarios \cite{miml,miml2}. In this case, examples from the input space are composed of several feature vectors and are associated to various labels. As a consequence, this model can represent many complicated problems where inputs and outputs have more structure than usual.
+
+Other more uncommon situations are MV MI ML problems \cite{mvmiml}, where patterns have several instances which may or may not belong to the same space, a multi-output version of OR named graded ML classification \cite{graded-ml} and more complex input structures such as multi-layer MI MV \cite{mlmimv}, where a hierarchy of instances is present in each example. 
+
+\section{Taxonomy}
+\label{p3sec:taxonomy}
+
+A first categorization of the variations analyzed in this work can be made according to how they differ from the standard problem. There can be multiplicity in the input space or the output space, order constraints may exist, or only partial information may be given in some cases. Fig.~\ref{p3fig.multiples} shows ways in which the traditional problems can be generalized. 
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.65\textwidth]{problems2}
+\caption{\label{p3fig.multiples}Extensions of the standard supervised problem: multiple inputs or outputs, presence of orders and rankings, and partial information.}
+\end{figure}
+
+Problems introducing multiple inputs are MI and MV, whereas multiple outputs can be found on ML, MD, LR, LDL and MTR. Problems where orders are present are OR, MC and IR. Likewise, tasks with only partial information are, among others, semi-supervised learning {(SSL), positive-unlabeled (PU) learning}, one-shot classification and zero-shot classification.
+
+Finally, a generalized problem can be built out of combining several of these components: for example, a multiple-input multiple-output problem where the inputs and outputs can belong to structures like the ones defined above.
+
+The rest of this section studies variations on the structure of the input space and output space, establishes relations among problems, and describes how they can be particularized or generalized to one another.
+
+\subsection{Input structure}
+\label{p3sec:multiinput}
+
+In a standard supervised problem, the input space consists of single feature vectors and does not impose a specific order.
+
+Problems where learning patterns are composed of multiple instances can usually be categorized into either MI, if the inputs share the same structure, or MV, otherwise. Their combination can also be considered as well, e.g. a problem where an example is composed of one or more photographs and one or more pieces of text. This would be a case of a MV MI problem.
+
+There are also problems where there exists a partial or total order among instances, which is coupled with an order constraint in relation to the outputs. These are MC and IR.
+
+Fig.~\ref{p3fig.minputstr} summarizes these structural traits in a hierarchy and indicates problems where these traits are present.
+
+\begin{figure}[ht]
+\centering\scriptsize
+\begin{tikzpicture}[node distance=.6cm, auto]
+ %nodes
+ \node[nobox] (title) {Input \mbox{structure} traits};
+ \node[right=of title] (dummy1) {}
+ edge[dummyhor] (title.east);
+ \node[nobox, above=1cm of dummy1] (single) {Single \mbox{feature} vector}
+ edge[] (dummy1.center);
+ \node[right=of single] (dummy2) {}
+ edge[dummyhor] (single.east);
+ \node[nobox, above=of dummy2] (unord) {Unordered (standard)}
+ edge[] (dummy2.center);
+ \node[box, below=of dummy2] (ord) {Ordered (MC, IR)}
+ edge[] (dummy2.center);
+ \node[nobox, below=1.5cm of dummy1] (multiple) {Multiple \mbox{feature} vectors}
+ edge[] (dummy1.center);
+ \node[right=of multiple] (dummy3) {}
+ edge[dummyhor] (multiple.east);
+ \node[box, below=of dummy3] (same) {Same space (MI)}
+ edge[] (dummy3.center);
+ \node[box, above=of dummy3] (dif) {Different space (MV)}
+ edge[] (dummy3.center);
+\end{tikzpicture}
+\caption{\label{p3fig.minputstr}Traits that can be found on the input structure of supervised problems.}
+\end{figure}
+
+\subsection{Output structure}
+\label{p3sec:multioutput}
+
+The diversity in output variations is higher than that of the input ones. A first sorting criterion is whether the codomain is discrete or continuous. This way, problems are either classification or regression ones.
+
+Further subdivision of problems allows to separate these traits according to whether outputs remain scalars or become vectors. In the first case we consider order in the discrete scenario a nonstandard variation, which is present in OR and MC. In the second case, classification problems are spread into ML, LR and MD, and regression ones into LDL and MTR. 
+
+Fig.~\ref{p3fig.moutputstr} organizes these traits in a hierarchy based on the previous criteria. Each leaf of the tree also includes problems where each one is present.
+
+\begin{figure*}[h]
+\centering\scriptsize
+\begin{tikzpicture}[node distance=.6cm, auto]
+ %nodes
+ \node[titlebox] (title) {Output structure traits};
+ \node[dummy,below=of title] (dummy1) {}
+ edge[dummyedge] (title.south);
+ \node[nobox, left=2.75cm of dummy1] (discrete) {Discrete}
+ edge[] (dummy1.center);
+   \node[dummy,below=of discrete] (dummy2) {}
+   edge[dummyedge] (discrete.south);
+   \node[nobox, left=1.87cm of dummy2] (scalar1) {Scalar}
+   edge[] (dummy2.center);
+     \node[dummy,below=of scalar1] (dummy4) {};
+     \node[nobox, left=.3cm of dummy4] (unord) {Unordered (standard classification)}
+     edge[] (scalar1.south);
+     \node[box, right=.3cm of dummy4] (ord) {Ordered (OR, MC)}
+     edge[] (scalar1.south);
+   \node[nobox, right=1.87cm of dummy2] (mult1) {Multiple}
+   edge[] (dummy2.center);
+     \node[box,below=of mult1] (dummy5) {Ranking (LR)}
+     edge[] (mult1.south);
+     \node[box, left=.3cm of dummy5] (unord) {Binary (ML)}
+     edge[] (mult1.south);
+     \node[box, right=.3cm of dummy5] (ord) {Finite (MD)}
+     edge[] (mult1.south);
+ \node[nobox, right=2.75cm of dummy1] (cont) {Continuous}
+ edge[] (dummy1.center);
+   \node[dummy,below=of cont] (dummy3) {}
+   edge[dummyedge] (cont.south);
+   \node[nobox, left=of dummy3] (scalar2) {Scalar (standard regression)}
+   edge[] (dummy3.center);
+   \node[nobox, right=of dummy3] (mult2) {Multiple}
+   edge[] (dummy3.center);
+     \node[dummy,below=of mult2] (dummy6) {};
+     \node[box, left=.3cm of dummy6] (unord) {Distribution (LDL)}
+     edge[] (mult2.south);
+     \node[box, right=.3cm of dummy6] (ord) {Unrestricted (MTR)}
+     edge[] (mult2.south);
+\end{tikzpicture}
+\caption{\label{p3fig.moutputstr}Traits that can be found on the output structure of supervised problems.}
+\end{figure*} % Este tipo de diagrama jerárquico se entiende mejor. Por coherencia, creo que también sería el adecuado para las entradas
+
+The variations in the structure of target spaces in supervised problems can be seen as generalizations of the standard problems. Furthermore, some of them are also more general than others. For example, ML problems can be seen as LR ones where, for a given instance, labels over a threshold are active and those below are not. Thus, LR is a generalization of the ML scenario. More relations of this kind are displayed in Fig.~\ref{p3fig.mouttax}.
+
+As shown in the graph, an inclusion of more target variables of the same type transforms a binary problem into ML, a multiclass problem into MD and a single-target regression one into MTR. Similarly, inclusion of more values into each variable allows to generalize binary problems to multiclass, and ordinal to single-target regression, as well as ML ones to MD and these to MTR. LDL can be seen as a generalization of ML where real numbers between 0 and 1 are also allowed as values for a label. LR is a generalization of ML by the argument discussed before.
+
+\begin{figure}[ht]
+\centering\scriptsize
+\begin{tikzpicture}[node distance=1cm, auto]
+ % Fondo (opcional)
+ %\fill[fill={rgb:green,1;white,3}] (4.5,0.4) -- (-1.1,0.4) -- (-1.1,-3.8) -- (4.5,-3.8);
+ %\fill[fill={rgb:red,1;white,3}] (4.5,0.4) -- (7.1,0.4) -- (7.1,-3.8) -- (4.5,-3.8);
+ 
+ \node[nobox] (bin) {Binary};
+ \node[nobox, right=of bin] (multiclass) {Multiclass}
+ edge[pil2] (bin.east);
+ \node[box, below=of multiclass] (ord) {Ordinal}
+ edge[pil2] (multiclass.south);
+ \node[box, left=of bin] (mlabel) {Multi-label}
+ edge[pil] (bin.west);
+ \node[box, below=of mlabel] (lrank) {Label ranking}
+ edge[pil2] (mlabel.south);
+ \node[box, below=of bin] (mdim) {Multi-dimensional}
+ edge[pil] (multiclass.south)
+ edge[pil2] (mlabel.east);
+ \node[nobox, below=of ord] (reg) {Standard regression}
+ edge[pil2] (ord.south);
+ \node[box, below=of mdim] (mtreg) {Multi-target regression}
+ edge[pil2] (mdim.south)
+ edge[pil] (reg.west);
+ \node[box, below=of lrank] (ldl) {Label \mbox{distribution} learning}
+ edge[pil2,->] (mtreg.west)
+ edge[pil2,bend right=45] (mlabel.east);
+\end{tikzpicture}
+\caption{\label{p3fig.mouttax}Relations among supervised problems according to output structure. Arrows follow natural generalizations from one problem to another. Continuous arrows denote generalizations based on adding more variables of the same type. Dashed arrows indicate generalizations based on modifying existing target variables.}
+\end{figure}
+
+\subsection{Summary}
+\label{p3sec:summary}
+
+In this section input and output variations of standard supervised problems have been categorized and related. Table~\ref{p3tbl.identification} allows to identify specific problems according to which input and output traits are present.
+
+\begin{table*} 
+\centering\scriptsize
+\setlength{\tabcolsep}{0.65em}
+\begin{tabular}{r p{.25\textwidth} p{.20\textwidth} c p{.12\textwidth} p{.22\textwidth} p{.11\textwidth} p{.11\textwidth} }
+\toprule
+%& & inputs & &  \\
+\multirow{ 3}{*}{\diaghead{Inputs~~~~~Outputs}{\scriptsize\textbf{Inputs}}{\scriptsize\textbf{Outputs}}} & \multicolumn{2}{c}{\textbf{Unordered outputs}}  &                  & \multicolumn{4}{c}{\textbf{Ordered outputs}}                    \\
+& \multicolumn{1}{c}{\textbf{Scalar}} & \multicolumn{1}{c}{\textbf{Multiple}} &  & \multicolumn{2}{l}{\hphantom{Padding}\textbf{Scalar}} & \multicolumn{2}{c}{\textbf{Multiple}}  \\ 
+&  & &  & \textbf{Discrete} & \textbf{Continuous} & \textbf{Discrete} & \textbf{Continuous} \\ 
+\cmidrule{2-3}\cmidrule{5-8}
+\vspace{.3em} \textbf{Unordered inputs}&
+standard classification \cite{classification} & ML/MD classification \cite{mlc,mdc} & &
+OR \cite{ord-survey} & standard regression \cite{regression} & Graded ML \cite{graded-ml} & MTR \cite{moutr} \\ \vspace{.3em}
+\textbf{Ordered inputs}&
+- &-  & &
+MC \cite{mc-salva} & IR \cite{ir-book} &-  &-  \\ \vspace{.3em}
+\textbf{Multiple instances}&
+MI classification \cite{mil} & MIML/MIMD classification \cite{miml} & &- & MI regression \cite{mil} &- &- \\
+\textbf{Multiple views}&
+MV classification \cite{mviewl} & MVML/MVMD classification \cite{mvmiml} & &- & MV regression \cite{mviewl} &- &- \\
+\bottomrule
+\end{tabular}
+\caption{\label{p3tbl.identification}Identification of problems according to their input traits (vertical axis) and output traits (horizontal axis).}
+\end{table*}
+
+\section{Common approaches to tackle nonstandard problems}
+\label{p3sec:algorithms}
+
+When tackling a nonstandard problem, most techniques follow one of two main approaches: problem transformation or algorithm adaptation. The first one relies on appropriate transformations of the data which result in one or more simpler, standard problems. The latter implies an extension or development of previously existing algorithms, in order to adapt them to the complexities induced by the structure of the data.
+
+In the following subsections several methods based on both approaches are enumerated for each analysed problem.
+
+\subsection{Problem transformation}
+
+Problem transformation methods assume that a solution can be achieved by extracting one or more simpler problems out of the original one. For example, a problem with multi-dimensional targets could be transformed into many problems with scalar outputs. Then, these problems could be solved independently by a classical algorithm. A solution for the original problem would be the concatenation of those extracted from the simpler ones.
+
+Next, the most common transformation techniques are described for each nonstandard supervised learning task previously introduced.
+
+
+\paragraph{-- MI.} 
+The taxonomy proposed in \cite{mic-taxonomy} describes an Embedded Space paradigm, where each bag is transformed into a single feature vector representing the relevant information about the whole bag. This transformation brings the MI problem into a single-instance one. Most of these methods are voca\-bulary-based, which means that the embedding uses a set of concepts to classify each bag according to its instances, resulting in a single vector with one component per concept.
+
+\paragraph{-- MV.} Some naive transformations consist in ignoring every view except one, or concatenating feature vectors from all views, thus training a single-view model in both cases \cite{mv-spectral}. A preprocessing based on Canonical Correlation Analysis \cite{mv-cca} is able to project data from multiple views onto a lower-dimensional, single-view space.
+
+\paragraph{-- ML.} 
+Transformation methods for ML classification \cite{mlmethods} are diverse: Binary Relevance trains separate binary classifiers for each label. Label Powerset reduces the problem to a multiclass one by treating each individual labelset as an independent class label, and Random k-Labelsets \cite{ml-rakel} extracts an ensemble of multiclass problems similarly. Classifier chains \cite{ml-chains} trains subsequent binary classifiers accumulating previous predictions as inputs. ML problems can also be transformed to LR \cite{ml-clr}.
+
+\paragraph{-- MD.} In some cases, independent classifiers can be trained for several dimensions \cite{mdc,mdc-indep} but this method ignores possible correlations among dimensions. An alternative transformation, building a different label from each combination of classes, would produce a much larger label space and thus is not typically applied.
+
+\paragraph{-- LDL.} A LDL problem can be reduced to multiclass classification by extracting as many single-label examples as labels for each one of the training instances \cite{ldl}. These new examples are assigned a class corresponding to each label and weighted according to its degree of description. During the prediction process, the classifier must be able to output the score/confidence for each label, which can be used as its description degree.
+
+\paragraph{-- LR.} A reduction of this problem to several binary problems can be achieved by learning pairwise preferences \cite{lrankpairwise}. This transforms a $c$-label problem into $c(c-1)/2$ binary problems describing a comparison among two labels. An alternative reduction by means of constraint classification \cite{lr-constraint} builds a single binary classification dataset by expanding each label preference into a new positive instance and a new negative instance. The feature space of the new binary problem has dimension $nc$, where $n$ is the original dimension and $c$ the number of labels, due to the constraints embedded in it by Kesler's construction \cite{nilsson}.
+
+\paragraph{-- MTR.} There are several ways to transform a MTR problem into several single-target regression ones. Some of them are inspired by the ML field, such as a one-vs-all single-target reduction, multi-target stacking and regressor chains \cite{mtrviaml}. All of them train single-target regressors for several extracted problems, and then combine the obtained predictions. A different approach based on support vectors \cite{mtr-lssvr} extends the feature space which expresses the multi-output problem as a single-target one that can be solved using least squares support vector regression machines.
+
+\paragraph{-- OR.} An ordinal problem with $c$ classes can be transformed into $c-1$ binary classification problems by using each class from the second to the last one as a threshold for the positive class \cite{ord-simple}. This decomposition can be called \emph{ordered partitions} and is not the only possible one: others are \emph{one-vs-next}, \emph{one-vs-followers} and \emph{one-vs-previous} \cite{ord-survey}. Several 3-class problems can also be obtained by using, for the $i$-th problem, classes ``$l_i$'', ``$<l_i$'' and ``$>l_i$''.
+
+\paragraph{-- MC.} The authors in \cite{monotonicity} describe a procedure to tackle binary MC problems by means of IR. Multiclass MC cases can be reduced to several binary MC ones, which in turn are solved as IR problems. 
+
+\subsection{Algorithm adaptation}
+
+Existing methods for classical problems can be extended in order to introduce the necessary complexities of nonstandard variations. As an example, nearest neighbor methods could be coupled with new distance metrics in order to be able to measure similarity among multiple inputs.
+
+The rest of this section presents some algorithm adaptations which can be used to tackle nonstandard supervised tasks.
+
+
+\paragraph{-- MI.} 
+Methods that work on instance level are adaptations of algorithms from single-instance classification whose responses are then aggregated to build the bag-level classification \cite{mic-taxonomy}. They typically assume that one positive instance implies a positive bag. Adaptations of common algorithms have been proposed with support vector machines (SVM) \cite{mi-svm} and neural networks \cite{mi-nn}, whereas some original methods in this area are Axis-Parallel Rectangles \cite{mi-apr} and Diverse Density \cite{mi-framework}. In the bag-space paradigm, methods treat bags as a whole and use specific distance metrics with distance as well as kernel-based classifiers, such as k-nearest neighbor (k\nobreakdash-NN) \cite{mi-knn} or SVM \cite{mi-kernel}.
+
+\paragraph{-- MV.} Supervised methods for MV are comparatively less developed than semi-supervised ones. Nonetheless, there is an extension of SVM \cite{mv-svm} which simultaneously looks for two SVMs, one in each of the feature spaces of a two-view problem. There is an extension of Fisher discriminant analysis as well \cite{mv-fda}.
+
+\paragraph{-- ML.} The most relevant algorithm adaptations \cite{mlmethods} are based on standard classification algorithms with added support for choosing more than one class at a time: adaptations exist for k-NN \cite{ml-knn}, decision trees \cite{ml-dt}, SVMs \cite{ml-svm}, association rules \cite{ml-rules} and ensembles \cite{mlensembles}.
+
+\paragraph{-- MD.} Specific Bayesian networks have been proposed for the MD scenario \cite{md-bayes,md-bayes2}, as well as Maximum Entropy-based algorithms \cite{mdc,mdc-indep}.
+
+\paragraph{-- LDL.} Proposals in \cite{ldl} are adaptations of k-NN, with a special derivation of the label distribution of an unseen instance given its neighbors, and backpropagated neural networks, where the output layer indicates the label distribution of an instance. Other proposed methods are based on the optimization algorithms BFGS and Improved Iterative Scaling. 
+
+\paragraph{-- LR.} Boosting methods have been adapted to LR \cite{lr-boost}, as well as the SVM proposed in \cite{ml-svm} for ML which can be naturally extended to LR \cite{lranksurvey}. An adaptation of online learning algorithms such as the perceptron has also been developed \cite{lr-online}.
+
+\paragraph{-- MTR.} First methods able to treat MTR problems were actually generalizations of statistical methods for single-target regression \cite{mtr-rank,mtr-canon}. Other common methods which have been extended to predict multiple regression variables are support vector regression \cite{mtr-svr1,mtr-svr2}, kernel-based methods \cite{mtr-kern1,mtr-kern2}, and regression trees \cite{mtr-trees} as well as random forests \cite{mtr-rf}.
+
+\paragraph{-- OR.} Neural networks can be used to tackle OR with slight changes in the loss function or the output layer \cite{or-nn,or-nn2}. Similarly, extreme learning machines have also been applied to this problem \cite{or-elm,or-elm2}. Common techniques such as k-NN or decision trees have been coupled with global constraints for OR \cite{or-knn-dt}, and extensions of other well known algorithms such as Gaussian processes \cite{or-gp} and AdaBoost \cite{or-ada} have been proposed as well.
+
+\paragraph{-- MC.} Algorithm adaptations generally take a well known technique and add monotonicity constraints. For example, there exist in the literature adaptations of k-NN \cite{mc-knn}, decision trees \cite{mc-trees}, decision rules \cite{mc-rules,mc-rules2} and artificial neural networks \cite{mc-monnets}.
+
+\vspace{1em}
+
+Table~\ref{p3tbl.methods} gathers all the methods described previously to tackle nonstandard supervised tasks.
+
+\begin{table}[ht]
+\centering\scriptsize
+\setlength{\tabcolsep}{0.55em}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{r p{.4\textwidth} p{.4\textwidth}}
+\toprule
+\textbf{Task} & \textbf{Problem transformation} & \textbf{Algorithm adaptation} \\ \cmidrule{1-3}
+\textbf{MI} & 
+Embedded-space \cite{mic-taxonomy} & 
+SVM \cite{mi-svm,mi-kernel}\newline Neural networks \cite{mi-nn}\newline k-NN \cite{mi-knn} \\
+\textbf{MV} & 
+Canonical correlation analysis \cite{mv-cca}& 
+SVM \cite{mv-svm} \newline Fisher discriminant analysis \cite{mv-fda}\\
+\textbf{ML} & 
+Binary Relevance \cite{mlmethods} \newline Label Powerset \cite{mlmethods} \newline Classifier chains \cite{ml-chains} & 
+k-NN \cite{ml-knn} \newline Decision trees \cite{ml-dt}\newline SVM \cite{ml-svm} \newline Association rules \cite{ml-rules} \newline Ensembles \cite{mlensembles}\\
+\textbf{MD} & 
+Independent classifiers \cite{mdc,mdc-indep} & 
+Bayesian networks \cite{md-bayes,md-bayes2}\newline Maximum Entropy \cite{mdc,mdc-indep} \\
+\textbf{LDL} & 
+Multiclass reduction \cite{ldl} & 
+k-NN \cite{ldl} \newline Neural networks \cite{ldl}\\
+\textbf{LR} & 
+Pairwise preferences \cite{lrankpairwise} \newline Constraint classification \cite{lr-constraint} &
+Boosting \cite{lr-boost} \newline SVM \cite{lranksurvey} \newline Perceptron \cite{lr-online}\\
+\textbf{MTR} &
+ML {inspired: one-vs-all, stacking, regressor chains} \cite{mtrviaml} \newline Support vectors \cite{mtr-lssvr}& 
+Generalizations \cite{mtr-rank,mtr-canon} \newline Support vector regression \cite{mtr-svr1,mtr-svr2}\newline Kernel-based \cite{mtr-kern1,mtr-kern2} \newline Regression trees \cite{mtr-trees} \newline Random forests \cite{mtr-rf}\\
+\textbf{OR} & 
+Ordered partitions \cite{ord-simple} \newline One-vs-next, One-vs-followers, One-vs-previous \cite{ord-survey} \newline 3-class problems \cite{ord-survey}& 
+Neural networks \cite{or-nn,or-nn2} \newline Extreme learning machines \cite{or-elm,or-elm2} \newline Decision trees \cite{or-knn-dt} \newline Gaussian processes \cite{or-gp} \newline AdaBoost \cite{or-ada} \\
+\textbf{MC} & 
+Reduction to IR \cite{monotonicity}& 
+k-NN \cite{mc-knn}\newline Decision trees \cite{mc-trees}\newline Decision rules \cite{mc-rules,mc-rules2}\newline Neural networks \cite{mc-monnets}\\
+\toprule
+\end{tabular}
+\caption{\label{p3tbl.methods}Summary table of presented methods according to their type of approach.}
+\end{table}
+
+
+\section{Applications. Original real word scenarios}
+\label{p3sec:applications}
+
+The problems studied in this work have their origins in real-world scenarios which are related below:
+
+\paragraph{-- MI.} Problems modeled under MI learning are drug activity prediction \cite{mi-apr}, where each pattern describes a molecule and its different forms are represented by instances; image classification \cite{mic-taxonomy}, and bankruptcy \cite{ami-bank}. Most of the datasets used in experimentations, however, are usually synthetic.
+
+\paragraph{-- MV.} Some situations where data is described in multiple views are multilingual text categorization \cite{amv-multilingual}, face detection with several poses \cite{amv-face}, user localization in a WiFi network \cite{amv-wifi}, advertisements described by their image and surrounding text \cite{amv-ads-webkb} and image classification with several color-based views and texture-based views \cite{amv-corel}.
+
+\paragraph{-- ML.} Problems which fall naturally under the ML definition are text classification under several categories simultaneously \cite{aml-text}, image labeling \cite{aml-scene}, question tagging in forums where tags can co-exist \cite{aml-question}, protein classification \cite{aml-protein}{, data streams \cite{Sousa2018} and recommendation systems \cite{Laghmari2018}}.
+
+\paragraph{-- MD.} Applications of MD classification include classification of biomedical text \cite{mdc}, where predicted dimensions for a given document are its focus, evidence type, certainty level, polarity and trend; gene function identification \cite{md-bayes}; tumor classification, and illness diagnosis in animals \cite{md-bayes2}.
+
+\paragraph{-- LR.} The field known as \emph{preference learning} has been gaining interest \cite{lrankpairwise}, and LR is one of the problem that falls under this term. LR is also frequently applied in ML scenarios \cite{lrank4ml}, where a threshold can be applied in order to transform an obtained ranking into a labelset.
+
+\paragraph{-- LDL.} Data with relative importance of each label appears in applications such as analysis of gene expression levels in yeast \cite{aldl-yeast}, or emotion description from facial expressions \cite{aldl-face}, where a face can depict several emotions in different grades.
+
+\paragraph{-- MTR.} Applications modeled as MTR problems are diverse, including modeling of vegetation condition in ecosystems assigning several scores which depend on the vegetation type \cite{amtr-eco}, prediction of audio spectrums of wind tunnel tests \cite{amtr-wind}, and estimation of several biophysical parameters from remote sensing images \cite{amtr-remote}.
+
+\paragraph{-- OR.} The most salient fields where OR can be found are text classification \cite{aor-text}, where the predicted variable may be an opinion scale or a degree of satisfaction; image categorization \cite{aor-image}; medical research \cite{aor-medical}; credit rating \cite{aor-credit}, and age estimation \cite{aor-age}.
+
+\paragraph{-- MC.} Monotonicity constraints are found in problems related to customer satisfaction analysis \cite{amc-customer}, in which overall appreciation of a product must increase along with the evaluation of its features; house pricing \cite{mc-trees}; bankruptcy risk evaluation \cite{amc-bank}, and cancer prediction \cite{amc-cancer}, among others.
+
+\section{Other nonstandard variations}
+\label{p3sec:othervariations}
+
+This section covers variations of the standard supervised problem which are further from the central focus of this paper less related to those above. 
+
+\subsection{Learning with partial information}
+\label{p3sec:partial}
+
+
+In a standard supervised classification setting, it is assumed that every training example is labeled accordingly and that there exist examples for every class that may appear in the testing phase. When only a fraction of the training instances are labeled, the problem is considered semi-supervised \cite{semi-sup}, but generally there still exist labeled samples for each class.
+
+In positive-unlabeled learning \cite{pu-learn,pu-text}, however, labeled examples provided within the training set are only positive. This means the learning algorithm only knows about the class of positive instances, and unlabeled ones can have either class. 
+
+A different scenario arises when the training set only consists of negative (or only positive) instances, and no unlabeled examples are provided. This is known as one-class classification \cite{oneclass}, and data of this nature can be obtained from outlier detection applications, where positive examples are hardly recorded.
+
+A problem which may be seen as a generalization of one-class classification is zero-shot learning \cite{zeroshot}, a situation where unseen classes are to be predicted in the testing stage. That is, the label space $Y$ includes some values which are not present in any training pattern, but the classifier must be able to predict them. For example, if in a speech recognition problem $Y$ is the set of all words in English, the training set is unlikely to have at least one instance for each word, thus the classifier will only succeed if it is capable of assigning unlearned words to test examples.
+
+A relaxation on the obstacles of zero-shot learning is present in one-shot learning \cite{oneshot}, where algorithms attempt to generalize from very few (1 to 5) examples of each class. This is a common circumstance in the field of image classification, where the cost of collecting and labeling data samples is high.
+
+A classification of these problems according to the type of missing information can be found in Table~\ref{p3tbl.partial-problems}.
+
+\begin{table*}[ht]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{l  l}
+\toprule
+\textbf{Trait} & \textbf{Problem types} \\ \hline
+Presence of unlabeled instances & Semi-supervised \cite{semi-sup}, Positive-unlabeled \cite{pu-learn} \\
+No representation of some classes &   One-class \cite{oneclass}, Positive-unlabeled \cite{pu-learn}, Zero-shot \cite{zeroshot} \\
+Scarce representation of some classes &  One-shot \cite{oneshot}\\
+\toprule
+\end{tabular}
+\caption{\label{p3tbl.partial-problems}Partial information problems according to the kind of absence in the training set.}
+\end{table*}
+
+\subsection{Prediction of structured data}
+
+The nonstandard variations described in this work generalize traditional supervised problems where the predicted output is at most a vector whose components take values in either a finite set or $\mathbb R$. Further generalizations are possible if other kinds of structures are allowed. For example, the target may take the form of an ordered sequence or a tree. In this case, the problem usually enters the scope of structured prediction \cite{str-pred}, a generalization of supervised learning where methods must build structured data associated to input instances.
+
+A particular case of supervised problem which can be seen under the umbrella of structured prediction is learning to rank \cite{ltr}, which does not involve a label space as such. Instead, training consists in learning from a set of feature vectors with a series of preferences among them, that is, a partial or total order in the training set. During testing a set of feature vectors is provided and the desired output is a ranking (with a predefined number of relevance levels, allowing ties) or a sorting (simply an ordering of the instances). This problem differs from OR in that individual classifications are usually meaningless: only relative distances among ranked instances matter.
+
+\section{Conclusions}
+\label{p3sec:conclusions}
+
+Traditional supervised learning comprises two well known problems in machine learning: classification and regression. However, the multitude of applications which do not strictly fit the structure of the standard versions of those problems have favored the development of alternative versions which are more flexible and allow the analysis of more complex situations. 
+
+In this work an overview of nonstandard variations of supervised learning problems has been presented. A novel taxonomy under several criteria has described relationships among these variations, where the main differentiating properties are multiplicity of inputs, multiplicity of outputs, presence of order relations and constraints, and partial information. Afterwards, common methods for tackling these problems have been outlined and their main applications have been mentioned as well. Finally, some additional variants which were left out of the scope of the previous analysis have been introduced as well.
+
+Design of novel algorithms for nonstandard supervised tasks is scarcer than adaptations and transformations, but there exist some approximations and even more open possibilities for tackling these from classical algorithmic perspectives, such as probabilistic and heuristic methods, information theory and linear algebra, among others. 
+
+% Text with citations \cite{RefB} and \cite{RefJ}.
+% Your text comes here. Separate text sections with
+% as required. Don't forget to give each section
+% and subsection a unique label (see Sect.~\ref{p3sec:1}).
+% \paragraph{-- Paragraph headings} Use paragraph headings as needed.
+% \begin{equation}
+% a^2+b^2=c^2
+% \end{equation}
+
+% % For one-column wide figures use
+% \begin{figure}
+% % Use the relevant command to insert your figure file.
+% % For example, with the graphicx package use
+%   \includegraphics{example.eps}
+% % figure caption is below the figure
+% \caption{Please write your figure caption here}
+% \label{p3fig:1}       % Give a unique label
+% \end{figure}
+% %
+% % For two-column wide figures use
+% \begin{figure*}
+% % Use the relevant command to insert your figure file.
+% % For example, with the graphicx package use
+%   \includegraphics[width=0.75\textwidth]{example.eps}
+% % figure caption is below the figure
+% \caption{Please write your figure caption here}
+% \label{p3fig:2}       % Give a unique label
+% \end{figure*}
+% %
+% % For tables use
+% \begin{table}
+% % table caption is above the table
+% \caption{Please write your table caption here}
+% \label{p3tab:1}       % Give a unique label
+% % For LaTeX tables use
+% \begin{tabular}{lll}
+% \hline\noalign{\smallskip}
+% first & second & third  \\
+% \noalign{\smallskip}\hline\noalign{\smallskip}
+% number & number & number \\
+% number & number & number \\
+% \noalign{\smallskip}\hline
+% \end{tabular}
+% \end{table}
+
+
+\section*{Acknowledgments}
+  D. Charte is supported by the Spanish Ministry of Science, Innovation and Universities under the FPU National Program (Ref. FPU17/04069). This work has been partially supported by projects TIN2017-89517-P (FEDER Founds) of the Spanish Ministry of Economy and Competitiveness and TIN2015-68454-R of the Spanish Ministry of Science, Innovation and Universities.
+
+% BibTeX users please use one of
+%\bibliographystyle{spbasic}      % basic style, author-year citations
+%\bibliographystyle{spmpsci}      % mathematics and physical sciences
+%\bibliographystyle{spphys}       % APS-like style for physics
+%\bibliography{references}   % name your BibTeX data base
+
+% \begin{widepar}
+%   \section*{References}
+%   \leavevmode
+%   \printbibliography[heading=none]
+%   \end{widepar}
+  
+% \begin{thebibliography}{100}
+% \providecommand{\url}[1]{{#1}}
+% \providecommand{\urlprefix}{URL }
+% \expandafter\ifx\csname urlstyle\endcsname\relax
+%   \providecommand{\doi}[1]{DOI~\discretionary{}{}{}#1}\else
+%   \providecommand{\doi}{DOI~\discretionary{}{}{}\begingroup
+%   \urlstyle{rm}\Url}\fi
+
+% \bibitem{mtr-kern2}
+% Alvarez, M.A., Rosasco, L., Lawrence, N.D.: Kernels for vector-valued
+%   functions: A review.
+% \newblock In: Foundations and Trends in Machine Learning. Now Publishers
+%   (2012).
+% \newblock \doi{10.1561/2200000036}
+
+% \bibitem{amv-multilingual}
+% Amini, M., Usunier, N., Goutte, C.: Learning from multiple partially observed
+%   views-an application to multilingual text categorization.
+% \newblock In: Advances in neural information processing systems, pp. 28--36
+%   (2009)
+
+% \bibitem{mic-taxonomy}
+% Amores, J.: Multiple instance classification: Review, taxonomy and comparative
+%   study.
+% \newblock Artificial Intelligence \textbf{201}, 81 -- 105 (2013).
+% \newblock \doi{https://doi.org/10.1016/j.artint.2013.06.003}
+
+% \bibitem{mi-svm}
+% Andrews, S., Tsochantaridis, I., Hofmann, T.: Support vector machines for
+%   multiple-instance learning.
+% \newblock In: Advances in neural information processing systems, pp. 577--584
+%   (2003)
+
+% \bibitem{aor-text}
+% Baccianella, S., Esuli, A., Sebastiani, F.: Feature selection for ordinal text
+%   classification.
+% \newblock Neural computation \textbf{26}(3), 557--591 (2014).
+% \newblock \doi{10.1162/NECO\_a\_00558}
+
+% \bibitem{ir-book}
+% Barlow, R.E.: Statistical inference under order restrictions; the theory and
+%   application of isotonic regression.
+% \newblock Wiley (1972)
+
+% \bibitem{aor-medical}
+% Bender, R., Grouven, U.: Ordinal logistic regression in medical research.
+% \newblock Journal of the Royal College of physicians of London \textbf{31}(5),
+%   546--551 (1997)
+
+% \bibitem{md-bayes}
+% Bielza, C., Li, G., Larranaga, P.: Multi-dimensional classification with
+%   bayesian networks.
+% \newblock International Journal of Approximate Reasoning \textbf{52}(6),
+%   705--727 (2011)
+
+% \bibitem{mc-rules2}
+% B{\l}aszczy{\'n}ski, J., S{\l}owi{\'n}ski, R., Szelag, M.: Sequential covering
+%   rule induction algorithm for variable consistency rough set approaches.
+% \newblock Information Sciences \textbf{181}(5), 987--1002 (2011).
+% \newblock \doi{10.1016/j.ins.2010.10.030}
+
+% \bibitem{highdim}
+% Bol{\'o}n-Canedo, V., S{\'a}nchez-Maro{\~{n}}o, N., Alonso-Betanzos, A.:
+%   Feature Selection for High-Dimensional Data.
+% \newblock Springer International Publishing, Cham (2015).
+% \newblock \doi{10.1007/978-3-319-21858-8}.
+% \newblock \urlprefix\url{https://doi.org/10.1007/978-3-319-21858-8}
+
+% \bibitem{moutr}
+% Borchani, H., Varando, G., Bielza, C., Larra{\~n}aga, P.: A survey on
+%   multi-output regression.
+% \newblock Wiley Interdisciplinary Reviews: Data Mining and Knowledge Discovery
+%   \textbf{5}(5), 216--233 (2015).
+% \newblock \doi{10.1002/widm.1157}
+
+% \bibitem{aml-scene}
+% Boutell, M., Luo, J., Shen, X., Brown, C.: Learning multi-label scene
+%   classification.
+% \newblock Pattern Recognition \textbf{37}(9), 1757--1771 (2004).
+% \newblock \doi{10.1016/j.patcog.2004.03.009}
+
+% \bibitem{ltr}
+% Burges, C., Shaked, T., Renshaw, E., Lazier, A., Deeds, M., Hamilton, N.,
+%   Hullender, G.: Learning to rank using gradient descent.
+% \newblock In: Proceedings of the 22nd international conference on Machine
+%   learning, pp. 89--96. ACM (2005).
+% \newblock \doi{10.1145/1102351.1102363}
+
+% \bibitem{or-knn-dt}
+% Cardoso, J.S., Sousa, R.: Classification models with global constraints for
+%   ordinal data.
+% \newblock In: 2010 Ninth International Conference on Machine Learning and
+%   Applications, pp. 71--77. IEEE (2010).
+% \newblock \doi{10.1109/ICMLA.2010.18}
+
+% \bibitem{aor-age}
+% Chang, K.Y., Chen, C.S., Hung, Y.P.: Ordinal hyperplanes ranker with cost
+%   sensitivities for age estimation.
+% \newblock In: Computer vision and pattern recognition (cvpr), 2011 ieee
+%   conference on, pp. 585--592. IEEE (2011).
+% \newblock \doi{10.1109/CVPR.2011.5995437}
+
+% \bibitem{semi-sup}
+% Chapelle, O., Schlkopf, B., Zien, A.: Semi-Supervised Learning, 1st edn.
+% \newblock The MIT Press (2010)
+
+% \bibitem{aml-question}
+% Charte, F., Rivera, A.J., del Jesus, M.J., Herrera, F.: Quinta: A question
+%   tagging assistant to improve the answering ratio in electronic forums.
+% \newblock In: EUROCON 2015 - International Conference on Computer as a Tool
+%   (EUROCON), IEEE, pp. 1--6 (2015).
+% \newblock \doi{10.1109/EUROCON.2015.7313677}
+
+% \bibitem{scumble}
+% Charte, F., Rivera, A.J., del Jesus, M.J., Herrera, F.: Dealing with difficult
+%   minority labels in imbalanced mutilabel data sets.
+% \newblock Neurocomputing  (2017).
+% \newblock \doi{10.1016/j.neucom.2016.08.158}
+
+% \bibitem{mv-cca}
+% Chaudhuri, K., Kakade, S.M., Livescu, K., Sridharan, K.: Multi-view clustering
+%   via canonical correlation analysis.
+% \newblock In: Proceedings of the 26th annual international conference on
+%   machine learning, pp. 129--136. ACM (2009).
+% \newblock \doi{10.1145/1553374.1553391}
+
+% \bibitem{mv-fda}
+% Chen, Q., Sun, S.: Hierarchical multi-view fisher discriminant analysis.
+% \newblock In: International Conference on Neural Information Processing, pp.
+%   289--298. Springer (2009).
+% \newblock \doi{10.1007/978-3-642-10684-2\_32}
+
+% \bibitem{or-nn2}
+% Cheng, J., Wang, Z., Pollastri, G.: A neural network approach to ordinal
+%   regression.
+% \newblock In: Neural Networks, 2008. IJCNN 2008.(IEEE World Congress on
+%   Computational Intelligence). IEEE International Joint Conference on, pp.
+%   1279--1284. IEEE (2008).
+% \newblock \doi{10.1109/IJCNN.2008.4633963}
+
+% \bibitem{graded-ml}
+% Cheng, W., H{\"u}llermeier, E., Dembczynski, K.J.: Graded multilabel
+%   classification: The ordinal case.
+% \newblock In: Proceedings of the 27th international conference on machine
+%   learning (ICML-10), pp. 223--230 (2010)
+
+% \bibitem{or-gp}
+% Chu, W., Ghahramani, Z.: Gaussian processes for ordinal regression.
+% \newblock Journal of machine learning research \textbf{6}(Jul), 1019--1041
+%   (2005)
+
+% \bibitem{ml-dt}
+% Clare, A., King, R.D.: Knowledge discovery in multi-label phenotype data.
+% \newblock In: European Conference on Principles of Data Mining and Knowledge
+%   Discovery, pp. 42--53. Springer (2001).
+% \newblock \doi{10.1007/3-540-44794-6\_4}
+
+% \bibitem{or-nn}
+% Costa, M.: Probabilistic interpretation of feedforward network outputs, with
+%   relationships to statistical prediction of ordinal quantities.
+% \newblock International journal of neural systems \textbf{7}(05), 627--637
+%   (1996).
+% \newblock \doi{10.1142/S0129065796000610}
+
+% \bibitem{md-bayes2}
+% De~Waal, P.R., Van Der~Gaag, L.C.: Inference and learning in multi-dimensional
+%   bayesian network classifiers.
+% \newblock In: European Conference on Symbolic and Quantitative Approaches to
+%   Reasoning and Uncertainty, pp. 501--511. Springer (2007).
+% \newblock \doi{10.1007/978-3-540-75256-1\_45}
+
+% \bibitem{mtr-trees}
+% De'Ath, G.: Multivariate regression trees: a new technique for modeling
+%   species--environment relationships.
+% \newblock Ecology \textbf{83}(4), 1105--1117 (2002).
+% \newblock \doi{10.1890/0012-9658(2002)083[1105:MRTANT]2.0.CO;2}
+
+% \bibitem{lr-boost}
+% Dekel, O., Singer, Y., Manning, C.D.: Log-linear models for label ranking.
+% \newblock In: Advances in neural information processing systems, pp. 497--504
+%   (2004)
+
+% \bibitem{mc-rules}
+% Dembczy{\'n}ski, K., Kot{\l}owski, W., S{\l}owi{\'n}ski, R.: Ensemble of
+%   decision rules for ordinal classification with monotonicity constraints.
+% \newblock In: International Conference on Rough Sets and Knowledge Technology,
+%   pp. 260--267. Springer (2008).
+% \newblock \doi{10.1007/978-3-540-79721-0\_38}
+
+% \bibitem{or-elm}
+% Deng, W.Y., Zheng, Q.H., Lian, S., Chen, L., Wang, X.: Ordinal extreme learning
+%   machine.
+% \newblock Neurocomputing \textbf{74}(1-3), 447--456 (2010).
+% \newblock \doi{10.1016/j.neucom.2010.08.022}
+
+% \bibitem{mi-apr}
+% Dietterich, T.G., Lathrop, R.H., Lozano-P{\'e}rez, T.: Solving the multiple
+%   instance problem with axis-parallel rectangles.
+% \newblock Artificial intelligence \textbf{89}(1-2), 31--71 (1997).
+% \newblock \doi{10.1016/S0004-3702(96)00034-3}
+
+% \bibitem{aml-protein}
+% Diplaris, S., Tsoumakas, G., Mitkas, P., Vlahavas, I.: Protein classification
+%   with multiple algorithms.
+% \newblock In: Proc. 10th Panhellenic Conference on Informatics, Volos, Greece,
+%   PCI05, pp. 448--456 (2005).
+% \newblock \doi{10.1007/11573036\_42}
+
+% \bibitem{classification-duda}
+% Duda, R.O., Hart, P.E., Stork, D.G.: Pattern classification.
+% \newblock John Wiley \& Sons (2012)
+
+% \bibitem{mc-knn}
+% Duivesteijn, W., Feelders, A.: Nearest neighbour classification with
+%   monotonicity constraints.
+% \newblock In: Joint European Conference on Machine Learning and Knowledge
+%   Discovery in Databases, pp. 301--316. Springer (2008).
+% \newblock \doi{10.1007/978-3-540-87479-9\_38}
+
+% \bibitem{aldl-yeast}
+% Eisen, M.B., Spellman, P.T., Brown, P.O., Botstein, D.: Cluster analysis and
+%   display of genome-wide expression patterns.
+% \newblock Proceedings of the National Academy of Sciences \textbf{95}(25),
+%   14863--14868 (1998)
+
+% \bibitem{ml-svm}
+% Elisseeff, A., Weston, J.: A kernel method for multi-labelled classification.
+% \newblock In: Advances in neural information processing systems, pp. 681--687
+%   (2002)
+
+% \bibitem{pu-learn}
+% Elkan, C., Noto, K.: Learning classifiers from only positive and unlabeled
+%   data.
+% \newblock In: Proceedings of the 14th ACM SIGKDD international conference on
+%   Knowledge discovery and data mining, pp. 213--220. ACM (2008).
+% \newblock \doi{10.1145/1401890.1401920}
+
+% \bibitem{mv-svm}
+% Farquhar, J., Hardoon, D., Meng, H., Shawe-taylor, J.S., Szedmak, S.: Two view
+%   learning: Svm-2k, theory and practice.
+% \newblock In: Advances in neural information processing systems, pp. 355--362
+%   (2006)
+
+% \bibitem{oneshot}
+% Fe-Fei, L., et~al.: A bayesian approach to unsupervised one-shot learning of
+%   object categories.
+% \newblock In: Computer Vision, 2003. Proceedings. Ninth IEEE International
+%   Conference on, pp. 1134--1141. IEEE (2003).
+% \newblock \doi{10.1109/ICCV.2003.1238476}
+
+% \bibitem{imbalanced}
+% Fern{\'a}ndez, A., Garc{\'i}a, S., Galar, M., Prati, R.C., Krawczyk, B.,
+%   Herrera, F.: Learning from Imbalanced Data Sets.
+% \newblock Springer International Publishing (2018).
+% \newblock \doi{10.1007/978-3-319-98074-4}
+
+% \bibitem{mil-assumptions}
+% Foulds, J., Frank, E.: A review of multi-instance learning assumptions.
+% \newblock The Knowledge Engineering Review \textbf{25}(1), 1--25 (2010).
+% \newblock \doi{10.1017/S026988890999035X}
+
+% \bibitem{ord-simple}
+% Frank, E., Hall, M.: A simple approach to ordinal classification.
+% \newblock In: European Conference on Machine Learning, pp. 145--156. Springer
+%   (2001).
+% \newblock \doi{10.1007/3-540-44795-4\_13}
+
+% \bibitem{classification}
+% Fukunaga, K.: Introduction to statistical pattern recognition.
+% \newblock Elsevier (2013)
+
+% \bibitem{ml-clr}
+% F{\"u}rnkranz, J., H{\"u}llermeier, E., Menc{\'\i}a, E.L., Brinker, K.:
+%   Multilabel classification via calibrated label ranking.
+% \newblock Machine learning \textbf{73}(2), 133--153 (2008).
+% \newblock \doi{10.1007/s10994-008-5064-8}
+
+% \bibitem{lrank4ml}
+% F{\"u}rnkranz, J., H{\"u}llermeier, E., Menc{\'\i}a, E.L., Brinker, K.:
+%   Multilabel classification via calibrated label ranking.
+% \newblock Machine learning \textbf{73}(2), 133--153 (2008).
+% \newblock \doi{10.1007/s10994-008-5064-8}
+
+% \bibitem{streams}
+% Gama, J.: Knowledge discovery from data streams.
+% \newblock Chapman and Hall/CRC (2010)
+
+% \bibitem{ldl}
+% Geng, X.: Label distribution learning.
+% \newblock IEEE Transactions on Knowledge and Data Engineering \textbf{28}(7),
+%   1734--1748 (2016).
+% \newblock \doi{10.1109/TKDE.2016.2545658}
+
+% \bibitem{mltutorial}
+% Gibaja, E., Ventura, S.: A tutorial on multilabel learning.
+% \newblock ACM Computing Surveys (CSUR) \textbf{47}(3), 52 (2015).
+% \newblock \doi{10.1145/2716262}
+
+% \bibitem{amc-bank}
+% Greco, S., Matarazzo, B., Slowinski, R.: A new rough set approach to evaluation
+%   of bankruptcy risk.
+% \newblock In: Operational tools in the management of financial risks, pp.
+%   121--136. Springer (1998).
+% \newblock \doi{10.1007/978-1-4615-5495-0\_8}
+
+% \bibitem{amc-customer}
+% Greco, S., Matarazzo, B., S{\l}owi{\'n}ski, R.: Rough set approach to customer
+%   satisfaction analysis.
+% \newblock In: International Conference on Rough Sets and Current Trends in
+%   Computing, pp. 284--295. Springer (2006).
+% \newblock \doi{10.1007/11908029\_31}
+
+% \bibitem{mc-salva}
+% Guti{\'e}rrez, P.A., Garc{\'i}a, S.: Current prospects on ordinal and monotonic
+%   classification.
+% \newblock Progress in Artificial Intelligence \textbf{5}(3), 171--179 (2016).
+% \newblock \doi{10.1007/s13748-016-0088-y}.
+% \newblock \urlprefix\url{https://doi.org/10.1007/s13748-016-0088-y}
+
+% \bibitem{ord-survey}
+% Gutiérrez, P.A., Pérez-Ortiz, M., Sánchez-Monedero, J., Fernández-Navarro,
+%   F., Hervás-Martínez, C.: Ordinal regression methods: Survey and
+%   experimental study.
+% \newblock IEEE Transactions on Knowledge and Data Engineering \textbf{28}(1),
+%   127--146 (2016).
+% \newblock \doi{10.1109/TKDE.2015.2457911}
+
+% \bibitem{lr-constraint}
+% Har-Peled, S., Roth, D., Zimak, D.: Constraint classification for multiclass
+%   classification and ranking.
+% \newblock In: Advances in neural information processing systems, pp. 809--816
+%   (2003)
+
+% \bibitem{weak-nonstandard}
+% Hernández-González, J., Inza, I., Lozano, J.A.: Weak supervision and other
+%   non-standard classification problems: A taxonomy.
+% \newblock Pattern Recognition Letters \textbf{69}, 49 -- 55 (2016).
+% \newblock \doi{10.1016/j.patrec.2015.10.008}
+
+% \bibitem{mlc}
+% Herrera, F., Charte, F., Rivera, A.J., Del~Jesus, M.J.: Multilabel
+%   classification.
+% \newblock Springer (2016)
+
+% \bibitem{mil}
+% Herrera, F., Ventura, S., Bello, R., Cornelis, C., Zafra, A.,
+%   S{\'a}nchez-Tarrag{\'o}, D., Vluymans, S.: Multiple instance learning:
+%   foundations and algorithms.
+% \newblock Springer (2016).
+% \newblock \doi{10.1007/978-3-319-47759-6}
+
+% \bibitem{lrankpairwise}
+% H{\"u}llermeier, E., F{\"u}rnkranz, J., Cheng, W., Brinker, K.: Label ranking
+%   by learning pairwise preferences.
+% \newblock Artificial Intelligence \textbf{172}(16-17), 1897--1916 (2008).
+% \newblock \doi{10.1016/j.artint.2008.08.002}
+
+% \bibitem{timeseries}
+% Hyndman, R.J., Athanasopoulos, G.: Forecasting: principles and practice.
+% \newblock OTexts (2018)
+
+% \bibitem{mtr-rank}
+% Izenman, A.J.: Reduced-rank regression for the multivariate linear model.
+% \newblock Journal of multivariate analysis \textbf{5}(2), 248--264 (1975).
+% \newblock \doi{10.1016/0047-259X(75)90042-1}
+
+% \bibitem{pattern-rec}
+% Jain, A.K., Duin, R.P., Mao, J.: Statistical pattern recognition: A review.
+% \newblock IEEE Transactions on pattern analysis and machine intelligence
+%   \textbf{22}(1), 4--37 (2000)
+
+% \bibitem{learning-tibshirani}
+% James, G., Witten, D., Hastie, T., Tibshirani, R.: An Introduction to
+%   Statistical Learning: with Applications in R.
+% \newblock Springer New York, New York, NY (2013).
+% \newblock \doi{10.1007/978-1-4614-7138-7}
+
+% \bibitem{aml-text}
+% Katakis, I., Tsoumakas, G., Vlahavas, I.: Multilabel text classification for
+%   automated tag suggestion.
+% \newblock In: Proc. ECML PKDD08 Discovery Challenge, Antwerp, Belgium, pp.
+%   75--83 (2008)
+
+% \bibitem{amtr-eco}
+% Kocev, D., D{\v{z}}eroski, S., White, M.D., Newell, G.R., Griffioen, P.: Using
+%   single-and multi-target regression trees and ensembles to model a compound
+%   index of vegetation condition.
+% \newblock Ecological Modelling \textbf{220}(8), 1159--1168 (2009).
+% \newblock \doi{10.1016/j.ecolmodel.2009.01.037}
+
+% \bibitem{mtr-rf}
+% Kocev, D., Vens, C., Struyf, J., D{\v{z}}eroski, S.: Tree ensembles for
+%   predicting structured outputs.
+% \newblock Pattern Recognition \textbf{46}(3), 817--833 (2013).
+% \newblock \doi{10.1016/j.patcog.2012.09.023}
+
+% \bibitem{monotonicity}
+% Kotlowski, W., Slowinski, R.: On nonparametric ordinal classification with
+%   monotonicity constraints.
+% \newblock IEEE Transactions on Knowledge and Data Engineering \textbf{25}(11),
+%   2576--2589 (2013).
+% \newblock \doi{10.1109/TKDE.2012.204}
+
+% \bibitem{ami-bank}
+% Kotsiantis, S., Kanellopoulos, D., Tampakas, V.: Financial application of
+%   multi-instance learning: two greek case studies.
+% \newblock Journal of Convergence Information Technology \textbf{5}(8), 42--53
+%   (2010)
+
+% \bibitem{imbalanced-krawczyk}
+% Krawczyk, B.: Learning from imbalanced data: open challenges and future
+%   directions.
+% \newblock Progress in Artificial Intelligence \textbf{5}(4), 221--232 (2016).
+% \newblock \doi{10.1007/s13748-016-0094-0}.
+% \newblock \urlprefix\url{https://doi.org/10.1007/s13748-016-0094-0}
+
+% \bibitem{mv-spectral}
+% Kumar, A., Rai, P., Daume, H.: Co-regularized multi-view spectral clustering.
+% \newblock In: Advances in neural information processing systems, pp. 1413--1421
+%   (2011)
+
+% \bibitem{amtr-wind}
+% Kuznar, D., Mozina, M., Bratko, I.: Curve prediction with kernel regression.
+% \newblock In: Proceedings of the 1st Workshop on Learning from Multi-Label
+%   Data, pp. 61--68 (2009)
+
+% \bibitem{aor-credit}
+% Kwon, Y.S., Han, I., Lee, K.C.: Ordinal pairwise partitioning (opp) approach to
+%   neural networks training in bond rating.
+% \newblock Intelligent Systems in Accounting, Finance \& Management
+%   \textbf{6}(1), 23--40 (1997).
+% \newblock \doi{10.1002/(SICI)1099-1174(199703)6:1<23::AID-ISAF113>3.0.CO;2-4}
+
+% \bibitem{Laghmari2018}
+% Laghmari, K., Marsala, C., Ramdani, M.: An adapted incremental graded
+%   multi-label classification model for recommendation systems.
+% \newblock Progress in Artificial Intelligence \textbf{7}(1), 15--29 (2018).
+% \newblock \doi{10.1007/s13748-017-0133-5}
+
+% \bibitem{amv-face}
+% Li, S.Z., Zhu, L., Zhang, Z., Blake, A., Zhang, H., Shum, H.: Statistical
+%   learning of multi-view face detection.
+% \newblock In: European Conference on Computer Vision, pp. 67--81. Springer
+%   (2002).
+% \newblock \doi{10.1007/3-540-47979-1\_5}
+
+% \bibitem{or-ada}
+% Lin, H.T., Li, L.: Combining ordinal preferences by boosting.
+% \newblock In: Proceedings ECML/PKDD 2009 Workshop on Preference Learning, pp.
+%   69--83 (2009)
+
+% \bibitem{pu-text}
+% Liu, B., Dai, Y., Li, X., Lee, W.S., Yu, P.S.: Building text classifiers using
+%   positive and unlabeled examples.
+% \newblock In: Data Mining, 2003. ICDM 2003. Third IEEE International Conference
+%   on, pp. 179--186. IEEE (2003).
+% \newblock \doi{10.1109/ICDM.2003.1250918}
+
+% \bibitem{ldl-prob}
+% L{\'o}pez-Cruz, P.L., Bielza, C., Larra{\~n}aga, P.: Learning conditional
+%   linear gaussian classifiers with probabilistic class labels.
+% \newblock In: Conference of the Spanish Association for Artificial
+%   Intelligence, pp. 139--148. Springer (2013).
+% \newblock \doi{10.1007/978-3-642-40643-0\_15}
+
+% \bibitem{aldl-face}
+% Lyons, M., Akamatsu, S., Kamachi, M., Gyoba, J.: Coding facial expressions with
+%   gabor wavelets.
+% \newblock In: Automatic Face and Gesture Recognition, 1998. Proceedings. Third
+%   IEEE International Conference on, pp. 200--205. IEEE (1998).
+% \newblock \doi{10.1109/AFGR.1998.670949}
+
+% \bibitem{mi-framework}
+% Maron, O., Lozano-P{\'e}rez, T.: A framework for multiple-instance learning.
+% \newblock In: Advances in neural information processing systems, pp. 570--576
+%   (1998)
+
+% \bibitem{learning-marsland}
+% Marsland, S.: Machine Learning: An Algorithmic Perspective.
+% \newblock Chapman \& Hall (2014)
+
+% \bibitem{mtr-kern1}
+% Micchelli, C.A., Pontil, M.: On learning vector-valued functions.
+% \newblock Neural computation \textbf{17}(1), 177--204 (2005).
+% \newblock \doi{10.1162/0899766052530802}
+
+% \bibitem{learning-mitchell}
+% Mitchell, T.M.: Machine learning.
+% \newblock McGraw Hill series in computer science. McGraw-Hill (1997)
+
+% \bibitem{oneclass}
+% Moya, M.M., Koch, M.W., Hostetler, L.D.: One-class classifier networks for
+%   target recognition applications.
+% \newblock NASA STI/Recon Technical Report N \textbf{93} (1993)
+
+% \bibitem{mlensembles}
+% Moyano, J.M., Gibaja, E.L., Cios, K.J., Ventura, S.: Review of ensembles of
+%   multi-label classifiers: Models, experimental study and prospects.
+% \newblock Information Fusion \textbf{44}, 33--45 (2018).
+% \newblock \doi{10.1016/j.inffus.2017.12.001}
+
+% \bibitem{learning-murphy}
+% Murphy, K.P.: Machine Learning: A Probabilistic Perspective.
+% \newblock The MIT Press (2012)
+
+% \bibitem{mvmiml}
+% Nguyen, C.T., Wang, X., Liu, J., Zhou, Z.H.: Labeling complicated objects:
+%   Multi-view multi-instance multi-label learning.
+% \newblock In: AAAI, pp. 2013--2019 (2014)
+
+% \bibitem{nilsson}
+% Nilsson, N.J.: Learning machines: foundations of trainable pattern-classifying
+%   systems.
+% \newblock McGraw-Hill (1965)
+
+% \bibitem{zeroshot}
+% Palatucci, M., Pomerleau, D., Hinton, G.E., Mitchell, T.M.: Zero-shot learning
+%   with semantic output codes.
+% \newblock In: Advances in neural information processing systems, pp. 1410--1418
+%   (2009)
+
+% \bibitem{mdc-indep}
+% Pan, F.: Multi-dimensional fragment classification in biomedical text.
+% \newblock Queen's University (2006)
+
+% \bibitem{amv-wifi}
+% Pan, S.J., Kwok, J.T., Yang, Q., Pan, J.J.: Adaptive localization in a dynamic
+%   wifi environment through multi-view learning.
+% \newblock In: AAAI, pp. 1108--1113 (2007)
+
+% \bibitem{mc-trees}
+% Potharst, R., Feelders, A.J.: Classification trees for problems with
+%   monotonicity constraints.
+% \newblock ACM SIGKDD Explorations Newsletter \textbf{4}(1), 1--10 (2002).
+% \newblock \doi{10.1145/568574.568577}
+
+% \bibitem{mi-nn}
+% Ramon, J., De~Raedt, L.: Multi instance neural networks.
+% \newblock In: Proceedings of the ICML-2000 workshop on attribute-value and
+%   relational learning, pp. 53--60 (2000)
+
+% \bibitem{ml-chains}
+% Read, J., Pfahringer, B., Holmes, G., Frank, E.: Classifier chains for
+%   multi-label classification.
+% \newblock Machine learning \textbf{85}(3), 333 (2011).
+% \newblock \doi{10.1007/s10994-011-5256-5}
+
+% \bibitem{amc-cancer}
+% Ryu, Y.U., Chandrasekaran, R., Jacob, V.S.: Breast cancer prediction using the
+%   isotonic separation technique.
+% \newblock European Journal of Operational Research \textbf{181}(2), 842--854
+%   (2007).
+% \newblock \doi{10.1016/j.ejor.2006.06.031}
+
+% \bibitem{mtr-svr2}
+% S{\'a}nchez-Fern{\'a}ndez, M., de~Prado-Cumplido, M., Arenas-Garc{\'\i}a, J.,
+%   P{\'e}rez-Cruz, F.: Svm multiregression for nonlinear channel estimation in
+%   multiple-input multiple-output systems.
+% \newblock IEEE transactions on signal processing \textbf{52}(8), 2298--2307
+%   (2004).
+% \newblock \doi{10.1109/TSP.2004.831028}
+
+% \bibitem{or-elm2}
+% S{\'a}nchez-Monedero, J., Guti{\'e}rrez, P.A., Herv{\'a}s-Mart{\'\i}nez, C.:
+%   Evolutionary ordinal extreme learning machine.
+% \newblock In: International Conference on Hybrid Artificial Intelligence
+%   Systems, pp. 500--509. Springer (2013).
+% \newblock \doi{10.1007/978-3-642-40846-5\_50}
+
+% \bibitem{lr-online}
+% Shalev-Shwartz, S., Singer, Y.: A unified algorithmic approach for efficient
+%   online label ranking.
+% \newblock In: Artificial Intelligence and Statistics, pp. 452--459 (2007)
+
+% \bibitem{mdc}
+% Shatkay, H., Pan, F., Rzhetsky, A., Wilbur, W.J.: Multi-dimensional
+%   classification of biomedical text: Toward automated, practical provision of
+%   high-utility text to diverse users.
+% \newblock Bioinformatics \textbf{24}(18), 2086--2093 (2008).
+% \newblock \doi{10.1093/bioinformatics/btn381}
+
+% \bibitem{mc-monnets}
+% Sill, J.: Monotonic networks.
+% \newblock In: Advances in neural information processing systems, pp. 661--667
+%   (1998)
+
+% \bibitem{hierarchical}
+% Silla, C.N., Freitas, A.A.: A survey of hierarchical classification across
+%   different application domains.
+% \newblock Data Mining and Knowledge Discovery \textbf{22}(1-2), 31--72 (2011)
+
+% \bibitem{streams2}
+% Silva, J.A., Faria, E.R., Barros, R.C., Hruschka, E.R., De~Carvalho, A.C.,
+%   Gama, J.: Data stream clustering: A survey.
+% \newblock ACM Computing Surveys (CSUR) \textbf{46}(1), 13 (2013)
+
+% \bibitem{regression}
+% Smola, A.J., Sch{\"o}lkopf, B.: On a kernel-based method for pattern
+%   recognition, regression, approximation, and operator inversion.
+% \newblock Algorithmica \textbf{22}(1-2), 211--231 (1998)
+
+% \bibitem{Sousa2018}
+% Sousa, R., Gama, J.: Multi-label classification from high-speed data streams
+%   with adaptive model rules and random rules.
+% \newblock Progress in Artificial Intelligence \textbf{7}(3), 177--187 (2018).
+% \newblock \doi{10.1007/s13748-018-0142-z}
+
+% \bibitem{mtrviaml}
+% Spyromitros-Xioufis, E., Tsoumakas, G., Groves, W., Vlahavas, I.: Multi-label
+%   classification methods for multi-target regression.
+% \newblock arXiv preprint arXiv \textbf{1211} (2012)
+
+% \bibitem{amv-ads-webkb}
+% Sun, S., Chao, G.: Multi-view maximum entropy discrimination.
+% \newblock In: IJCAI, pp. 1706--1712 (2013)
+
+% \bibitem{miml2}
+% Surdeanu, M., Tibshirani, J., Nallapati, R., Manning, C.D.: Multi-instance
+%   multi-label learning for relation extraction.
+% \newblock In: Proceedings of the 2012 joint conference on empirical methods in
+%   natural language processing and computational natural language learning, pp.
+%   455--465. Association for Computational Linguistics (2012)
+
+% \bibitem{str-pred}
+% Taskar, B., Chatalbashev, V., Koller, D., Guestrin, C.: Learning structured
+%   prediction models: A large margin approach.
+% \newblock In: Proceedings of the 22nd international conference on Machine
+%   learning, pp. 896--903. ACM (2005).
+% \newblock \doi{10.1145/1102351.1102464}
+
+% \bibitem{multiclass}
+% Tax, D.M., Duin, R.P.: Using two-class classifiers for multiclass
+%   classification.
+% \newblock In: Pattern Recognition, 2002. Proceedings. 16th International
+%   Conference on, vol.~2, pp. 124--127. IEEE (2002)
+
+% \bibitem{ml-rules}
+% Thabtah, F.A., Cowling, P., Peng, Y.: Mmac: A new multi-class, multi-label
+%   associative classification approach.
+% \newblock In: Data Mining, 2004. ICDM'04. Fourth IEEE International Conference
+%   on, pp. 217--224. IEEE (2004).
+% \newblock \doi{10.1109/ICDM.2004.10117}
+
+% \bibitem{aor-image}
+% Tian, Q., Chen, S., Tan, X.: Comparative study among three strategies of
+%   incorporating spatial structures to ordinal image regression.
+% \newblock Neurocomputing \textbf{136}, 152--161 (2014).
+% \newblock \doi{10.1016/j.neucom.2014.01.017}
+
+% \bibitem{ml-rakel}
+% Tsoumakas, G., Vlahavas, I.: Random k-labelsets: An ensemble method for
+%   multilabel classification.
+% \newblock In: European conference on machine learning, pp. 406--417. Springer
+%   (2007).
+% \newblock \doi{10.1007/978-3-540-74958-5\_38}
+
+% \bibitem{amtr-remote}
+% Tuia, D., Verrelst, J., Alonso, L., P{\'e}rez-Cruz, F., Camps-Valls, G.:
+%   Multioutput support vector regression for remote sensing biophysical
+%   parameter estimation.
+% \newblock IEEE Geoscience and Remote Sensing Letters \textbf{8}(4), 804--808
+%   (2011).
+% \newblock \doi{10.1109/LGRS.2011.2109934}
+
+% \bibitem{amv-corel}
+% Tzortzis, G., Likas, A.: Kernel-based weighted multi-view clustering.
+% \newblock In: Data Mining (ICDM), 2012 IEEE 12th International Conference on,
+%   pp. 675--684. IEEE (2012).
+% \newblock \doi{10.1109/ICDM.2012.43}
+
+% \bibitem{mtr-canon}
+% Van Der~Merwe, A., Zidek, J.: Multivariate regression analysis and canonical
+%   variates.
+% \newblock Canadian Journal of Statistics \textbf{8}(1), 27--39 (1980).
+% \newblock \doi{10.2307/3314667}
+
+% \bibitem{mtr-svr1}
+% Vazquez, E., Walter, E.: Multi-output support vector regression.
+% \newblock In: 13th IFAC Symposium on System Identification, pp. 1820--1825.
+%   Citeseer (2003)
+
+% \bibitem{lranksurvey}
+% Vembu, S., G{\"a}rtner, T.: Label ranking algorithms: A survey.
+% \newblock In: Preference learning, pp. 45--64. Springer (2010).
+% \newblock \doi{10.1007/978-3-642-14125-6\_3}
+
+% \bibitem{mi-knn}
+% Wang, J., Zucker, J.D.: Solving multiple-instance problem: a lazy learning
+%   approach.
+% \newblock In: International Conference on Machine Learning, pp. 1119--1126.
+%   Morgan Kaufmann Publishers (2000)
+
+% \bibitem{gaussianproc}
+% Williams, C.K., Barber, D.: Bayesian classification with gaussian processes.
+% \newblock IEEE Transactions on Pattern Analysis and Machine Intelligence
+%   \textbf{20}(12), 1342--1351 (1998)
+
+% \bibitem{mlmimv}
+% Wu, B., Zhong, E., Horner, A., Yang, Q.: Music emotion recognition by
+%   multi-label multi-layer multi-instance multi-view learning.
+% \newblock In: Proceedings of the 22nd ACM international conference on
+%   Multimedia, pp. 117--126. ACM (2014).
+% \newblock \doi{10.1145/2647868.2654904}
+
+% \bibitem{ml-knn}
+% Zhang, M.L., Zhou, Z.H.: Ml-knn: A lazy learning approach to multi-label
+%   learning.
+% \newblock Pattern recognition \textbf{40}(7), 2038--2048 (2007).
+% \newblock \doi{10.1016/j.patcog.2006.12.019}
+
+% \bibitem{mlmethods}
+% Zhang, M.L., Zhou, Z.H.: A review on multi-label learning algorithms.
+% \newblock IEEE transactions on knowledge and data engineering \textbf{26}(8),
+%   1819--1837 (2014).
+% \newblock \doi{10.1109/TKDE.2013.39}
+
+% \bibitem{mtr-lssvr}
+% Zhang, W., Liu, X., Ding, Y., Shi, D.: Multi-output ls-svr machine in extended
+%   feature space.
+% \newblock In: Computational Intelligence for Measurement Systems and
+%   Applications (CIMSA), 2012 IEEE International Conference on, pp. 130--134.
+%   IEEE (2012).
+% \newblock \doi{10.1109/CIMSA.2012.6269600}
+
+% \bibitem{mviewl}
+% Zhao, J., Xie, X., Xu, X., Sun, S.: Multi-view learning overview: Recent
+%   progress and new challenges.
+% \newblock Information Fusion \textbf{38}, 43--54 (2017).
+% \newblock \doi{10.1016/j.inffus.2017.02.007}
+
+% \bibitem{mi-kernel}
+% Zhou, Z.H., Sun, Y.Y., Li, Y.F.: Multi-instance learning by treating instances
+%   as non-iid samples.
+% \newblock In: Proceedings of the 26th annual international conference on
+%   machine learning, pp. 1249--1256. ACM (2009).
+% \newblock \doi{10.1145/1553374.1553534}
+
+% \bibitem{miml}
+% Zhou, Z.H., Zhang, M.L., Huang, S.J., Li, Y.F.: Multi-instance multi-label
+%   learning.
+% \newblock Artificial Intelligence \textbf{176}(1), 2291--2320 (2012).
+% \newblock \doi{10.1016/j.artint.2011.10.002}
+
+% \end{thebibliography}
+
+% Non-BibTeX users please use
+% \begin{thebibliography}{}
+% %
+% % and use \bibitem to create references. Consult the Instructions
+% % for authors for reference list style.
+% %
+% \bibitem{RefJ}
+% % Format for Journal Reference
+% Author, Article title, Journal, Volume, page numbers (year)
+% % Format for books
+% \bibitem{RefB}
+% Author, Book title, page numbers. Publisher, place (year)
+% % etc
+% \end{thebibliography}
+
+% \end{document}
+% end of file template.tex
+

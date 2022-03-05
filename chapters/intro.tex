@@ -3,43 +3,62 @@
 \labch{intro}
 
 
-The current trends in collection of data are increasing, with more and more human activities producing machine-readable information, such as product reviews, posts on social media, medical images, industrial machinery sensor data, \xr{más ejemplos y citas} and more. Automatic processing of data makes it easier to obtain  results fast and saves hours of human labor which can be freed for other purposes or dedicated to tasks which cannot be automated. The speed provided by current computation resources also opens new possibilities for leveraging the available data, achieving extraction and manipulation of information at levels infeasible by human hand.
+The current trends in collection of data are increasing, with more and more human activities producing machine-readable information, such as product reviews \sidecite[2cm]{fang2015sentiment}, posts on social media \sidecite[3cm]{balaji2021machine}, medical images, industrial machinery sensor data, and more. Automatic processing of data makes it easier to obtain  results fast and saves hours of human labor which can be freed for other purposes or dedicated to tasks which cannot be automated. The speed provided by current computation resources also opens new possibilities for leveraging the available data, achieving extraction and manipulation of information at levels infeasible by human hand.
 
-The study of problems, tools and solutions related to data integration, processing and analysis has been recently known as data science \xr{cita}, a field which overlaps branches of mathematics, statistics and computer science, among other disciplines. Current data science applications are present everywhere, from the most industrial settings to direct final user access, and range from machinery fault detection, to medical diagnosis assistance, customer loyalty in retail and photograph enhancing \xr{citas}.
+The study of problems, tools and solutions related to data integration, processing and analysis has been recently known as data science \sidecite{wickham2016r}, a field which overlaps branches of mathematics, statistics and computer science, among other disciplines. Current data science applications are present everywhere, from the most industrial settings to direct final user access, and range from machinery fault detection \sidecite{carvalho2019systematic}, to medical diagnosis assistance \sidecite{erickson2017machine}, customer loyalty in retail \sidecite{ma2020machine} and photograph enhancing \sidecite{wang2020deep}.
 
-The general objective in a data science problem is to model a real world scenario based on the collected data and use the resulting model to provide some information to the end user, for example, a category or label, a ranking, an association or a transformed version of the original data. This is a process that encompasses all steps from data acquisition, to its preparation, processing and analysis.
+The general objective in a data science problem is to model a real world scenario based on the collected data and use the resulting model to provide some information to the end user, for example, a category or label, a ranking, an association or a transformed version of the original data. This is a process that encompasses all steps from data acquisition, to its preparation, processing and analysis. In this context, a wide variety of computer algorithms are used to manipulate and process data. The study and development of these techniques that allow machines to distill knowledge from data are known as machine learning.
 
 \section{Problem setting}
 
-A great part of the time spent in a data science problem, usually the longest, consists in preparing and preprocessing the available data in order for the posterior learning techniques to extract the maximum possible amount of information \xr{cita preprocessing}. There exist several traits of the data that can be manipulated to facilitate the work of learning algorithms: missing values, noisy instances, class imbalance, among others.
+A great part of the time spent in a data science problem, usually the longest, consists in preparing and preprocessing the available data in order for the posterior learning techniques to extract the maximum possible amount of information and ensure the new knowledge is valid \sidecite{garcia2015data}. There exist several traits of the data that can be manipulated to facilitate the work of learning algorithms: missing values, noisy instances, class imbalance, among others.
 
-One aspect of data to which machine learning \xr{definition?} models may be specially sensitive is the set of features, the specific representation of each instance.
+\begin{figure}
+    \includegraphics[width=\linewidth]{images/kddprocess.pdf}
+    \caption{Process of knowledge discovery in databases (KDD)}
+\end{figure}
 
-- what difficulties can the feature set present
+The set of features, that is, the specific representation of each instance in a dataset, is one aspect which machine learning models can be specially sensitive to.
 
-Features that may characterize an event or object adequately for humans may not be ideal for machines to process. For example, a string of text may have meaning for a reader but for the machine it is just a sequence of characters. Furthermore, the techniques used for collecting data can only produce the ``observable'' variables in a dataset, but there may be interesting, ``hidden'' variables which influence the data in a clearer way.
+% - what difficulties can the feature set present
 
-- what problems cause the feature set on classifiers
+Features that may characterize an event or object adequately for humans may not be ideal for machines to process. For example, a string of text may have meaning for a reader but for the machine it is just a sequence of characters whose semantics are not easily processed in that format. Similarly, an image can be expressed as a series of color values which, if shown on a screen, will display something intelligible for a person's eye, but those values do not hold direct relation to what is contained in the image itself.
 
-Providing a learning algorithm with unprocessed features usually leads to sub-par performance due to 
+\begin{marginfigure}
+\includegraphics[width=\linewidth]{latentvariables.png}
+\caption{\label{fig:latentfaces}Two randomly generated images from \url{https://thispersondoesnotexist.com}. In blue, available features such as the color values of some pixels. In pink, latent variable values (such as \textit{hair tone}) that are not directly represented in the data but influence those color values.}
+\end{marginfigure}
 
-- what is the objective, to get a better feature set
+Furthermore, the techniques used for collecting data can only produce the observable variables in a dataset, but there may be interesting, hidden variables which influence the data in a clearer way. This is a concept known in statistics as \textit{latent variables}. For example, the value  ``blond'' for the latent variable ``hair color'' might determine the color value of many pixels in an image of a person's face, but those are also influenced by overall lighting and contrast, so the hair color of a person cannot be deduced by just extracting a couple of pixels (see Figure~\ref{fig:latentfaces} for an example). It would be desirable to obtain the meaningful features, but a learning mechanism that takes all observable features into account is needed for these to be extracted.
 
-All this leads to a new task that can be performed before the actual knowledge extraction, \textit{feature learning}. The objective when learning features is 
+% - what problems cause the feature set on classifiers
 
-- what are the difficulties of obtaining a new feature set
+% Providing a learning algorithm with unprocessed features usually leads to sub-par performance due to \xr{...}
 
-- what are other possible difficulties: difficult classes and nonstandard problems
+% - what is the objective, to get a better feature set
+
+% All this leads to a new task that can be performed before the actual knowledge extraction, \textit{feature learning}. The objective when learning features is \xr{...}
+
+% - what are the difficulties of obtaining a new feature set
+
+% - what are other possible difficulties: difficult classes and nonstandard problems
 
 Other possible obstacles that one may come across when inspecting the features of a dataset are difficult classes, also known as class complexity. This scenario arises when the variables do not provide sufficient information to allow class separation, the relations between variables and the target are highly nonlinear, or other circumstances prevent a learning method from inferring an adequate mapping from the input features to the target variable.
 
+% - why classical tools for feature extraction do not cut it
+
 \section{Tools}
 
-- Qué es el aprendizaje profundo y cómo surge
+The main set of tools that are used to tackle problems along this work is \textit{deep learning}, a subset of machine learning focused on algorithms which extract successive transformations of the data until a solution to the task is reached.
 
-- Por qué aplicar aprendizaje profundo
+Deep learning originates from the concept of artificial neuron, which takes inspiration on the biological nervous system \sidecite{mcculloch1943logical}. The perceptron, a probabilistic model of the brain, was developed as a result \sidecite{rosenblatt1958perceptron} and current artificial neural networks are simply generalizations of the multi-layer perceptron.
 
+The resurgence of neural network models for machine learning has happened more recently due to the fact that their optimization had much higher computational cost than other, classical machine learning models.
+% - Qué es el aprendizaje profundo y cómo surge
 
+% - Por qué aplicar aprendizaje profundo
+
+\xr{...}
 
 \section{Motivation}
 
@@ -68,17 +87,34 @@ Another potential use of feature learning models that catches our interest is th
 
 A current conflict of deep learning models with several areas of interest in machine learning, such as medical applications, is the fact that most are essentially black boxes. This means that the behavior of a trained model is obscured by the intrinsic structure and is thus unintuitive for humans to comprehend. As a result, there is much interest in explaining and justifying the behavior of these models, 
 
-\section{Objective}
+\section{Objectives}
 
-- explore ways of learning feature sets by means of deep learning models
+All the research developed along this work has been revolving around the general aim of improving how autoencoders can achieve a better representation of data in order to extract more reliable models from it. 
 
-- develop new objectives so that features are able to separate different classes better
+As a result, the specific objectives that we posed throughout the course of the thesis were the following:
+
+\begin{itemize}
+    \item To acquire a deep understanding on how autoencoders work, how they differ from other feature extraction techniques, and the different approaches to learn new features with them
+    \item To facilitate the use of autoencoders by inexperienced users, improving on previous implementations in efficiency and ease of use
+    \item To explore different types of supervised learning problems further from the classical binary (positive/negative) prediction schemes or regression tasks
+    \item In the context of supervised problems, to develop new ways of optimizing autoencoders so that generated features are able to separate different classes better
+\end{itemize}
+
+Additionally, there are several tangential issues that were studied due to the interesting relation to the main topic and the opportunity to work on real world problems. These are as follows:
+
+\begin{itemize}
+    \item To identify areas of application where autoencoders are able to provide solutions without the need of additional modelling
+    \item To evaluate and compare different encoder-decoder architectures for different purposes 
+    \item To analyze whether ensembling several encoder-decoder methods can provide better solutions
+\end{itemize}
 
 \section{Thesis structure}
 
-The rest of this document contains all the needed information to develop the posed questions and provide enough context in order to understand the work that has been realized throuhgout the thesis.
+The rest of this document contains all the needed information to develop the posed questions and provide enough context in order to understand the work that has been realized throughout the thesis.
 
-\begin{enumerate}
+\begin{itemize}
     \item Chapter~\ref{ch:theory} describes the basic theory that lies under the later work and the specific models that are developed and used.
-    \item \xr{Chapter...}
-\end{enumerate}
+    \item Chapter~\ref{ch:practical} explains the practicalities of implementing and training deep learning models, especially autoencoders.
+    \item Next chapters contain the selected publications for this thesis, along with brief explanations and connections to the main topic.
+    \item Lastly, Chapter~\ref{ch:conclusions} draws some conclusions and closing statements on the developed work.
+\end{itemize}

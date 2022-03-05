@@ -1,7 +1,7 @@
 % Load the kaobook class
 \documentclass[
 	fontsize=11pt, % Base font size
-	twoside=false, % Use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
+	twoside=true, % Use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
 	open=any, % If twoside=true, uncomment this to force new chapters to start on any page, not only on right (odd) pages
 	secnumdepth=1, % How deep to number headings. Defaults to 1 (sections)
 ]{kaobook}
@@ -148,9 +148,33 @@
 
 \input{chapters/practical.tex}
 
-\makearticle{A tutorial on autoencoders}{INFFUS18-AutoencoderTutorial}
+% \makearticle{A tutorial on autoencoders}{INFFUS18-AutoencoderTutorial}
 
-\makearticle{Software for unsupervised deep learning architectures in R}{knosys-RUTA-FINAL}
+\providecommand{\addarticle}[2]{\addcontentsline{toc}{chapter}{#1}%
+\markboth{}{#1}%
+\includepdf[pages=1,addtotoc={1,chapter,2,#1,p}]{#2}%
+\includepdf[pages=2-,pagecommand={}]{#2}}
+
+% \addarticle{I~~~A practical tutorial on autoencoders for nonlinear feature fusion}{papers/01-autoencoder-review/paper.pdf}
+
+% \addarticle{II~~~Ruta: implementations of neural autoencoders in R}{papers/02-ruta/paper.pdf}
+
+% \addarticle{III~~~A snapshot on nonstandard supervised learning problems}{papers/03-nonstandard/paper.pdf}
+
+% \includearticle{papers/01-autoencoder-review/chapter.tex}
+% \includearticle{papers/02-ruta/chapter.tex}
+% \includearticle{papers/03-nonstandard/chapter.tex}
+% \includearticle{papers/04-showcase/chapter.tex}
+% \includearticle{papers/05-case-studies/chapter.tex}
+% \includearticle{papers/06-reducing/chapter.tex}
+% \includearticle{papers/07-slicer/chapter.tex}
+ 
+% \addarticle{IV~~~A showcase of the use of autoencoders in feature learning applications}{papers/04-showcase/paper.pdf}
+% \addarticle{V~~~An analysis on the use of autoencoders for representation learning}{papers/05-case-studies/paper.pdf}
+% \addarticle{VI~~~Reducing data complexity using autoencoders with class-informed loss functions}{papers/06-reducing/paper.pdf}
+% \addarticle{VII~~~Feature learning for class separability applied to COVID-19 chest X-ray case study}{papers/07-slicer/paper.pdf}
+
+% \makearticle{Software for unsupervised deep learning architectures in R}{knosys-RUTA-FINAL}
 
 % \chapter{Software for unsupervised deep learning architectures in R}%
 % \begin{widepar}

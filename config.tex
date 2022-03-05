@@ -12,6 +12,13 @@
 % Load the bibliography package
 \usepackage{kaobiblio}
 \addbibresource{references.bib} % Bibliography file
+\addbibresource{papers/01-autoencoder-review/references.bib}
+\addbibresource{papers/02-ruta/references.bib}
+\addbibresource{papers/03-nonstandard/references.bib}
+\addbibresource{papers/04-showcase/references.bib}
+\addbibresource{papers/05-case-studies/references.bib}
+\addbibresource{papers/06-reducing/references.bib}
+\addbibresource{papers/07-slicer/references.bib}
 
 % Load mathematical packages for theorems and related environments
 \usepackage{kaotheorems}
@@ -20,14 +27,167 @@
 % Load the package for hyperreferences
 \usepackage{kaorefs}
 
-\graphicspath{{images/}{./}{assets/}} % Paths where images are looked for
+\graphicspath{{images/}{./}{assets/}%
+{papers/01-autoencoder-review/}%
+{papers/02-ruta/}%
+{papers/03-nonstandard/}%
+{papers/04-showcase/}%
+{papers/05-case-studies/}%
+{papers/06-reducing/}%
+{papers/07-slicer/}%
+} % Paths where images are looked for
 
 
 % \usepackage[fencedCode,inlineFootnotes,citations,definitionLists,hashEnumerators,smartEllipses,pipeTables,tableCaptions,hybrid]{markdown}
 
-
+\setcounter{tocdepth}{\sectiontocdepth}
 % \makeindex[columns=3, title=Alphabetical Index, intoc] % Make LaTeX produce the files required to compile the index
 % \usepackage[refpage]{nomencl}
 \renewcommand{\nomname}{List of Abbreviations}
 % \nomrefpage
 \makenomenclature
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages for each paper
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% 1 - review
+\usepackage{lscape,caption} 
+% \usepackage{amssymb}
+\usepackage{amsmath}
+% \usepackage{mathtools, cuted}
+% \usepackage{graphicx}
+\usepackage{url}
+% \usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{color}
+% \usepackage{booktabs}
+% \usepackage{stmaryrd}
+% \usepackage{epstopdf}
+\usepackage{pdflscape}
+% \usepackage{stmaryrd}
+% \usepackage{color}
+\usepackage{array}
+% \usepackage{tikz}
+% \usepackage{caption}
+% \usepackage{subcaption}
+\usepackage{dblfloatfix}
+\usepackage{flushend}
+\newcolumntype{V}{!{\vrule width 2pt}}
+
+%%%%%% 2 - ruta
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+% \usepackage[hidelinks]{hyperref}
+\usepackage{kaobiblio}
+\usepackage[usenames,dvipsnames,table]{xcolor}
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Código}
+\definecolor{light-gray}{gray}{0.99}
+\lstset{
+  language=R,
+  basicstyle=\scriptsize\linespread{1.1}\ttfamily,
+  commentstyle=\ttfamily\color{OliveGreen},
+  stringstyle=\color{Thistle},
+  numbers=none,
+  numberstyle=\scriptsize\ttfamily\color{RoyalBlue},
+  stepnumber=1,
+  numbersep=5pt,
+  backgroundcolor=\color{light-gray},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  %frame=single,
+  tabsize=2,
+  captionpos=b,
+  breaklines=true,
+  breakatwhitespace=false,
+  %title=\lstname,
+  escapeinside={},
+  keywordstyle={},
+  morekeywords={}
+}
+\usepackage{tikz}
+
+%%%%%% 3 - nonstandard
+\usepackage{mathptmx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{pdflscape}
+\usepackage{booktabs,makecell,multirow}
+\usepackage{enumitem} %% for 'noitemsep'
+\usetikzlibrary{arrows,positioning} 
+\usetikzlibrary{shadows.blur}
+\tikzset{
+    %Define standard arrow tip
+    >=stealth',
+    %Define style for boxes
+    box/.style={
+           rectangle,
+           fill=white,
+           draw=black, thick,
+           text width=7.5em,
+           minimum height=2em,
+           blur shadow={shadow blur steps=5,shadow blur extra rounding=1.3pt},
+           text centered},
+    titlebox/.style={
+           rectangle,
+           fill=white,
+           draw=gray,
+           minimum height=2em,
+           text centered},
+    nobox/.style={
+           rectangle,
+           fill=white,
+           draw=gray,
+           text width=7.5em,
+           minimum height=2em,
+           text centered},
+    dummy/.style={
+           minimum height=2em},
+    dummyedge/.style={
+           shorten <=-1em
+    },
+    dummyhor/.style={
+           shorten <=-.4em
+    },
+    % Define arrow style
+    pil/.style={
+           <-,
+           thick,
+           shorten <=2pt,
+           shorten >=2pt,},
+    % Define arrow style
+    pil2/.style={
+           <-,
+           dashed,
+           thick,
+           shorten <=2pt,
+           shorten >=2pt,}
+}
+
+%%%%%% 5 - case studies
+\usepackage{booktabs}
+\usepackage{makecell}
+\renewcommand\theadgape{\Gape[1pt]}
+\usetikzlibrary{shapes.misc, positioning, shapes.multipart, arrows.meta}
+\tikzset{
+    layer/.style={
+        draw, 
+        rectangle split,
+        minimum width=2cm,
+        rectangle split parts=3, 
+        rectangle split part fill={black!10,white,black!10},
+        rounded corners,
+        inner sep=5pt,
+    }
+}
+
+%%%%%% 6 - reducing 
+\usepackage[caption=false,font=footnotesize,labelfont=sf,textfont=sf]{subfig}
+\usepackage{multirow}
+
+%%%%%% 7 - slicer
+\usepackage[misc,geometry]{ifsym}
+\usepackage{gensymb}
