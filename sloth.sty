@@ -1,0 +1,387 @@
+\ProvidesPackage{sloth}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT CONFIGURATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Choose the language
+\usepackage[english]{babel} % Load characters and hyphenation
+\usepackage[english=american]{csquotes}	% English quotes
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% Load packages for testing
+\usepackage{blindtext}
+%\usepackage{showframe} % Uncomment to show boxes around the text area, margin, header and footer
+%\usepackage{showlabels} % Uncomment to output the content of \label commands to the document where they are used
+
+% Load the bibliography package
+\usepackage{kaobiblio}
+\addglobalbib{references.bib} % Bibliography file, available for all refsections
+% \addbibresource{papers/01-autoencoder-review/references.bib}
+% \addbibresource{papers/02-ruta/references.bib}
+% \addbibresource{papers/03-nonstandard/references.bib}
+% \addbibresource{papers/04-showcase/references.bib}
+% \addbibresource{papers/05-case-studies/references.bib}
+% \addbibresource{papers/06-reducing/references.bib}
+% \addbibresource{papers/07-slicer/references.bib}
+
+% Load mathematical packages for theorems and related environments
+\usepackage{kaotheorems}
+\usepackage{amsmath,amsthm}
+
+% Load the package for hyperreferences
+\usepackage{kaorefs}
+
+\graphicspath{{images/}{./}{assets/}%
+{papers/01-autoencoder-review/}%
+{papers/02-ruta/}%
+{papers/03-nonstandard/}%
+{papers/04-showcase/}%
+{papers/05-case-studies/}%
+{papers/06-reducing/}%
+{papers/07-slicer/}%
+} % Paths where images are looked for
+
+
+% \usepackage[fencedCode,inlineFootnotes,citations,definitionLists,hashEnumerators,smartEllipses,pipeTables,tableCaptions,hybrid]{markdown}
+
+\setcounter{tocdepth}{\sectiontocdepth}
+% \makeindex[columns=3, title=Alphabetical Index, intoc] % Make LaTeX produce the files required to compile the index
+% \usepackage[refpage]{nomencl}
+\renewcommand{\nomname}{List of Abbreviations}
+% \nomrefpage
+\makenomenclature
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages for each paper
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% 1 - review
+\usepackage{lscape,caption} 
+\usepackage{url}
+\usepackage{algpseudocode}
+\usepackage{pdflscape}
+\usepackage{array}
+\usepackage{dblfloatfix}
+\usepackage{flushend}
+\newcolumntype{V}{!{\vrule width 2pt}}
+
+%%%%%% 2 - ruta
+\usepackage{amssymb}
+\usepackage[usenames,dvipsnames,table]{xcolor}
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Código}
+\definecolor{light-gray}{gray}{0.99}
+\newcommand{\setListingsForR}{ 
+\lstset{
+    language=R,
+    basicstyle=\scriptsize\linespread{1.1}\ttfamily,
+    commentstyle=\ttfamily\color{OliveGreen},
+    stringstyle=\color{Thistle},
+    numbers=none,
+    numberstyle=\scriptsize\ttfamily\color{RoyalBlue},
+    stepnumber=1,
+    numbersep=5pt,
+    backgroundcolor=\color{light-gray},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    %frame=single,
+    tabsize=2,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=false,
+    %title=\lstname,
+    escapeinside={},
+    keywordstyle={},
+    morekeywords={}
+  }
+}
+\usepackage{tikz}
+
+%%%%%% 3 - nonstandard
+\usepackage{mathptmx}
+\usepackage{booktabs,makecell,multirow}
+\usepackage{enumitem} %% for 'noitemsep'
+\usetikzlibrary{arrows,positioning} 
+\usetikzlibrary{shadows.blur}
+\tikzset{
+    %Define standard arrow tip
+    >=stealth',
+    %Define style for boxes
+    box/.style={
+           rectangle,
+           fill=white,
+           draw=black, thick,
+           text width=7.5em,
+           minimum height=2em,
+           blur shadow={shadow blur steps=5,shadow blur extra rounding=1.3pt},
+           text centered},
+    titlebox/.style={
+           rectangle,
+           fill=white,
+           draw=gray,
+           minimum height=2em,
+           text centered},
+    nobox/.style={
+           rectangle,
+           fill=white,
+           draw=gray,
+           text width=7.5em,
+           minimum height=2em,
+           text centered},
+    dummy/.style={
+           minimum height=2em},
+    dummyedge/.style={
+           shorten <=-1em
+    },
+    dummyhor/.style={
+           shorten <=-.4em
+    },
+    % Define arrow style
+    pil/.style={
+           <-,
+           thick,
+           shorten <=2pt,
+           shorten >=2pt,},
+    % Define arrow style
+    pil2/.style={
+           <-,
+           dashed,
+           thick,
+           shorten <=2pt,
+           shorten >=2pt,}
+}
+
+%%%%%% 5 - case studies
+\renewcommand\theadgape{\Gape[1pt]}
+\usetikzlibrary{shapes.misc, positioning, shapes.multipart, arrows.meta}
+\tikzset{
+    layer/.style={
+        draw, 
+        rectangle split,
+        minimum width=2cm,
+        rectangle split parts=3, 
+        rectangle split part fill={black!10,white,black!10},
+        rounded corners,
+        inner sep=5pt,
+    }
+}
+
+%%%%%% 6 - reducing 
+\usepackage[caption=false,font=footnotesize,labelfont=sf,textfont=sf]{subfig}
+
+%%%%%% 7 - slicer
+\usepackage[misc,geometry]{ifsym}
+\usepackage{gensymb}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+% From liuthesis:
+% \createvariable{myname} will create commands \myname{Enter a name} and \@myname
+% which will substitute for the entered text
+\def\createvariable#1{%
+  \expandafter\def\csname #1\endcsname{\expandafter\gdef\csname @#1\endcsname}
+  \csname #1\endcsname{\texttt{\textbackslash #1}}
+}
+
+\newcommand{\xr}[1]{{\color{red}#1}}
+
+% List of variables
+
+\createvariable{thetitle}
+\createvariable{theauthor}
+\createvariable{supervisor}
+\createvariable{university}
+\createvariable{department}
+\createvariable{publicationdate}
+\createvariable{publicationurl}
+\createvariable{publicationyear}
+\createvariable{publicationplace}
+
+% From latex-mat-ugr/Plantilla-TFG: resources for the outer page
+
+\RequirePackage{eso-pic}
+\newcommand\BackgroundPic{%
+  \put(0,0){%
+    \parbox[b][\paperheight]{\paperwidth}{%
+      \vfill
+      \centering
+      % Indicar la imagen de fondo en el siguiente comando
+      \includegraphics[width=\paperwidth,height=\paperheight,%
+      keepaspectratio]{portada-ugr-color}%
+      \vfill
+}}}
+
+\RequirePackage{scrextend}
+\RequirePackage{setspace}
+\newcommand{\makeouterpage}{
+  \begin{titlepage}
+    \AddToShipoutPicture*{\BackgroundPic}
+    \phantomsection 
+    \pdfbookmark[1]{Título}{title}
+    \begin{addmargin}[2.6cm]{0cm}
+    \begin{flushleft}
+      \vfill
+      \large{\textsf{\@department}}
+      \vfill\vfill
+      {\large\textsc{tesis doctoral}}
+      \begin{flushleft}
+        \Huge
+        %\setstretch{0.8}
+        \@title
+      \end{flushleft}
+      \vfill\vfill\vfill\vfill
+      \textsf{\normalsize{Autor:}}\\
+      {\normalsize\textrm{\@author}} \\
+      \bigskip
+      \textsf{\normalsize{Directores:}}\\
+      {\normalsize\rmfamily\@supervisor}\\
+      \bigskip
+      \textsf{\normalsize{\@publicationplace, \@publicationdate}}
+    \end{flushleft}  
+    \end{addmargin}
+  \end{titlepage}
+}
+
+% from liuthesis: resources to embed other articles here
+
+\RequirePackage{calc}
+\RequirePackage{ragged2e}
+
+
+\newcommand{\paperprefix}{Artículo}
+\definecolor{nicered}{rgb}{.914,.173,.188}
+\newsavebox{\feline@article}
+\newcommand\feline@article@marker[1][4cm]{%
+  \sbox\feline@article{%
+    \resizebox{!}{#1}{\fboxsep=1pt%
+      \colorbox{nicered!90!black}{\color{white}\bfseries\thearticle\phantom{.}}%
+    }}%
+  \rotatebox{90}{%
+    \resizebox{%
+      \heightof{\usebox{\feline@article}}+\depthof{\usebox{\feline@article}}}%
+    {!}{{\scshape \MakeUppercase \paperprefix}}}\quad%
+  \raisebox{\depthof{\usebox{\feline@article}}}{\usebox{\feline@article}}%
+}
+\newcommand\feline@chm[1][4cm]{%
+  \sbox\feline@article{\feline@article@marker[#1]}%
+  \makebox[0pt][l]{% aka \rlap
+    %\makebox[\spinemargin][r]{
+      \usebox\feline@article
+    %}
+  }
+}
+\RequirePackage{textpos}
+\newcounter{article}
+\setcounter{article}{0}
+\renewcommand{\thearticle}{\Roman{article}}
+\includepdfset{pages=-}
+\setlength{\TPVertModule}{2cm}
+\setlength{\TPHorizModule}{\paperwidth - 4.3cm}
+\newcommand{\papermark}{\paperprefix \thearticle}
+\let\theoldchapter\thechapter
+
+
+% Layout #1: large margins
+\newcommand{\reducedlayout}{%
+	\newgeometry{
+		top=54.8\vscale,
+		bottom=54.8\vscale,
+		inner=24.8\hscale,
+		textwidth=107\hscale,
+        marginparsep=6.2\hscale,
+		marginparwidth=47.7\hscale,
+    }%
+    \recalchead%
+}
+
+\newcommand{\makearticle}[2]{%
+  \chapter{#1}%
+  \begin{widepar}
+    \begin{kaobox}[frametitle=Source]
+      \fullcite{#2}\\[2\baselineskip]
+    \end{kaobox}
+  \end{widepar}
+}
+
+\newcommand{\widebibliography}{
+  \pagelayout{wide}%
+    % \leavevmode%
+    \printbibliography[heading=subbibliography]%
+    \pagelayout{margin}%
+}
+
+\newcommand{\includechapter}[1]{
+  \newrefsection
+  \input{chapters/#1.tex}
+  \widebibliography
+  \endrefsection
+}
+
+\newcommand{\includearticle}[1]{
+  % \begin{refsegment}
+  \newrefsection[papers/#1/references.bib]
+  \refstepcounter{article}%
+  \renewcommand*{\thechapter}{\thearticle}%
+  \include{papers/#1/chapter.tex}%
+  \addtocounter{chapter}{-1}
+  \renewcommand*{\thechapter}{\theoldchapter}%
+  \widebibliography
+  \endrefsection
+  % \end{refsegment}
+}
+
+
+\newenvironment{papers}{
+%   \makeevenhead{ruled}{\papermark}{}{}
+  \renewcommand*{\thechapter}{\thearticle}
+  \newlength{\numberheight}
+ \makechapterstyle{paperstyle}{%
+    \setlength{\afterchapskip}{40pt}
+    \setlength{\numberheight}{10mm}
+  \renewcommand*{\chapterheadstart}{\vspace*{40pt}}
+    \renewcommand*{\afterchapternum}{\par\nobreak\vskip 25pt}
+    \renewcommand*{\chapnamefont}{\normalfont\LARGE\flushright}
+    \renewcommand*{\chapnumfont}{\normalfont\HUGE}
+    \renewcommand*{\chaptitlefont}{\normalfont\Huge\bfseries\flushright}
+    % \renewcommand*{\printchaptername}{%
+    % }
+    % \renewcommand*{\chapternamenum}{}
+
+    % \renewcommand*{\printchapternum}{%
+    % }%
+    % \makeoddfoot{plain}{}{}{\thepage}
+    }
+    \renewcommand{\@chapapp}{\papermark}
+    \chapterstyle{paperstyle}
+}{}
+\newcommand{\includearticletex}[1]{%
+ \stepcounter{article}%
+%   \cleartorecto%
+  \pagelayout{wide}
+  \thispagestyle{empty}
+  \mbox{}%
+  \vspace*{\fill}
+   \begin{center}%
+     {\hfill \feline@chm[2.5cm]\\[2\baselineskip]}
+     {\fullcite{#1}}
+  \end{center}%
+  \vspace*{\fill}%
+  \clearpage{}
+  \chapter[\papermark][\papermark]{\citetitle{#1}}
+  \label{art:#1}
+ \input{papers/#1}%
+ \pagelayout{margin}
+}
+
+\newcommand{\makepart}[1]{
+    \pagelayout{wide}% No margins
+    \addpart{#1}%
+    \pagelayout{margin}% Restore margins
+}

@@ -1,76 +1,8 @@
 % !TeX spellcheck = en_US
-% \documentclass[
-% 	fontsize=11pt, % Base font size
-% 	twoside=false, % Use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
-% 	open=any, % If twoside=true, uncomment this to force new chapters to start on any page, not only on right (odd) pages
-% 	secnumdepth=1, % How deep to number headings. Defaults to 1 (sections)
-% ]{kaobook}
-% \setchapterstyle{kao} % Choose the default chapter heading style
-
-% \usepackage[utf8]{inputenc}
-% \usepackage[T1]{fontenc}
-% \usepackage{lscape,caption} 
-% \usepackage{amssymb}
-% \usepackage{amsmath}
-% \usepackage{mathtools, cuted}
-% \usepackage{graphicx}
-% \usepackage{url}
-% % \usepackage{algorithm}
-% \usepackage{algpseudocode}
-% \usepackage{color}
-% \usepackage{booktabs}
-% \usepackage{stmaryrd}
-% \usepackage{epstopdf}
-% \usepackage{pdflscape}
-% \usepackage{stmaryrd}
-% \usepackage{color}
-% \usepackage[table]{xcolor}
-% \usepackage{array}
-% \usepackage{tikz}
-% \usepackage{caption}
-% \usepackage{subcaption}
-% \usepackage{dblfloatfix}
-% \usepackage{flushend}
-% \usepackage{kaobiblio}
-
-% \bibliography{references.bib}
-
-% \renewcommand*{\thechapter}{\Roman{chapter}}
-
-% \journal{Information Fusion}
 
 \providecommand{\sep}{-~}
 
-% \begin{document} 
-% \begin{frontmatter}
-
 \makearticle{A practical tutorial on autoencoders for nonlinear feature fusion}{INFFUS18-AutoencoderTutorial}
-
-% \begin{widepar}
-%   \begin{kaobox}[frametitle=Source]
-%     Charte, D., Charte, F., García, S., del Jesus, M. J., \& Herrera, F. (2018). A practical tutorial on autoencoders for nonlinear feature fusion: Taxonomy, models, software and guidelines. \textit{Information Fusion, 44}, 78-96.
-%   \end{kaobox}
-% \end{widepar}
-
-% \author[UGR]{David Charte\corref{cor1}}
-% \ead{fdavidcl@correo.ugr.es}
-
-% \author[UJA]{Francisco Charte}
-% \ead{fcharte@ujaen.es}
-
-% \author[UGR]{Salvador Garc\'ia}
-% \ead{salvagl@decsai.ugr.es}
-
-% \author[UJA]{Mar\'ia J. del Jesus}
-% \ead{mjjesus@ujaen.es}
-
-% \author[UGR,IND]{Francisco Herrera}
-% \ead{herrera@decsai.ugr.es}
-
-% \cortext[cor1]{Corresponding author. Tel.: +34~953~213~016}
-% \address[UGR]{Department of Computer Science and A.I., University of Granada, 18071 Granada, Spain}
-% \address[UJA]{Department of Computer Science, University of Ja\'en, 23071 Ja\'en, Spain}
-% \address[IND]{Faculty of Computing and Information Technology, King Abdulaziz University, 21589, Jeddah, Saudi Arabia}
 
 \section*{Abstract}
 Many of the existing machine learning algorithms, both supervised and unsupervised, depend on the quality of the input characteristics to generate a good model. The amount of these variables is also important, since performance tends to decline as the input dimensionality increases, hence the interest in using feature fusion techniques, able to produce feature sets that are more compact and higher level. A plethora of procedures to fuse original variables for producing new ones has been developed in the past decades. The most basic ones use linear combinations of the original variables, such as PCA (\textit{Principal Component Analysis}) and LDA (\textit{Linear Discriminant Analysis}), while others find manifold embeddings of lower dimensionality based on non-linear combinations, such as Isomap or LLE (\textit{Linear Locally Embedding}) techniques. 
@@ -78,13 +10,9 @@ Many of the existing machine learning algorithms, both supervised and unsupervis
 More recently, autoencoders (AEs) have emerged as an alternative to manifold learning for conducting nonlinear feature fusion. Dozens of AE models have been proposed lately, each with its own specific traits. Although many of them can be used to generate reduced feature sets through the fusion of the original ones, there also AEs designed with other applications in mind.
 
 The goal of this paper is to provide the reader with a broad view of what an AE is, how they are used for feature fusion, a taxonomy gathering a broad range of models, and how they relate to other classical techniques. In addition, a set of didactic guidelines on how to choose the proper AE for a given task is supplied, together with a discussion of the software tools available. Finally, two case studies illustrate the usage of AEs with datasets of handwritten digits and breast cancer.
-% \end{abstract}
 
 \subsection*{Keywords}
 autoencoders \sep feature fusion \sep feature extraction \sep representation learning \sep deep learning \sep machine learning
-% \end{keyword}
-
-% \end{frontmatter}
 
 \section{Introduction}
 The development of the first machine learning techniques dates back to the middle of the 20th century, supported mainly by previously established statistical methods. By then, early research on how to emulate the functioning of the human brain through a machine was underway. McCulloch and Pitts cell \sidecite{McCullochPitts} was proposed back in 1943, and the Hebb rule \sidecite{HebbRule} that the Perceptron \sidecite{Perceptron} is founded on was stated in 1949. Therefore, it is not surprising that artificial neural networks (ANNs), especially since the backpropagation algorithm was rediscovered in 1986 by Rumelhart, Hinton and Willians \sidecite{Backpropagation}, have become one of the essential models. 
@@ -1110,6 +1038,3 @@ The dataset consists of 60~000 instances, divided into a 50~000-instance set for
 This dataset is actually a modified subset of a previous work from NIST\footnote{Available at \url{http://doi.org/10.18434/T4H01C}.} for character recognition. The original images used only black or white pixels, whereas in MNIST they have been anti-aliased.
 
 MNIST has been used as benchmark for a large variety of deep learning proposals, since it is reasonably easy to extract higher-level features out of simple grayscale images, and it provides a high enough amount of training data. State-of-the-art work\footnote{A collection of methods applied to MNIST and their results is available at \url{http://yann.lecun.com/exdb/mnist/}.} achieves an error rate of around 0.2\% \sidecite{Alvear_Sandoval_2018,MulticolumnDNN}.
-
-% \end{document}
-

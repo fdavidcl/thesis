@@ -38,7 +38,7 @@
 %
 
 \makearticle{Feature learning for class separability applied to COVID-19 chest X-ray case study}{charte2021slicer}
-
+\label{ch:paper7}
 % \renewcommand*{\thechapter}{\Roman{chapter}}
 % \addtocounter{chapter}{6}
 % \chapter{Feature learning for class separability applied to COVID-19 chest X-ray case study}
@@ -183,7 +183,7 @@ More information about class distribution is provided in Table~\ref{p7tab:classd
 
 Since the final objective of the proposed model is to improve classification performance, the evaluation framework will consist in a variety of simple classifiers that will be trained with either the original features or the encoded ones. Standard classification metrics will be computed using the predictions over test subsets. A 5-fold cross validation scheme will be applied 5 times for a total of 25 train-test runs, so as to prevent errors from statistical chance. Table~\ref{p7tab:eval} lists the available feature sets and every classifier and evaluation metric included in the experiment. Each column is independent, in the sense that every feature set has been tested with each one of the classifiers and the performance has always been assessed with all four metrics.
 
-\begin{table}[htbp]
+\begin{table*}[htbp]
     \centering
     \begin{tabular}{lllc}
     \toprule
@@ -199,7 +199,7 @@ Since the final objective of the proposed model is to improve classification per
     \end{tabular}
     \caption{Evaluation framework: available feature sets, tested classifiers and evaluation metrics. TP, TN, FP and FN denote true positives, true negatives, false positives and false negatives, respectively.}
     \label{p7tab:eval}
-\end{table}
+\end{table*}
 \vspace{-1em} 
 
 \subsection{Architecture of the Slicer model used with the COVIDGR dataset}
@@ -243,7 +243,7 @@ Using the previous architecture, a model was trained for each training partition
 
 In this section, the main results of the experimentation are analyzed. Table~\ref{p7tab:meanspercl} contains average metrics for the total of 25 runs that were performed. We can observe drastically different behaviors according to the classifier that was used: the decision tree had similar performance independently of the set of features that were provided, while the Gaussian process only was competitive when using the features learned by Slicer.
 
-\begin{table}[htbp]
+\begin{table*}[htbp]
     \centering
     
   \begin{tabular}{llrrrr}
@@ -270,7 +270,7 @@ SVM & slicer & 65.987 & 66.235 & 65.025 & 65.393\\
 
     \caption{Average classification metrics over 25 runs (5 times 5-fold cross validation). Results from convolutional neural networks are reported in \cite{9254002}.}
     \label{p7tab:meanspercl}
-\end{table}
+\end{table*}
 
 Several deductions can be made out of the results in Table~\ref{p7tab:meanspercl}. First, the classifiers that take the most advantage from the Slicer-generated features are kNN and GP. In fact, the latter struggles to find an acceptable model of the data using either the original features or the autoencoded ones. For its part, the DT shows little variance with respect to the set of variables it uses, although the Slicer-generated has a slight lead in F1 score and accuracy. The SVM, however, does not benefit from the more separable features and loses performance with respect to the original and autoencoded ones.
 
@@ -280,7 +280,7 @@ It is important to note that there exist specific deep learning architectures de
 
 As a summary, Table~\ref{p7tab:overall} displays the average metrics across all 4 classifiers, for each feature set. The average ranking that each one achieved for each metric is also shown. From this, we can conclude that the Slicer model produces feature sets that are consistently superior to a basic AE. Furthermore, it is able to preserve or even improve the quality of the original features, while simultaneously reducing drastically the dimensionality.  
 
-\begin{table}[htbp]
+\begin{table*}[htbp]
     \centering
     \begin{tabular}{lrrrr}
 \toprule
@@ -293,7 +293,7 @@ slicer & 62.391 (1.85) & 63.259 (1.87) & 59.101 (1.71) & 60.876 (1.82)\\
 \end{tabular}
     \caption{Average classification metrics per feature set provided to the classifiers. The average ranking achieved by each feature set in each of the tests is shown in parentheses (lower is better).}
     \label{p7tab:overall}
-\end{table}
+\end{table*}
 
 
 \section{Conclusions and future work}\label{p7sec.conc}

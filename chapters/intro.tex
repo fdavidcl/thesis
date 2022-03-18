@@ -51,14 +51,15 @@ Other possible obstacles that one may come across when inspecting the features o
 
 The main set of tools that are used to tackle problems along this work is \textit{deep learning}, a subset of machine learning focused on algorithms which extract successive transformations of the data until a solution to the task is reached.
 
-Deep learning originates from the concept of artificial neuron, which takes inspiration on the biological nervous system \sidecite{mcculloch1943logical}. The perceptron, a probabilistic model of the brain, was developed as a result \sidecite{rosenblatt1958perceptron} and current artificial neural networks are simply generalizations of the multi-layer perceptron.
+Deep learning originates from the concept of artificial neuron, which takes some inspiration on the biological nervous system \sidecite{mcculloch1943logical}. The perceptron, a probabilistic model of the brain, was developed as a result \sidecite{rosenblatt1958perceptron} and current artificial neural networks are simply generalizations of the multi-layer perceptron. For a long time, neural networks were very inefficient to train compared to other machine learning methods, and they were not used for many applications as a result.
 
-The resurgence of neural network models for machine learning has happened more recently due to the fact that their optimization had much higher computational cost than other, classical machine learning models.
-% - Qué es el aprendizaje profundo y cómo surge
+The resurgence of neural network models for machine learning has happened more recently due to the fact that their optimization had much higher computational cost than other, classical machine learning models. Thus, more efficient optimization strategies in combination with much more powerful hardware (leveraging the computing capacities of modern GPUs) have allowed to train complex deep models which were unfeasible before.
 
-% - Por qué aplicar aprendizaje profundo
+Nowadays, deep learning is used to extract the contents of images, natural language and speech (as well as produce them) in a wide range of applications, from small fitness devices to autonomous vehicles. It is also very present in research fields ranging from medicine to computer security. It powers translation systems \sidecite{deepl}, search engines \sidecite{SHU19991} and virtual assistants \sidecite{mycroft}. 
 
-\xr{...}
+The main advantage of deep learning against traditional machine learning methods is being able to automatically transform raw data into useful representations that depict more complex, high-level concepts. This stage is usually performed manually when approaching machine learning problems with other models.
+
+Since deep learning models perform their own representation learning while training to solve other tasks, one possible use for these models is the extraction of said representations. One can either extract these \textit{deep features} from neural networks which are trained for a different purpose or build a deep learning model dedicated to just learning a new, more useful representation. The latter approach will be our focus during most of the thesis, using a specific category of models known as \textit{autoencoders}.
 
 \section{Motivation}
 

@@ -2,13 +2,11 @@
 \documentclass[
 	fontsize=11pt, % Base font size
 	twoside=true, % Use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
-	open=any, % If twoside=true, uncomment this to force new chapters to start on any page, not only on right (odd) pages
+	% open=any, % If twoside=true, uncomment this to force new chapters to start on any page, not only on right (odd) pages
 	secnumdepth=1, % How deep to number headings. Defaults to 1 (sections)
 ]{kaobook}
 
-\usepackage{latt}
-\input{config.tex}
-
+\usepackage{sloth}
 
 \begin{document}
 
@@ -71,7 +69,6 @@
 %----------------------------------------------------------------------------------------
 
 \dedication{\itshape
-% This is only a foretaste of what is to come, and only the shadow of what is going to be.
 	Machines take me by surprise with great frequency. \\
 	\flushright -- Alan Turing
 }
@@ -132,70 +129,26 @@
 \mainmatter % Denotes the start of the main document content, resets page numbering and uses arabic numbers
 \setchapterstyle{kao} % Choose the default chapter heading style
 
-\input{chapters/intro.tex}
-\input{chapters/theory.tex}
+\makepart{Fundaments}
+\includechapter{intro} 
+\includechapter{theory}
 
-% \refstepcounter{article}%
-% \let\oldthechapter\thechapter
-% \renewcommand*{\thechapter}{\thearticle}%
-% \chapter{A tutorial on autoencoders}%
-% \begin{widepar}
-% \begin{kaobox}[frametitle=Source]
-%   \fullcite{INFFUS18-AutoencoderTutorial}\\[2\baselineskip]
-% \end{kaobox}
-% \end{widepar}
-% \includepdf[pages=-]{INFFUS18-AutoencoderTutorial}
+\includechapter{practical}
 
-\input{chapters/practical.tex}
+\makepart{Published articles}
 
-% \makearticle{A tutorial on autoencoders}{INFFUS18-AutoencoderTutorial}
-
-\providecommand{\addarticle}[2]{\addcontentsline{toc}{chapter}{#1}%
-\markboth{}{#1}%
-\includepdf[pages=1,addtotoc={1,chapter,2,#1,p}]{#2}%
-\includepdf[pages=2-,pagecommand={}]{#2}}
-
-% \addarticle{I~~~A practical tutorial on autoencoders for nonlinear feature fusion}{papers/01-autoencoder-review/paper.pdf}
-
-% \addarticle{II~~~Ruta: implementations of neural autoencoders in R}{papers/02-ruta/paper.pdf}
-
-% \addarticle{III~~~A snapshot on nonstandard supervised learning problems}{papers/03-nonstandard/paper.pdf}
-
-% \includearticle{papers/01-autoencoder-review/chapter.tex}
-% \includearticle{papers/02-ruta/chapter.tex}
-% \includearticle{papers/03-nonstandard/chapter.tex}
-% \includearticle{papers/04-showcase/chapter.tex}
-% \includearticle{papers/05-case-studies/chapter.tex}
-% \includearticle{papers/06-reducing/chapter.tex}
-% \includearticle{papers/07-slicer/chapter.tex}
+% \includearticle{01-autoencoder-review}
+\setListingsForR
+\includearticle{02-ruta}
+% \includearticle{03-nonstandard}
+% \includearticle{04-showcase}
+% \includearticle{05-case-studies}
+% \includearticle{06-reducing}
+% \includearticle{07-slicer} 
  
-% \addarticle{IV~~~A showcase of the use of autoencoders in feature learning applications}{papers/04-showcase/paper.pdf}
-% \addarticle{V~~~An analysis on the use of autoencoders for representation learning}{papers/05-case-studies/paper.pdf}
-% \addarticle{VI~~~Reducing data complexity using autoencoders with class-informed loss functions}{papers/06-reducing/paper.pdf}
-% \addarticle{VII~~~Feature learning for class separability applied to COVID-19 chest X-ray case study}{papers/07-slicer/paper.pdf}
+\makepart{Final remarks}
 
-% \makearticle{Software for unsupervised deep learning architectures in R}{knosys-RUTA-FINAL}
-
-% \chapter{Software for unsupervised deep learning architectures in R}%
-% \begin{widepar}
-% \begin{kaobox}[frametitle=Source]
-%   \fullcite{knosys-RUTA-FINAL}\\[2\baselineskip]
-% \end{kaobox}
-% \end{widepar}
-% % \includepdf[pages=-]{knosys-RUTA-FINAL}
-% \renewcommand*{\thechapter}{\oldthechapter}%
-% \pagelayout{margin}
- 
-
-% % \makepart{Published articles}
-
-% % \makearticle{A tutorial on autoencoders}{INFFUS18-AutoencoderTutorial}
-
-% % This paper tackles the variety...
-
-% % \includepdf{INFFUS18-AutoencoderTutorial}
-
-\input{chapters/conclusions.tex}
+\input{chapters/conclusions.tex} 
 
 % \pagelayout{margin}
 % \appendix % From here onwards, chapters are numbered with letters, as is the appendix convention
@@ -218,7 +171,7 @@
 % The bibliography needs to be compiled with biber using your LaTeX editor, or on the command line with 'biber main' from the template directory
 
 \defbibnote{bibnote}{Here are the references in citation order.\par\bigskip} % Prepend this text to the bibliography
-\printbibliography[heading=bibintoc, title=Bibliography, prenote=bibnote] % Add the bibliography heading to the ToC, set the title of the bibliography and output the bibliography note
+\printbibliography[section=0,heading=bibintoc,title=Bibliography] % Add the bibliography heading to the ToC, set the title of the bibliography and output the bibliography note
 
 %----------------------------------------------------------------------------------------
 %	INDEX

@@ -120,17 +120,12 @@
 }
 
 \newcommand{\makearticle}[2]{%
-  % \refstepcounter{article}%
-  % \renewcommand*{\thechapter}{\thearticle}%
-%   \pagelayout{reduced}
   \chapter{#1}%
   \begin{widepar}
-  \begin{kaobox}[frametitle=Source]
-    \fullcite{#2}\\[2\baselineskip]
-  \end{kaobox}
-\end{widepar}
-%   \includepdf[pages=-]{#2}
-  % \renewcommand*{\thechapter}{\theoldchapter}%
+    \begin{kaobox}[frametitle=Source]
+      \fullcite{#2}\\[2\baselineskip]
+    \end{kaobox}
+  \end{widepar}
 }
 
 \newcommand{\includearticle}[1]{
@@ -142,27 +137,6 @@
 }
 
 
-% \newcommand{\includearticle}[2][pages=-]{%
-%   \@twosidetrue
-%   \refstepcounter{article}%
-% %   \cleartorecto%
-%   \pagelayout{wide}
-%   \clearpage
-%   \thispagestyle{empty}
-%   \mbox{}%
-%   \vspace*{\fill}
-%    \begin{center}%
-%      {\feline@chm[2.5cm]\\[2\baselineskip]}
-%      {\fullcite{#2}}
-%   \end{center}%
-%   \vspace*{\fill}%
-%   \clearpage
-% %   \cleartorecto%
-%   \label{art:#2}%
-%   \addcontentsline{toc}{chapter}{\papermark}%
-%   \includepdf[#1]{#2}%
-%   \pagelayout{margin}
-% }
 \newenvironment{papers}{
 %   \makeevenhead{ruled}{\papermark}{}{}
   \renewcommand*{\thechapter}{\thearticle}

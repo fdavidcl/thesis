@@ -57,13 +57,21 @@ During the latest years, there has been a notable evolution in the scene of soft
 
 \subsection{About Tensorflow}
 
-- whodunnit
-- main features
-- small AE example
+Tensorflow is a deep learning framework implemented in C++, with Python and C++ interfaces, developed by Google and open source contributors.
+
+This library provides both lazy and eager execution of tensor operations on either CPU or GPU. Eager execution, the usual way of running statements where the result of each statement is readily available just after an operation is run, is enabled by default starting from Tensorflow 2. Lazy execution behaves the opposite, delaying the actual computation of operations until a final step where everything is processed jointly. It allows to optimize models better using a computation graph, but makes it harder to debug them.
+
+Tensorflow integrates an easy-to-use API called Keras \sidecite{keras}, which raises the level of abstraction so that the user does not need to program each operation but can design a network based on its layers. This API also brings additional tools including prebuilt and pretrained models, data manipulation functionalities, built-in datasets and automatic parameter tuning.
 
 \subsubsection{Sample implementation}
 
-Consider an essential autoencoder model where both the encoder and the decoder are composed of just one fully connected layer. 
+Consider an essential autoencoder model where both the encoder and the decoder are composed of one fully connected layer. 
+
+For the purpose of modularity, which helps reusing parts of the code later, it is convenient to define the encoder and the decoder separately. Each will be represented by an object of class \texttt{Sequential}, and comprises a list with just one layer, of class \texttt{Dense}. 
+
+Both models are chained by listing them in a new \texttt{Sequential} model, which is then compiled to optimize the binary crossentropy loss using the Adam \sidecite{Adam} optimizer. Assuming that the variable \texttt{x\_train} holds the training data, the model is optimized when the \texttt{fit()} method is called.
+
+Once the autoencoder has been trained, the encoder can be fed new instances from the same variable space and it will map those to the learned representation.
 
 \begin{lstlisting}[language=Python]
 import tensorflow as tf
@@ -82,27 +90,63 @@ autoencoder = tf.keras.Sequential([encoder, decoder])
 autoencoder.compile(loss="binary_crossentropy", 
     optimizer="adam")
 autoencoder.fit(x_train, x_train, epochs=10)
+
+new_encodings = encoder.predict(x_test)
 \end{lstlisting}
 
 \subsection{About Pytorch}
 
+Pytorch is the successor of the Lua-based Torch library, with the objective of providing an interface as natural as possible for the experienced Python user. It is developed by Facebook and other open source contributors.
+
+This library attempts to provide a deeper integration with Numpy and Scipy, and is designed to work in eager execution but models can be transformed into graph mode (which enables lazy execution and further optimizations).
+
+The Pytorch API is well organized into modules depending on the type of data that is being processed: \texttt{torchvision} for images, \texttt{torchaudio} for audio sequences and \texttt{torchtext} for text and natural language. Models can be built in a similar fashion to the Keras interface, but the training process usually requires more explicit code.
+
 \subsubsection{Sample implementation}
+
+Next is an equivalent implementation for the same autoencoder of the previous example, this time in Pytorch. The similarities can be appreciated when defining the encoder and the decoder, but the optimization of the autoencoder model is done more explicitly this time, by means of a training loop. At each iteration, the following steps are performed:
+
+\begin{enumerate}
+    \item A batch of input samples is selected
+    \item The neural network is feeded these samples and its output is obtained
+    \item A loss metric is calculated according to the target outputs
+    \item The gradients applied to the model are reset
+    \item The gradients corresponding to the current loss are computed and propagated
+    \item Model parameters are updated by the optimizer according to the gradients
+\end{enumerate}
+
+Once the training loop has finished, the model is considered trained and is switched to evaluation mode in order to allow for extraction of the learned features for new data.
 
 \begin{lstlisting}[language=Python]
 import torch
+from torch.nn.functional import binary_cross_entropy
 
 enc_dim = 10
+
 encoder = torch.nn.Sequential(
-    torch.nn.Linear(enc_dim),
+    torch.nn.Linear(x_train.shape[1], enc_dim),
     torch.nn.ReLU(True)
 )
 decoder = torch.nn.Sequential(
-    torch.nn.Linear(x_train.shape[1]),
-    torch.nn.Sigmoid()
+    torch.nn.Linear(enc_dim, x_train.shape[1]),
+    torch.nn.ReLU(True)
 )
-\end{lstlisting}
 
-- same
+autoencoder = torch.nn.Sequential(encoder, decoder)
+
+optimizer = torch.optim.Adam(autoencoder.parameters())
+
+for i in range(100):
+    inputs = x_train[i*10:(i+1)*10]
+    output = autoencoder(inputs)
+    loss = binary_cross_entropy(output, inputs)
+    autoencoder.zero_grad()
+    loss.backward()
+    optimizer.step()
+
+autoencoder.eval()
+encoder(x_test)
+\end{lstlisting}
 
 \section{Training deep models}
 
