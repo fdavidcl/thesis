@@ -11,7 +11,7 @@ The general objective in a data science problem is to model a real world scenari
 
 \section{Problem setting}
 
-A great part of the time spent in a data science problem, usually the longest, consists in preparing and preprocessing the available data in order for the posterior learning techniques to extract the maximum possible amount of information and ensure the new knowledge is valid \sidecite{garcia2015data}. There exist several traits of the data that can be manipulated to facilitate the work of learning algorithms: missing values, noisy instances, class imbalance, among others.
+A great part of the time spent in a data science problem, usually the longest, consists in preparing and preprocessing the available data in order for the posterior learning techniques to extract the maximum possible amount of information and ensure the new knowledge is valid \sidecite{domingos2012few,garcia2015data}. There exist several traits of the data that can be manipulated to facilitate the work of learning algorithms: missing values, noisy instances, class imbalance, among others.
 
 \begin{figure}
     \includegraphics[width=\linewidth]{images/kddprocess.pdf}
@@ -20,8 +20,6 @@ A great part of the time spent in a data science problem, usually the longest, c
 
 The set of features, that is, the specific representation of each instance in a dataset, is one aspect which machine learning models can be specially sensitive to.
 
-% - what difficulties can the feature set present
-
 Features that may characterize an event or object adequately for humans may not be ideal for machines to process. For example, a string of text may have meaning for a reader but for the machine it is just a sequence of characters whose semantics are not easily processed in that format. Similarly, an image can be expressed as a series of color values which, if shown on a screen, will display something intelligible for a person's eye, but those values do not hold direct relation to what is contained in the image itself.
 
 \begin{marginfigure}
@@ -29,23 +27,17 @@ Features that may characterize an event or object adequately for humans may not 
 \caption{\label{fig:latentfaces}Two randomly generated images from \url{https://thispersondoesnotexist.com}. In blue, available features such as the color values of some pixels. In pink, latent variable values (such as \textit{hair tone}) that are not directly represented in the data but influence those color values.}
 \end{marginfigure}
 
-Furthermore, the techniques used for collecting data can only produce the observable variables in a dataset, but there may be interesting, hidden variables which influence the data in a clearer way. This is a concept known in statistics as \textit{latent variables}. For example, the value  ``blond'' for the latent variable ``hair color'' might determine the color value of many pixels in an image of a person's face, but those are also influenced by overall lighting and contrast, so the hair color of a person cannot be deduced by just extracting a couple of pixels (see Figure~\ref{fig:latentfaces} for an example). It would be desirable to obtain the meaningful features, but a learning mechanism that takes all observable features into account is needed for these to be extracted.
+Furthermore, the techniques used for collecting data can only produce the observable variables in a dataset, but there may be interesting, hidden variables which influence the data in a clearer way. This is a concept known in statistics as \textit{latent variables} \sidecite{borsboom2008latent}. For example, the value  ``blond'' for the latent variable ``hair color'' might determine the color value of many pixels in an image of a person's face, but those are also influenced by overall lighting and contrast, so the hair color of a person cannot be deduced by just extracting a couple of pixels (see Figure~\ref{fig:latentfaces} for an example). It would be desirable to obtain the meaningful features, but a learning mechanism that takes all observable features into account is needed for these to be extracted.
 
-% - what problems cause the feature set on classifiers
+Providing a learning algorithm with unprocessed features usually leads to sub-par performance due to several potential issues: different scales, presence of noisy variables, redundant information, useful information that is obscured and not directly represented, as well as irrelevant information. All of this may confuse a classification method which initially might consider all variables equally relevant.
 
-% Providing a learning algorithm with unprocessed features usually leads to sub-par performance due to \xr{...}
+Other possible obstacles that one may come across when inspecting the features of a dataset are difficult classes, also known as data complexity \sidecite{cano2013analysis}. This scenario arises when the variables do not provide sufficient information to allow class separation, the relations between variables and the target are highly nonlinear, or other circumstances prevent a learning method from inferring an adequate mapping from the input features to the target variable.
 
-% - what is the objective, to get a better feature set
+As a consequence, much time can be spent manually engineering features according to what the practitioner believes the classification method will adapt best. However, this is a process that requires experience and usually involves many attempts at improving results. Instead of this, a new task can be performed by machine learning techniques before the actual knowledge extraction, called \textit{feature learning} or more broadly \textit{representation learning} \sidecite{bengio2013representation}. 
 
-% All this leads to a new task that can be performed before the actual knowledge extraction, \textit{feature learning}. The objective when learning features is \xr{...}
+Feature learning alleviates a notable amount of manual labor and dataset manipulation although, of course, implies that the user know about feature learning methods and their operation. There exists a very diverse array of methods, ranging from simple principal component analysis to more complex manifold learning methods.
 
-% - what are the difficulties of obtaining a new feature set
-
-% - what are other possible difficulties: difficult classes and nonstandard problems
-
-Other possible obstacles that one may come across when inspecting the features of a dataset are difficult classes, also known as class complexity. This scenario arises when the variables do not provide sufficient information to allow class separation, the relations between variables and the target are highly nonlinear, or other circumstances prevent a learning method from inferring an adequate mapping from the input features to the target variable.
-
-% - why classical tools for feature extraction do not cut it
+However, not every feature learning method can solve every task. Most of them have a specific criterion that they optimize, such as maximum variance in the case of PCA, point reconstruction from its neighbors as in Locally Linear Embedding \sidecite{LLE}, or shortest-path distances between points as in Isomap \sidecite{Isomap}. The objective function of each method determines which behavior will be found in the extracted representation, with little to no room to customize it. There may be situations where it is necessary for the learned variables to adjust to certain properties and, ideally, the feature extraction method should allow to enforce those properties.
 
 \section{Tools}
 
@@ -86,7 +78,7 @@ Another potential use of feature learning models that catches our interest is th
 
 % - interest in interpretable models
 
-A current conflict of deep learning models with several areas of interest in machine learning, such as medical applications, is the fact that most are essentially black boxes. This means that the behavior of a trained model is obscured by the intrinsic structure and is thus unintuitive for humans to comprehend. As a result, there is much interest in explaining and justifying the behavior of these models, 
+A current conflict of deep learning models with several areas of interest in machine learning, such as medical applications, is the fact that most are essentially black boxes. This means that the behavior of a trained model is obscured by the intrinsic structure and is thus unintuitive for humans to comprehend. As a result, there is much interest in explaining and justifying the behavior of these models. Enabling the use of interpretable classifiers and regressors such as decision trees by means of better dataset representations can be one way of avoiding black boxes in these contexts.
 
 \section{Objectives}
 
@@ -116,6 +108,11 @@ The rest of this document contains all the needed information to develop the pos
 \begin{itemize}
     \item Chapter~\ref{ch:theory} describes the basic theory that lies under the later work and the specific models that are developed and used.
     \item Chapter~\ref{ch:practical} explains the practicalities of implementing and training deep learning models, especially autoencoders.
-    \item Next chapters contain the selected publications for this thesis, along with brief explanations and connections to the main topic.
+    \item Chapter~\ref{ch:summary} outlines the main results obtained during the research period, providing context and connections among the articles that are reproduced next.
+    \item Article~\ref{ch:paper1}, the first of the journal articles, is a guide on the inner workings of autoencoders, their variants, how to design and how to implement them.
+    \item Article~\ref{ch:paper2} describes into detail the software developed with the objective to facilitate the use of autoencoders.
+    \item Article~\ref{ch:paper3} is a review of the current state of the art in supervised learning further from the standard problems.
+    \item Article~\ref{ch:paper5} covers the most popular applications of autoencoders apart from classification, with concrete examples and guidelines.
+    \item Article~\ref{ch:paper6} improves the applicability of autoencoders in classification problems by developing new loss functions which help reduce data complexity.
     \item Lastly, Chapter~\ref{ch:conclusions} draws some conclusions and closing statements on the developed work.
 \end{itemize}

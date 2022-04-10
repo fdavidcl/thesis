@@ -44,6 +44,40 @@ Using the appropriate activation function in the output layer can facilitate the
     \item \textbf{Bounded interval}: Data in the $[0,1]$ range can be produced as the result of a sigmoid activation. Similarly, the $\tanh$ activation function can provide data in the $[-1,1]$ range.
 \end{itemize}
 
+\section{Training deep models}
+
+The training process of a deep learning model can be very resource-intensive, since it requires computing hundreds of arithmetic operations, usually across several thousands of parameters. 
+
+\subsection{Stochastic gradient descent}
+
+Deep learning models are usually optimized by differentiating the objective function with respect to the model parameters and updating those in the direction of steepest descent. This optimization scheme is known as \textit{gradient descent}, but it suffers from high time complexity when datasets become large. An approximation called \textit{stochastic gradient descent} (SGD) is used instead as a result \sidecite{goodfellow2016deep}. It simply runs gradient descent on successive minibatches of data, estimating the true gradient as the overall expectation of all gradients computed. This fixes the time required for each parameter update, depending only on the size of the minibatch and independently from the training set size.
+
+Gradient descent is prone to converging to local minima and SGD is just an approximation which will also tend to stabilize in local minima or locations with small gradients. However, neural networks do not represent convex functions, on the contrary, they almost always present a large amount of local minima. As a consequence, many improvements have been proposed to find better solutions with lower values of the objective function. Of course, they still do not ensure that a global minimum is reached, but they are more likely to find an overall well optimized point in parameter space. Some of these improvements on SGD are AdaBoost \sidecite{freund1997decision}, Adadelta \sidecite{zeiler2012adadelta} and Adam \sidecite{kingma2014adam}.
+
+\subsection{Gradient computation}
+
+In order to perform SGD on a neural network, it is required to compute the value of the objective function and then find its gradient with respect to model parameters. 
+
+
+\subsubsection{Forward pass}
+
+The value of the objective function is the result of transforming the input data through the network up to the application of the loss function, that is, the metric that evaluates the obtained output with respect to the desired one. This sequence of operations is known as a \textit{forward pass} of a batch of data. 
+
+
+\subsubsection{Backward pass}
+
+
+
+The training stage of a neural network is usually divided into a series of epochs, which in turn are composed of several forward and backward passes. 
+
+\subsection{GPU parallelization}
+
+From a hardware point of view, neural network training is a relatively easy task since it mostly involves great amounts of floating point matrix products. Thus, it does not require the complexity of a whole CPU to run the optimization task. Instead, most of the bulk of the process can be carried out by the simpler, more dense computing chips that are present in current graphical processing units (GPU). These allow very fast parallel calculations and, as a result, are ideal to accelerate the training process.
+
+Both tensor libraries, Tensorflow and Pytorch, are implemented with GPU execution in mind as well as CPU execution (usually as fallback) of the models. If the correct drivers and the CUDA platform are installed, the selected library will be able to automatically connect to the GPU in order to copy data to the dedicated memory and send instructions to carry out the necessary computations.
+
+The potential of GPUs is further leveraged in dedicated multi-GPU servers where the calculations can be spread across several accelerators, resulting in proportional time savings with no loss in quality of results. Graphics cards manufacturers currently produce variants of the cards that are specific for computing purposes and discard the video output, sometimes including dedicated circuitry for tensor operations (e.g. Tensor Cores in the NVIDIA A100 lineup \sidecite{nva100}).
+
 \section{Implementation}
 
 During the latest years, there has been a notable evolution in the scene of software libraries for deep learning. From the existence of a wide variety of them with differing functionalities, ease of use and optimizations, there has been a tendency to condensate popularity in just two of them, which currently offer very similar functionalities and interfaces: Tensorflow and Pytorch.
@@ -108,7 +142,7 @@ Next is an equivalent implementation for the same autoencoder of the previous ex
 
 \begin{enumerate}
     \item A batch of input samples is selected
-    \item The neural network is feeded these samples and its output is obtained
+    \item The neural network is fed these samples and its output is obtained
     \item A loss metric is calculated according to the target outputs
     \item The gradients applied to the model are reset
     \item The gradients corresponding to the current loss are computed and propagated
@@ -147,9 +181,3 @@ for i in range(100):
 autoencoder.eval()
 encoder(x_test)
 \end{lstlisting}
-
-\section{Training deep models}
-
-The training process of a deep learning model can be very resource-intensive, since it requires computing hundreds of arithmetic operations, usually across several thousands of parameters. 
-
-\subsection{GPU parallelization}

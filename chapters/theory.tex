@@ -56,7 +56,7 @@ Machine learning covers a set of problems and tools that overlaps several discip
 
 The objective of this chapter is to provide the reader with the definitions, descriptions and examples that allow to understand the rest of this work. We will try to assume little-to-no prior knowledge about machine learning, thus making it as accessible as possible. The following sections go over the basic subjects of machine learning, build the core concepts of deep learning and arrive to the main tools that will be used along the rest of this book, autoencoders.
 
-\section{Machine learning fundamentals}
+\section{Machine learning fundamentals}[ML fundamentals]
 
 Machine learning differs from other kinds of computer science disciplines in that its objective is not to give precise instructions for the machine to follow, but instead to provide some form of experience that the machine must learn from in order to extract some information or display some behavior \sidecite{deisenroth2020mathematics}. The algorithms developed for machine learning are essentially mechanisms that take in a certain amount of data, process it and compute the necessary steps to fulfill a specific objetive related to the data. Their output is usually a model, that is, a representation of an approximate solution to the problem. 
  
@@ -124,6 +124,13 @@ Traditional algorithms for adjusting models tend to process data "as is", which 
 
 Although supervised learning tasks provide the desired answer for all observed cases, there are a wide variety of obstacles that can prevent a learning algorithm from finding an acceptable solution.
 
+The structure of the task can itself be a hindrance. The scheme that most algorithms are designed to tackle is that of a binary classification problem. This is characterized by the categorization of instances in one of two possible classes, which can be represented as a binary variable which acts as the target. Each instance is in turn represented by a vector valued in a set of variables. Although this is the simplest setting for a supervised machine learning problem, and many methods are initially created with it in mind for this reason, real world situations usually need more complex approaches.
+
+One possible case is problem objects being represented by several data points, either homogeneous or heterogeneous according to whether they come from the same feature space. For example, one molecule may present various forms \sidecite{dietterich1997solving}, where one of them may present a valid solution, rendering that molecule apt to solve the studied problem. This is known as a \textit{multi-instance} learning task, while a \textit{multi-view} one would have the data points belonging to different sources (and different feature spaces) \sidecite{sun2013survey}, like social media posts with associated image and text.
+
+
+
+
 - small intro to nonstandard problems
 
 
@@ -137,13 +144,25 @@ is to embed the feature extraction stage within the untrained model itself, and 
 
 \subsection{Types of deep networks}
 
-- dense networks
+Not every kind of neural network is prepared to deal with every type of dataset. 
 
-- convolutional networks
+\subsubsection{Dense networks}
 
-- recurrent networks
+Dense deep networks, also known as fully connected networks, are essentially the same as MLPs. Their main operation in each layer is matrix product, therefore ``connecting'' each unit in the previous layer with the next one.
 
-- transformers
+\begin{equation}
+    f(x)=Wx + b\quad W\in \mathcal M_{n\times m}(\mathbb R), x\in\mathbb R^m, b\in\mathbb R^n
+\end{equation}
+
+\subsubsection{Convolutional networks}
+
+Convolutional networks emerge out of the need to adapt operations to structured data, as well as reduce the computational complexity of dense networks when treating this type of high-dimensional data. Since the matrix used in a dense layer has $n\times m$ parameters, $m$ being the number of variables in the input vector and $n$ the number of variables in the output vector, the amount of floating point operations required to compute the result is $\mathcal O(nm)$. 
+
+In a convolutional network, a certain number of filters is computed out of the input matrix. Each one is composed of values that are calculated by convoluting the original matrix with a weight matrix which is usually of a fixed small size: $3\times 3$ up to $9\times 9$.
+
+\subsubsection{Recurrent networks}
+
+\subsubsection{Transformers and other recent advancements}
 
 
 \subsection{Encoder-decoder architectures}

@@ -4,11 +4,11 @@
 
 This chapter aims to summarize the outcomes of this thesis, highlight the most relevant achievements, list the related published material and outline some lines of work that will be pursued next.
 
-\section{Achieved objectives and results}
+\section{Achieved objectives}
 
 \subsection{Didactic resources for learning about autoencoders}
 
-Autoencoders are conceptually very different from traditional feature extractors. Unlike these, autoencoders are based on a neural network framework and this allows for a high level of customization and adjustments for each task. However, this availability of diverse options when building an autoencoder makes it less accessible to inexperienced practitioners. This is a barrier that was identified at the start of our research work and, as a result, become 
+Autoencoders are conceptually very different from traditional feature extractors. Unlike these, autoencoders are based on a neural network framework and this allows for a high level of customization and adjustments for each task. However, this availability of diverse options when building an autoencoder makes it less accessible to inexperienced practitioners. This is a barrier that was identified at; the start of our research work and, as a result, became an issue we wanted to address.
 
 Our first goal, taking advantage of the usual literature review, was to produce a guide on autoencoders for machine learning users assuming no prior knowledge about neural networks or these models in particular. This guide should cover all the basics in order to be able to grasp what autoencoders compute, how they are trained, how they compare to other feature learners and what options a user may be presented with when choosing to apply this model to their data.
 
@@ -21,6 +21,14 @@ One of the first obstacles that programmers may come across when working with fe
 
 \subsection{Development of new autoencoder losses for class separability}
 
+In order to contribute to the specific field of autoencoders, \xr{we wanted to} improve on one of the main uses that these models can have, the extraction of better features for classification methods. Instead on relying on the intended classifiers themselves to optimize the quality of the features, like a deep neural network would operate, we opted to choose metrics that inform about the ability of dataset variables to separate different classes.
+
+
+
+\subsection{Application of newly developed models}
+
+
+
 \section{Summary of publications}
 
 This section holds a relation of all public results of the thesis, including the publications that have been reproduced from \autoref{ch:paper1} to \autoref{ch:paper7}, the related software packages and repositories that allow to replicate experimental results, as well as publications arising from collaborations with colleagues and other projects.
@@ -29,7 +37,9 @@ This section holds a relation of all public results of the thesis, including the
 
 Following are the publications in JCR journals and international conferences associated to the present thesis.
 
-\subsubsection{In JCR journals}
+\subsubsection{Publications in JCR journals}
+
+Next are the five articles published in journals listed in JCR which are directly linked to the thesis. Four of them are published in Q1 journals, including an article in IEEE TPAMI which is the highest ranking journal in the area of Computer Science according to JCR.
 
 \begin{itemize}
     \item Charte, D., Charte, F., García, S., del Jesus, M. J., \& Herrera, F. (2018). A practical tutorial on autoencoders for nonlinear feature fusion: Taxonomy, models, software and guidelines. Information Fusion, 44, 78-96.
@@ -39,14 +49,19 @@ Following are the publications in JCR journals and international conferences ass
     \item Charte, D., Charte, F., \& Herrera, F. (2021). Reducing Data Complexity using Autoencoders with Class-informed Loss Functions. IEEE Transactions on Pattern Analysis and Machine Intelligence.
 \end{itemize}
 
-\subsubsection{In international conferences}
+\subsubsection{Communications in international conferences}
+
+Two works were presented in international conferences:
 
 \begin{itemize}
     \item Charte, D., Charte, F., del Jesus, M. J., \& Herrera, F. (2019, June). A Showcase of the Use of Autoencoders in Feature Learning Applications. In International Work-Conference on the Interplay Between Natural and Artificial Computation (pp. 412-421). Springer, Cham.
     \item Charte, D., Sevillano-García, I., Lucena-González, M. J., Martín-Rodríguez, J. L., Charte, F., \& Herrera, F. (2021, September). Slicer: Feature Learning for Class Separability with Least-Squares Support Vector Machine Loss and COVID-19 Chest X-Ray Case Study. In International Conference on Hybrid Artificial Intelligence Systems (pp. 305-315). Springer, Cham.
 \end{itemize}
 
+
 \subsection{Published software}
+
+Most of the developed software to perform experimentations has been made available in the popular code repository GitHub for its use to replicate and extend them. Additionally, some of these packages conveniently allow users to apply the models to other datasets, more specifically, Ruta and the autoencoders for complexity reduction including the convolutional version of Slicer.
 
 \begin{itemize}
     \item Ruta, software for unsupervised deep architectures (associated to \autoref{ch:paper2}). Homepage: \href{https://ruta.software/}{ruta.software}. Source code: \href{https://github.com/fdavidcl/ruta}{github.com/fdavidcl/ruta}.
@@ -58,21 +73,47 @@ Following are the publications in JCR journals and international conferences ass
 
 \subsection{Collaborations and other related results}
 
-Articles published in collaboration with other researchers with tangential topics to the current thesis:
+This section is dedicated to works published during the thesis period where the doctoral candidate participated, as well as talks and dissemination material around the topic of the present thesis.
+
+\subsubsection{Articles published in collaboration with other researchers with tangential topics to the current thesis}
+
+The following are five JCR articles whose topics interleave with the present thesis but are not core to the main objectives. 
 
 \begin{itemize}
-    \item Charte, F., Rivera, A. J., Charte, D., del Jesus, M. J., \& Herrera, F. (2018). Tips, guidelines and tools for managing multi-label datasets: The mldr.datasets R package and the Cometa data repository. Neurocomputing, 289, 68-85.
-    \item Górriz, J. M., Ramírez, J., Ortíz, A., Martinez-Murcia, F. J., Segovia, F., Suckling, J., \dots \& Ferrández, J. M. (2020). Artificial intelligence within the interplay between natural and artificial computation: Advances in data science, trends and applications. Neurocomputing, 410, 237-270.
-    \item Tabik, S., Gómez-Ríos, A., Martín-Rodríguez, J. L., Sevillano-García, I., Rey-Area, M., Charte, D., ... \& Herrera, F. (2020). COVIDGR dataset and COVID-SDNet methodology for predicting COVID-19 based on chest X-ray images. IEEE Journal of biomedical and health informatics, 24(12), 3595-3605.
-    \item Pascual-Triana, J. D., Charte, D., Andrés Arroyo, M., Fernández, A., \& Herrera, F. (2021). Revisiting data complexity metrics based on morphology for overlap and imbalance: snapshot, new overlap number of balls metrics and singular problems prospect. Knowledge and Information Systems, 63(7), 1961-1989.
-    \item Luengo, J., Moreno, R., Sevillano, I., Charte, D., Peláez-Vegas, A., Fernández-Moreno, M., ... \& Herrera, F. (2022). A tutorial on the segmentation of metallographic images: Taxonomy, new MetalDAM dataset, deep learning-based ensemble model, experimental analysis and challenges. Information Fusion, 78, 232-253.
+    \item Charte, F., Rivera, A. J., \textbf{Charte, D.}, del Jesus, M. J., \& Herrera, F. (2018). Tips, guidelines and tools for managing multi-label datasets: The mldr.datasets R package and the Cometa data repository. Neurocomputing, 289, 68-85.
+    \item Górriz, J. M., Ramírez, J., Ortíz, A., Martinez-Murcia, F. J., Segovia, F., Suckling, J., \dots \textbf{Charte, D.}, \dots \& Ferrández, J. M. (2020). Artificial intelligence within the interplay between natural and artificial computation: Advances in data science, trends and applications. Neurocomputing, 410, 237-270.
+    \item Tabik, S., Gómez-Ríos, A., Martín-Rodríguez, J. L., Sevillano-García, I., Rey-Area, M., \textbf{Charte, D.}, \dots \& Herrera, F. (2020). COVIDGR dataset and COVID-SDNet methodology for predicting COVID-19 based on chest X-ray images. IEEE Journal of biomedical and health informatics, 24(12), 3595-3605.
+    \item Pascual-Triana, J. D., \textbf{Charte, D.}, Andrés Arroyo, M., Fernández, A., \& Herrera, F. (2021). Revisiting data complexity metrics based on morphology for overlap and imbalance: snapshot, new overlap number of balls metrics and singular problems prospect. Knowledge and Information Systems, 63(7), 1961-1989.
+    \item Luengo, J., Moreno, R., Sevillano, I., \textbf{Charte, D.}, Peláez-Vegas, A., Fernández-Moreno, M., \dots \& Herrera, F. (2022). A tutorial on the segmentation of metallographic images: Taxonomy, new MetalDAM dataset, deep learning-based ensemble model, experimental analysis and challenges. Information Fusion, 78, 232-253.
 \end{itemize}
 
-Educational/training material:
+\subsubsection{Other conferences and talks}
+
+The following talks and works were presented in national-level conferences and other events:
+
+\begin{itemize}
+    \item Charte, D., Charte, F., Herrera, F. (2017). Unsupervised Deep Learning in R with Ruta. Poster presented at \textit{IX Jornadas de Usuarios de R} in Granada.
+    \item Charte, D., Charte, F., García, S., del Jesus, M.J., Herrera, F. (2018). Keywork "A practical tutorial on autoencoders for nonlinear feature fusion" presented at \textit{XVIII Conferencia de la Asociación Española para la Inteligencia Artificial (CAEPIA)} in Granada.
+    \item Charte, D. (2019). Aplicaciones prácticas de las redes neuronales no supervisadas. Talk presented at \textit{esLibre 2019} within track "Informática y matemáticas", in Granada.
+    \item Charte, D. (2020). Autoencoders: An Overview and Applications. Talk presented at \textit{IAA-CSIC Severo Ochoa School on Machine Learning, Big Data, and Deep Learning in Astronomy (SOMACHINE 2020)}.
+\end{itemize}
+
+\subsubsection{Educational/training material}
+
+During the course of the thesis, a textbook on machine learning and data science has been published for use as training material, as well as a 5-video course on linear algebra and dimensionality reduction, including autoencoder networks:
 
 \begin{itemize}
     \item Charte, Francisco \& Charte, David (2021). Machine Learning y Ciencia de Datos con Python y R. Krasis Consulting. ISBN: 978-8494582257.
-    \item Curso Math-ML Módulo 2: Álgebra lineal y reducción de la dimensionalidad. Published in collaboration with the Andalusian Research Institute in Data Science and Computational Intelligence (DaSCI). Video playlist: \href{https://www.youtube.com/playlist?list=PL88MWrW4s4nf-Bc3hccxt3Att8TSS-LBn}{youtube.com/ playlist?list=PL88MWrW4s4nf-Bc3hccxt3Att8TSS-LBn}.
+    \item Math-ML Course, Module 2: Linear algebra and dimensionality reduction. Published in collaboration with the Andalusian Research Institute in Data Science and Computational Intelligence (DaSCI). Video playlist: \href{https://www.youtube.com/playlist?list=PL88MWrW4s4nf-Bc3hccxt3Att8TSS-LBn}{youtube.com/ playlist?list=PL88MWrW4s4nf-Bc3hccxt3Att8TSS-LBn}.
+\end{itemize}
+
+\subsubsection{Projects with public and private entities}
+
+\begin{itemize}
+    \item Our research group has participated in several state-funded projects which involve deep learning as one of their main lines of work. Their funding allowed the group to build the necessary infrastructure to quickly develop and test models with large amounts of data.
+    \item The candidate has collaborated with the Repsol statistics department in optimization of refinery processes. No research outputs are available due to industrial secrecy requirements.
+    \item The candidate has participated in a two-year collaboration with the metallurgic company ArcelorMittal, on the topic of semantic segmentation of metallographic iamges with encoder-decoder deep neural networks. A result of this project was the article ``A tutorial on the segmentation of metallographic images: Taxonomy, new MetalDAM dataset, deep learning-based ensemble model, experimental analysis and challenges'' co-written by the UGR and ArcelorMittal teams.
+    \item A collaboration was also established with the Hospital Universitario San Cecilio in Granada, during which the candidate looked into capsule networks and convolutional networks attempting to solve the problem of detecting the presence of COVID-19-induced lung affection. The results of this study were published in the article ``COVIDGR dataset and COVID-SDNet methodology for predicting COVID-19 based on chest X-ray images''.
 \end{itemize}
 
 % \setchapterpreamble[u]{\margintoc}
@@ -83,4 +124,5 @@ Educational/training material:
 
 \subsection{Promoting other behavior in learned representations}
 
-% \section{}
+\subsection{Synthetic instance generation for label resampling}
+
