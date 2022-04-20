@@ -115,27 +115,29 @@ A different strategy for machines to learn consists in providing them with posit
 
 % \subsection{Traditional machine learning algorithms}
 
+\section{Obstacles when learning models}
 
-\subsection{Feature learning}
+Machine learning models can come across several kinds of difficulties that are relevant to analyze since they are related to the tools and solutions studied in this thesis. Primarily, we will focus on improving the feature sets and tackling certain aspects of supervised learning problems.
+
+\subsection{Feature sets}
+
+The feature set, as explained in Chapter~\ref{ch:intro}, corresponds to the space where each sample takes values. The same events may be expressed by different feature sets according to the information collection procedures. For example, a spoken command may be represented by a precise sound file that was recorded or by the words that were uttered. In the former case, the feature set could be the presence of each frequency at each time point. In the latter, a possible set of features would indicate whether each word from a predefined list was present or not in the sentence.
 
 Traditional algorithms for adjusting models tend to process data "as is", which means that they perform few transformations (or none) to each vector before using them directly to fit model parameters. This causes them to underperform when the representation of the vectors (i.e. the set of features) is not ideal. As a consequence, it is usually convenient to preprocess data beforehand, using one or several tools that will manipulate the features looking to improve the performance of the learning algorithm. This is known as \textit{feature extraction}, feature learning or representation learning. 
 
-\section{Obstacles in supervised problems}
+\subsection{Potential issues with supervised problems}
 
 Although supervised learning tasks provide the desired answer for all observed cases, there are a wide variety of obstacles that can prevent a learning algorithm from finding an acceptable solution.
 
 The structure of the task can itself be a hindrance. The scheme that most algorithms are designed to tackle is that of a binary classification problem. This is characterized by the categorization of instances in one of two possible classes, which can be represented as a binary variable which acts as the target. Each instance is in turn represented by a vector valued in a set of variables. Although this is the simplest setting for a supervised machine learning problem, and many methods are initially created with it in mind for this reason, real world situations usually need more complex approaches.
 
-One possible case is problem objects being represented by several data points, either homogeneous or heterogeneous according to whether they come from the same feature space. For example, one molecule may present various forms \sidecite{dietterich1997solving}, where one of them may present a valid solution, rendering that molecule apt to solve the studied problem. This is known as a \textit{multi-instance} learning task, while a \textit{multi-view} one would have the data points belonging to different sources (and different feature spaces) \sidecite{sun2013survey}, like social media posts with associated image and text.
+One possible case is problem objects being represented by several data points, either homogeneous or heterogeneous according to whether they come from the same feature space. For example, one molecule may present various forms \sidecite{dietterich1997solving}, where one of them may present a valid solution, rendering that molecule apt to solve the studied problem. This is known as a \textit{multi-instance} learning task, while a \textit{multi-view} one would have the data points belonging to different sources (and different feature spaces) \sidecite{sun2013survey}, like social media posts with associated image and text. Learning methods are typically applied with a one-to-one input-target association in mind, so these types of input structures become harder to work around.
 
+% - small intro to nonstandard problems
 
+Different issues can arise that make certain classes hard to learn by classifiers due to their size, location or lack of representation within the training set itself. This phenomenon is broadly known as data complexity \sidecite{ho2002complexity}, and in some cases as difficult classes \sidecite{galar2014empowering}, if the complications are related to a specific class. Data complexity can be caused by the feature set not fully being able to separate instances of different classes, class boundaries being highly nonlinear or composed of several disjoint subsets, or a class being notably underrepresented with respect to the rest, among other factors.
 
-
-- small intro to nonstandard problems
-
-
-
-- small intro to difficult classes
+% - small intro to difficult classes
 
 \section{Deep learning}
 
@@ -144,26 +146,58 @@ is to embed the feature extraction stage within the untrained model itself, and 
 
 \subsection{Types of deep networks}
 
-Not every kind of neural network is prepared to deal with every type of dataset. 
+Not every kind of neural network is prepared to deal with every type of dataset. Their main advantage is that they can become specialized in certain structures, such as sequential data (sound, speech, language), bidimensional data (images) and three-dimensional data (video). This specialization while preserving the same training strategies and essential implementation methods is what sets them apart from traditional learning methods, which are more fixed in their way of working through data.
 
 \subsubsection{Dense networks}
 
-Dense deep networks, also known as fully connected networks, are essentially the same as MLPs. Their main operation in each layer is matrix product, therefore ``connecting'' each unit in the previous layer with the next one.
+Dense deep networks, also known as fully connected networks, are essentially the same as MLPs. Their main operation in each layer is matrix product, where a parameter matrix is used to extract the values of each layer out of those of the previous one. 
 
 \begin{equation}
-    f(x)=Wx + b\quad W\in \mathcal M_{n\times m}(\mathbb R), x\in\mathbb R^m, b\in\mathbb R^n
+    f(x)=Wx + b\quad W\in \mathcal M_{n\times m}(\mathbb R), x\in\mathbb R^m, b\in\mathbb R^n~.
 \end{equation}
+
+These networks are called fully connected because each value in the output is able to draw information from all values in the input vector. This is especially useful when variables are not structured since the order of variables  will not affect the training.
 
 \subsubsection{Convolutional networks}
 
-Convolutional networks emerge out of the need to adapt operations to structured data, as well as reduce the computational complexity of dense networks when treating this type of high-dimensional data. Since the matrix used in a dense layer has $n\times m$ parameters, $m$ being the number of variables in the input vector and $n$ the number of variables in the output vector, the amount of floating point operations required to compute the result is $\mathcal O(nm)$. 
+\begin{marginfigure}
+    \includegraphics{resnet}
+    \caption{\label{fig:resnet}Comparison of the architectures of several CNNs, from left to right: VGG-19, a CNN with 36 layers and a residual CNN with 36 layers. Figure from \cite{he2016deep}.}
+\end{marginfigure}
 
-In a convolutional network, a certain number of filters is computed out of the input matrix. Each one is composed of values that are calculated by convoluting the original matrix with a weight matrix which is usually of a fixed small size: $3\times 3$ up to $9\times 9$.
 
-\subsubsection{Recurrent networks}
+Convolutional networks (CNNs) emerge out of the need to adapt operations to bidimensional data, as well as reduce the computational complexity of dense networks when treating this type of high-dimensional data. Since the matrix used in a dense layer has $n\times m$ parameters, $m$ being the number of variables in the input vector and $n$ the number of variables in the output vector, the amount of floating point operations required to compute the result is $O\left(nm\right)$. This makes CNNs appropriate for image-related tasks such as image classification, segmentation and object detection. They can also extend to tridimensional data such as video segments.
 
-\subsubsection{Transformers and other recent advancements}
+In a CNN, a certain number of matrices typically named \textit{channels} is computed out of the input matrix. Each one is composed of values calculated by convoluting the original matrix with a weight matrix, called \textit{kernel}, which is usually of a fixed small size: $3\times 3$ up to $9\times 9$. Each pixel $(i, j)$ in a filter resulting from convoluting a kernel $K$ over the input $I$ can be computed as follows:
+\begin{equation}
+    f(i,j)=\left(K\ast I\right)(i,j)=\sum_{m}\sum_{n}I(i-m,j-n)K(m,n)~.
+\end{equation}
+By keeping $k$, the size of the kernels, notably smaller than the input image, the complexity of convolution is $O(kn)$ and it requires much fewer parameters than matrix multiplication.
 
+Most current neural network libraries implement cross correlation instead of the discrete convolution, which does not affect the results since equivalent kernels can be learned for it. The operation is still called convolution in most cases, and the only change is a sign flip for $m$ and $n$:
+\begin{equation}
+    f(i,j)=\left(I\ast K\right)(i,j)=\sum_{m}\sum_{n}I(i+m,j+n)K(m,n)~.
+\end{equation}
+
+Convolution is not the only stage performed by CNN. The other important step is \textit{pooling}. This function outputs a smaller version of its input by summarizing nearby values. For example, max pooling \sidecite{zhou1988computation} takes the maximum out of a rectangle of the input matrix and outputs that as a single value, reducing in this way the size of the matrix.
+
+Computer vision has been one of the fundamental applications of deep learning and CNNs have evolved greatly as a result, with many improvements and extensions such as residual connections (see Figure~\ref{fig:resnet}), breakdown of convolutions into smaller ones \sidecite{7780677}, and pruning strategies \sidecite{lin2019towards}.
+
+
+\subsubsection{Recurrent networks, transformers and other advancements}
+
+In a recurrent neural network (RNN), some parts of the computation of the network at each step, e.g. the output, are fed as input in the next one. This creates a ``memory'' which allows the RNN to remember previous outputs when making predictions. RNNs are used for tasks such as speech recognition and language translation, where the order of the input is important and past outputs are relevant for the next predictions.
+
+\begin{marginfigure}
+    \includegraphics[width=\linewidth]{lstm}
+    \caption{\label{fig:lstm}Diagram for an LSTM where blue units are gates (sigmoidal or tanh activations), green units are products and pink units are sums. Triangles over data flows indicate values that are fed at the next step.}
+\end{marginfigure}
+
+A popular kind of RNN units are long short-term memory (LSTM) units \sidecite{hochreiter1997long}, which add a self-loop controlled (\textit{gated}) by another unit so that the memorized information can be eventually forgotten. See Figure~\ref{fig:lstm} for a detailed schematic of this type of unit.
+
+
+% \subsubsection{Transformers and other recent advancements}
+Transformers \sidecite{vaswani2017attention} emerged from the concept of \textit{attention}
 
 \subsection{Encoder-decoder architectures}
 
@@ -175,19 +209,14 @@ A special subset of encoder-decoder architectures are autoencoders, which are fu
 
 \subsection{Autoencoders}
 
-Essentially, an \textit{autoencoder} is an encoder-decoder architecture which is trained to map its inputs onto its outputs.
+Essentially, an \textit{autoencoder} is an encoder-decoder architecture which is trained to map its inputs onto its outputs. Being $f$ the encoder network and $g$ the decoder one, the main objective of an autoencoder would be to match the input data as closely as possible:
 
-- function version
+\begin{equation}
+    x\approx g(f(x))
+\end{equation}
+
+
 
 - some of the basic purposes of an ae
 
 - basic ae variants 
-
-
-\clearpage
-
-% article: autoencoder overview
-
-% article: nonstandard problems overview
-
-% \section{}
