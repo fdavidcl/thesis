@@ -209,14 +209,17 @@ A special subset of encoder-decoder architectures are autoencoders, which are fu
 
 \subsection{Autoencoders}
 
-Essentially, an \textit{autoencoder} is an encoder-decoder architecture which is trained to map its inputs onto its outputs. Being $f$ the encoder network and $g$ the decoder one, the main objective of an autoencoder would be to match the input data as closely as possible:
+\begin{marginfigure}
+    \includegraphics{basic-fc-ae}
+    \caption{\label{fig:basicae}Schematic structure of a fully connected autoencoder.}
+\end{marginfigure}
+
+Essentially, an \textit{autoencoder} is an encoder-decoder architecture which is trained to map its inputs onto its outputs. Being $f$ the encoder network and $g$ the decoder one, the main objective of an autoencoder would be to match the input data as closely as possible (see Figure~\ref{fig:basicae}):
 
 \begin{equation}
     x\approx g(f(x))
 \end{equation}
 
+As a feature learner, the autoencoder trains to extract appropriate features from data by considering that quality features should allow to reconstruct the original data from the encoded vectors.
 
-
-- some of the basic purposes of an ae
-
-- basic ae variants 
+Different variations can be introduced into the training process and the autoencoder structure in order to extend its functionality. For example, the encoded features can be manipulated to be more sparse, i.e. most of them are equal to 0 for each input vector; the extracted reconstruction can discard noise from the inputs, and the reconstruction fidelity can be used as a sign of anomalous data.
