@@ -6,6 +6,8 @@ This chapter aims to summarize the outcomes of this thesis, highlight the most r
 
 \section{Achieved objectives}
 
+Before detailing specific results, this section explains how the different objectives posed at the beginning of the thesis have been tackled and completed.
+
 \subsection{Didactic resources for learning about autoencoders}
 
 Autoencoders are conceptually very different from traditional feature extractors. Unlike these, autoencoders are based on a neural network framework and this allows for a high level of customization and adjustments for each task. However, this availability of diverse options when building an autoencoder makes it less accessible to inexperienced practitioners. This is a barrier that was identified at; the start of our research work and, as a result, became an issue we wanted to address.
@@ -18,20 +20,32 @@ The result was an extensive article (reproduced as \autoref{paper1}) that explai
 
 One of the first obstacles that programmers may come across when working with feature learning tools is that autoencoders are much harder to set up and train than other alternatives like PCA or even complex manifold learning algorithms such as LLE or Isomap, which come already implemented in libraries and can be applied with a simple function call.
 
+The main software-related outcome of this thesis has been the R package Ruta, a library which includes the most relevant autoencoder variants and provides easy-to-use functionalities for beginners, as well as more flexible and detailed options for more experienced users. This software is published at CRAN, a software repository for the R language with strict quality controls.
+
+The Ruta package has totaled more than 15000 downloads just on the official RStudio CRAN mirror, averaging more than 10 downloads per day since its launch. Figure~\ref{fig:rutadl} shows daily downloads of the library according to the RStudio CRAN logs.
+
+\begin{figure*}[htbp]
+    \includegraphics{rutadownloads}
+    \caption{\label{fig:rutadl}Per-day downloads of the Ruta package from the RStudio CRAN mirror.}
+\end{figure*}
 
 \subsection{Development of new autoencoder losses for class separability}
 
-In order to contribute to the specific field of autoencoders, \xr{we wanted to} improve on one of the main uses that these models can have, the extraction of better features for classification methods. Instead on relying on the intended classifiers themselves to optimize the quality of the features, like a deep neural network would operate, we opted to choose metrics that inform about the ability of dataset variables to separate different classes.
+After a more general focus on the state of the art, it was important to create new solutions based on what had been learned. These solutions should be applicable as widely as possible and tackle real problems from a novel perspective, leveraging the flexibility of autoencoders.
 
+In order to contribute to the specific field of autoencoders, our aim was to improve on one of the main uses that these models can have, the extraction of better features for classification methods. Instead on relying on the intended classifiers themselves to optimize the quality of the features, like a deep neural network would operate, we opted to choose metrics that inform about the ability of dataset variables to separate different classes. This way, the model is not necessarily focused on the variables that are more relevant to allow a neural network classify, but those that help separate classes in general, which can in turn be useful for various classifiers.
 
+The extensive experimentation showed that, out of the three methods considered, the LSSVM-inspired loss worked best and provided significant improvement in classification performance with respect to other feature learners.
 
 \subsection{Application of newly developed models}
 
+The previous model proposal would be more valuable if useful applications of it were deployed. For a first use, we chose a dataset that was imposing notable levels of difficulty for classifiers to model adequately, the COVIDGR dataset of chest X-ray imaging for COVID-19 detection. This is, as well, an area where a solution involving a simple, interpretable classifier would appeal more to the experts than a black-box model like a neural network.
 
+The results revealed a promising line of work, as several of the selected classifiers improved their performance when learning from the features extracted by the proposed model with respect to the original features.
 
 \section{Summary of publications}
 
-This section holds a relation of all public results of the thesis, including the publications that have been reproduced from \autoref{ch:paper1} to \autoref{ch:paper7}, the related software packages and repositories that allow to replicate experimental results, as well as publications arising from collaborations with colleagues and other projects.
+This section holds a relation of all public results of the thesis, including the publications that have been reproduced from \autoref{ch:paper1} to \autoref{ch:paper6}, the related software packages and repositories that allow to replicate experimental results, as well as publications arising from collaborations with colleagues and other projects.
 
 \subsection{Publications associated to the thesis}
 
@@ -119,6 +133,8 @@ During the course of the thesis, a textbook on machine learning and data science
 % \setchapterpreamble[u]{\margintoc}
 \section{Future lines of work}
 % \label{ch:future}
+
+The developed work has shown to be very promising and opens several possible routes to continue researching. 
 
 \subsection{Label separability in multi-label data}
 

@@ -105,7 +105,7 @@
 % \fi
 % cite.sty was written by Donald Arseneau
 % V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
-% \cite{} output to follow that of the IEEE. Loading the cite package will
+% \sidecite{} output to follow that of the IEEE. Loading the cite package will
 % result in citation numbers being automatically sorted and properly
 % "compressed/ranged". e.g., [1], [9], [2], [7], [5], [6] without using
 % cite.sty will become [1], [2], [5]--[7], [9] using cite.sty. cite.sty's
@@ -578,12 +578,12 @@
 % Some journals put the first two words in caps:
 % \IEEEPARstart{T}{his demo} file is ....
 
-A classical obstacle in the field of data science is obtaining data of sufficient quality in order to extract the desired knowledge. The process of learning a model can be notably hindered by data presenting very common traits such as noise \cite{xiong2006enhancing}, outliers \cite{aggarwal2015outlier}, high dimensionality \cite{AYESHA202044} or complex class boundaries \cite{ho2000measuring}. This results in long periods of time spent cleaning and preprocessing data \cite{garcia2015data} before the actual data mining step can even begin.
+A classical obstacle in the field of data science is obtaining data of sufficient quality in order to extract the desired knowledge. The process of learning a model can be notably hindered by data presenting very common traits such as noise \sidecite{xiong2006enhancing}, outliers \sidecite{aggarwal2015outlier}, high dimensionality \sidecite{AYESHA202044} or complex class boundaries \sidecite{ho2000measuring}. This results in long periods of time spent cleaning and preprocessing data \sidecite{garcia2015data} before the actual data mining step can even begin.
 Although data cleaning techniques can be of good use in order to identify and filter out noise, outliers and missing data, other aspects can be trickier to solve.
 
-Many real world situations can be modeled as supervised classification problems, those where each instance belongs to one of several classes, and the objective is to learn from the observed data from each class in order to automatically assign the corresponding class labels to new, unobserved instances. Some examples of classification problems are text categorization~\cite{Yang1999ARO}, spam filtering~\cite{Dada2019MachineLF}, object recognition in images~\cite{Russakovsky2015ImageNetLS} and automatic interpretation of medical data to facilitate diagnostics~\cite{deo2015machine}. \rechange{Many of these problems correspond to the simplest case, binary classification, where there are only two categories.}
+Many real world situations can be modeled as supervised classification problems, those where each instance belongs to one of several classes, and the objective is to learn from the observed data from each class in order to automatically assign the corresponding class labels to new, unobserved instances. Some examples of classification problems are text categorization~\sidecite{Yang1999ARO}, spam filtering~\sidecite{Dada2019MachineLF}, object recognition in images~\sidecite{Russakovsky2015ImageNetLS} and automatic interpretation of medical data to facilitate diagnostics~\sidecite{deo2015machine}. \rechange{Many of these problems correspond to the simplest case, binary classification, where there are only two categories.}
 
-One of the type of issues that is very commonly overlooked in classification problems is the complexity of data~\cite{ho2000measuring,lorena2019complex}. Consider a clean dataset with no presence of errors or abnormalities. There can still be aspects related to the geometrical shapes and overlap among classes which can hinder the performance of a learning technique. For example, there could be no separability between classes, or even regions of the feature space with a mix of instances from different classes. In cases where separability is achievable, boundaries can present complex shapes that can be difficult for a parameterized model to fit. Figure~\ref{p6fig.boundaries} illustrates some of these cases, more concretely, one where the features do not allow to separate the classes, and another where class boundaries are difficult to model due to there being several small groups from one class, sometimes known as small disjuncts~\cite{weiss1995learning},  within a group of the other.
+One of the type of issues that is very commonly overlooked in classification problems is the complexity of data~\sidecite{ho2000measuring,lorena2019complex}. Consider a clean dataset with no presence of errors or abnormalities. There can still be aspects related to the geometrical shapes and overlap among classes which can hinder the performance of a learning technique. For example, there could be no separability between classes, or even regions of the feature space with a mix of instances from different classes. In cases where separability is achievable, boundaries can present complex shapes that can be difficult for a parameterized model to fit. Figure~\ref{p6fig.boundaries} illustrates some of these cases, more concretely, one where the features do not allow to separate the classes, and another where class boundaries are difficult to model due to there being several small groups from one class, sometimes known as small disjuncts~\sidecite{weiss1995learning},  within a group of the other.
 
 \begin{figure*}[hbtp]\centering
 
@@ -593,11 +593,11 @@ One of the type of issues that is very commonly overlooked in classification pro
   \caption{\label{p6fig.boundaries}Different situations relating to class complexity. The graph on the left shows separable classes, the middle one is an example where classes are not separable and the one on the right shows separable classes with complex boundaries (small disjuncts).}
 \end{figure*}
 
-An additional hindrance that frequently occurs in data mining scenarios is associated to the representation of instances, to the features themselves \cite{DimRecComparative}. These can be typically seen as observed outcomes of underlying factors that cause them and, as a result, are not always the ideal representation of the data. This can depend on the objective task and the learning method to be used. For example, a pixel-based representation for images can be ideal for a convolutional neural network to perform classification, but may be difficult for a lazy learning method to process.
+An additional hindrance that frequently occurs in data mining scenarios is associated to the representation of instances, to the features themselves \sidecite{DimRecComparative}. These can be typically seen as observed outcomes of underlying factors that cause them and, as a result, are not always the ideal representation of the data. This can depend on the objective task and the learning method to be used. For example, a pixel-based representation for images can be ideal for a convolutional neural network to perform classification, but may be difficult for a lazy learning method to process.
 
-When data have some kind of complexity, it can affect the performance of machine learning methods and these are usually not able to overcome the issue by themselves. Instead, \rechange{a preprocessing step can transform data aiming to find} a better representation which makes it easier to categorize points. Operating with features for this purpose is a task known as feature extraction or feature learning. There exists a wide variety of approaches to feature extraction \cite{bengio2013representation}, including linear transformations, manifold learning and neural network-based models. However, very few of them take class complexity into account and, as a result, extracting quality features with a specific strategy to reduce this complexity is still an important challenge.
+When data have some kind of complexity, it can affect the performance of machine learning methods and these are usually not able to overcome the issue by themselves. Instead, \rechange{a preprocessing step can transform data aiming to find} a better representation which makes it easier to categorize points. Operating with features for this purpose is a task known as feature extraction or feature learning. There exists a wide variety of approaches to feature extraction \sidecite{bengio2013representation}, including linear transformations, manifold learning and neural network-based models. However, very few of them take class complexity into account and, as a result, extracting quality features with a specific strategy to reduce this complexity is still an important challenge.
 
-In particular, autoencoders (AEs) \cite{charte-tutorial} are neural networks specifically designed to extract features from the data. These are typically trained to reconstruct the input at its output, feeding the data through several layers which impose some kind of restriction or bottleneck in order to find more appropriate representations along the way. AEs can also be easily restricted or adapted in order to promote certain kinds of transformations and encodings, for example, finding sparse variables which only take high values for a small number of instances \cite{ng2011sparse}.
+In particular, autoencoders (AEs) \sidecite{charte-tutorial} are neural networks specifically designed to extract features from the data. These are typically trained to reconstruct the input at its output, feeding the data through several layers which impose some kind of restriction or bottleneck in order to find more appropriate representations along the way. AEs can also be easily restricted or adapted in order to promote certain kinds of transformations and encodings, for example, finding sparse variables which only take high values for a small number of instances \sidecite{ng2011sparse}.
 
 \change{This work makes use of the well-known technique for regularizing the behavior of an AE, applied in this case to achieve class complexity reduction. Aiming to transform features onto a more useful space with special attention to class complexity, three concrete models that use different criteria are proposed. The bases for these are}: Fisher's discriminant ratio, the Kullback-Leibler divergence (KLD) and least-squares support vector machines (LSSVMs). The new models have been tested against well-established feature extraction methods \rechange{within a binary classification pipeline}.
 
@@ -633,13 +633,13 @@ A dataset can present many different problems that may drive it to be considered
 
 \subsection{Sources of difficulty}
 
-Ho and Basu \cite{basubook} identify three possible sources of difficulty: (1) class ambiguity, (2) boundary complexity and (3) sample sparsity and feature space dimensionality. The first applies to the circumstances where classes cannot be distinguished using the given features, either because they provide insufficient knowledge about the problem or because the classes are not well defined. The second source refers to the situation where classes are interleaved or not easily separable. In these cases, the complexity can be measured attending to class overlap and class separability as well as geometry, topology and density of manifolds. The last category covers issues with the structure of the sample, whether it is complete enough and the amount of variables the classifier needs to work with.
+Ho and Basu \sidecite{basubook} identify three possible sources of difficulty: (1) class ambiguity, (2) boundary complexity and (3) sample sparsity and feature space dimensionality. The first applies to the circumstances where classes cannot be distinguished using the given features, either because they provide insufficient knowledge about the problem or because the classes are not well defined. The second source refers to the situation where classes are interleaved or not easily separable. In these cases, the complexity can be measured attending to class overlap and class separability as well as geometry, topology and density of manifolds. The last category covers issues with the structure of the sample, whether it is complete enough and the amount of variables the classifier needs to work with.
 
 % In this work we focus on treating some of these sources of difficulty, namely: class overlap, class separability and feature space dimensionality.
 
 \subsection{Complexity measures}\label{p6sec.compmeas}
 
-In order to quantitatively assess how complex a dataset is, a wide variety of complexity metrics have been proposed over the years \cite{ho2000measuring,lorena2019complex}. The following sections briefly describe the most relevant approaches to measure complexity, paying special attention to the metrics that will be \rechange{applied} throughout the experimentation. Each metric is abbreviated according to the original nomenclature in \cite{ho2000measuring} and \cite{lorena2019complex}.
+In order to quantitatively assess how complex a dataset is, a wide variety of complexity metrics have been proposed over the years \sidecite{ho2000measuring,lorena2019complex}. The following sections briefly describe the most relevant approaches to measure complexity, paying special attention to the metrics that will be \rechange{applied} throughout the experimentation. Each metric is abbreviated according to the original nomenclature in \sidecite{ho2000measuring} and \sidecite{lorena2019complex}.
 
 \subsubsection{Class overlap}
 
@@ -678,8 +678,8 @@ and $\left\llbracket\dots\right\rrbracket$ is the Iverson bracket, which evaluat
 Instead of measuring the importance of the overlapping regions in features, an alternative approach is to look for complexity of the boundary separating classes, that is, its ability to actually isolate both classes and its nonlinearity. Several measures have been developed regarding the shape and separation degree of classes.
 
 
-%\paragraph*{Linear classifier objective function (L1)} The linear classifier proposed by Smith \cite{smith1968pattern} can help  measure class linear separability. In particular, the value of the objective function that has to be minimized can be also used as a measure of the level of separability or nonlinearity: the higher L1 is, the more difficult it is for a linear classifier to separate instances from both classes.
-\paragraph*{Linear classifier error (L2)} Linear separability of classes is the core of a branch of classification methods, support vector machines (SVM) \cite{steinwart2008support}. In its simplest form, a SVM is a binary classifier that attempts to find the hyperplane which best separates both classes. Its training error can be used as a metric to characterize the separability (or lack thereof) of a dataset.
+%\paragraph*{Linear classifier objective function (L1)} The linear classifier proposed by Smith \sidecite{smith1968pattern} can help  measure class linear separability. In particular, the value of the objective function that has to be minimized can be also used as a measure of the level of separability or nonlinearity: the higher L1 is, the more difficult it is for a linear classifier to separate instances from both classes.
+\paragraph*{Linear classifier error (L2)} Linear separability of classes is the core of a branch of classification methods, support vector machines (SVM) \sidecite{steinwart2008support}. In its simplest form, a SVM is a binary classifier that attempts to find the hyperplane which best separates both classes. Its training error can be used as a metric to characterize the separability (or lack thereof) of a dataset.
 \paragraph*{Linear classifier nonlinearity (L3)} Describing the shape of the regions occupied by each class can also contribute to learning about the complexity of the data.  In particular, this measure tackles nonlinearity, i.e. the smoothness of the decision boundary of a classifier, which can be detected by interpolating pairs of points of the same class to extract a test set and computing the classification error for this new set.
 
 
@@ -692,7 +692,7 @@ The previous traditional measures for data complexity come from a statistical or
 \paragraph*{1-NN classifier error (N3)} Similarly to the L1-L3 measures, which make use of a simple classifier in order to measure complexity, this metric performs a leave-one-out validation of a nearest neighbor classifier, that is, it checks the class of every instance according to the nearest one, and measures complexity as the error rate obtained.
 %\paragraph*{Space covering by $\varepsilon$-neighborhoods (T1)} A system can be defined to group points from the same class in neighborhoods that are built progressively by advancing some distance $\varepsilon$ as many times as possible without including points of the opposite class.
 
-Recently, some new metrics have been proposed that attempt to describe data complexity from the perspective of data morphology \cite{pascual2020revisiting}. These are based on the Pure Class Cover Catch Digraph (P-CCCD) classification method \cite{pcccd}.
+Recently, some new metrics have been proposed that attempt to describe data complexity from the perspective of data morphology \sidecite{pascual2020revisiting}. These are based on the Pure Class Cover Catch Digraph (P-CCCD) classification method \sidecite{pcccd}.
 
 P-CCCD creates a collection of balls that cover the feature space so that each ball only contains points from the same class. The process consists in choosing a ball so that it is centered in a point of the target class and is the largest possible ball that does not any point of the other class. This is repeated until all points of that class are in at least one ball, producing a cover which is not necessarily optimal but is a good approximation.
 
@@ -708,7 +708,7 @@ These metrics can turn into a very general way of describing the geometrical com
 
 \subsubsection{Feature space dimensionality}
 
-One of the main issues that occur in many datasets and has been tackled from many perspectives is dimensionality. Dimensionality refers to the number of variables where each instance takes values. High dimensionality has long been considered a problem for classification algorithms, known as curse of dimensionality \cite{aggarwal2001surprising}. It is not directly related to the way classes interact with each other, but a high number of features can hinder the performance of a classifier with a dataset that is otherwise not considered complex, due to the fact that most distance metrics lose meaning when measuring across many variables.
+One of the main issues that occur in many datasets and has been tackled from many perspectives is dimensionality. Dimensionality refers to the number of variables where each instance takes values. High dimensionality has long been considered a problem for classification algorithms, known as curse of dimensionality \sidecite{aggarwal2001surprising}. It is not directly related to the way classes interact with each other, but a high number of features can hinder the performance of a classifier with a dataset that is otherwise not considered complex, due to the fact that most distance metrics lose meaning when measuring across many variables.
 
 Dimension can be measured in absolute terms, but the complexity that derives from it is also related to the number of instances in the dataset. Two problems with the same number of features are not equally complex if the first one has 10 times more instances than the other. As a result, \change{an instances-to-features rate (T2) can be considered a complexity metric that can give a better account of this relation}.
 
@@ -735,29 +735,29 @@ There are several approaches to complexity reduction in datasets. This section p
 
 %\subsubsection{Dimensionality reduction}
 
-Dimensionality of data has been one of the most diversely tackled issues. A multitude of methods exist in the literature, ranging from simple feature selection to nonlinear feature learning. A thorough review of all these can be found in \cite{garcia2015data}, but we enumerate and describe the main ones below.
+Dimensionality of data has been one of the most diversely tackled issues. A multitude of methods exist in the literature, ranging from simple feature selection to nonlinear feature learning. A thorough review of all these can be found in \sidecite{garcia2015data}, but we enumerate and describe the main ones below.
 
 However, there are other emerging methods that may be able to modify other aspects of the data and reduce complexity along the way. Some of those are distance metric learning methods.
 
 \subsubsection{Feature selection}
 
-Assuming that not every variable has the same relevance for the purposes of classification, an initial approach to dimensionality reduction can be to simply discard some of them, retaining only the ones that help the classifier the most. This process is known as feature selection \cite{garcia2015data}. Of course, there exist a plethora of criteria that can apply for this purpose.
+Assuming that not every variable has the same relevance for the purposes of classification, an initial approach to dimensionality reduction can be to simply discard some of them, retaining only the ones that help the classifier the most. This process is known as feature selection \sidecite{garcia2015data}. Of course, there exist a plethora of criteria that can apply for this purpose.
 
-\paragraph*{Filters} This variety of techniques is mostly founded on statistical and information theory measures, such as the joint mutual information, the conditional mutual information, the Kullback-Leibler divergence or minimum-reduncancy-maximum-relevance. The objective is to quantify the utility of each variable and keep only the most useful ones. In fact, some approaches take class separability into account as well \cite{zhang2013divergence,wang2008feature}.
+\paragraph*{Filters} This variety of techniques is mostly founded on statistical and information theory measures, such as the joint mutual information, the conditional mutual information, the Kullback-Leibler divergence or minimum-reduncancy-maximum-relevance. The objective is to quantify the utility of each variable and keep only the most useful ones. In fact, some approaches take class separability into account as well \sidecite{zhang2013divergence,wang2008feature}.
 
 \paragraph*{Wrappers} Another way of looking at feature selection is shaping it as an optimization problem, finding an adequate fitness function, typically the performance of a classifier, and making use of one of the many existing metaheuristics available, for instance, genetic algorithms, simulated annealing or particle swarm optimization, to name a few.
 
-\paragraph*{Embedded methods} Some classifiers have built-in feature selection, so that they only look at the information provided by the most relevant variables. These are usually decision trees like C4.5 \cite{quinlan}.
+\paragraph*{Embedded methods} Some classifiers have built-in feature selection, so that they only look at the information provided by the most relevant variables. These are usually decision trees like C4.5 \sidecite{quinlan}.
 
 \subsubsection{Linear feature extraction}
 
 Another way of reducing the number of variables is to attempt to summarize most of the information of the original variables in a smaller set of new variables, which emerge as linear transformations of the original ones.
 
-\paragraph*{Principal component analysis (PCA) \cite{PCA,PCABook}} PCA  is a well-studied technique that solves the problem of obtaining features which retain the maximum possible variance while being uncorrelated to each other. It also allows to recover the original data from the projected points while losing the minimum amount of information as measured by the mean squared error. %Once the adequate transformation, based on the eigenvalues of the data matrix, is found, one can project the original points to their corresponding ones by simple matrix multiplication. PCA in itself does not provide a lower amount of features, but one can usually retain most of the variance of the data by keeping only the first principal components and omitting the rest, achieving thus a more compact representation.
+\paragraph*{Principal component analysis (PCA) \sidecite{PCA,PCABook}} PCA  is a well-studied technique that solves the problem of obtaining features which retain the maximum possible variance while being uncorrelated to each other. It also allows to recover the original data from the projected points while losing the minimum amount of information as measured by the mean squared error. %Once the adequate transformation, based on the eigenvalues of the data matrix, is found, one can project the original points to their corresponding ones by simple matrix multiplication. PCA in itself does not provide a lower amount of features, but one can usually retain most of the variance of the data by keeping only the first principal components and omitting the rest, achieving thus a more compact representation.
 
-\paragraph*{Linear discriminant analysis (LDA) \cite{LDA}} This is a supervised method able to extract linear combinations of features which achieve good class separation. Under assumptions of normality, independence and homoscedascity, it can project the data onto a space consisting of new coordinates that best discriminate the classes. \change{Its} main drawback is that the number of resulting variables is completely determined by the number of classes. More specifically, for a problem with $c$ classes, LDA will output a space of $c-1$ linear combinations of the original variables. There is a recent generalization of LDA which claims to solve its stability issues and achieve better class separation through a maximum margin criterion \cite{li2006efficient}.
+\paragraph*{Linear discriminant analysis (LDA) \sidecite{LDA}} This is a supervised method able to extract linear combinations of features which achieve good class separation. Under assumptions of normality, independence and homoscedascity, it can project the data onto a space consisting of new coordinates that best discriminate the classes. \change{Its} main drawback is that the number of resulting variables is completely determined by the number of classes. More specifically, for a problem with $c$ classes, LDA will output a space of $c-1$ linear combinations of the original variables. There is a recent generalization of LDA which claims to solve its stability issues and achieve better class separation through a maximum margin criterion \sidecite{li2006efficient}.
 
-\paragraph*{Factor analysis \cite{PCAandFA}} This technique assumes, unlike PCA, that a series of hidden factors are generating the observed data by means of linear combinations. The number of underlying factors is lower than the number of observed variables, and they are assumed to have zero mean and unit covariance (i.e. the identity matrix). %The original data is recovered from the factors by linear combinations, where the coefficients of each term are known as loadings, and some level of stochastic error.
+\paragraph*{Factor analysis \sidecite{PCAandFA}} This technique assumes, unlike PCA, that a series of hidden factors are generating the observed data by means of linear combinations. The number of underlying factors is lower than the number of observed variables, and they are assumed to have zero mean and unit covariance (i.e. the identity matrix). %The original data is recovered from the factors by linear combinations, where the coefficients of each term are known as loadings, and some level of stochastic error.
 
 % DONE: completar estos dos
 
@@ -767,25 +767,25 @@ The most advanced methods for dimensionality reduction base their new variables 
 
 A lot of these techniques can be grouped in a concept known as manifold learning, since they attempt to find structure for a manifold where most of the data lie, and thus transform each data point onto its coordinates on that manifold.
 
-\paragraph*{Multidimensional scaling (MDS) \cite{borg2005modern}}
+\paragraph*{Multidimensional scaling (MDS) \sidecite{borg2005modern}}
 This is a classical methodology that has served as basis for several other algorithms as well. Its objective is to compute new coordinates for data points while preserving distances among them as faithfully as possible. Instead of having points as inputs, it only receives the pairwise distances themselves, and minimizes a loss function which helps the model obtain coordinates for each point, creating a space where the given distances are maintained. %There are several loss functions according to the type of MDS applied. For example, in metric MDS one would measure Euclidean distances among points and then minimize the stress function, which is a sum of squared errors.
 
 
-\paragraph*{Isomap \cite{Isomap}} This method extends metric MDS in order to find coordinates that describe the actual degrees of freedom of the data while preserving distances among neighbors and geodesic distances between the rest of points. %The main difference between MDS and Isomap is that, while the Euclidean distance is usually employed for any pair of points in MDS, 
+\paragraph*{Isomap \sidecite{Isomap}} This method extends metric MDS in order to find coordinates that describe the actual degrees of freedom of the data while preserving distances among neighbors and geodesic distances between the rest of points. %The main difference between MDS and Isomap is that, while the Euclidean distance is usually employed for any pair of points in MDS, 
 Isomap constructs a neighborhood graph where each edge is weighted according to the Euclidean distance among vertices\change{, then uses this} to compute geodesic distances instead of using straight lines. These new distances are potentially higher than the Euclidean but help capture more information about the manifold.
 
-\paragraph*{Locally linear embedding (LLE) \cite{LLE}} The objective of LLE is similar to that of the previous techniques, but with a different approach to preserving the local structure. It finds a linear combination which describes \change{each point} from its neighbors. Once \change{its} coefficients have been computed, LLE optimizes the coordinates for a lower-dimensional space so that they fit the same expressions.
+\paragraph*{Locally linear embedding (LLE) \sidecite{LLE}} The objective of LLE is similar to that of the previous techniques, but with a different approach to preserving the local structure. It finds a linear combination which describes \change{each point} from its neighbors. Once \change{its} coefficients have been computed, LLE optimizes the coordinates for a lower-dimensional space so that they fit the same expressions.
 
-\paragraph*{t-stochastic neighbor embedding (t-SNE) \cite{van2008visualizing}} This is a technique specially oriented for visualization, so it finds specially attractive low-dimensional projections of the data. %The method for finding the embedding works somewhat differently than the rest, although there exists some similarities with LLE. 
+\paragraph*{t-stochastic neighbor embedding (t-SNE) \sidecite{van2008visualizing}} This is a technique specially oriented for visualization, so it finds specially attractive low-dimensional projections of the data. %The method for finding the embedding works somewhat differently than the rest, although there exists some similarities with LLE. 
 It consists on assigning, for each pair of points, the probability that one point would choose the other as its nearest neighbor if neighbors are computed according to Gaussian distributions centered on each point. t-SNE then defines a low-dimensional mapping that tries to preserve these probability scores.
 
-\paragraph*{Autoencoder networks (AE) \cite{charte-tutorial}} AEs are neural network models which reconstruct the input at their output, using some kind of bottleneck in between so as to learn useful information from the data. We explain AEs in further detail in Section~\ref{p6sec.aefund}.
+\paragraph*{Autoencoder networks (AE) \sidecite{charte-tutorial}} AEs are neural network models which reconstruct the input at their output, using some kind of bottleneck in between so as to learn useful information from the data. We explain AEs in further detail in Section~\ref{p6sec.aefund}.
 
 % DONE terminar de explicar estos
 
 \subsubsection{Distance metric learning}
 
-Distance metric learning \cite{suarez2018tutorial} is an area of machine learning dedicated to learning distances from datasets. These distances are built to better represent the similarities and differences among examples than standard distances, such as the Euclidean distance.
+Distance metric learning \sidecite{suarez2018tutorial} is an area of machine learning dedicated to learning distances from datasets. These distances are built to better represent the similarities and differences among examples than standard distances, such as the Euclidean distance.
 
 In a supervised learning context, the problem of learning a distance can be formulated as follows:
 \begin{align}
@@ -795,14 +795,14 @@ In a supervised learning context, the problem of learning a distance can be form
 \end{align}
 and $l$ is a loss function that determines the fitness of a distance to describe the similarities and differences provided as sets $S$ and $D$.
 
-Some of the dimensionality reduction methods mentioned above can be also seen as distance metric learning techniques, but there are more algorithms which can learn distances. Some of them are addressed at improving the performance of k-nearest neighbors, and others are based on information theory. Among the most relevant are: NCA \cite{goldberger2004neighbourhood}, LMNN \cite{weinberger2009distance}, NCMML \cite{NCMC} and NCMC \cite{NCMC}.
+Some of the dimensionality reduction methods mentioned above can be also seen as distance metric learning techniques, but there are more algorithms which can learn distances. Some of them are addressed at improving the performance of k-nearest neighbors, and others are based on information theory. Among the most relevant are: NCA \sidecite{goldberger2004neighbourhood}, LMNN \sidecite{weinberger2009distance}, NCMML \sidecite{NCMC} and NCMC \sidecite{NCMC}.
 
 % DONE: completar o reducir
 
 \subsubsection{Current limitations}
 Many of the complexity reduction methods explained above tackle complexity only partially or from a limited perspective. In most of the cases, tha main focus is reducing dimensionality. This can help model data when good quality coordinates are found, but may discard useful information present in the class labels.
 
-Some of the available methods consider class separability when selecting features \cite{zhang2013divergence,wang2008feature} but they do not generate new features, and can capture only a partial view of the whole feature space as a result.
+Some of the available methods consider class separability when selecting features \sidecite{zhang2013divergence,wang2008feature} but they do not generate new features, and can capture only a partial view of the whole feature space as a result.
 
 In summary, there is an unexplored possibility of advanced feature extraction techniques which perform nonlinear transformations of variables in order to find spaces where classes are further away and easier to identify.
 
@@ -820,7 +820,7 @@ This section details the theoretical underpinings of our proposals: Scorer, Skal
 \subsection{Autoencoder fundamentals}
 \label{p6sec.aefund}
 
-A neural AE \cite{charte-tutorial,bengio2012deep} is generally a symmetrical neural network trained to reconstruct the inputs at its output. The composition of layers up to the middle one computes a new representation of the input data where some traits may be induced: lower dimension, sparsity, or robustness against noise, for example. The feature transformation is learned by means of a training process that optimizes the reconstruction error as well as, potentially, other penalties allowing the introduction of those specific aspects.
+A neural AE \sidecite{charte-tutorial,bengio2012deep} is generally a symmetrical neural network trained to reconstruct the inputs at its output. The composition of layers up to the middle one computes a new representation of the input data where some traits may be induced: lower dimension, sparsity, or robustness against noise, for example. The feature transformation is learned by means of a training process that optimizes the reconstruction error as well as, potentially, other penalties allowing the introduction of those specific aspects.
 
 \begin{figure}[ht]
   \centering
@@ -838,7 +838,7 @@ Consider the diagram in Fig.~\ref{p6fig.basicae}. During training, mini-batches 
   \item Cross entropy: this measure is effective when modeling data where values lie in the $[0,1]$ interval, since it is usually implemented as the cross entropy of two Bernoulli distributions. The formulation is as follows: \begin{equation}\mathcal L(x,x')= -\sum_{i=1}^n x_i\log x_i'  + (1-x_i)\log(1-x_i') \end{equation}
 \end{itemize}
 
-In general, any kind of measure that indicates the difference among two data points of the same type can be used. For certain types of structured data, such as images or sequences, specific reconstruction errors may also apply. For instance, a perceptual loss \cite{johnson2016perceptual} can be very fitting for image reconstruction, since it \change{focuses more in the  appearance of the image instead of} trying to accurately recover each individual pixel, which can lead to softer and blurrier images.
+In general, any kind of measure that indicates the difference among two data points of the same type can be used. For certain types of structured data, such as images or sequences, specific reconstruction errors may also apply. For instance, a perceptual loss \sidecite{johnson2016perceptual} can be very fitting for image reconstruction, since it \change{focuses more in the  appearance of the image instead of} trying to accurately recover each individual pixel, which can lead to softer and blurrier images.
 
 Once one of these dissimilarity metrics is chosen, the loss function of the AE can be defined:
 \begin{equation}
@@ -849,19 +849,19 @@ where $\theta$ holds the parameters of the network, and thus determines $f$ and 
 Diverse kinds of regularizations can be applied to the loss function with the objective of adjusting the behavior of the AE\change{, such as sparsity, contraction or variational inference}. Each of these result in a slightly different AE variant with its own applications. \iffalse The most popular AE variants are the following
 
   \begin{itemize}
-    \item Sparse AE \cite{ng2011sparse}: Introduces a small penalty term which forces the model to prevent many high activations in the encoding for each input data point, resulting in sparse codifications, where most units take the value 0.
-    \item Contractive AE \cite{rifai_contractive_2011}: This model, which minimizes the Frobenius norm of the Jacobian of the encoder, facilitates encodings where neighborhood structure is preserved from the inputs, although global structure is transformed. The objective is not dissimilar to that of manifold learning methods such as LLE and Isomap.
-    \item Variational AE \cite{VariationalAE}: The encoder in this model is not a deterministic function but a stochastic one, it maps each input instance onto a probability distribution, which is then sampled to obtain the decodification. The resulting encoding space can be sampled smoothly, generating new unobserved examples from the original data distribution.
-    \item Denoising AE \cite{vincent_stacked_2010}: This approach is unlike the previous, since it does not modify the loss function but the input data, introducing artificial noise that the AE attempts to recover from and eliminate. This process help build more robust features that resist small perturbations in the inputs.
+    \item Sparse AE \sidecite{ng2011sparse}: Introduces a small penalty term which forces the model to prevent many high activations in the encoding for each input data point, resulting in sparse codifications, where most units take the value 0.
+    \item Contractive AE \sidecite{rifai_contractive_2011}: This model, which minimizes the Frobenius norm of the Jacobian of the encoder, facilitates encodings where neighborhood structure is preserved from the inputs, although global structure is transformed. The objective is not dissimilar to that of manifold learning methods such as LLE and Isomap.
+    \item Variational AE \sidecite{VariationalAE}: The encoder in this model is not a deterministic function but a stochastic one, it maps each input instance onto a probability distribution, which is then sampled to obtain the decodification. The resulting encoding space can be sampled smoothly, generating new unobserved examples from the original data distribution.
+    \item Denoising AE \sidecite{vincent_stacked_2010}: This approach is unlike the previous, since it does not modify the loss function but the input data, introducing artificial noise that the AE attempts to recover from and eliminate. This process help build more robust features that resist small perturbations in the inputs.
   \end{itemize}
 
 \fi Although these and several other regularizations help build better feature spaces, to the best of our knowledge there is no AE variant focusing on enabling class separability or reducing data complexity yet.
 
-AEs are generally trained with common neural network optimizers, such as stochastic gradient descent~\cite{robbins1951stochastic} or Adam~\cite{adam}. \change{They decide how to update the parameters in an iterative process which computes the gradient of the loss function via backpropagation~\cite{backprop}.}
+AEs are generally trained with common neural network optimizers, such as stochastic gradient descent~\sidecite{robbins1951stochastic} or Adam~\sidecite{adam}. \change{They decide how to update the parameters in an iterative process which computes the gradient of the loss function via backpropagation~\sidecite{backprop}.}
 
 \subsection{\change{Regularizing autoencoders with label information}}
 
-As described above, a basic autoencoder is trained using a loss function which evaluates the distance between the input feature vector and its reconstruction through the network. It is clear, by its definition, that instance labels are not used at all to compute the loss function, nor does the AE receive this information as input. This has its advantages and shortcomings. A benefit is that one may train AEs using unlabeled data and obtain valuable knowledge as a result. This allows for their use in several widespread applications \cite{CHARTE202093}, such as anomaly detection, data denoising, synthetic instance generation and semantic hashing.
+As described above, a basic autoencoder is trained using a loss function which evaluates the distance between the input feature vector and its reconstruction through the network. It is clear, by its definition, that instance labels are not used at all to compute the loss function, nor does the AE receive this information as input. This has its advantages and shortcomings. A benefit is that one may train AEs using unlabeled data and obtain valuable knowledge as a result. This allows for their use in several widespread applications \sidecite{CHARTE202093}, such as anomaly detection, data denoising, synthetic instance generation and semantic hashing.
 
 One possible drawback, when applying AEs to classification problems, is that they will extract features that may or may not help distinguish the classes, since they are not provided with the labels. However, this is not applicable to all AE-based models, since some of them can take the class label into account when computing the encoded representation, either directly as an input layer to the network, or indirectly, by informing the loss function.
 
@@ -869,7 +869,7 @@ A common way to modify the behavior of the training process and improve the solu
 
 \begin{equation}J\left(\theta;S\right)=\sum_{(x,y)\in S}\mathcal L\left(x,\left(g\circ f\right)\left(x\right)\right) + \lambda\Omega\left(\theta;S\right)\end{equation}
 
-For instance, one well-known regularization consists in penalizing high levels of simultaneous activations within the codes. This, usually called a sparsity regularization \cite{ng2011sparse}, helps maintain a low number of active neurons in the encoding for each sample.
+For instance, one well-known regularization consists in penalizing high levels of simultaneous activations within the codes. This, usually called a sparsity regularization \sidecite{ng2011sparse}, helps maintain a low number of active neurons in the encoding for each sample.
 
 In our case, the objective is that the resulting feature transformation helps better separate different classes, so the loss function should receive some kind of label information in order to be able to learn from it. The procedure can thus be similar to a penalty modification, but using the class label within the penalty term $\Omega$.
 
@@ -944,7 +944,7 @@ Some preliminary tests revealed that it is easy for this penalty to force encodi
 
 The third proposal of this work goes a bit further than the two previous ones, since it incorporates not only a different penalty function, but also additional learnable parameters.
 
-This alternative regularization is inspired on least-squares support vector machines (LSSVM) \cite{suykens1999least}. These models attempt to learn the hyperplane which best separates both classes, but the difference between them and traditional SVMs lies on the objective function. For both models, the linear (non-kernelized) version of the classifier optimizes parameters $w$ and $b$ of the hyperplane $w^Tx+b$. However, the functions that both models minimize are different. In the case of the LSSVM, the parameters are fitted to optimize the following expression:
+This alternative regularization is inspired on least-squares support vector machines (LSSVM) \sidecite{suykens1999least}. These models attempt to learn the hyperplane which best separates both classes, but the difference between them and traditional SVMs lies on the objective function. For both models, the linear (non-kernelized) version of the classifier optimizes parameters $w$ and $b$ of the hyperplane $w^Tx+b$. However, the functions that both models minimize are different. In the case of the LSSVM, the parameters are fitted to optimize the following expression:
 
 \begin{equation}\frac 1 2 \left\Vert w\right\Vert^2+\frac \beta 2\sum_{(x,y)\in S}\left(1 - y\left(w^Tx+b\right)\right)^2\end{equation}
 
@@ -985,38 +985,38 @@ The datasets are briefly described and referenced \change{in the supplementary m
 
 \iffalse
   \begin{table*}[hbtp]
-    \caption{\label{p6tbl.datasets} Short description for each experimental scenario where all methods have been applied. Most datasets have been sourced from OpenML \cite{OpenML2013}, KEEL \cite{triguero2017keel} and UCI \cite{Dua:2019}. The target column describes whether the class is binary or a certain binarization has been performed. The three rightmost columns indicate the number of variables, negative instances and positive instances respectively.}
+    \caption{\label{p6tbl.datasets} Short description for each experimental scenario where all methods have been applied. Most datasets have been sourced from OpenML \sidecite{OpenML2013}, KEEL \sidecite{triguero2017keel} and UCI \sidecite{Dua:2019}. The target column describes whether the class is binary or a certain binarization has been performed. The three rightmost columns indicate the number of variables, negative instances and positive instances respectively.}
     \centering
     \begin{tabular}{p{2.5cm}p{3.5cm}p{5.2cm}rrr}
       \toprule
       Dataset                                                    & Target                    & Domain                                    & Variables & Negatives & Positives \\
       \midrule
-      Appendicitis \cite{weiss1991computer}                      & binary                    & Diagnosis from medical measures           & 7         & 85        & 21        \\
-      Arcene \cite{guyon2004result}                              & binary                    & Mass spectrometry                         & 10000     & 112       & 88        \\
-      Australian \cite{quinlan1999simplifying}                   & binary                    & Credit approval                           & 14        & 383       & 307       \\
+      Appendicitis \sidecite{weiss1991computer}                      & binary                    & Diagnosis from medical measures           & 7         & 85        & 21        \\
+      Arcene \sidecite{guyon2004result}                              & binary                    & Mass spectrometry                         & 10000     & 112       & 88        \\
+      Australian \sidecite{quinlan1999simplifying}                   & binary                    & Credit approval                           & 14        & 383       & 307       \\
       Bioresponse\footnote{https://www.kaggle.com/c/bioresponse} & binary                    & Chemical properties of molecules          & 1776      & 1717      & 2034      \\
-      Christine \cite{Guyon:AutoML:2015}                         & binary                    & Undisclosed                               & 1636      & 2709      & 2709      \\
-      Dexter \cite{guyon2004result}                              & binary                    & Text classification from bag-of-words     & 20000     & 300       & 300       \\
-      Gina \cite{Guyon:AutoML:2015}                              & binary                    & Undisclosed                               & 970       & 1763      & 1705      \\
-      Jasmine  \cite{Guyon:AutoML:2015}                          & binary                    & Undisclosed                               & 144       & 1492      & 1492      \\
-      Gisette  \cite{guyon2004result}                            & binary                    & Handwritten 4-vs-9 classification         & 5000      & 3500      & 3500      \\
-      HAR \cite{anguita2013public}                               & walking vs. staying       & Activity recognition                      & 561       & 5627      & 4672      \\
-      HillValley \cite{Dua:2019}                                 & binary                    & Points that form either hills or valleys  & 100       & 606       & 606       \\
-      IndianPines \cite{PURR1947}                                & corn vs. rest             & Spectral bands from pine imagery          & 220       & 6642      & 2502      \\
-      IndianPines \cite{PURR1947}                                & soybeans vs. rest         & Spectral bands from pine imagery          & 220       & 5094      & 4050      \\
-      Ionosphere \cite{sigillito1989classification}              & binary                    & Phased array of high-frequency antennas   & 34        & 225       & 126       \\
-      Isolet \cite{fanty1990spoken}                              & vowels vs. consonants     & Letter names pronounced                   & 617       & 6297      & 1500      \\
-      Madelon \cite{guyon2004result}                             & binary                    & Synthetic dataset                         & 500       & 1300      & 1300      \\
-      MFeatFactors\cite{jain2000statistical}                     & odd vs. even              & Handwritten digits (profile correlations) & 216       & 1000      & 1000      \\
+      Christine \sidecite{Guyon:AutoML:2015}                         & binary                    & Undisclosed                               & 1636      & 2709      & 2709      \\
+      Dexter \sidecite{guyon2004result}                              & binary                    & Text classification from bag-of-words     & 20000     & 300       & 300       \\
+      Gina \sidecite{Guyon:AutoML:2015}                              & binary                    & Undisclosed                               & 970       & 1763      & 1705      \\
+      Jasmine  \sidecite{Guyon:AutoML:2015}                          & binary                    & Undisclosed                               & 144       & 1492      & 1492      \\
+      Gisette  \sidecite{guyon2004result}                            & binary                    & Handwritten 4-vs-9 classification         & 5000      & 3500      & 3500      \\
+      HAR \sidecite{anguita2013public}                               & walking vs. staying       & Activity recognition                      & 561       & 5627      & 4672      \\
+      HillValley \sidecite{Dua:2019}                                 & binary                    & Points that form either hills or valleys  & 100       & 606       & 606       \\
+      IndianPines \sidecite{PURR1947}                                & corn vs. rest             & Spectral bands from pine imagery          & 220       & 6642      & 2502      \\
+      IndianPines \sidecite{PURR1947}                                & soybeans vs. rest         & Spectral bands from pine imagery          & 220       & 5094      & 4050      \\
+      Ionosphere \sidecite{sigillito1989classification}              & binary                    & Phased array of high-frequency antennas   & 34        & 225       & 126       \\
+      Isolet \sidecite{fanty1990spoken}                              & vowels vs. consonants     & Letter names pronounced                   & 617       & 6297      & 1500      \\
+      Madelon \sidecite{guyon2004result}                             & binary                    & Synthetic dataset                         & 500       & 1300      & 1300      \\
+      MFeatFactors\sidecite{jain2000statistical}                     & odd vs. even              & Handwritten digits (profile correlations) & 216       & 1000      & 1000      \\
       MFeatPixel                                                 & odd vs. even              & Handwritten digits (pixel averages)       & 240       & 1000      & 1000      \\
-      Satellite \cite{goldstein2016comparative}                  & grey (3 classes) vs. rest & Satellite images of ground                & 36        & 2941      & 3489      \\
-      Scene \cite{boutell2004learning}                           & beach vs. no beach        & Scene labeling                            & 294       & 1980      & 427       \\
-      Scene \cite{boutell2004learning}                           & sunset vs. no sunset      & Scene labeling                            & 294       & 2043      & 364       \\
-      Scene \cite{boutell2004learning}                           & fall vs. no fall          & Scene labeling                            & 294       & 2010      & 397       \\
-      Scene \cite{boutell2004learning}                           & field vs. no field        & Scene labeling                            & 294       & 1974      & 433       \\
-      Scene \cite{boutell2004learning}                           & mountain vs. no mountain  & Scene labeling                            & 294       & 1874      & 533       \\
-      Scene \cite{boutell2004learning}                           & urban vs. no urban        & Scene labeling                            & 294       & 1976      & 431       \\
-      Sonar \cite{gorman1988analysis}                            & binary                    & Sonar signal classification               & 60        & 111       & 97
+      Satellite \sidecite{goldstein2016comparative}                  & grey (3 classes) vs. rest & Satellite images of ground                & 36        & 2941      & 3489      \\
+      Scene \sidecite{boutell2004learning}                           & beach vs. no beach        & Scene labeling                            & 294       & 1980      & 427       \\
+      Scene \sidecite{boutell2004learning}                           & sunset vs. no sunset      & Scene labeling                            & 294       & 2043      & 364       \\
+      Scene \sidecite{boutell2004learning}                           & fall vs. no fall          & Scene labeling                            & 294       & 2010      & 397       \\
+      Scene \sidecite{boutell2004learning}                           & field vs. no field        & Scene labeling                            & 294       & 1974      & 433       \\
+      Scene \sidecite{boutell2004learning}                           & mountain vs. no mountain  & Scene labeling                            & 294       & 1874      & 533       \\
+      Scene \sidecite{boutell2004learning}                           & urban vs. no urban        & Scene labeling                            & 294       & 1976      & 431       \\
+      Sonar \sidecite{gorman1988analysis}                            & binary                    & Sonar signal classification               & 60        & 111       & 97
       \\   \bottomrule
     \end{tabular}
   \end{table*}
@@ -1102,7 +1102,7 @@ Table~\ref{p6tbl.metrics} gathers all of these selected metrics with a short int
 
   \subsubsection{Autoencoder models}
 
-  There are little to no generic implementations of AEs available. This can constitute an obstacle for large experimentations with many different datasets, since it could imply designing and implementing specific AE models for each one, out of tensor operations or neural network layers using any well known deep learning library. However, we have implemented our proposals Scorer, Skaler and Slicer in R, on top of the \texttt{ruta} package \cite{charte2019ruta}. It implements a variety of AE types and an interface for AE customization. Its generic approach to AEs made it easy to just add the different penalty mechanisms and obtain AE templates that can adapt to different datasets. \texttt{ruta} runs on top of Tensorflow using the \texttt{keras} package through an interface with the Python language called \texttt{reticulate}.
+  There are little to no generic implementations of AEs available. This can constitute an obstacle for large experimentations with many different datasets, since it could imply designing and implementing specific AE models for each one, out of tensor operations or neural network layers using any well known deep learning library. However, we have implemented our proposals Scorer, Skaler and Slicer in R, on top of the \texttt{ruta} package \sidecite{charte2019ruta}. It implements a variety of AE types and an interface for AE customization. Its generic approach to AEs made it easy to just add the different penalty mechanisms and obtain AE templates that can adapt to different datasets. \texttt{ruta} runs on top of Tensorflow using the \texttt{keras} package through an interface with the Python language called \texttt{reticulate}.
 
   The resulting implementation of both the proposals and the experimental framework has been structured as an additional package, named \texttt{s4r}, which can be retrieved from the code repository GitHub under a free software license. In this way, further experiments using these AEs or new variants can be achieved with less time and effort.
 
@@ -1112,11 +1112,11 @@ Table~\ref{p6tbl.metrics} gathers all of these selected metrics with a short int
 
   \begin{itemize}
     \item Function \texttt{prcomp()}. This is a built-in R function that allows to compute the principal components of a matrix.
-    \item Package \texttt{dimRed} \cite{dimred}. It provides a collection of dimension reduction methods, 19 of them in total, including LLE and Isomap.
-    \item Package \texttt{ECoL} \cite{lorena2019complex}. It implements most of the complexity metrics explained in Section~\ref{p6sec.compmeas}, using normalized versions of each one that range from 0 (indicating minimum complexity) to 1 (maximum complexity).
-    \item Package \texttt{cccd} \cite{cccd}. This library contains implementations for the P-CCCD method, thus allowing to compute the ONB metrics.
-    \item Package \texttt{ggridges} \cite{ggridges}. It is used to generate density estimation visualizations also known as joyplots.
-    \item Package \texttt{scmamp} \cite{scmamp}. It computes statistical tests to verify significant differences across different techniques.
+    \item Package \texttt{dimRed} \sidecite{dimred}. It provides a collection of dimension reduction methods, 19 of them in total, including LLE and Isomap.
+    \item Package \texttt{ECoL} \sidecite{lorena2019complex}. It implements most of the complexity metrics explained in Section~\ref{p6sec.compmeas}, using normalized versions of each one that range from 0 (indicating minimum complexity) to 1 (maximum complexity).
+    \item Package \texttt{cccd} \sidecite{cccd}. This library contains implementations for the P-CCCD method, thus allowing to compute the ONB metrics.
+    \item Package \texttt{ggridges} \sidecite{ggridges}. It is used to generate density estimation visualizations also known as joyplots.
+    \item Package \texttt{scmamp} \sidecite{scmamp}. It computes statistical tests to verify significant differences across different techniques.
   \end{itemize}
 \fi
 
@@ -1229,7 +1229,7 @@ Table~\ref{p6tbl.ranking} holds the average ranking that each dimensionality red
 
 Looking at the table into more detail, we can observe that the three supervised AE-based methods overall reach better metrics than the traditional feature extraction techniques, especially when analyzing the resulting predictive performance of the different classifiers.
 
-In order to calculate which differences are significant, the Friedman's Aligned Ranks test %\cite{garcia2010advanced} 
+In order to calculate which differences are significant, the Friedman's Aligned Ranks test %\sidecite{garcia2010advanced} 
 was performed with its corresponding post-hoc test where the winning algorithm was chosen as the control for each metric. \change{Table~\ref{p6tbl.ranking}} organizes the results of these tests, indicating which methods  were significantly worse than the winner with two levels of confidence ($p<0.05$ and $p<0.01$). The tests allow to assess whether the values found by the rankings can be considered enough to state that two methods are performing differently. It is important to notice, however, that each statistical test had information only about a specific metric, and not the whole picture. As a result, the fact that a test does not find significant differences among two methods does not mean that they perform the same in general.
 
 % sacar tabla con significancia con el ganador de cada fila
@@ -1355,7 +1355,7 @@ In summary, the experimentation has shown that defining a class-based penalty in
 
 \rechange{Similarly to other preprocessing methods, these intend to ease a later classification task.} In this case, only binary targets have been supported, since most of the complexity metrics were initially defined for binary problems. It would be possible to extend the proposed framework to multiclass or even multi-label datasets, although the penalty functions as well as the implementations would need notable modifications. A similar approach could also be followed for regression problems, where the target variable could help model the embedding space.
 
-An additional option that may be explored is the application of a combination of penalties, since they are not necessarily exclusive, \change{including improvements on basic AEs such as variational AEs}. Some preliminary tests suggested that combining Slicer and Scorer may provide a slight improvement in classification performance, but it would need meticulous optimization of the selected penalties and their weights in order to provide promising results. \change{Further steps would include} introducing other complexity measures into the penalty function, so as to tackle other aspects of data complexity\change{, as well as learning from just a small number of labels in a semi-supervised scenario~\cite{kingma2014semi}}.
+An additional option that may be explored is the application of a combination of penalties, since they are not necessarily exclusive, \change{including improvements on basic AEs such as variational AEs}. Some preliminary tests suggested that combining Slicer and Scorer may provide a slight improvement in classification performance, but it would need meticulous optimization of the selected penalties and their weights in order to provide promising results. \change{Further steps would include} introducing other complexity measures into the penalty function, so as to tackle other aspects of data complexity\change{, as well as learning from just a small number of labels in a semi-supervised scenario~\sidecite{kingma2014semi}}.
 
 The experimentation developed to support the proposals has served not only to highlight the potential of Slicer as a better alternative for feature extraction, but also to notice which complexity measures are better predictors of classifier performance. In particular, morphology-based metrics like $\textit{ONB}_{\text{tot}}$ and $\textit{ONB}_{\text{avg}}$ seemed to be more aligned with classifiers.
 

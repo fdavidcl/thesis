@@ -12,12 +12,13 @@ Designing an autoencoder for a certain task can be challenging, since the object
 
 \subsection{Type of layers}
 
-Different layers are available in every deep learning framework and can be used according to the structure of the provided data and the kind of operations the practitioner wants to apply to it.
+As explained in greater detail in Section~\ref{sec:layers}, different layers are available in every deep learning framework and can be used according to the structure of the provided data and the kind of operations the practitioner wants to apply to it. The choice in an autoencoder would be analogous to that in other kinds of networks:
 
 \begin{itemize}
     \item \textbf{Unstructured variables}: the most basic type of data takes the form of tabular values where columns may be related but do not hold a specific structure, they can be reordered in any way and the data is still valid. Appropriate layers for this kind of data are dense layers, also known as fully connected or linear. These compute a product between the input vector and a matrix of parameters, which gives a new output vector as a result.
-    \item \textbf{Images}: the recent surge in deep learning applications is in great part due to the potential of convolutional operations for image processing. These relieve a great part of the computational complexity of dense layers by leveraging the spatial relations among values. This is done by computing new values out of multiplying parameters with a neighborhood of input values, thus not taking into account the whole image for each individual value in the output. Convolutional layers are frequently coupled with pooling layers (either max-pooling or average-pooling) which reduce the dimensionality of the data points, as well as dropout layers which randomly disable some layer nodes during training in order to improve model robustness.
-    \item \textbf{Sound, time series and sequential data}: there exist many data sources which impose a one-dimensional structure to the values, e.g. recorded sounds, stock prices, sensor signals across time, etc. Convolutional operations can also apply in this case, since they can operate in one dimension analogously to the two-dimensional version. However, other layers have been specifically designed for this kind of data, such as long short-term memory (LSTM) units or gated recurrent units (GRU). These are encompassed under the term \textit{recurrent units}.
+    \item \textbf{Images}: the recent surge in deep learning applications is in great part due to the potential of convolutional operations for image processing. These relieve a great part of the computational complexity of dense layers by leveraging the spatial relations among values. %This is done by computing new values out of multiplying parameters with a neighborhood of input values, thus not taking into account the whole image for each individual value in the output. 
+    Convolutional layers are frequently coupled with pooling layers (either max-pooling or average-pooling) which reduce the dimensionality of the data points, as well as dropout layers which randomly disable some layer nodes during training in order to improve model robustness.
+    \item \textbf{Sound, time series and sequential data}: many data sources impose a one-dimensional structure to the values, e.g. recorded sounds, stock prices, sensor signals across time, etc. Convolutional operations can also apply in this case, since they can operate in one dimension analogously to the two-dimensional version. However, other layers have been specifically designed for this kind of data, such as long short-term memory (LSTM) units or gated recurrent units (GRU). These are encompassed under the term \textit{recurrent units}.
 \end{itemize}
 
 \subsection{Model depth}
@@ -56,7 +57,8 @@ Gradient descent is prone to converging to local minima and SGD is just an appro
 
 \subsection{Gradient computation}
 
-In order to perform SGD on a neural network, it is required to compute the value of the objective function and then find its gradient with respect to model parameters. 
+In order to optimize a neural network, SGD requires to compute the value of the objective function and then find its gradient with respect to model parameters. Since SGD is an approximation,  
+the training stage is usually divided into a series of epochs, during which a batch of data is fed to the network. Each epoch is composed of several forward and backward passes. 
 
 
 \subsubsection{Forward pass}
@@ -66,9 +68,11 @@ The value of the objective function is the result of transforming the input data
 
 \subsubsection{Backward pass}
 
+The expression for the derivative of each layer in a feedforward neural network turns out to be dependent on the values for the derivatives in the next layer. The strategy, as a result, is to perform the computations starting from the output layer back to the input layer. This technique is known as \textit{backpropagation of errors}. 
 
+The derivatives are computed for the last layer and, using the chain rule, those values can be reused to find the derivatives for the second-to-last layer, then the layer before, and the rest successively. This backward pass is what allows the optimizer to calculate the gradient of the objective function with respect to all the weights. 
 
-The training stage of a neural network is usually divided into a series of epochs, which in turn are composed of several forward and backward passes. 
+After one or more backward passes, the errors and derivatives obtained are combined and used to update the weights in the direction of steepest descent. Certain properties of the optimizer, such as momentum, may also be applied in order to compensate for potential noise and side effects of using only a small part of the dataset for each update.
 
 \subsection{GPU parallelization}
 
@@ -76,7 +80,12 @@ From a hardware point of view, neural network training is a relatively easy task
 
 Both tensor libraries, Tensorflow and Pytorch, are implemented with GPU execution in mind as well as CPU execution (usually as fallback) of the models. If the correct drivers and the CUDA platform are installed, the selected library will be able to automatically connect to the GPU in order to copy data to the dedicated memory and send instructions to carry out the necessary computations.
 
-The potential of GPUs is further leveraged in dedicated multi-GPU servers where the calculations can be spread across several accelerators, resulting in proportional time savings with no loss in quality of results. Graphics cards manufacturers currently produce variants of the cards that are specific for computing purposes and discard the video output, sometimes including dedicated circuitry for tensor operations (e.g. Tensor Cores in the NVIDIA A100 lineup \sidecite{nva100}).
+\begin{marginfigure}
+    \includegraphics{nvidiaa100}
+    \caption{\label{fig:nvidia}NVIDIA A100 GPU including 108 Tensor cores. Source: \cite{nvidiaa100}.}
+\end{marginfigure}
+ 
+The potential of GPUs is further leveraged in dedicated multi-GPU servers where the calculations can be spread across several accelerators, resulting in proportional time savings with no loss in quality of results. Graphics cards manufacturers currently produce variants of the cards that are specific for computing purposes and discard the video output, sometimes including dedicated circuitry for tensor operations (e.g. Tensor Cores in the NVIDIA A100 lineup \sidecite{nvidiaa100} as can be seen in Figure~\ref{fig:nvidia}).
 
 \section{Implementation}
 
@@ -103,7 +112,7 @@ Consider an essential autoencoder model where both the encoder and the decoder a
 
 For the purpose of modularity, which helps reusing parts of the code later, it is convenient to define the encoder and the decoder separately. Each will be represented by an object of class \texttt{Sequential}, and comprises a list with just one layer, of class \texttt{Dense}. 
 
-Both models are chained by listing them in a new \texttt{Sequential} model, which is then compiled to optimize the binary crossentropy loss using the Adam \sidecite{Adam} optimizer. Assuming that the variable \texttt{x\_train} holds the training data, the model is optimized when the \texttt{fit()} method is called.
+Both models are chained by listing them in a new \texttt{Sequential} model, which is then compiled to optimize the binary crossentropy loss using the Adam \sidecite{kingma2014adam} optimizer. Assuming that the variable \texttt{x\_train} holds the training data, the model is optimized when the \texttt{fit()} method is called.
 
 Once the autoencoder has been trained, the encoder can be fed new instances from the same variable space and it will map those to the learned representation.
 

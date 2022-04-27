@@ -137,9 +137,9 @@ unsupervised learning \sep neural networks \sep autoencoders
 
 The problem of feature extraction consists in finding a transformation of the feature space of some data set which is more adequate than the original one in relation to another task, such as classification or visualization. A particular case of this problem is dimensionality reduction, where the objective is to build a more compact representation for the data while retaining most of their information.
 
-Some traditional techniques for feature extraction are principal components analysis (PCA) \cite{PCABook}, multidimensional scaling \cite{MDS}, Isomap \cite{Isomap} and locally linear embedding \cite{LLE}. Other more modern methods include t-distributed stochastic neighbor embedding (t-SNE) \cite{tSNE}, which is designed to visualize high-dimensional datasets, restricted Boltzmann machines (RBMs) \cite{RBM} and autoencoders (AEs) \cite{hinton_reducing_2006}, both based on neural networks. 
+Some traditional techniques for feature extraction are principal components analysis (PCA) \sidecite{PCABook}, multidimensional scaling \sidecite{MDS}, Isomap \sidecite{Isomap} and locally linear embedding \sidecite{LLE}. Other more modern methods include t-distributed stochastic neighbor embedding (t-SNE) \sidecite{tSNE}, which is designed to visualize high-dimensional datasets, restricted Boltzmann machines (RBMs) \sidecite{RBM} and autoencoders (AEs) \sidecite{hinton_reducing_2006}, both based on neural networks. 
 
-AEs are a tool for feature extraction in increasing development. {Making use of them, however, is not straightforward.} Software pieces which implement them are uncommon and are either very basic versions or adapted to specific databases. {Basic AE models are relatively easy to implement in well-known deep learning frameworks, such as Keras \cite{Keras} or Tensorflow \cite{Tensorflow}{, but this requires some knowledge about their structure and training procedures. In addition to this}, some useful regularizations and alterations in the objective functions can present challenges while coding.} Since most neural AEs share a common basis, it is desirable to have an implementation which abstracts its components and gives the customization possibilities to build different kinds of AEs without reimplementing them. {This would allow users to leverage the possibilities of AEs as feature learning techniques without the need to study their architecture in advance.}
+AEs are a tool for feature extraction in increasing development. {Making use of them, however, is not straightforward.} Software pieces which implement them are uncommon and are either very basic versions or adapted to specific databases. {Basic AE models are relatively easy to implement in well-known deep learning frameworks, such as Keras \sidecite{Keras} or Tensorflow \sidecite{Tensorflow}{, but this requires some knowledge about their structure and training procedures. In addition to this}, some useful regularizations and alterations in the objective functions can present challenges while coding.} Since most neural AEs share a common basis, it is desirable to have an implementation which abstracts its components and gives the customization possibilities to build different kinds of AEs without reimplementing them. {This would allow users to leverage the possibilities of AEs as feature learning techniques without the need to study their architecture in advance.}
 
 The \texttt{ruta} package for the R language includes all the necessary foundations to build AEs for all kinds of experimentations. It is based on frameworks Keras and Tensorflow to ensure efficiency and cross-platform compatibility. {Its interface allows any R user to easily define different models, train them and perform additional tasks with little to no previous knowledge required.}
 
@@ -156,7 +156,7 @@ As previously stated, the main objective of an AE is to find a good transformati
 
 \subsection{Autoencoder framework}
 
-An AE \cite{charte2017} is an artificial neural network (ANN) composed of an encoder and a decoder. Analytically, it can be seen as a composition of maps $f$ and $g$ which results in a tensor of the same shape as the input. As an ANN, it takes a form analogue to that on Fig.~\ref{p2fig:ae-example}. AEs were originally used to perform a preliminary weight training on other ANNs, but on their own they can also learn alternative representations for input data.
+An AE \sidecite{charte2017} is an artificial neural network (ANN) composed of an encoder and a decoder. Analytically, it can be seen as a composition of maps $f$ and $g$ which results in a tensor of the same shape as the input. As an ANN, it takes a form analogue to that on Fig.~\ref{p2fig:ae-example}. AEs were originally used to perform a preliminary weight training on other ANNs, but on their own they can also learn alternative representations for input data.
 
 \begin{figure}[ht!]
   \centering
@@ -277,7 +277,7 @@ The different aspects that lead an AE to a specific transformation are its neura
 
 \subsection{Variants}
 
-An interesting advantage of AEs is their versatility: one can obtain encodings with certain properties if the adequate regularizations are chosen. There exist many AE variants in the literature \cite{charte2017}, the most common ones centered in how to control the behavior of the transformation while allowing for faithful reconstructions. The following are the most relevant ones:
+An interesting advantage of AEs is their versatility: one can obtain encodings with certain properties if the adequate regularizations are chosen. There exist many AE variants in the literature \sidecite{charte2017}, the most common ones centered in how to control the behavior of the transformation while allowing for faithful reconstructions. The following are the most relevant ones:
 
 \begin{itemize}
 \item Sparse: induces a low number of activations in average in the encoding layer.
@@ -346,7 +346,7 @@ The following AE types can be used: basic, sparse, contractive, denoising, robus
 
 Since \texttt{ruta} is implemented on top of Tensorflow and Keras, it can run on computing devices such as GPUs. In order for them to be used, the correct Tensorflow version with CUDA support will need to be installed. Several issues can arise during the installation and first use, which have been documented in the troubleshooting section of the online documentation.
 
-Few other software pieces provide the necessary functionality to build custom AEs. Among them we can find H2O \cite{h2o}, with its \texttt{h2o.deeplearning} function which includes an \texttt{autoencoder} option; package \texttt{autoencoder} for R \cite{Rautoencoder}, and library \texttt{yadlt} for Python. These focus on just one or two AE variants and provide less customizability than AEs defined in \texttt{ruta}. For further options one needs to resort to Deep Learning frameworks, which require a much higher programming effort in order to define AE models.
+Few other software pieces provide the necessary functionality to build custom AEs. Among them we can find H2O \sidecite{h2o}, with its \texttt{h2o.deeplearning} function which includes an \texttt{autoencoder} option; package \texttt{autoencoder} for R \sidecite{Rautoencoder}, and library \texttt{yadlt} for Python. These focus on just one or two AE variants and provide less customizability than AEs defined in \texttt{ruta}. For further options one needs to resort to Deep Learning frameworks, which require a much higher programming effort in order to define AE models.
 
 %Implementation details. Empirical results. Conduct empirical studies and provide results. Compare with state-of-the-art software if any, kindly cite relevant work.
 

@@ -144,7 +144,9 @@ Different issues can arise that make certain classes hard to learn by classifier
 An alternative approach to extracting features before training a predictor 
 is to embed the feature extraction stage within the untrained model itself, and learn the best features at the same time that the final model (a classifier, regressor, segmentor...) is trained. When this process is organized layer-wise, the overall model is called a \textit{deep learning} model \sidecite{goodfellow2016deep}.
 
-\subsection{Types of deep networks}
+Deep learning model design comprises two complementary elements: the type of \textit{layers} that build up the network and determine the type of data that can be processed, and the \textit{architecture} itself, that is, the way these layers are organized and allow to perform one task or another with the provided data. For example, one could build a classification network out of recurrent units for sentiment analysis, or an encoder-decoder network out of convolutional layers for image segmentation. The fundamental types of layers as well as the most relevant architectures are explained next.
+
+\subsection{Neural networks according to layer operations}[Layer operations]\label{sec:layers}
 
 Not every kind of neural network is prepared to deal with every type of dataset. Their main advantage is that they can become specialized in certain structures, such as sequential data (sound, speech, language), bidimensional data (images) and three-dimensional data (video). This specialization while preserving the same training strategies and essential implementation methods is what sets them apart from traditional learning methods, which are more fixed in their way of working through data.
 
@@ -184,9 +186,9 @@ Convolution is not the only stage performed by CNN. The other important step is 
 Computer vision has been one of the fundamental applications of deep learning and CNNs have evolved greatly as a result, with many improvements and extensions such as residual connections (see Figure~\ref{fig:resnet}), breakdown of convolutions into smaller ones \sidecite{7780677}, and pruning strategies \sidecite{lin2019towards}.
 
 
-\subsubsection{Recurrent networks, transformers and other advancements}
+\subsubsection{Recurrent networks}
 
-In a recurrent neural network (RNN), some parts of the computation of the network at each step, e.g. the output, are fed as input in the next one. This creates a ``memory'' which allows the RNN to remember previous outputs when making predictions. RNNs are used for tasks such as speech recognition and language translation, where the order of the input is important and past outputs are relevant for the next predictions.
+\xr{In a recurrent neural network (RNN), some parts of the computation of the network at each step, e.g. the output, are fed as input in the next one. This creates a ``memory'' which allows the RNN to remember previous outputs when making predictions. RNNs are used for tasks such as speech recognition and language translation, where the order of the input is important and past outputs are relevant for the next predictions.}
 
 \begin{marginfigure}
     \includegraphics[width=\linewidth]{lstm}
@@ -196,18 +198,39 @@ In a recurrent neural network (RNN), some parts of the computation of the networ
 A popular kind of RNN units are long short-term memory (LSTM) units \sidecite{hochreiter1997long}, which add a self-loop controlled (\textit{gated}) by another unit so that the memorized information can be eventually forgotten. See Figure~\ref{fig:lstm} for a detailed schematic of this type of unit.
 
 
-% \subsubsection{Transformers and other recent advancements}
-Transformers \sidecite{vaswani2017attention} emerged from the concept of \textit{attention}
+\subsubsection{Attention and transformers}
 
-\subsection{Encoder-decoder architectures}
+Attention mechanisms started in encoder-decoder recurrent networks as a system to identify parts of speech that are more relevant than others within the input data while decoding is in process \sidecite{bahdanau2014neural,luong2015effective}. Instead of compacting all the inputs into an encoded vector and decoding from there, attention allows to have all information available and focus on just the important pieces at each decoding step. There exist several ways of applying attention according to the elements that interact with one another, including self-attention, local attention and global attention.
+
+\begin{marginfigure}
+    \includegraphics{transformer}
+    \caption{\label{fig:transformer}Original architecture diagram of the Transformer. Source: \cite{vaswani2017attention}.}
+\end{marginfigure}
+
+Based on the concept of attention, transformers \sidecite{vaswani2017attention} were conceptualized by simply avoiding recurrent units and building the whole network around stacked self-attention operations. Figure~\ref{fig:transformer} shows how a transformer is organized. 
+Transformers have been applied beyond machine translation to many other natural language tasks, where they are currently the state of the art \sidecite{devlin-etal-2019-bert}. Some proposals have tackled computer vision as well \sidecite{liu2021swin}, but are being matched in performance by attention-free models such as \sidecite{chen2021cyclemlp}.
+
+\subsection{Network architectures}
+
+Neural layers can be organized in different formations and connected in various ways in order to achieve specific solutions. The structure and connections of a network are known as its architecture.
+
+\subsubsection{Classifiers and regressors}
+
+Classifiers and regressors are very common types of neural network architectures. The key to obtaining a label output from a network is to stack layers which transform and progressively reduce the dimension of the original data, up to the last layer where the class is selected or a numerical value is predicted. 
+
+Some classification networks are trained and tested against well known benchmarks, becoming a reference for further works and even a basis for other tasks, leveraging the already extracted knowledge by means of \textit{transfer learning}. For instance, the VGG-19 and ResNet networks shown in Figure~\ref{fig:resnet} are standard tools for general image classification.
+
+\subsubsection{Encoder-decoder structures}
 
 There exists a category of deep architectures composed of two components, an \textit{encoder} and a \textit{decoder}, where there is an interest in the model operating first with the features in order to obtain higher-level features (encoding) and then developing these features back onto more detailed and specific versions.
 
-For example, when the objective task is to segment the pixels in an image, that is, label each pixel with one of several classes, a possible solution is to compute abstract, high-level features for the image, and use those to classify each pixel next. This allows to analyze the neighborhoods of each pixel before assigning it to a class, which will probably lead to more cohesive segmentations. Using an encoder-decoder structure, the encoder would compute these low-resolution but high-level features, and the decoder would perform the detailed labeling task out of the extracted information.
+For example, when the objective task is to segment the pixels in an image, that is, label each pixel with one of several classes, a possible solution is to compute abstract, high-level features for the image, and use those to classify each pixel next \sidecite{minaee2021image}. This allows to analyze the neighborhoods of each pixel before assigning it to a class, which will probably lead to more cohesive segmentations. Using an encoder-decoder structure, the encoder would compute these low-resolution but high-level features, and the decoder would perform the detailed labeling task out of the extracted information.
+
+Similarly, an encoder-decoder scheme made out of recurrent units, also known as a \textit{sequence-to-sequence} model \sidecite{prabhavalkar2017comparison}, could serve as basis for a language translation system. The encoder would extract an intermediate representation for the meaning of the original sentence and the decoder would transform that onto the target language.
 
 A special subset of encoder-decoder architectures are autoencoders, which are further described next.
 
-\subsection{Autoencoders}
+\subsubsection{Autoencoders}
 
 \begin{marginfigure}
     \includegraphics{basic-fc-ae}
@@ -222,4 +245,4 @@ Essentially, an \textit{autoencoder} is an encoder-decoder architecture which is
 
 As a feature learner, the autoencoder trains to extract appropriate features from data by considering that quality features should allow to reconstruct the original data from the encoded vectors.
 
-Different variations can be introduced into the training process and the autoencoder structure in order to extend its functionality. For example, the encoded features can be manipulated to be more sparse, i.e. most of them are equal to 0 for each input vector; the extracted reconstruction can discard noise from the inputs, and the reconstruction fidelity can be used as a sign of anomalous data.
+Different variations can be introduced into the training process and the autoencoder structure in order to extend its functionality. For example, the encoded features can be manipulated to be more sparse, i.e. most of them are equal to 0 for each input vector; the extracted reconstruction can discard noise from the inputs, and the reconstruction fidelity can be used as a sign of anomalous data. Article~\ref{ch:paper1} goes into detail about these variants.
