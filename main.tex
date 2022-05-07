@@ -8,21 +8,22 @@
 
 \usepackage{sloth}
 
+
 \begin{document}
 
 %----------------------------------------------------------------------------------------
 %	BOOK INFORMATION
 %----------------------------------------------------------------------------------------
 
-% \titlehead{}
-\title[Autoencoders from scratch]{Autoencoders from scratch}
-\subtitle{Notes and musings on autoencoders from a PhD student}
+\titlehead{\centering\includegraphics[width=.3\textwidth]{ugr_logo}}
+\title[Mejoras en tratamiento de problemas de clasificación con modelos basados en autoencoders]{Mejoras en tratamiento de problemas de clasificación con modelos basados en autoencoders}
+\subtitle{Tesis para la obtención del título de doctor por la Universidad de Granada\\Programa de doctorado en \textsc{Tecnologías de la Información y la Comunicación}}
 \author[Francisco David Charte Luque]{Francisco David Charte Luque\\\texttt{<fdavidcl@ugr.es>}}
-% \department{Departamento de Ciencias de la Computación e Inteligencia Artificial}
-% \supervisor{Francisco Herrera Triguero\\Francisco Charte Ojeda}
+\department{Departamento de Ciencias de la Computación e Inteligencia Artificial}
+\supervisor{Francisco Herrera Triguero\\Francisco Charte Ojeda}
 \publicationplace{Granada}
 \publicationdate{15 de julio de 2022}
-% \date{\underline{Directores de tesis}\\\textbf{Dr. D. Francisco Herrera}\\Soft Computing y Sistemas de Información Inteligentes (Universidad de Granada)\\\textbf{Dr. D. Francisco Charte}\\Sistemas Inteligentes y Minería de Datos (Universidad de Jaén)}
+\date{\underline{Directores de tesis}\\\textbf{Dr. D. Francisco Herrera}\\Soft Computing y Sistemas de Información Inteligentes (Universidad de Granada)\\\textbf{Dr. D. Francisco Charte}\\Sistemas Inteligentes y Minería de Datos (Universidad de Jaén)}
 % \publishers{An Awesome Publisher}
 
 %----------------------------------------------------------------------------------------
@@ -48,9 +49,11 @@
 	\medskip
 
 	\textbf{Copyright} \\
-	This book is released under a CC-BY-SA copyright license. This allows you to share and modify it as long as the modifications are released under a similar license.
+	Part of this book is released under a CC-BY-SA copyright license. This allows you to share and modify it as long as the modifications are released under a similar license.
 
 	To view a copy of the CC-BY-SA code, visit: \\\url{https://creativecommons.org/licenses/by-sa/4.0/}
+
+	The published articles included in this document are printed under permission of their corresponding copyright holders.
 	
 	\medskip
 	
@@ -69,6 +72,7 @@
 %----------------------------------------------------------------------------------------
 
 \dedication{\itshape
+% This is only a foretaste of what is to come, and only the shadow of what is going to be.
 	Machines take me by surprise with great frequency. \\
 	\flushright -- Alan Turing
 }
@@ -88,12 +92,12 @@
 %----------------------------------------------------------------------------------------
 
 \chapter*{Abstract}
+
 a
-% \blindtext
 
 \chapter*{Resumen}
+
 a
-% \blindtext
 
 %----------------------------------------------------------------------------------------
 %	TABLE OF CONTENTS & LIST OF FIGURES/TABLES
@@ -153,15 +157,6 @@ a
 
 \input{chapters/conclusions.tex} 
 
-% \pagelayout{margin}
-% \appendix % From here onwards, chapters are numbered with letters, as is the appendix convention
-
-% \makepart{Appendix}
-
-% \chapter{Some more blindtext}
-
-% \blindtext
-
 %----------------------------------------------------------------------------------------
 
 \backmatter % Denotes the end of the main document content
@@ -182,6 +177,7 @@ a
 
 % The index needs to be compiled on the command line with 'makeindex main' from the template directory
 
-\printnomenclature % Output the index
+% \printindex % Output the index
+\printnomenclature
 
 \end{document}

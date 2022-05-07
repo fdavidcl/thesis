@@ -113,11 +113,11 @@ There are special cases where the task that is being approached is not entirely 
 
 The most common combination emerges when the presence of labels in the observed data is mixed, that is, there are instances with associated labels and others with missing labels. This learning paradigm, known as \textit{semi-supervised learning} \sidecite{kingma2014semi}, is of interest in many real-world problems, since annotating each one of the collected data instances with its corresponding label can be costly and time-consuming~\sidecite{vanEngelen2019ASO}. 
 
-Another relevant area that combines predictive and descriptive learning is that of \textit{subgroup discovery} \cite{Herrera2010AnOO}, a task where the objective is to find unusual relations (rules) between the input variables and the target variable. Instead of learning to predict this variable, the idea is to identify interesting subsets of instances according to their relation to the target variable and the rest of samples.
+Another relevant area that combines predictive and descriptive learning is that of \textit{subgroup discovery} \sidecite{Herrera2010AnOO}, a task where the objective is to find unusual relations (rules) between the input variables and the target variable. Instead of learning to predict this variable, the idea is to identify interesting subsets of instances according to their relation to the target variable and the rest of samples.
 
 \subsubsection{Reinforcement learning}
 
-A different strategy for machines to learn consists in providing them with positive or negative reinforcements according to their behavior \sidecite{kober2013reinforcement}. Instead of providing the algorithm with the complete solution for each problem instance, usually a score is given, evaluating the current solution against some criteria. This learning paradigm fits well with problems where multiple solutions can be acceptable, so the actual solving process is not as important as obtaining the desired result, as well as situations where the aim is to find the most efficient solution.
+A different strategy for machines to learn consists in providing them with positive or negative reinforcements according to their behavior \sidecite{kober2013reinforcement}. Instead of providing the algorithm with the complete solution for each problem instance, usually a score is given, evaluating the current solution against some criteria. This learning paradigm fits well with problems where multiple solutions can be acceptable, so the actual solving process is not as important as obtaining the desired result, as well as situations where the aim is to find the most efficient solution. Notable examples of this kind of learning are tabletop games like AlphaGo for Go \sidecite{silver2016mastering} and even strategy videogames like AlphaStar for StarCraft II \sidecite{vinyals2019grandmaster}.
 
 % \subsection{Traditional machine learning algorithms}
 
@@ -162,7 +162,7 @@ Not every kind of neural network is prepared to deal with every type of dataset.
 
 \subsubsection{Dense networks}
 
-Dense deep networks, also known as fully connected networks, are essentially the same as MLPs. Their main operation in each layer is matrix product, where a parameter matrix is used to extract the values of each layer out of those of the previous one. 
+Dense deep networks, also known as fully connected networks, are essentially the same as MLPs. Their main operation in each layer is matrix product, where a parameter matrix is used to extract the values of each layer out of those of the previous one. More formally, is $x$ is an input vector, $W$ is the parameter matrix and $b$ is a bias parameter, the dense layer performs the following computation:
 
 \begin{equation}
     f(x)=Wx + b\quad W\in \mathcal M_{n\times m}(\mathbb R), x\in\mathbb R^m, b\in\mathbb R^n~.

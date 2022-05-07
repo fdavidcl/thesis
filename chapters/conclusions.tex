@@ -2,25 +2,58 @@
 \chapter{Conclusions}
 \label{ch:conclusions}
 
-This chapter aims to summarize the outcomes of this thesis, highlight the most relevant achievements, list the related published material and outline some lines of work that will be pursued next.
+This chapter aims to summarize the outcomes of this thesis, highlight the most relevant achievements and outline some lines of work that will be pursued next.
+
+\section{Summary of work}
+
+The candidate has been working under a competitive government contract for university professor training with the objective of completing this thesis. Additionally, the doctoral program at University of Granada includes a comprehensive range of lectures and courses which provide formative resources for doctoral candidates. In consequence, the work throughout this period can be categorized into three parts: research, training and teaching.
+
+\subsection{Research activity}
+
+The research developed by the candidate has been already mostly discussed in \autoref{ch:summary}. The outputs have been multiple and have covered all necessary areas from the study of the state of the art, to developing a new solution to an existing problem and applying it to a specific case.
+
+
+
+\subsection{Formative activity}
+
+\subsection{Teaching activity}
+
+The candidate has fulfilled the teaching objectives marked by the FPU regulations: between 3 and 6 ECTS credits a year, totaling at most 18 ECTS credits. More specifically, the amount of credits has been maxed out, achieving the total of 18 credits taught across 4 years.
+
+\begin{table}
+    \begin{tabular}{rllrr}
+        \toprule
+        Year & Degree & Subject & Groups & hrs/wk\\
+        \midrule
+        2 & CS & Estructuras de datos & 1 & 1\\
+        2 & CSM & Estructuras de datos & 1 & 1\\
+        2 & CS & Modelos de computación & 1 & 2\\
+        3 & CS & Estructuras de datos & 2 & 2\\
+        3 & CS & Modelos de computación & 1 & 2\\
+        4 & CS & Modelos de computación & 2 & 4\\
+        \bottomrule
+    \end{tabular}
+    \caption{\label{tbl:classes}Breakdown of the subjects where the candidate taught practical lectures during the doctoral period, detailing the number of groups and the total of class hours per week. Abbreviations: Degree in Computer Science (CS), Degree in Computer Science and Mathematics (CSM).}
+\end{table}
+
 
 \section{Achieved objectives}
 
-Before detailing specific results, this section explains how the different objectives posed at the beginning of the thesis have been tackled and completed.
+This section explains how the different objectives posed in \autoref{sec:objectives} have been tackled and completed.
 
 \subsection{Didactic resources for learning about autoencoders}
 
-Autoencoders are conceptually very different from traditional feature extractors. Unlike these, autoencoders are based on a neural network framework and this allows for a high level of customization and adjustments for each task. However, this availability of diverse options when building an autoencoder makes it less accessible to inexperienced practitioners. This is a barrier that was identified at; the start of our research work and, as a result, became an issue we wanted to address.
+% Autoencoders are conceptually very different from traditional feature extractors. Unlike these, autoencoders are based on a neural network framework and this allows for a high level of customization and adjustments for each task. However, this availability of diverse options when building an autoencoder makes it less accessible to inexperienced practitioners. This is a barrier that was identified at; the start of our research work and, as a result, became an issue we wanted to address.
 
-Our first goal, taking advantage of the usual literature review, was to produce a guide on autoencoders for machine learning users assuming no prior knowledge about neural networks or these models in particular. This guide should cover all the basics in order to be able to grasp what autoencoders compute, how they are trained, how they compare to other feature learners and what options a user may be presented with when choosing to apply this model to their data.
+% Our first goal, taking advantage of the usual literature review, was to produce a guide on autoencoders for machine learning users assuming no prior knowledge about neural networks or these models in particular. This guide should cover all the basics in order to be able to grasp what autoencoders compute, how they are trained, how they compare to other feature learners and what options a user may be presented with when choosing to apply this model to their data.
 
 The result was an extensive article (reproduced as \autoref{paper1}) that explained every fundamental aspect about these models, as well as provided enough detail about the main variants to be able to select an appropriate one for any given purpose. One key contribution of this work was \autoref{p1Sec.HowToChoose}, which attempts to provide advice on which options to choose depending on the problem at hand.
 
 \subsection{Software tool for easy access to autoencoders}
 
-One of the first obstacles that programmers may come across when working with feature learning tools is that autoencoders are much harder to set up and train than other alternatives like PCA or even complex manifold learning algorithms such as LLE or Isomap, which come already implemented in libraries and can be applied with a simple function call.
+% One of the first obstacles that programmers may come across when working with feature learning tools is that autoencoders are much harder to set up and train than other alternatives like PCA or even complex manifold learning algorithms such as LLE or Isomap, which come already implemented in libraries and can be applied with a simple function call.
 
-The main software-related outcome of this thesis has been the R package Ruta, a library which includes the most relevant autoencoder variants and provides easy-to-use functionalities for beginners, as well as more flexible and detailed options for more experienced users. This software is published at CRAN, a software repository for the R language with strict quality controls.
+The main software-related outcome of this thesis has been the R package Ruta (see \autoref{ch:paper2}), a library which includes the most relevant autoencoder variants and provides easy-to-use functionalities for beginners, as well as more flexible and detailed options for more experienced users. This software is published at CRAN, a software repository for the R language with strict quality controls.
 
 The Ruta package has totaled more than 15000 downloads just on the official RStudio CRAN mirror, averaging more than 10 downloads per day since its launch. Figure~\ref{fig:rutadl} shows daily downloads of the library according to the RStudio CRAN logs.
 
@@ -31,15 +64,15 @@ The Ruta package has totaled more than 15000 downloads just on the official RStu
 
 \subsection{Development of new autoencoder losses for class separability}
 
-After a more general focus on the state of the art, it was important to create new solutions based on what had been learned. These solutions should be applicable as widely as possible and tackle real problems from a novel perspective, leveraging the flexibility of autoencoders.
+% After a more general focus on the state of the art, it was important to create new solutions based on what had been learned. These solutions should be applicable as widely as possible and tackle real problems from a novel perspective, leveraging the flexibility of autoencoders.
 
-In order to contribute to the specific field of autoencoders, our aim was to improve on one of the main uses that these models can have, the extraction of better features for classification methods. Instead on relying on the intended classifiers themselves to optimize the quality of the features, like a deep neural network would operate, we opted to choose metrics that inform about the ability of dataset variables to separate different classes. This way, the model is not necessarily focused on the variables that are more relevant to allow a neural network classify, but those that help separate classes in general, which can in turn be useful for various classifiers.
+% In order to contribute to the specific field of autoencoders, our aim was to improve on one of the main uses that these models can have, the extraction of better features for classification methods. Instead on relying on the intended classifiers themselves to optimize the quality of the features, like a deep neural network would operate, we opted to choose metrics that inform about the ability of dataset variables to separate different classes. This way, the model is not necessarily focused on the variables that are more relevant to allow a neural network classify, but those that help separate classes in general, which can in turn be useful for various classifiers.
 
 The extensive experimentation showed that, out of the three methods considered, the LSSVM-inspired loss worked best and provided significant improvement in classification performance with respect to other feature learners.
 
 \subsection{Application of newly developed models}
 
-The previous model proposal would be more valuable if useful applications of it were deployed. For a first use, we chose a dataset that was imposing notable levels of difficulty for classifiers to model adequately, the COVIDGR dataset of chest X-ray imaging for COVID-19 detection. This is, as well, an area where a solution involving a simple, interpretable classifier would appeal more to the experts than a black-box model like a neural network.
+% The previous model proposal would be more valuable if useful applications of it were deployed. For a first use, we chose a dataset that was imposing notable levels of difficulty for classifiers to model adequately, the COVIDGR dataset of chest X-ray imaging for COVID-19 detection. This is, as well, an area where a solution involving a simple, interpretable classifier would appeal more to the experts than a black-box model like a neural network.
 
 The results revealed a promising line of work, as several of the selected classifiers improved their performance when learning from the features extracted by the proposed model with respect to the original features.
 
@@ -136,9 +169,23 @@ During the course of the thesis, a textbook on machine learning and data science
 
 The developed work has shown to be very promising and opens several possible routes to continue researching. 
 
-\subsection{Label separability in multi-label data}
-
 \subsection{Promoting other behavior in learned representations}
 
+As was learned out of the study of autoencoder variants in \autoref{ch:paper1} and the new autoencoder models from \autoref{ch:paper6}, these models are flexible enough to be able to accept very diverse penalty functions which in turn influence the learned transformations in some way. Relevant uses of this property have been to learn noise-resilient representations, create probability distributions from which to sample new data, and separate points from different classes. 
+
+Leveraging this advantage of autoencoders and taking into account the diversity of supervised problems analyzed in \autoref{ch:paper3}, an interesting path of research would be to conceptualize and implement new penalties which incorporate knowledge about the structure of those problems and allow this way to perform feature preprocessing on those tasks, even potentially transformations from one task type to another. For example, one specifically designed autoencoder could merge features from multi-view input samples in order to output just one feature vector, representative of the whole instance. This would effectively reduce multi-view problems to single-view ones.
+
+\subsection{Label separability in multilabel data}
+
+The early work of the candidate, although not fundamental for this thesis, revolved around learning from multilabel data. The previous experience in this specific area would help translate the newly developed solutions in \autoref{ch:paper6} from the binary classification scheme to multilabel clasification, as this can be seen as a generalization of the more traditional binary case. 
+
+Approaching label separability, however, is not as straightforward as class separability in binary or multiclass problems, since several labels can co-occur in the same instance. This means that separability is no longer easy to measure: one could compute per-label data complexity measures but that would not give a complete account of how close instances with similar labelsets are. Similarly, for a model to be able to project instances to a feature space better suited for classification, it has to take all labels into account at the same time and produce variables that separate not only individual labels but relevant labelsets.
+
+Multilabel learning being typically a harder problem than multiclass classification, there is a need for better descriptive and preprocessing tools, so a set of complexity measures and new methods for reducing complexity in datasets of this kind would be a notable advancement. Some preliminary work is currently being done by the candidate with this purpose in mind.
+
 \subsection{Synthetic instance generation for label resampling}
+
+Multilabel classification problems pose an interesting obstacle when resampling instances in order to address imbalanced labels: replicating instances with minority labels or generating similar ones usually also implies increasing the amount of instances with majority labels, since they can co-occur \sidecite{charte2019remedial}. 
+
+A novel solution to this issue would be to train generative autoencoders so as to learn a probability distribution characterized by the dataset labels. This would constitute a mechanism for creating new synthetic instances with only minority labels. Furthermore, instances generated by an autoencoder would fit better within the distribution of the original dataset than those built by pure interpolation of pairs of instances \sidecite{aeinterpolation}, like in SMOTE-based approaches.
 
