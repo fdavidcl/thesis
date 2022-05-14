@@ -212,11 +212,12 @@
   \put(0,0){%
     \parbox[b][\paperheight]{\paperwidth}{%
       \vfill
+      % \hspace{.5em}
       \centering
       % Indicar la imagen de fondo en el siguiente comando
-      \includegraphics[width=\paperwidth,height=\paperheight,%
+      \includegraphics[width=\paperwidth,height=1.05\paperheight,%
       keepaspectratio]{portada-ugr-color}%
-      \vfill
+      \vspace{-1cm}
 }}}
 
 \RequirePackage{scrextend}
@@ -226,7 +227,7 @@
     \AddToShipoutPicture*{\BackgroundPic}
     \phantomsection 
     \pdfbookmark[1]{Título}{title}
-    \begin{addmargin}[2.6cm]{0cm}
+    \begin{addmargin}[2.95cm]{0cm}
     \begin{flushleft}
       \vfill
       \large{\textsf{\@department}}
@@ -304,11 +305,11 @@
 
 \newcommand{\makearticle}[2]{%
   \chapter{#1}%
-  \begin{widepar}
+  % \begin{widepar}
     \begin{kaobox}[frametitle=Source]
       \fullcite{#2}\\[2\baselineskip]
     \end{kaobox}
-  \end{widepar}
+  % \end{widepar}
 }
 
 \newcommand{\widebibliography}{
@@ -386,3 +387,14 @@
     \addpart{#1}%
     \pagelayout{margin}% Restore margins
 }
+
+% This patch brings back DOIs to \fullcite citations
+\usepackage{xpatch}
+\DeclareCiteCommand{\fullcite}
+  {\usebibmacro{prenote}}
+  {\usedriver
+     {\defcounter{minnames}{6}%
+      \defcounter{maxnames}{6}}
+     {\thefield{entrytype}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}

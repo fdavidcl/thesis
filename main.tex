@@ -1,5 +1,6 @@
 % Load the kaobook class
 \documentclass[
+	ansiapaper,
 	fontsize=11pt, % Base font size
 	twoside=true, % Use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
 	% open=any, % If twoside=true, uncomment this to force new chapters to start on any page, not only on right (odd) pages
@@ -22,8 +23,8 @@
 \department{Departamento de Ciencias de la Computación e Inteligencia Artificial}
 \supervisor{Francisco Herrera Triguero\\Francisco Charte Ojeda}
 \publicationplace{Granada}
-\publicationdate{15 de julio de 2022}
-\date{\underline{Directores de tesis}\\\textbf{Dr. D. Francisco Herrera}\\Soft Computing y Sistemas de Información Inteligentes (Universidad de Granada)\\\textbf{Dr. D. Francisco Charte}\\Sistemas Inteligentes y Minería de Datos (Universidad de Jaén)}
+\publicationdate{mayo de 2022}
+\date{\underline{Directores de tesis}\\\textbf{Dr. D. Francisco Herrera}\\{\small Soft Computing y Sistemas de Información Inteligentes (Universidad de Granada)}\\\textbf{Dr. D. Francisco Charte}\\{\small Sistemas Inteligentes y Minería de Datos (Universidad de Jaén)}}
 % \publishers{An Awesome Publisher}
 
 %----------------------------------------------------------------------------------------
@@ -72,7 +73,8 @@
 %----------------------------------------------------------------------------------------
 
 \dedication{\itshape
-% This is only a foretaste of what is to come, and only the shadow of what is going to be.
+	It's the questions we can't answer that teach us the most. They teach us how to think. If you give someone an answer, all they gain is a little fact. But give them a question and they'll look for their own answers. \\
+	\flushright -- Patrick Rothfuss, The Wise Man's Fear\\\vspace{3em}
 	Machines take me by surprise with great frequency. \\
 	\flushright -- Alan Turing
 }
@@ -85,19 +87,16 @@
 \makeouterpage
 \maketitle
 
+\input{chapters/declaration.tex}
+
 \pagestyle{pagenum.scrheadings}
 
 %----------------------------------------------------------------------------------------
 %	PREFACE
 %----------------------------------------------------------------------------------------
-
-\chapter*{Abstract}
-
-a
-
-\chapter*{Resumen}
-
-a
+\input{chapters/acknowledgments.tex}
+\input{chapters/abstract.tex}
+\input{chapters/resumen.tex}
 
 %----------------------------------------------------------------------------------------
 %	TABLE OF CONTENTS & LIST OF FIGURES/TABLES
@@ -115,16 +114,17 @@ a
 \etocstandardlines % "toc lines as if etoc was not loaded
 
 \tableofcontents % Output the table of contents
-
+% \clearpage
 \listoffigures % Output the list of figures
 
 % Comment both of the following lines to have the LOF and the LOT on different pages
-\let\cleardoublepage\bigskip
-\let\clearpage\bigskip
+% \let\cleardoublepage\bigskip
+% \let\clearpage\bigskip
 
 \listoftables % Output the list of tables
 
 \endgroup
+
 
 %----------------------------------------------------------------------------------------
 %	MAIN BODY
@@ -143,19 +143,22 @@ a
 
 \includechapter{summary}
 
-% \includearticle{01-autoencoder-review}
-% \setListingsForR
-% \includearticle{02-ruta}
-% \includearticle{03-nonstandard}
-% \includearticle{05-case-studies}
-% \includearticle{06-reducing}
+\setcounter{margintocdepth}{\sectiontocdepth}
+\includearticle{01-autoencoder-review}
+\setListingsForR
+\includearticle{02-ruta}
+\includearticle{03-nonstandard}
+\includearticle{05-case-studies} 
+\includearticle{06-reducing}
+\setcounter{margintocdepth}{\subsectiontocdepth}
 
-% % \includearticle{04-showcase}
-% % \includearticle{07-slicer} 
+% \includearticle{04-showcase}
+% \includearticle{07-slicer} 
  
 \makepart{Final remarks}
 
-\input{chapters/conclusions.tex} 
+\includechapter{conclusions}
+% \input{chapters/conclusions.tex} 
 
 %----------------------------------------------------------------------------------------
 
@@ -178,6 +181,6 @@ a
 % The index needs to be compiled on the command line with 'makeindex main' from the template directory
 
 % \printindex % Output the index
-\printnomenclature
+% \printnomenclature
 
 \end{document}

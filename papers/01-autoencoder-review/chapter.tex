@@ -1,9 +1,11 @@
 % !TeX spellcheck = en_US
-
+% \setchapterpreamble[u]{}
+\setchapterpreamble[u]{\margintoc}
 \providecommand{\sep}{-~}
 
 \makearticle{A practical tutorial on autoencoders for nonlinear feature fusion}{INFFUS18-AutoencoderTutorial}
 \label{ch:paper1}
+
 
 \section*{Abstract}
 Many of the existing machine learning algorithms, both supervised and unsupervised, depend on the quality of the input characteristics to generate a good model. The amount of these variables is also important, since performance tends to decline as the input dimensionality increases, hence the interest in using feature fusion techniques, able to produce feature sets that are more compact and higher level. A plethora of procedures to fuse original variables for producing new ones has been developed in the past decades. The most basic ones use linear combinations of the original variables, such as PCA (\textit{Principal Component Analysis}) and LDA (\textit{Linear Discriminant Analysis}), while others find manifold embeddings of lower dimensionality based on non-linear combinations, such as Isomap or LLE (\textit{Linear Locally Embedding}) techniques. 
@@ -272,18 +274,16 @@ AEs could be grouped according to disparate principles, such as their structure,
 
 As explained above, AEs are ANNs with a symmetrical structure. The decoder and the encoder have the same number of layers, with the number of units per layer in reverse order. The encoding layer is shared by both parts. Depending on the dimensionality of the encoding layer, AEs are said to be:
 
-\begin{figure*}[h!]
+\begin{figure}[h!]
 	\centering
-  \subfloat[Shallow undercomplete]{\label{p1Fig.ShallowUnder}\includegraphics[width=0.32\linewidth]{ShallowUndercomplete.pdf}}
-	\qquad
-  \subfloat[Shallow overcomplete]{\label{p1Fig.ShallowOver}\includegraphics[width=0.32\linewidth]{ShallowOvercomplete.pdf}}
+  \subfloat[Shallow undercomplete]{\label{p1Fig.ShallowUnder}\includegraphics[width=0.45\linewidth]{ShallowUndercomplete.pdf}}\hfill	
+  \subfloat[Shallow overcomplete]{\label{p1Fig.ShallowOver}\includegraphics[width=0.45\linewidth]{ShallowOvercomplete.pdf}}
 	
-  \subfloat[Deep undercomplete]{\label{p1Fig.DeepUnder}\includegraphics[width=0.32\linewidth]{DeepUndercomplete.pdf}}
-	\qquad
-  \subfloat[Deep overcomplete]{\label{p1Fig.DeepOver}\includegraphics[width=0.32\linewidth]{DeepOvercomplete.pdf}}
+  \subfloat[Deep undercomplete]{\label{p1Fig.DeepUnder}\includegraphics[width=0.45\linewidth]{DeepUndercomplete.pdf}}\hfill
+  \subfloat[Deep overcomplete]{\label{p1Fig.DeepOver}\includegraphics[width=0.45\linewidth]{DeepOvercomplete.pdf}}
 	\caption{Autoencoder models according to their structure.}
 	\label{p1Fig.Structure}
-\end{figure*}
+\end{figure}
 
 
 \begin{itemize}
@@ -307,10 +307,11 @@ These four types of AEs are visually summarized in Fig. \ref{p1Fig.Structure}. S
 
 \subsection{Autoencoder taxonomy}
 
+As stated before, a taxonomy of AEs can be built according to different criteria. Here the interest is mainly on the properties of the inferred model regarding the feature fusion task. Conforming to this principle, we have elaborated the taxonomy shown in Fig. \ref{p1fig:autoencoder-taxonomy}. As can be seen, there are four main categories in this taxonomy:
+
 \begin{figure*}[htp!]
 	\centering
-	\resizebox {.75\textwidth} {!} {
-		
+	\resizebox {\linewidth} {!} {
 		\begin{tikzpicture}[
 		font=\small,
 		every node/.style = {shape=rectangle,
@@ -347,8 +348,6 @@ These four types of AEs are visually summarized in Fig. \ref{p1Fig.Structure}. S
 	\caption{Taxonomy: most popular autoencoders classified according to the charasteristics they induce in their encodings}
 	\label{p1fig:autoencoder-taxonomy}
 \end{figure*}
-
-As stated before, a taxonomy of AEs can be built according to different criteria. Here the interest is mainly on the properties of the inferred model regarding the feature fusion task. Conforming to this principle, we have elaborated the taxonomy shown in Fig. \ref{p1fig:autoencoder-taxonomy}. As can be seen, there are four main categories in this taxonomy:
 
 \paragraph{Lower dimensionality}
 High-dimensional data can be an issue when using most classifiers and especially shallow neural networks, since they do not perform any kind of high-level feature learning and are then forced to optimize a notable amount of parameters. This task may be eased by just lowering the dimensionality of the data, and this is the aim of the basic AE, which is thoroughly explained in Section~\ref{p1Sec.BasicAE}. Decreasing the dimensionality of specific types of data, such as images or sequences, can be treated by domain specific AEs detailed in Section~\ref{p1Sec.DomainSpecific}.
@@ -440,8 +439,8 @@ The training process begins by training only the first hidden layer as the encod
 
 \begin{figure}[ht!]
   \centering
-  \includegraphics{Stacked}
-  \caption{\label{p1Fig.StackedAutoencoder}Greedy layer-wise training of a deep AE with the architecture shown in Fig~\ref{p1Fig.DeepUnder}. Units drawn in black designate layers of the final AE, and gray ones indicate layers that are not part of the unrolled AE during the fine-tuning phase.}
+  \includegraphics[width=.8\linewidth]{Stacked}
+  \caption[Greedy layer-wise training of a deep AE.]{\label{p1Fig.StackedAutoencoder}Greedy layer-wise training of a deep AE with the architecture shown in Fig~\ref{p1Fig.DeepUnder}. Units drawn in black designate layers of the final AE, and gray ones indicate layers that are not part of the unrolled AE during the fine-tuning phase.}
 \end{figure}
 
 After this layer-wise training, initial weights for all layers preceding and including the encoding layer will have been computed. The AE is now ``unrolled'', i.e. the rest of layers are added symetrically with weight matrices resulting from transposing the ones from each corresponding layer. For instance, for the AE trained in Fig.~\ref{p1Fig.StackedAutoencoder}, the unrolled AE would have the structure shown in Fig.~\ref{p1Fig.DeepUnder}.
@@ -529,7 +528,7 @@ The structure and parameters of a denoising AE are identical to those of a basic
 	\centering
 	\includegraphics[width=0.7\linewidth]{Denoising.pdf} 
 
-	\caption{Illustration of the training phase of a denoising AE. For each input sample, some of its components are randomly selected and set to 0, but the reconstruction error is computed by comparing to the original, non-corrupted data.}
+	\caption[Illustration of the training phase of a denoising AE.]{Illustration of the training phase of a denoising AE. For each input sample, some of its components are randomly selected and set to 0, but the reconstruction error is computed by comparing to the original, non-corrupted data.}
 	\label{p1Fig.Denoising}
 \end{figure}
 
@@ -614,8 +613,8 @@ The basic AE can also be used as building block or inspiration for other, more c
 
   \vspace{.5em}
   
-  \subfloat[Recursive AE (left), unfolded recursive AE (right)]{\label{p1Fig.RecAE}\includegraphics[width=\linewidth]{ArchDualAE.pdf}}
-  \caption{\label{p1Fig.AEarch}Illustrations of autoencoder-based architectures. Each rectangle represents a layer, dark gray fill represents an input, light gray represents output layers and white objects represent hidden layers.}
+  \subfloat[Recursive AE (left), unfolded recursive AE (right)]{\label{p1Fig.RecAE}\includegraphics[width=\linewidth]{ArchRecAE.pdf}}
+  \caption[Illustrations of autoencoder-based architectures.]{\label{p1Fig.AEarch}Illustrations of autoencoder-based architectures. Each rectangle represents a layer, dark gray fill represents an input, light gray represents output layers and white objects represent hidden layers.}
   
 \end{figure}
 
@@ -656,7 +655,7 @@ Fig.~\ref{p1Fig.AEvsPCA} shows a particular occurrence of these facts in the cas
   \item  \parbox{\linewidth}{\includegraphics[width=0.9\linewidth,trim={14em 2em 14em 19em},clip]{robust-wd-36-rmsprop-corr.pdf}}
   \end{enumerate}
   
-  \caption{\label{p1Fig.AEvsPCA}Row 1 shows test samples, second row corresponds to PCA reconstructions, the third one shows those from a linear AE optimizing MSE, row 4 displays reconstructions from a basic AE with $\tanh$ activation and cross-entropy as loss function, and last row corresponds to a robust AE.}  
+  \caption[Test samples, PCA reconstructions and AE reconstructions]{\label{p1Fig.AEvsPCA}Row 1 shows test samples, second row corresponds to PCA reconstructions, the third one shows those from a linear AE optimizing MSE, row 4 displays reconstructions from a basic AE with $\tanh$ activation and cross-entropy as loss function, and last row corresponds to a robust AE.}  
 \end{figure}
 
 A procedure similar to PCA but from a different theoretical perspective is Factor Analysis (FA) \sidecite{PCAandFA}, which assumes a set of latent variables or \textit{factors} which are not observable but are linearly combined to produce the observed variables. The difference between PCA and FA is similar to that between the basic AE and the variational AE: the latter assumes that hypothetical, underlying variables exist and cause the observed data. Variational AEs and FA attempt to find the model that best describes these variables, whereas the basic AE and PCA only aim for a lower-dimensional representation.
@@ -911,7 +910,7 @@ As discussed previously, the number of units in the encoding layer can determine
   \includegraphics[width=\linewidth,trim={16em 2em 14em 19em},clip]{basic-36-tanh-rmsprop-xent.pdf}
   \includegraphics[width=\linewidth,trim={16em 2em 14em 19em},clip]{basic-81-tanh-rmsprop-xent.pdf}
   \includegraphics[width=\linewidth,trim={16em 2em 14em 19em},clip]{basic-144-tanh-rmsprop-xent.pdf}
-  \caption{\label{p1Fig.enclength}First row: test samples; Remaining rows: reconstructions obtained with 16, 36, 81 and 144 units in the encoding layer, respectively.}
+  \caption[Test samples and reconstructions with differing encoding lengths]{\label{p1Fig.enclength}First row: test samples; Remaining rows: reconstructions obtained with 16, 36, 81 and 144 units in the encoding layer, respectively.}
 \end{figure}
 
 \subsubsection{Comparison of optimizers}
@@ -971,7 +970,7 @@ The optimizers used in these examples were baseline SGD, AdaGrad, Adam and RMSPr
   \subfloat[Denoising AE with sparsity regularization]{\label{p1Fig.mnist.denoising}\includegraphics[width=\textwidth,trim={14em 0 14em 0},clip]{sparse-denoising-36-rmsprop-xent.pdf}}
   \hfill
   \subfloat[Robust AE with weight decay]{\label{p1Fig.mnist.robust}\includegraphics[width=\textwidth,trim={14em 0 14em 0},clip]{robust-wd-36-rmsprop-corr.pdf}}
-  \caption{\label{p1Fig.mnist}Reconstructing test samples with different AE models. First row of each figure shows test samples, second row shows activations of the encoding layer and third row displays reconstructions. Encoded values range from -1 (black) to 1 (white).}
+  \caption[Reconstructing test samples with different AE models.]{\label{p1Fig.mnist}Reconstructing test samples with different AE models. First row of each figure shows test samples, second row shows activations of the encoding layer and third row displays reconstructions. Encoded values range from -1 (black) to 1 (white).}
 \end{figure*}
 
 In addition, Fig.~\ref{p1Fig.optimizers} provides the reconstructions generated for some test instances for a basic AE trained with each of those optimizers. As could be intuitively deduced by the convergence, or lack thereof, of the methods, SGD was not capable of finding weights which would recover any digit. AdaGrad, for its part, did improve on SGD but its reconstructions are relatively poor, whereas Adam and RMSProp display superior performance, with little difference between them.

@@ -1,0 +1,30 @@
+% \pagelayout{margin}%
+\chapter*{Resumen}
+
+\begin{center}
+\textbf{Mejoras en tratamiento de problemas de clasificación con modelos basados en autoencoders}
+\end{center}
+
+La presente tesis doctoral aborda el estudio y aplicación de una herramienta particular del ámbito de la ciencia de datos, los \textit{autoencoders}, que son redes neuronales artificiales capaces de transformar el espacio de variables de un conjunto de datos según un criterio escogido. La manipulación y transformación de variables es una tarea crucial en minería de datos, puesto que puede determinar en gran medida lo complejo que resulte un problema de análisis de datos y, por tanto, afectar al comportamiento de los métodos de aprendizaje con los que se pretende extraer conocimiento útil. Además, el reciente incremento en recolección y procesamiento de datos para todo tipo de propósitos propicia que cada vez menos tareas de transformación se puedan realizar manualmente, por lo que son necesarios métodos automáticos que las resuelvan. 
+
+Los \textit{autoencoders} son modelos que se encuadran en el campo del aprendizaje de representaciones, y resultan mucho más flexibles y adaptables que otros métodos más clásicos como el análisis de componentes principales. Para estudiar esta versatilidad, se ha realizado un análisis pormenorizado de su funcionamiento y de las diferentes variedades de modelos que se pueden crear fundamentándose en sus componentes básicos. Como complemento, se ha construido una herramienta software que proporciona fácil acceso a estos modelos y elimina una importante barrera de conocimiento existente a la hora de utilizar los \textit{autoencoders}.
+
+Asimismo, se ha llevado a cabo una extensa búsqueda en la literatura de tipologías de problemas cuya dificultad esté relacionada con la representación de los datos, de forma que se pueda plantear una solución basada en \textit{autoencoders}. Se han identificado varias clases de conflictos que pueden presentar los conjuntos de datos: los que residen en la propia estructura de los datos como, por ejemplo, el uso de varios objetos para representar una sola instancia; los relacionados con la complejidad de los propios datos cuando están categorizados, o tareas que no aportan información adicional y han de resolverse por medio del análisis de las características.
+
+Con el objetivo de aportar una contribución novedosa al campo de los \textit{autoencoders}, se han desarrollado tres modelos que abordan el problema de la complejidad de los datos categorizados, siendo capaces de simplificar las fronteras entre las categorías de forma que un método de clasificación mejore su rendimiento.
+
+En resumen, las principales contribuciones de la tesis son las siguientes:
+
+\begin{itemize}
+    \item Un \textbf{análisis teórico y taxonomía} de las principales variantes de \textit{autoencoders} presentes en la literatura, componiendo una guía para facilitar la selección y el uso de las mismas.
+    \item Un completo \textbf{paquete software} que automatiza gran parte del trabajo de implementación de \textit{autoencoders} y acerca su uso a un nivel comparable al de otros métodos de extracción de características más simples.
+    \item Un trabajo de \textbf{organización y síntesis} de las particularidades que pueden presentar los problemas de aprendizaje supervisado cuando los datos están representados de formas no estándares.
+    \item Una \textbf{demostración de las diversas aplicaciones} de los modelos basados en \textit{autoencoders}, identificando y exponiendo distintas estrategias para resolver problemas no supervisados mediante manipulación de las variables.
+    \item Tres nuevos modelos, \textbf{Scorer, Skaler y Slicer}, enfocados a la reducción de la complejidad de datos en problemas de clasificación.
+\end{itemize}
+
+El presente documento introduce todos los conceptos globales necesarios para entender los artículos publicados y aporta una visión teórica de la problemática del aprendizaje de representaciones y del conjunto de herramientas de aprendizaje profundo, dentro del cual se enmarca el objeto principal de estudio. Además, se explican las técnicas que ayudan a llevar a la práctica estos modelos y cómo se ejecutan sobre las infraestructuras de computación. Posteriormente se introduce el material publicado a lo largo del periodo doctoral y se reproducen cinco artículos publicados en revistas científicas de notable reputación. Finalmente se resumen estas y otras actividades llevadas a cabo, y se presentan las líneas de trabajo que continuarían con los avances ya realizados.
+
+
+
+\pagelayout{wide}%

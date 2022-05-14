@@ -73,9 +73,10 @@
 %% \cortext[cor1]{}
 %% \address{Address\fnref{label3}}
 %% \fntext[label3]{}
-
+\setchapterpreamble[u]{\margintoc}
 \makearticle{Ruta: implementations of neural autoencoders in R}{charte2019ruta}
 \label{ch:paper2}
+
 % \addtocounter{chapter}{1}
 % \renewcommand*{\thechapter}{\Roman{chapter}}
 % \chapter{}
@@ -158,9 +159,9 @@ As previously stated, the main objective of an AE is to find a good transformati
 
 An AE \sidecite{charte2017} is an artificial neural network (ANN) composed of an encoder and a decoder. Analytically, it can be seen as a composition of maps $f$ and $g$ which results in a tensor of the same shape as the input. As an ANN, it takes a form analogue to that on Fig.~\ref{p2fig:ae-example}. AEs were originally used to perform a preliminary weight training on other ANNs, but on their own they can also learn alternative representations for input data.
 
-\begin{figure}[ht!]
+\begin{marginfigure}
   \centering
-  \resizebox {0.40\textwidth} {!} {
+  \resizebox{\textwidth}{!}{
         \begin{tikzpicture}[scale=0.12]
 \tikzstyle{every node}+=[inner sep=0pt]
 \draw [black] (15.7,-15.6) circle (3);
@@ -266,11 +267,10 @@ An AE \sidecite{charte2017} is an artificial neural network (ANN) composed of an
 \draw [black] (56.18,-41.29) -- (62.92,-45.91);
 \fill [black] (62.92,-45.91) -- (62.55,-45.04) -- (61.98,-45.87);
 \end{tikzpicture}
-
-  }
+ }
   \caption{A possible neural architecture for an AE with a 2-variable encoding layer.}
   \label{p2fig:ae-example}
-\end{figure}
+\end{marginfigure}
 
 The different aspects that lead an AE to a specific transformation are its neural architecture, which determines the type of input and the size of the encoding; the cost and activation functions, which can be defined and regularized in order to induce some desired properties, and parameters of the training process, such as the optimization algorithm or the number of times the data is feeded to the network.
 
@@ -361,12 +361,12 @@ An easy way to start using \texttt{ruta} is by means of the \texttt{autoencode} 
 
 These 2 features can be visualized like in Fig.~\ref{p2fig.iris} in order to represent the model learned by the AE.
 
-\begin{figure}[ht]
+\begin{marginfigure}
   \centering
-  \includegraphics[width=0.5\textwidth]{iris.pdf}
+  \includegraphics[width=\textwidth]{iris.pdf}
   \caption{Features learned by a basic AE with Iris data.}
   \label{p2fig.iris}
-\end{figure}
+\end{marginfigure}
 
 {The next step in difficulty involves defining a deep autoencoder. To help beginners describe its architecture, \texttt{ruta} provides a conversion from integer vector to neural network architecture in the following manner: \texttt{c(64, 16)} would become a network with an input layer the size of the inputs, a hidden layer with 64 variables, another hidden layer with 16 units for the encoding, the last hidden layer with 64 variables and an output layer the same size of the input one. Thus, the interface allows for simpler code, which can be observed in the following comparison between the code needed to define the same model in \texttt{ruta} and Keras:
 }
@@ -414,11 +414,11 @@ We have provided examples on how trained AEs can perform several tasks such as e
 
 {Since its publication on CRAN in May 2018 to the end of the year, \texttt{ruta} has received more than a thousand downloads from the RStudio CRAN mirror. Fig. \ref{p2fig.downloads} shows the amount of downloads since the day of publication.}
 
-\begin{figure}[ht]
+\begin{marginfigure}
   \centering
-  \includegraphics[width=.5\textwidth]{ruta_downloads.pdf}
+  \includegraphics[width=\textwidth]{ruta_downloads.pdf}
   \caption{\label{p2fig.downloads}Cumulative downloads since \texttt{ruta} was published.}
-\end{figure}
+\end{marginfigure}
 
 Some supplementary software packages have already been planned. These include a package dedicated to visualizing the behavior of AEs, from their training process to the learned model, and a web-based user interface with the aim of providing easier access to these neural architectures.
 

@@ -63,7 +63,7 @@ Machine learning differs from other kinds of computer science disciplines in tha
 \subsection{Data and models}
 
 \begin{margintable}
-\caption{\label{tbl:dataset}An example dataset describing features of different kinds of animals. Each feature can be numerical (length, legs) or categorical (wings, species).}\footnotesize
+\caption[An example dataset describing features of different kinds of animals.]{\label{tbl:dataset}An example dataset describing features of different kinds of animals. Each feature can be numerical (length, legs) or categorical (wings, species).}\footnotesize
 \begin{tabular}{rrrl}\toprule
 Length & Legs & Wings & Species\\\midrule
 0.40 & 4 & No & Dog\\
@@ -111,13 +111,13 @@ One case where unsupervised learning methods are convenient is when trying to fi
 
 There are special cases where the task that is being approached is not entirely supervised but not completely unsupervised either, but a mix of both.
 
-The most common combination emerges when the presence of labels in the observed data is mixed, that is, there are instances with associated labels and others with missing labels. This learning paradigm, known as \textit{semi-supervised learning} \sidecite{kingma2014semi}, is of interest in many real-world problems, since annotating each one of the collected data instances with its corresponding label can be costly and time-consuming~\sidecite{vanEngelen2019ASO}. 
+The most common combination emerges when the presence of labels in the observed data is mixed, that is, there are instances with associated labels and others with missing labels. This learning paradigm, known as \textit{semi-supervised learning} \sidecite{van2020survey}, is of interest in many real-world problems, since annotating each one of the collected data instances with its corresponding label can be costly and time-consuming~\sidecite{vanEngelen2019ASO}. 
 
 Another relevant area that combines predictive and descriptive learning is that of \textit{subgroup discovery} \sidecite{Herrera2010AnOO}, a task where the objective is to find unusual relations (rules) between the input variables and the target variable. Instead of learning to predict this variable, the idea is to identify interesting subsets of instances according to their relation to the target variable and the rest of samples.
 
 \subsubsection{Reinforcement learning}
 
-A different strategy for machines to learn consists in providing them with positive or negative reinforcements according to their behavior \sidecite{kober2013reinforcement}. Instead of providing the algorithm with the complete solution for each problem instance, usually a score is given, evaluating the current solution against some criteria. This learning paradigm fits well with problems where multiple solutions can be acceptable, so the actual solving process is not as important as obtaining the desired result, as well as situations where the aim is to find the most efficient solution. Notable examples of this kind of learning are tabletop games like AlphaGo for Go \sidecite{silver2016mastering} and even strategy videogames like AlphaStar for StarCraft II \sidecite{vinyals2019grandmaster}.
+A different strategy for machines to learn consists in providing them with positive or negative reinforcements according to their behavior \sidecite{kaelbling1996reinforcement}. Instead of providing the algorithm with the complete solution for each problem instance, usually a score is given, evaluating the current solution against some criteria. This learning paradigm fits well with problems where multiple solutions can be acceptable, so the actual solving process is not as important as obtaining the desired result, as well as situations where the aim is to find the most efficient solution. Notable examples of this kind of learning are tabletop games like AlphaGo for Go \sidecite{silver2016mastering} and even strategy videogames like AlphaStar for StarCraft II \sidecite{vinyals2019grandmaster}.
 
 % \subsection{Traditional machine learning algorithms}
 
@@ -174,17 +174,18 @@ These networks are called fully connected because each value in the output is ab
 
 \begin{marginfigure}
     \includegraphics{resnet}
-    \caption{\label{fig:resnet}Comparison of the architectures of several CNNs, from left to right: VGG-19, a CNN with 36 layers and a residual CNN with 36 layers. Figure from \cite{he2016deep}.}
+    \caption[Comparison of the architectures of several CNNs.]{\label{fig:resnet}Comparison of the architectures of several CNNs, from left to right: VGG-19, a CNN with 36 layers and a residual CNN with 36 layers. Figure from \cite{he2016deep}.}
 \end{marginfigure}
 
 
-Convolutional networks (CNNs) emerge out of the need to adapt operations to bidimensional data, as well as reduce the computational complexity of dense networks when treating this type of high-dimensional data. Since the matrix used in a dense layer has $n\times m$ parameters, $m$ being the number of variables in the input vector and $n$ the number of variables in the output vector, the amount of floating point operations required to compute the result is $O\left(nm\right)$. This makes CNNs appropriate for image-related tasks such as image classification, segmentation and object detection. They can also extend to tridimensional data such as video segments.
+Convolutional networks (CNNs) emerge out of the need to adapt operations to bidimensional data, as well as reduce the computational complexity of dense networks when treating this type of high-dimensional data. Since the matrix used in a dense layer has $n\times m$ parameters, $m$ being the number of variables in the input vector and $n$ the number of variables in the output vector, the amount of floating point operations required to compute the result is $O\left(nm\right)$.
 
 In a CNN, a certain number of matrices typically named \textit{channels} is computed out of the input matrix. Each one is composed of values calculated by convoluting the original matrix with a weight matrix, called \textit{kernel}, which is usually of a fixed small size: $3\times 3$ up to $9\times 9$. Each pixel $(i, j)$ in a filter resulting from convoluting a kernel $K$ over the input $I$ can be computed as follows:
 \begin{equation}
     f(i,j)=\left(K\ast I\right)(i,j)=\sum_{m}\sum_{n}I(i-m,j-n)K(m,n)~.
 \end{equation}
-By keeping $k$, the size of the kernels, notably smaller than the input image, the complexity of convolution is $O(kn)$ and it requires much fewer parameters than matrix multiplication.
+By keeping $k$, the size of the kernels, notably smaller than the input image, the complexity of convolution is $O(kn)$ and it requires much fewer parameters than matrix multiplication.  This makes CNNs appropriate for image-related tasks such as image classification, segmentation and object detection. They can also extend to tridimensional data such as video segments.
+
 
 Most current neural network libraries implement cross correlation instead of the discrete convolution, which does not affect the results since equivalent kernels can be learned for it. The operation is still called convolution in most cases, and the only change is a sign flip for $m$ and $n$:
 \begin{equation}
@@ -198,11 +199,11 @@ Computer vision has been one of the fundamental applications of deep learning an
 
 \subsubsection{Recurrent networks}
 
-\xr{In a recurrent neural network (RNN), some parts of the computation of the network at each step, e.g. the output, are fed as input in the next one. This creates a ``memory'' which allows the RNN to remember previous outputs when making predictions. RNNs are used for tasks such as speech recognition and language translation, where the order of the input is important and past outputs are relevant for the next predictions.}
+{In a recurrent neural network (RNN), some parts of the computation of the network at each step, e.g. the output, are fed as input in the next one. This creates a ``memory'' which allows the RNN to remember previous outputs when making predictions. RNNs are used for tasks such as speech recognition and language translation, where the order of the input is important and past outputs are relevant for the next predictions.}
 
 \begin{marginfigure}
     \includegraphics[width=\linewidth]{lstm}
-    \caption{\label{fig:lstm}Diagram for an LSTM where blue units are gates (sigmoidal or tanh activations), green units are products and pink units are sums. Triangles over data flows indicate values that are fed at the next step.}
+    \caption[Diagram for an LSTM.]{\label{fig:lstm}Diagram for an LSTM where blue units are gates (sigmoidal or tanh activations), green units are products and pink units are sums. Triangles over data flows indicate values that are fed at the next step.}
 \end{marginfigure}
 
 A popular kind of RNN units are long short-term memory (LSTM) units \sidecite{hochreiter1997long}, which add a self-loop controlled (\textit{gated}) by another unit so that the memorized information can be eventually forgotten. See Figure~\ref{fig:lstm} for a detailed schematic of this type of unit.
@@ -214,7 +215,7 @@ Attention mechanisms started in encoder-decoder recurrent networks as a system t
 
 \begin{marginfigure}
     \includegraphics{transformer}
-    \caption{\label{fig:transformer}Original architecture diagram of the Transformer. Source: \cite{vaswani2017attention}.}
+    \caption[Original architecture diagram of the Transformer.]{\label{fig:transformer}Original architecture diagram of the Transformer. Source: \cite{vaswani2017attention}.}
 \end{marginfigure}
 
 Based on the concept of attention, transformers \sidecite{vaswani2017attention} were conceptualized by simply avoiding recurrent units and building the whole network around stacked self-attention operations. Figure~\ref{fig:transformer} shows how a transformer is organized. 
@@ -255,4 +256,12 @@ Essentially, an \textit{autoencoder} is an encoder-decoder architecture which is
 
 As a feature learner, the autoencoder trains to extract appropriate features from data by considering that quality features should allow to reconstruct the original data from the encoded vectors.
 
-Different variations can be introduced into the training process and the autoencoder structure in order to extend its functionality. For example, the encoded features can be manipulated to be more sparse, i.e. most of them are equal to 0 for each input vector; the extracted reconstruction can discard noise from the inputs, and the reconstruction fidelity can be used as a sign of anomalous data. Article~\ref{ch:paper1} goes into detail about these variants.
+Different variations can be introduced into the training process and the autoencoder structure in order to extend its functionality. For example, the encoded features can be manipulated to be more sparse, i.e. most of them are equal to 0 for each input vector; the extracted reconstruction can discard noise from the inputs, or it  can model the data as a continuous probability distribution. Article~\ref{ch:paper1} goes into detail about these variants and compares autoencoders to other feature learning methods.
+
+Autoencoders are not limited to the existing variants. Since they are usually based on a penalty function added to the objective that they train to optimize, an expert can define a different penalty function and induce a new behavior on the learned features. This penalty function, unlike the basic objective, can be based on network inputs, outputs, encodings or even external data associated to each instance. This idea is further explored in Article~\ref{ch:paper6}, where three novel autoencoder models are proposed.
+
+Unlike some types of neural networks which are used more commonly such as CNN classifiers or natural language models, autoencoders are not straightforward to implement in current deep learning libraries. This is due to autoencoders having two main output points where most neural networks have one: autoencoders can both encode a feature vector through their middle layer and reconstruct it through their last layer. In spite of this, there are few software tools which act as an abstraction layer over deep learning platforms, giving easier access to autoencoder functionalities. This, along with our developed software package Ruta, is further discussed in Article~\ref{ch:paper2}.
+
+Autoencoders, just like other kinds of networks, can adapt to process data with different structures. As long as the input and output \textit{shapes} of the network coincide, an autoencoder will be able to transform the variables and produce an output as close as possible to the sampled data. In consequence, autoencoders can be made out of dense layers, convolutional layers and recurrent units as detailed in Section~\ref{sec:design}. Other possible structures for problems which could be captured by an adequately built autoencoders are analyzed in Article~\ref{ch:paper3}.
+
+Finally, the utility of autoencoders as feature learners is not limited to helping classification methods by projecting instances to a more useful feature space. As mentioned before, autoencoders may learn noise-resilient representations which allow to restore noisy signals. The reconstruction fidelity can also be used as a sign of anomalous data. Meanwhile, the encoded features can also be binarized to serve as bucket identifiers or treated as a probability distribution to sample new points. All of these applications are explained and demonstrated in Article~\ref{ch:paper5}.

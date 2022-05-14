@@ -57,8 +57,10 @@
 % \begin{document}
 %
 % A Showcase of Applied Examples on the Use of Autoencoders
+\setchapterpreamble[u]{\margintoc}
 \makearticle{A showcase of the use of autoencoders in feature learning applications}{charte2019showcase}
 \label{ch:paper4}
+
 % \renewcommand*{\thechapter}{\Roman{chapter}}
 % \addtocounter{chapter}{3}
 % \chapter{A showcase of the use of autoencoders in feature learning applications}
@@ -313,7 +315,7 @@ recovered <- model %>% reconstruct(noisy)
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{denoising_cifar10.pdf}
-    \caption{Image denoising. First row shows original test samples, second row displays the noisy images feeded to the AE, and third row shows reconstructed images.}
+    \caption[Image denoising]{Image denoising. First row shows original test samples, second row displays the noisy images feeded to the AE, and third row shows reconstructed images.}
     \label{p4fig:denoising}
 \end{figure}
 

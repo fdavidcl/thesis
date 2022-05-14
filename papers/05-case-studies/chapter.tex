@@ -36,13 +36,14 @@
 % \bibliographystyle{elsarticle-num}
 
 % \begin{document}
-
+\setchapterpreamble[u]{\margintoc}
 \newcommand{\revision}[1]{#1}
 \newcommand{\revisioncolor}{}
 
 % \begin{frontmatter}
     \makearticle{An analysis on the use of autoencoders for representation learning}{charte2020analysis}
     \label{ch:paper5}
+    
     %   \renewcommand*{\thechapter}{\Roman{chapter}}
 %   \addtocounter{chapter}{4}
 %   \chapter{An analysis on the use of autoencoders for representation learning}
@@ -156,7 +157,7 @@ AEs take the form of a neural network with at least one hidden layer and two com
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{autoencoder.png}
-    \caption{Illustration of the general structure of a basic AE: an encoder and a decoder connected by the encoding layer}
+    \caption[Illustration of the general structure of a basic AE.]{Illustration of the general structure of a basic AE: an encoder and a decoder connected by the encoding layer}
     \label{fig:ae}
 \end{figure}
 
@@ -286,7 +287,7 @@ The models described below are each associated to a diagram describing the layer
 \draw[-Latex] (h1.east) to (h3.west);
 \end{tikzpicture}
 }
-    \caption{Example AE architecture. Each block represents a layer and is splitted into three parts: the meaning or purpose of the layer, the type of operation performed and its output shape (size of each dimension).}
+    \caption[Example AE architecture.]{Example AE architecture. Each block represents a layer and is splitted into three parts: the meaning or purpose of the layer, the type of operation performed and its output shape (size of each dimension).}
     \label{fig:exampleae}
 \end{figure}
 
@@ -365,13 +366,13 @@ For the purposes of demonstrating the capacity of AEs to find manifolds and appr
 \end{figure}
 
 
-\begin{figure}[ht!]
+\begin{figure*}[ht!]
     \centering
-\includegraphics[width=\linewidth]{visualization_cpu} %
-\includegraphics[width=\linewidth]{visualization_sat2}
-    \caption{Embeddings learned by an unsupervised contractive AE. The top image shows the projection of the CPU Activity dataset where each point has been shaded according to the level of user activity. The bottom image displays the projected samples of the Satellite Image dataset, each one colored according to its class. }
+\includegraphics[width=.49\linewidth]{visualization_cpu}\hfill
+\includegraphics[width=.49\linewidth]{visualization_sat2}
+    \caption[Embeddings learned by an unsupervised contractive AE.]{Embeddings learned by an unsupervised contractive AE. The top image shows the projection of the CPU Activity dataset where each point has been shaded according to the level of user activity. The bottom image displays the projected samples of the Satellite Image dataset, each one colored according to its class. }
     \label{fig:visualizations}
-\end{figure}
+\end{figure*}
 
 In order to verify to a certain degree that these embeddings, in addition to producing meaningful visualizations,  contain the necessary information about the data, the mean squared error between each instance and its reconstruction through the AE can be computed. As a reference for comparison purposes, the same reconstruction error can be computed from the two first principal components of the data \revision{and from the encoding found by a basic AE}. Table~\ref{tbl:mse} holds these results, which are very favourable to the contractive AE, since the error is lower in every case. \revision{The difference among both AEs is small, but it serves to deduce that the contractive penalty in the AE does not hinder the reconstruction objective, instead it helps obtain useful low-dimensional embeddings.}
 
@@ -390,7 +391,7 @@ In order to verify to a certain degree that these embeddings, in addition to pro
             Contractive AE & \revision{\textbf{0.5053}} & \revision{\textbf{0.4546}} & \revision{\textbf{0.1132}} & \revision{\textbf{0.1157}} \\
         \bottomrule               
     \end{tabular}
-    \caption{\label{tbl:mse}Mean squared error comparison between the reconstructions of a contractive AE with a 2-variable encoding and the projections to the original feature space from the two principal components of the data. Lower values are better.}
+    \caption[MSE comparison between contractive AE and PCA]{\label{tbl:mse}Mean squared error comparison between the reconstructions of a contractive AE with a 2-variable encoding and the projections to the original feature space from the two principal components of the data. Lower values are better.}
 \end{table}
 
 \subsection{Noise reduction}
@@ -462,7 +463,7 @@ The results can be analyzed in Table~\ref{tbl:noisered}, which shows the designe
     \includegraphics[width=\linewidth,trim={768px 0 1536px 0},clip]{denoising-predictions.png}
 
     \includegraphics[width=\linewidth,trim={1536px 0 768px 0},clip]{denoising-predictions.png}
-    \caption{\label{fig:denoised}Random selection of test examples (first and third rows) and their reconstructions (second and fourth rows) via forward passes through the denoising AE.}
+    \caption[Test examples and their reconstructions]{\label{fig:denoised}Random selection of test examples (first and third rows) and their reconstructions (second and fourth rows) via forward passes through the denoising AE.}
 \end{figure}
 
 \begin{table}
@@ -478,7 +479,7 @@ The results can be analyzed in Table~\ref{tbl:noisered}, which shows the designe
         \bottomrule
     \end{tabular}
 
-    \caption{\label{tbl:noisered}Summary of results for noise reduction (average values and standard deviations are provided). Original images without noise are the reference for measuring the mean squared error, and the noise reduction is computed for each image as the percentage decrease in this error. Images are represented by their RGB values from 0 to 255.}
+    \caption[Summary of results for noise reduction.]{\label{tbl:noisered}Summary of results for noise reduction (average values and standard deviations are provided). Original images without noise are the reference for measuring the mean squared error, and the noise reduction is computed for each image as the percentage decrease in this error. Images are represented by their RGB values from 0 to 255.}
 \end{table}
 
 
@@ -534,7 +535,7 @@ In order to assess whether the trained model serves the purpose of semantic hash
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=\linewidth]{hashing_intercluster.eps}
-    \caption{\label{fig:hashingplot}Intercluster cosine distance boxplot according to the hamming distance between hashes. Blue diamonds indicate the mean cosine distance among all pairs of clusters that differ in $k$ digits where $k$ is a Hamming distance. Gray dots indicate outlier cosine distances.}
+    \caption[Intercluster cosine distance boxplot according to the hamming distance between hashes.]{\label{fig:hashingplot}Intercluster cosine distance boxplot according to the hamming distance between hashes. Blue diamonds indicate the mean cosine distance among all pairs of clusters that differ in $k$ digits where $k$ is a Hamming distance. Gray dots indicate outlier cosine distances.}
 \end{figure}
 
 In addition to quantitatively evaluating the quality of the model, it can be qualitatively analyzed in order to verify whether semantic hashing indeed groups topics in similar hashes. One way of doing this is computing the term frequency-inverse document frequency index (tf-idf)~\sidecite{tfidf} of the words for each cluster. This way, words that are frequent within a cluster but uncommon along the rest of the test set are considered the most relevant words. Table~\ref{tab:semhashwords} shows a truncated list of hashes used by the AE to cluster documents, along with their most relevant words ranked by tf-idf.
@@ -563,7 +564,7 @@ Hash & Relevant words \\
 \bottomrule
 \end{tabular}
 }
-\caption{\label{tab:semhashwords} The first 15 hashes used as semantic codes for clusters found by the AE, ordered in Gray code. The most relevant words are selected according to tf-idf computed for each cluster. They show some common topics between hashes 0001110 and 0001010, and between 0000001, 0001001 and 0001000.}
+\caption[The first 15 hashes used as semantic codes for clusters found by the AE.]{\label{tab:semhashwords} The first 15 hashes used as semantic codes for clusters found by the AE, ordered in Gray code. The most relevant words are selected according to tf-idf computed for each cluster. They show some common topics between hashes 0001110 and 0001010, and between 0000001, 0001001 and 0001000.}
 \end{table}
 
 \subsection{Anomaly detection}\label{sec:anomaly}
@@ -619,7 +620,7 @@ Indeed, Fig.~\ref{fig.anomaly-hist} graphs the reconstruction error for each tes
     \includegraphics[width=.5\linewidth]{anomaly_column.eps}%
     \includegraphics[width=.5\linewidth]{anomaly_histogram.eps}
     
-    \caption{\label{fig.anomaly-hist}Reconstruction error of the AE during test. The graph on the left shows the reconstruction error of each request in sequence, where the detection threshold is set to the mean training error plus 6 times its standard deviation. The histogram on the right shows the amount of hits and misses according to the reconstruction error.}
+    \caption[Reconstruction error of the AE during test.]{\label{fig.anomaly-hist}Reconstruction error of the AE during test. The graph on the left shows the reconstruction error of each request in sequence, where the detection threshold is set to the mean training error plus 6 times its standard deviation. The histogram on the right shows the amount of hits and misses according to the reconstruction error.}
 \end{figure*}
 
 
@@ -633,7 +634,7 @@ Variational AEs are stochastic in the sense that they do not map each instance t
 
 \begin{figure}[ht]
     \centering\small
-    \resizebox{\linewidth}{!}{%
+    \resizebox{.9\linewidth}{!}{%
 \begin{tikzpicture}[node distance=0.5cm]
 \node[layer] (x) {\textsc{input}
 \nodepart{second} AT\&T faces
@@ -680,7 +681,7 @@ Variational AEs are stochastic in the sense that they do not map each instance t
 \draw[-Latex] (h9.east) to (y.west);
 \end{tikzpicture}
 }
-    \caption{Variational AE architecture for instance generation. The sampling layer draws a sample from the vector of normal distributions with means and variances given by the previous layer.}
+    \caption[Variational AE architecture for instance generation.]{Variational AE architecture for instance generation. The sampling layer draws a sample from the vector of normal distributions with means and variances given by the previous layer.}
     \label{fig:variational}
 \end{figure}
 
@@ -688,8 +689,8 @@ In this example, a variational AE following the structure in Fig.~\ref{fig:varia
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=\linewidth]{variational-matrix.png}
-    \caption{\label{fig:sampledfaces}Faces sampled from the encoding space of a variational AE, using interpolations between the projections of images in the original dataset}
+    \includegraphics[width=.8\linewidth]{variational-matrix.png}
+    \caption[Faces sampled from the encoding space of a variational AE.]{\label{fig:sampledfaces}Faces sampled from the encoding space of a variational AE, using interpolations between the projections of images in the original dataset}
 \end{figure}
 
 \subsection{\revision{Other applications}}\label{sec:oth}

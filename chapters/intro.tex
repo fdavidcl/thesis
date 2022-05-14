@@ -2,10 +2,15 @@
 \chapter{Introduction}
 \labch{intro}
 
+\iffalse % use this for a4paper
+Current trends in collection of data are increasing, with more and more human activities producing machine-readable information, such as product reviews \sidecite[3.4cm]{fang2015sentiment}, posts on social media \sidecite[4.3cm]{balaji2021machine}, medical images \sidecite[5.1cm]{willemink2020preparing}, industrial machinery sensor data \sidecite[6.4cm]{gao2015survey}, and more. Automatic processing of data makes it easier to obtain  results fast and saves hours of human labor which can be freed for other purposes or dedicated to tasks which cannot be automated. The speed provided by current computation resources also opens new possibilities for leveraging the available data, achieving extraction and manipulation of information at levels infeasible by human hand.
 
-Current trends in collection of data are increasing, with more and more human activities producing machine-readable information, such as product reviews \sidecite[1.8cm]{fang2015sentiment}, posts on social media \sidecite[2.7cm]{balaji2021machine}, medical images \sidecite[3.45cm]{willemink2020preparing}, industrial machinery sensor data \sidecite[4.72cm]{gao2015survey}, and more. Automatic processing of data makes it easier to obtain  results fast and saves hours of human labor which can be freed for other purposes or dedicated to tasks which cannot be automated. The speed provided by current computation resources also opens new possibilities for leveraging the available data, achieving extraction and manipulation of information at levels infeasible by human hand.
+The study of problems, tools and solutions related to data integration, processing and analysis has been recently known as data science \sidecite[3cm]{dhar2013data}, a field which overlaps branches of mathematics, statistics and computer science, among other disciplines. Current data science applications are present everywhere, from the most industrial settings to direct final user access, and range from machinery fault detection \sidecite[1.8cm]{carvalho2019systematic}, to medical diagnosis assistance \sidecite[3.5cm]{erickson2017machine}, customer loyalty in retail \sidecite[3.8cm]{ma2020machine} and photograph enhancing \sidecite[5.5cm]{wang2020deep}.
+\fi
 
-The study of problems, tools and solutions related to data integration, processing and analysis has been recently known as data science \sidecite[1.5cm]{dhar2013data}, a field which overlaps branches of mathematics, statistics and computer science, among other disciplines. Current data science applications are present everywhere, from the most industrial settings to direct final user access, and range from machinery fault detection \sidecite{carvalho2019systematic}, to medical diagnosis assistance \sidecite{erickson2017machine}, customer loyalty in retail \sidecite{ma2020machine} and photograph enhancing \sidecite{wang2020deep}.
+Current trends in collection of data are increasing, with more and more human activities producing machine-readable information, such as product reviews \sidecite[3.6cm]{fang2015sentiment}, posts on social media \sidecite[4.5cm]{balaji2021machine}, medical images \sidecite[5.3cm]{willemink2020preparing}, industrial machinery sensor data \sidecite[6.6cm]{gao2015survey}, and more. Automatic processing of data makes it easier to obtain  results fast and saves hours of human labor which can be freed for other purposes or dedicated to tasks which cannot be automated. The speed provided by current computation resources also opens new possibilities for leveraging the available data, achieving extraction and manipulation of information at levels infeasible by human hand.
+
+The study of problems, tools and solutions related to data integration, processing and analysis has been recently known as data science \sidecite[4.4cm]{dhar2013data}, a field which overlaps branches of mathematics, statistics and computer science, among other disciplines. Current data science applications are present everywhere, from the most industrial settings to direct final user access, and range from machinery fault detection \sidecite[3.2cm]{carvalho2019systematic}, to medical diagnosis assistance \sidecite[4.3cm]{erickson2017machine}, customer loyalty in retail \sidecite[5.2cm]{ma2020machine} and photograph enhancing \sidecite[6cm]{wang2020deep}.
 
 The general objective in a data science problem is to model a real world scenario based on the collected data and use the resulting model to provide some information to the end user, for example, a category or label, a ranking, an association or a transformed version of the original data. This is a process that encompasses all steps from data acquisition, to its preparation, processing and analysis. In this context, a wide variety of computer algorithms are used to manipulate and process data. The study and development of these techniques that allow machines to distill knowledge from data are known as \textit{machine learning}.
 
@@ -15,7 +20,7 @@ There are several stages that compose the process of solving a data science prob
 
 \begin{figure}
     \includegraphics[width=\linewidth]{images/kddprocess.pdf}
-    \caption{\label{fig:kdd}Process of knowledge discovery in databases (KDD)}
+    \caption{\label{fig:kdd}Steps of the knowledge discovery in databases (KDD) process ordered from left to right: data selection, cleaning, transformation, mining and evaluation.}
 \end{figure}
 
 The set of features, that is, the specific representation of each instance in a dataset, is one aspect which machine learning models can be specially sensitive to.
@@ -24,7 +29,7 @@ Features that may characterize an event or object adequately for humans may not 
 
 \begin{marginfigure}
 \includegraphics[width=\linewidth]{latentvariables.png}
-\caption{\label{fig:latentfaces}Two randomly generated images from \url{https://thispersondoesnotexist.com}. In blue, available features such as the color values of some pixels. In pink, latent variable values (such as \textit{hair tone}) that are not directly represented in the data but influence those color values.}
+\caption[Two randomly generated faces.]{\label{fig:latentfaces}Two randomly generated images from \url{https://thispersondoesnotexist.com}. In blue, available features such as the color values of some pixels. In pink, latent variable values (such as \textit{hair tone}) that are not directly represented in the data but influence those color values.}
 \end{marginfigure}
 
 Furthermore, the techniques used for collecting data can only produce the observable variables in a dataset, but there may be interesting, hidden variables which influence the data in a clearer way. This is a concept known in statistics as \textit{latent variables} \sidecite{borsboom2008latent}. For example, the value  ``blond'' for the latent variable ``hair color'' might determine the color value of many pixels in an image of a person's face, but those are also influenced by overall lighting and contrast, so the hair color of a person cannot be deduced by just extracting a couple of pixels (see Figure~\ref{fig:latentfaces} for an example). It would be desirable to obtain the meaningful features, but a learning mechanism that takes all observable features into account is needed for these to be extracted.
@@ -35,7 +40,7 @@ Other possible obstacles that one may come across when inspecting the features o
 
 As a consequence, much time can be spent manually engineering features according to what the practitioner believes the learning method will adapt best. However, this is a process that requires experience and usually involves many attempts at improving results. Instead of this, a new task can be performed by machine learning techniques before the actual knowledge extraction, called \textit{feature learning} or more broadly \textit{representation learning} \sidecite{bengio2013representation}. 
 
-Feature learning alleviates a notable amount of manual labor and dataset manipulation although, of course, implies that the user know about feature learning methods and their operation. There exists a very diverse array of methods, ranging from simple principal component analysis (PCA) to more complex manifold learning methods.
+Feature learning alleviates a notable amount of manual labor and dataset manipulation although, of course, implies that the user know about feature learning methods and their operation. There exists a very diverse array of methods, ranging from simple principal component analysis (PCA) \sidecite{PCABook} to more complex manifold learning methods \sidecite{lin2008riemannian}.
 
 However, not every feature learning method can solve every task. Most of them have a specific criterion that they optimize, such as maximum variance in the case of PCA, point reconstruction from its neighbors as in locally linear embedding \sidecite{LLE}, or shortest-path distances between points as in Isomap \sidecite{Isomap}. The objective function of each method determines which behavior will be found in the extracted representation, with little to no room to customize it. There may be situations where it is necessary for the learned variables to adjust to certain properties and, ideally, the feature extraction method should allow to enforce those properties.
 
@@ -70,7 +75,7 @@ As the trends in usage of deep learning models to solve machine learning problem
 
 % - interest in how to adapt feature generation for different purposes, e.g. multiple outputs
 
-Deep neural models dedicated to generating new feature sets could be adapted, as a result, to different purposes. For instance, one could search for feature spaces where ``ordinary'' data points are very cohesive, and thus anomalous inputs would be easy to identify. Similarly, a transformation of features could allow for better separation of different classes, better distinction between noise and signal, or more meaningful traits that relate to all the original variables.
+Deep neural models dedicated to generating new feature sets could be adapted, as a result, to different purposes. For instance, one could search for feature spaces where ``ordinary'' data points are very cohesive, and thus anomalous inputs would be easy to identify \sidecite{sakurada2014anomaly}. Similarly, a transformation of features could allow for better separation of different classes, better distinction between noise and signal, or more meaningful traits that relate to all the original variables.
 
 % - interest in multi-view problems
 
@@ -80,7 +85,7 @@ Another potential use of feature learning models that catches our interest is th
 
 A current conflict of deep learning models with several areas of interest in machine learning, such as medical applications, is the fact that most are essentially black boxes \sidecite{fong2017interpretable}. This means that the behavior of a trained model is obscured by the intrinsic structure and is thus unintuitive for humans to comprehend. As a result, there is much interest in explaining and justifying the behavior of these models. Enabling the use of interpretable classifiers and regressors such as decision trees by means of better dataset representations can be one way of avoiding black boxes in these contexts.
 
-\section{Objectives}
+\section{Objectives}\label{sec:objectives}
 
 All the research developed along this work has been revolving around the general aim of improving how autoencoders can achieve a better representation of data in order to extract more reliable models from it. 
 
@@ -97,37 +102,38 @@ Additionally, there are several tangential issues that were studied due to the i
 
 \begin{itemize}
     \item To identify areas of application where autoencoders are able to provide solutions without the need of additional modelling.
-    \item To evaluate and compare different encoder-decoder architectures for different purposes .
+    \item To evaluate and compare different encoder-decoder architectures for different purposes.
     \item To analyze whether ensembling several encoder-decoder methods can provide better solutions.
 \end{itemize}
 
+The main objectives outlined above are further detailed in the following subsections.
 
-\subsection{Didactic resources for learning about autoencoders}
+\subsection{Didactic resources about autoencoders}[Didactic resources]\label{ss:didactic}
 
-Autoencoders are conceptually very different from traditional feature extractors. Unlike these, autoencoders are based on a neural network framework and this allows for a high level of customization and adjustments for each task. However, this availability of diverse options when building an autoencoder makes it less accessible to inexperienced practitioners. This is a barrier that was identified at; the start of our research work and, as a result, became an issue we wanted to address.
+Autoencoders are conceptually very different from traditional feature extractors. Unlike these, autoencoders are based on a neural network framework and this allows for a high level of customization and adjustments for each task. However, this availability of diverse options when building an autoencoder makes it less accessible to inexperienced practitioners. This is a barrier that was identified at the start of our research work and, as a result, became an issue we wanted to address.
 
 Our first goal, taking advantage of the usual literature review, was to produce a guide on autoencoders for machine learning users assuming no prior knowledge about neural networks or these models in particular. This guide should cover all the basics in order to be able to grasp what autoencoders compute, how they are trained, how they compare to other feature learners and what options a user may be presented with when choosing to apply this model to their data.
 
 
-\subsection{Software tool for easy access to autoencoders}
+\subsection{Easy-to-use autoencoder implementations}[Implementations]\label{ss:implementations}
 
 One of the first obstacles that programmers may come across when working with feature learning tools is that autoencoders are much harder to set up and train than other alternatives like PCA or even complex manifold learning algorithms such as LLE or Isomap, which come already implemented in libraries and can be applied with a simple function call.
 
-\xr{The main software-related outcome of this thesis has been the R package Ruta, a library which includes the most relevant autoencoder variants and provides easy-to-use functionalities for beginners, as well as more flexible and detailed options for more experienced users. This software is published at CRAN, a software repository for the R language with strict quality controls.}
+In consequence, for a better understanding of autoencoders by the data science community, it is crucial to have access to a software tool which provides all the necessary tooling in order to design, train and use autoencoders without the need to be an expert in this specific area. Our objective was to develop this tool which would provide a simple interface for scientists from other knowledge fields and other practitioners, as well as more complete functionalities for those who need and know how to take advantage of them.
 
-\subsection{Development of new autoencoder losses for class separability}
+\subsection{Exploration of supervised problems}[Supervised tasks]\label{ss:exploration}
+
+With the potential application of autoencoders in mind, but not limiting ourselves to the current state of available strategies and architectures, we aimed to study in detail the diverse range of supervised problems that one may encounter beyond traditional classification (binary or multiclass) and regression (with one output).
+
+The main purpose of this was to identify common properties in different problems that would allow to tackle them from similar perspectives or generalizations of simpler cases.
+
+\subsection{Development and application of new autoencoder models}[New models]\label{ss:newae}
 
 After a more general focus on the state of the art, it was important to create new solutions based on what had been learned. These solutions should be applicable as widely as possible and tackle real problems from a novel perspective, leveraging the flexibility of autoencoders.
 
 In order to contribute to the specific field of autoencoders, our aim was to improve on one of the main uses that these models can have, the extraction of better features for classification methods. Instead on relying on the intended classifiers themselves to optimize the quality of the features, like a deep neural network would operate, we opted to choose metrics that inform about the ability of dataset variables to separate different classes. This way, the model is not necessarily focused on the variables that are more relevant to allow a neural network classify, but those that help separate classes in general, which can in turn be useful for various classifiers.
 
-% The extensive experimentation showed that, out of the three methods considered, the LSSVM-inspired loss worked best and provided significant improvement in classification performance with respect to other feature learners.
-
-\subsection{Application of newly developed models}
-
-The previous model proposal would be more valuable if useful applications of it were deployed. For a first use, we chose a dataset that was imposing notable levels of difficulty for classifiers to model adequately, the COVIDGR dataset of chest X-ray imaging for COVID-19 detection. This is, as well, an area where a solution involving a simple, interpretable classifier would appeal more to the experts than a black-box model like a neural network.
-
-% The results revealed a promising line of work, as several of the selected classifiers improved their performance when learning from the features extracted by the proposed model with respect to the original features.
+The previous model proposal would be more valuable if useful applications of it were deployed. For a first use, we chose a dataset that was imposing notable levels of difficulty for classifiers to model adequately, the COVIDGR dataset of chest X-ray imaging for COVID-19 detection \sidecite{covid}. This is, as well, an area where a solution involving a simple, interpretable classifier would appeal more to the experts than a black-box model like a neural network.
 
 \section{Thesis structure}
 
@@ -136,13 +142,13 @@ This work comprises several original introductory chapters presenting the necess
 The rest of this document is organized as follows: %contains all the needed information to develop the posed questions and provide enough context in order to understand the work that has been realized throughout the thesis.
 
 \begin{itemize}
-    \item Chapter~\ref{ch:theory} describes the basic theory that lies under the subsequent works and the specific models that are developed and used.
-    \item Chapter~\ref{ch:practical} explains the practicalities of implementing and training deep learning models, especially autoencoders.
-    \item Chapter~\ref{ch:summary} outlines the main results obtained during the research period, providing context and connections among the articles that are reproduced next.
-    \item Article~\ref{ch:paper1}, the first of the journal articles, is a guide on the inner workings of autoencoders, their variants, how to design and how to implement them.
-    \item Article~\ref{ch:paper2} describes into detail the software developed with the objective to facilitate the use of autoencoders.
-    \item Article~\ref{ch:paper3} is a review of the current state of the art in supervised learning further from the standard problems.
-    \item Article~\ref{ch:paper5} covers the most popular applications of autoencoders apart from classification, with concrete examples and guidelines.
-    \item Article~\ref{ch:paper6} improves the applicability of autoencoders in classification problems by developing new loss functions which help reduce data complexity.
-    \item Lastly, Chapter~\ref{ch:conclusions} draws some conclusions and closing statements on the developed work.
+    \item \textbf{Chapter~\ref{ch:theory}} describes the basic theory that lies under the subsequent works and the specific models that are developed and used.
+    \item \textbf{Chapter~\ref{ch:practical}} explains the practicalities of implementing and training deep learning models, especially autoencoders.
+    \item \textbf{Chapter~\ref{ch:summary}} outlines the main results obtained during the research period, providing context and connections among the articles that are reproduced next.
+    \item \textbf{Article~\ref{ch:paper1}}, the first of the journal articles, is a guide on the inner workings of autoencoders, their variants, how to design and how to implement them.
+    \item \textbf{Article~\ref{ch:paper2}} describes into detail the software developed with the objective to facilitate the use of autoencoders.
+    \item \textbf{Article~\ref{ch:paper3}} is a review of the current state of the art in supervised learning further from the standard problems.
+    \item \textbf{Article~\ref{ch:paper5}} covers the most popular applications of autoencoders apart from classification, with concrete examples and guidelines.
+    \item \textbf{Article~\ref{ch:paper6}} improves the applicability of autoencoders in classification problems by developing new loss functions which help reduce data complexity.
+    \item Lastly, \textbf{Chapter~\ref{ch:conclusions}} draws some conclusions and closing statements on the developed work.
 \end{itemize}

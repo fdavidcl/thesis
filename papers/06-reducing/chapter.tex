@@ -391,9 +391,10 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-
+\setchapterpreamble[u]{\margintoc}
 \makearticle{Reducing data complexity using autoencoders with class-informed loss functions}{charte2021reducing}
 \label{ch:paper6}
+
 % \renewcommand*{\thechapter}{\Roman{chapter}}
 % \addtocounter{chapter}{5}
 % \chapter{Reducing data complexity using autoencoders with class-informed loss functions}
@@ -586,11 +587,10 @@ Many real world situations can be modeled as supervised classification problems,
 One of the type of issues that is very commonly overlooked in classification problems is the complexity of data~\sidecite{ho2000measuring,lorena2019complex}. Consider a clean dataset with no presence of errors or abnormalities. There can still be aspects related to the geometrical shapes and overlap among classes which can hinder the performance of a learning technique. For example, there could be no separability between classes, or even regions of the feature space with a mix of instances from different classes. In cases where separability is achievable, boundaries can present complex shapes that can be difficult for a parameterized model to fit. Figure~\ref{p6fig.boundaries} illustrates some of these cases, more concretely, one where the features do not allow to separate the classes, and another where class boundaries are difficult to model due to there being several small groups from one class, sometimes known as small disjuncts~\sidecite{weiss1995learning},  within a group of the other.
 
 \begin{figure*}[hbtp]\centering
-
-  \hfill\includegraphics[width=.3\textwidth,trim={1cm 2cm 0 0},clip]{separable}%
-  \hfill\includegraphics[width=.3\textwidth,trim={1cm 2cm 0 0},clip]{mixed}%
-  \hfill\includegraphics[width=.3\textwidth,trim={1cm 2cm 0 0},clip]{disjuncts}\hfill%
-  \caption{\label{p6fig.boundaries}Different situations relating to class complexity. The graph on the left shows separable classes, the middle one is an example where classes are not separable and the one on the right shows separable classes with complex boundaries (small disjuncts).}
+  \includegraphics[width=.32\linewidth,trim={1cm 2cm 1cm 1cm},clip]{separable}%
+  \hfill\includegraphics[width=.32\linewidth,trim={1cm 2cm 1cm 1cm},clip]{mixed}%
+  \hfill\includegraphics[width=.32\linewidth,trim={1cm 2cm 1cm 1cm},clip]{disjuncts}%
+  \caption[Different situations relating to class complexity.]{\label{p6fig.boundaries}Different situations relating to class complexity. The graph on the left shows separable classes, the middle one is an example where classes are not separable and the one on the right shows separable classes with complex boundaries (small disjuncts).}
 \end{figure*}
 
 An additional hindrance that frequently occurs in data mining scenarios is associated to the representation of instances, to the features themselves \sidecite{DimRecComparative}. These can be typically seen as observed outcomes of underlying factors that cause them and, as a result, are not always the ideal representation of the data. This can depend on the objective task and the learning method to be used. For example, a pixel-based representation for images can be ideal for a convolutional neural network to perform classification, but may be difficult for a lazy learning method to process.
@@ -822,12 +822,12 @@ This section details the theoretical underpinings of our proposals: Scorer, Skal
 
 A neural AE \sidecite{charte-tutorial,bengio2012deep} is generally a symmetrical neural network trained to reconstruct the inputs at its output. The composition of layers up to the middle one computes a new representation of the input data where some traits may be induced: lower dimension, sparsity, or robustness against noise, for example. The feature transformation is learned by means of a training process that optimizes the reconstruction error as well as, potentially, other penalties allowing the introduction of those specific aspects.
 
-\begin{figure}[ht]
+\begin{marginfigure}
   \centering
-  \includegraphics[width=.25\textwidth]{basic-fc-ae.pdf}
+  \includegraphics[width=\linewidth]{basic-fc-ae.pdf}
   % \includegraphics[width=.4\textwidth]{basic-ae.png}
-  \caption{\label{p6fig.basicae}The essential structure of an AE implemented as a fully connected feed-forward neural network, composed of an encoder $f$ and a decoder $g$. The training loss of this model is measured as the distance $d$ between the input $x$ and its reconstruction $x'=(g\circ f)(x)$.}
-\end{figure}
+  \caption[The essential structure of an AE implemented as a fully connected feed-forward neural network.]{\label{p6fig.basicae}The essential structure of an AE implemented as a fully connected feed-forward neural network, composed of an encoder $f$ and a decoder $g$. The training loss of this model is measured as the distance $d$ between the input $x$ and its reconstruction $x'=(g\circ f)(x)$.}
+\end{marginfigure}
 
 A simple AE models the reconstruction problem as a deterministic function given by the composition of an encoder $f$ and a decoder $g$. When an instance is feeded to the model, the encoder transforms it to a vector located within the encoding space, and the decoder maps this vector to the original feature space.
 
@@ -904,11 +904,11 @@ This allows to put together an expression for the average Fisher's discriminant 
 The penalty term, drawing inputs from the encoding layer and the class label, is simply computed at the end of each training and added to the loss function, multiplied by a weight hyperparameter $\lambda$ so as to balance it with the reconstruction objective. Figure~\ref{p6fig.scorer} extends the basic AE diagram with these new components in order to illustrate how Scorer differs from the basic model.
 
 
-\begin{figure}[ht]
+\begin{marginfigure}
   \centering
-  \includegraphics[width=.35\textwidth]{scorer.pdf}
-  \caption{\label{p6fig.scorer}\change{Schematic illustration of the Scorer model. The average Fisher discriminant ratio of the encoded class distributions contributes to the training loss.}}
-\end{figure}
+  \includegraphics[width=\linewidth]{scorer.pdf}
+  \caption[Schematic illustration of the Scorer model.]{\label{p6fig.scorer}\change{Schematic illustration of the Scorer model. The average Fisher discriminant ratio of the encoded class distributions contributes to the training loss.}}
+\end{marginfigure}
 
 
 \subsection{Skaler}
@@ -919,11 +919,11 @@ Although cross entropy is the conventional measure for classification loss, we r
 
 Skaler is a supervised feature extraction model with a KLD-based penalty for class separation. As explained above, the KLD gives an asymmetric view on how two distributions are different. In this case, the objective is to maximize the difference among the distribution of encodings belonging to the positive class and those belonging to the negative class. A schematic view is provided in Figure~\ref{p6fig.skaler}.
 
-\begin{figure}[ht]
+\begin{marginfigure}
   \centering
-  \includegraphics[width=.35\textwidth]{skaler.pdf}
-  \caption{\label{p6fig.skaler}\change{Schematic illustration of the Skaler model. The KLD between the positive and the negative-class encodings contributes negatively to the training loss.}}
-\end{figure}
+  \includegraphics[width=\linewidth]{skaler.pdf}
+  \caption[Schematic illustration of the Skaler model.]{\label{p6fig.skaler}\change{Schematic illustration of the Skaler model. The KLD between the positive and the negative-class encodings contributes negatively to the training loss.}}
+\end{marginfigure}
 
 Both positive and negative encodings can be modeled as following categorical distributions, if we assume that each feature in the encoding can have a high (1) and a low (0) state and that the highest feature is the one that matters. This is a simplification but it helps build a KLD-based formulation that is easy to implement and able to train successfully. Then, the sample space of each distribution consists of events associated to each feature, indicating whether that feature is the highest. If $P_+(j)$ denotes the probability that the $j$-th feature is highest for positive instances and $P_-(j)$ does the same for the negative class, the KLD-based penalty function would be as follows:
 
@@ -958,11 +958,11 @@ where $\beta$ is just a hyperparameter weighting the importance of the LSSVM los
 
 Figure~\ref{p6fig.slicer} illustrates how the AE is modified using the LSSVM objective function, taking the encoding $z=f(x)$ as input for the LSSVM and using a prediction $p=w^Tz+b$ to calculate its loss.
 
-\begin{figure}[ht]
+\begin{marginfigure}
   \centering
-  \includegraphics[width=.4\textwidth]{slicer.pdf}
+  \includegraphics[width=\linewidth]{slicer.pdf}
   \caption{\label{p6fig.slicer}\change{Schematic illustration of the Slicer model. }}
-\end{figure}
+\end{marginfigure}
 
 The result is a model that simultaneously trains a very simple classifier on the encoded data and uses its objective in order to find better representations. Our assumption is that there will exist some level of collaboration between both models and this will help the new features become more practical for classifiers to use.
 
@@ -985,7 +985,7 @@ The datasets are briefly described and referenced \change{in the supplementary m
 
 \iffalse
   \begin{table*}[hbtp]
-    \caption{\label{p6tbl.datasets} Short description for each experimental scenario where all methods have been applied. Most datasets have been sourced from OpenML \sidecite{OpenML2013}, KEEL \sidecite{triguero2017keel} and UCI \sidecite{Dua:2019}. The target column describes whether the class is binary or a certain binarization has been performed. The three rightmost columns indicate the number of variables, negative instances and positive instances respectively.}
+    \caption[Short description for each experimental scenario where all methods have been applied.]{\label{p6tbl.datasets} Short description for each experimental scenario where all methods have been applied. Most datasets have been sourced from OpenML \sidecite{OpenML2013}, KEEL \sidecite{triguero2017keel} and UCI \sidecite{Dua:2019}. The target column describes whether the class is binary or a certain binarization has been performed. The three rightmost columns indicate the number of variables, negative instances and positive instances respectively.}
     \centering
     \begin{tabular}{p{2.5cm}p{3.5cm}p{5.2cm}rrr}
       \toprule
@@ -1030,19 +1030,20 @@ In addition to our proposals Scorer, Skaler and Slicer, we have selected four di
 \begin{table}[ht]
   \centering
   \caption{\label{p6tbl.methods}Brief description of each method available in the experiments}
+  \resizebox{\linewidth}{!}{
   \begin{tabular}{ll}
     \toprule
     Method              & Description                                       \\
     \midrule
-    PCA\cite{PCABook}   & Linear variance maximization                      \\
-    LLE\cite{LLE}       & Neighborhood-based manifold learning              \\
-    Isomap\cite{Isomap} & MDS-based manifold learning                       \\
-    Basic AE\cite{AEs}  & Neural network for data reconstruction            \\
+    PCA \cite{PCABook}   & Linear variance maximization                      \\
+    LLE \cite{LLE}       & Neighborhood-based manifold learning              \\
+    Isomap \cite{Isomap} & MDS-based manifold learning                       \\
+    Basic AE \cite{AEs}  & Neural network for data reconstruction            \\
     Skaler              & Proposed AE with Kullback-Leibler-based penalty   \\
     Scorer              & Proposed AE with discriminant ratio-based penalty \\
     Slicer              & Proposed AE with LSSVM-based penalty              \\
     \bottomrule
-  \end{tabular}
+  \end{tabular}}
 \end{table}
 
 \subsection{Evaluation metrics}
@@ -1071,6 +1072,7 @@ Table~\ref{p6tbl.metrics} gathers all of these selected metrics with a short int
 \begin{table}[ht]
   \centering
   \caption{\label{p6tbl.metrics}Brief description of each evaluation metric used for the experiments, \change{classified according to their dependency on a classifier}}
+  \resizebox{\linewidth}{!}{
   \begin{tabular}{lll}
     \toprule
      & Metric          & Meaning                                      \\
@@ -1092,7 +1094,7 @@ Table~\ref{p6tbl.metrics} gathers all of these selected metrics with a short int
      & AUC             & Area under the ROC curve                     \\
      & Kappa           & Agreement between prediction and truth       \\
     \bottomrule
-  \end{tabular}
+  \end{tabular}}
 \end{table}
 
 \iffalse
@@ -1127,6 +1129,7 @@ The last details about the execution of the experiments are provided in Table~\r
 \begin{table}[ht]
   \centering
   \caption{\label{p6tbl.params}Enumeration of parameters used throughout the experiments.}
+  \resizebox{\linewidth}{!}{
   \begin{tabular}{ll}
     \toprule
     Parameter                               & Value                                                            \\
@@ -1142,7 +1145,7 @@ The last details about the execution of the experiments are provided in Table~\r
     Penalty weight - Slicer                 & 1                                                                \\
     Reconstruction error                    & Cross entropy                                                    \\
     \bottomrule
-  \end{tabular}
+  \end{tabular}}
 \end{table}
 
 \iffalse The encoding dimension refers to the dimension of the middle layer in the case of AEs, and the selected dimension for the projection for the rest of methods. The square root of the original dimension of the dataset was chosen as it provides proportionally more reduction for higher-dimensional datasets.
@@ -1167,41 +1170,42 @@ Experiments for the 27 datasets have been conducted in a 5-fold cross validation
 
 Table~\ref{p6tbl.ranking} holds the average ranking that each dimensionality reduction method achieved for each metric throughout the dataset collection. The winning method for each row is marked in underlined bold text. The number of overall first positions in rankings is summed up and shown in the last row of the table. The first observation that can be extracted is that model Slicer turns out to be consistently superior in most metrics, resulting in a vastly higher amount of won cases than the rest.
 
-\iffalse\begin{table}[ht]
-  \caption{\label{p6tbl.ranking}Average ranking for each method in each evaluated metric. A horizontal line separates complexity metrics from classifier evaluation metrics. The total number of first positions achieved by each method is shown in the last row.}\centering
-  \resizebox*{\linewidth}{!}{\begin{tabular}{llrrrrrrr}
-      \toprule
-                                             &                             & PCA                        & LLE   & \scriptsize Isomap & AE    & \scriptsize Skaler         & \scriptsize Scorer & \scriptsize Slicer \tabularnewline
-      \midrule
-      % \endhead
-                                             & F1                          & 5.885                      & 6.115 & 5.731              & 4.038 & \underline{\bfseries1.577} & 2.308              & 2.346 \tabularnewline
-      % &F2 & 2.923 & \underline{\bfseries2.577} & 3.000 & 5.115 & 6.462 & 4.481 & 3.442 \tabularnewline
-                                             & F3                          & 4.250                      & 5.231 & 4.846              & 5.654 & 2.788                      & 3.000              & \underline{\bfseries2.231} \tabularnewline
-                                             & N3                          & 4.692                      & 5.173 & 5.308              & 4.269 & 3.654                      & 2.577              & \underline{\bfseries2.327} \tabularnewline
-                                             & L2                          & \underline{\bfseries2.712} & 4.519 & 3.981              & 5.654 & 4.442                      & 3.846              & 2.846 \tabularnewline
-                                             & L3                          & 2.769                      & 4.500 & 4.115              & 5.500 & 4.923                      & 3.654              & \underline{\bfseries2.538} \tabularnewline
-                                             & $\textit{ONB}_{\text{tot}}$ & 4.481                      & 6.115 & 4.519              & 4.481 & 3.442                      & 3.019              & \underline{\bfseries1.942} \tabularnewline
-                                             & $\textit{ONB}_{\text{avg}}$ & 4.442                      & 6.077 & 4.519              & 4.577 & 3.538                      & 2.904              & \underline{\bfseries1.942} \tabularnewline\midrule
-      \multirow{3}{*}{\rotatebox[]{90}{kNN}} & F-score                     & 3.096                      & 6.923 & 4.904              & 4.115 & 3.519                      & 3.231              & \underline{\bfseries2.212} \tabularnewline
-                                             & AUC                         & 3.288                      & 7.000 & 4.750              & 4.038 & 3.500                      & 3.250              & \underline{\bfseries2.173} \tabularnewline\vspace{1ex}
-                                             & Kappa                       & 3.096                      & 7.000 & 4.827              & 4.038 & 3.558                      & 3.346              & \underline{\bfseries2.135} \tabularnewline
-      \multirow{3}{*}{\rotatebox[]{90}{SVM}} & F-score                     & 3.788                      & 6.846 & 4.673              & 3.538 & 3.538                      & 2.923              & \underline{\bfseries2.692}\tabularnewline
-                                             & AUC                         & 4.000                      & 6.846 & 4.865              & 3.462 & 3.346                      & 2.962              & \underline{\bfseries2.519} \tabularnewline\vspace{1ex}
-                                             & Kappa                       & 3.904                      & 6.846 & 4.827              & 3.346 & 3.577                      & 2.962              & \underline{\bfseries2.538}\tabularnewline
-      \multirow{3}{*}{\rotatebox[]{90}{MLP}} & F-score                     & 4.077                      & 6.769 & 3.962              & 4.731 & 2.596                      & 3.865              & \underline{\bfseries2.000} \tabularnewline
-                                             & AUC                         & 4.000                      & 7.000 & 4.058              & 4.635 & 2.404                      & 3.942              & \underline{\bfseries1.962} \tabularnewline
-                                             & Kappa                       & 4.000                      & 7.000 & 4.077              & 4.596 & 2.558                      & 3.827              & \underline{\bfseries1.942} \tabularnewline
-      \midrule
-                                             & wins                        & 62                         & 10    & 17                 & 19    & 78                         & 64                 & \underline{\bfseries 188} \tabularnewline              % count overall wins better
-      \bottomrule % DONE quitar F2, meter CDplot global
-    \end{tabular}}
-\end{table}\fi
+% \iffalse\begin{table}[ht]
+%   \caption{\label{p6tbl.ranking}Average ranking for each method in each evaluated metric. A horizontal line separates complexity metrics from classifier evaluation metrics. The total number of first positions achieved by each method is shown in the last row.}\centering
+%   \resizebox*{\linewidth}{!}{\begin{tabular}{llrrrrrrr}
+%       \toprule
+%                                              &                             & PCA                        & LLE   & \scriptsize Isomap & AE    & \scriptsize Skaler         & \scriptsize Scorer & \scriptsize Slicer \tabularnewline
+%       \midrule
+%       % \endhead
+%                                              & F1                          & 5.885                      & 6.115 & 5.731              & 4.038 & \underline{\bfseries1.577} & 2.308              & 2.346 \tabularnewline
+%       % &F2 & 2.923 & \underline{\bfseries2.577} & 3.000 & 5.115 & 6.462 & 4.481 & 3.442 \tabularnewline
+%                                              & F3                          & 4.250                      & 5.231 & 4.846              & 5.654 & 2.788                      & 3.000              & \underline{\bfseries2.231} \tabularnewline
+%                                              & N3                          & 4.692                      & 5.173 & 5.308              & 4.269 & 3.654                      & 2.577              & \underline{\bfseries2.327} \tabularnewline
+%                                              & L2                          & \underline{\bfseries2.712} & 4.519 & 3.981              & 5.654 & 4.442                      & 3.846              & 2.846 \tabularnewline
+%                                              & L3                          & 2.769                      & 4.500 & 4.115              & 5.500 & 4.923                      & 3.654              & \underline{\bfseries2.538} \tabularnewline
+%                                              & $\textit{ONB}_{\text{tot}}$ & 4.481                      & 6.115 & 4.519              & 4.481 & 3.442                      & 3.019              & \underline{\bfseries1.942} \tabularnewline
+%                                              & $\textit{ONB}_{\text{avg}}$ & 4.442                      & 6.077 & 4.519              & 4.577 & 3.538                      & 2.904              & \underline{\bfseries1.942} \tabularnewline\midrule
+%       \multirow{3}{*}{\rotatebox[]{90}{kNN}} & F-score                     & 3.096                      & 6.923 & 4.904              & 4.115 & 3.519                      & 3.231              & \underline{\bfseries2.212} \tabularnewline
+%                                              & AUC                         & 3.288                      & 7.000 & 4.750              & 4.038 & 3.500                      & 3.250              & \underline{\bfseries2.173} \tabularnewline\vspace{1ex}
+%                                              & Kappa                       & 3.096                      & 7.000 & 4.827              & 4.038 & 3.558                      & 3.346              & \underline{\bfseries2.135} \tabularnewline
+%       \multirow{3}{*}{\rotatebox[]{90}{SVM}} & F-score                     & 3.788                      & 6.846 & 4.673              & 3.538 & 3.538                      & 2.923              & \underline{\bfseries2.692}\tabularnewline
+%                                              & AUC                         & 4.000                      & 6.846 & 4.865              & 3.462 & 3.346                      & 2.962              & \underline{\bfseries2.519} \tabularnewline\vspace{1ex}
+%                                              & Kappa                       & 3.904                      & 6.846 & 4.827              & 3.346 & 3.577                      & 2.962              & \underline{\bfseries2.538}\tabularnewline
+%       \multirow{3}{*}{\rotatebox[]{90}{MLP}} & F-score                     & 4.077                      & 6.769 & 3.962              & 4.731 & 2.596                      & 3.865              & \underline{\bfseries2.000} \tabularnewline
+%                                              & AUC                         & 4.000                      & 7.000 & 4.058              & 4.635 & 2.404                      & 3.942              & \underline{\bfseries1.962} \tabularnewline
+%                                              & Kappa                       & 4.000                      & 7.000 & 4.077              & 4.596 & 2.558                      & 3.827              & \underline{\bfseries1.942} \tabularnewline
+%       \midrule
+%                                              & wins                        & 62                         & 10    & 17                 & 19    & 78                         & 64                 & \underline{\bfseries 188} \tabularnewline              % count overall wins better
+%       \bottomrule % DONE quitar F2, meter CDplot global
+%     \end{tabular}}
+% \end{table}\fi
 
 \begin{table}[ht]
-  \caption{\label{p6tbl.ranking}Average ranking for each method in each evaluated metric. A horizontal line separates complexity metrics from classifier evaluation metrics. The best method is marked with a star \(\bigstar\). Those which are worse with $p<0.05$ are marked with $\times$, and those which are worse with $p<0.01$ are marked with $\otimes$. The total number of first positions achieved by each method is shown in the last row.}\centering
-  \resizebox*{\linewidth}{!}{\change{\begin{tabular}{llrrrrrrr}
+  \caption[Average ranking for each method in each evaluated metric.]{\label{p6tbl.ranking}Average ranking for each method in each evaluated metric. A horizontal line separates complexity metrics from classifier evaluation metrics. The best method is marked with a star \(\bigstar\). Those which are worse with $p<0.05$ are marked with $\times$, and those which are worse with $p<0.01$ are marked with $\otimes$. The total number of first positions achieved by each method is shown in the last row.}\centering
+  \resizebox*{\linewidth}{!}{\change{
+    \begin{tabular}{llrrrrrrr}
       \toprule
-                                             &                             & PCA                        & LLE                & \scriptsize Isomap & AE                & \scriptsize Skaler                      & \scriptsize Scorer & \scriptsize Slicer \tabularnewline
+                                             &                             & PCA                        & LLE                & \small Isomap & AE                & \small Skaler                      & \small Scorer & \small Slicer \tabularnewline
       \midrule
       % \endhead
                                              & F1                          & \(\otimes\) 5.885          & \(\otimes\) 6.115  & \(\otimes\) 5.731  & \(\otimes\) 4.038 & \(\bigstar\) {\bfseries1.577} & 2.308              & 2.346 \tabularnewline
@@ -1235,7 +1239,7 @@ was performed with its corresponding post-hoc test where the winning algorithm w
 % sacar tabla con significancia con el ganador de cada fila
 % sacar critical distance plot o bayesian sign???
 \iffalse\begin{table}[ht]
-  \caption{\label{p6tbl.tests}This table indicates significant differences for each metric between the best method and the rest. The best method is marked with a star \(\bigstar\). Those which are worse with $p<0.05$ are marked with $\times$, and those which are worse with $p<0.01$ are marked with $\otimes$.}\centering
+  \caption[Significant differences for each metric between the best method and the rest.]{\label{p6tbl.tests}This table indicates significant differences for each metric between the best method and the rest. The best method is marked with a star \(\bigstar\). Those which are worse with $p<0.05$ are marked with $\times$, and those which are worse with $p<0.01$ are marked with $\otimes$.}\centering
   \resizebox*{\linewidth}{!}{\begin{tabular}{llccccccc}
       \toprule
                                              &                             & \scriptsize PCA & \scriptsize LLE & \scriptsize Isomap & \scriptsize AE & \scriptsize Skaler & \scriptsize Scorer & \scriptsize Slicer \\
@@ -1288,7 +1292,7 @@ was performed with its corresponding post-hoc test where the winning algorithm w
     \subfloat[MLP + F-score]{\includegraphics[width=.3\textwidth]{alignedranks_mlpfscore}}
     \subfloat[MLP + Kappa]{\includegraphics[width=.3\textwidth]{alignedranks_mlpkappa}}
 
-    \caption{\label{p6fig.critclassifier}These critical distance plots illustrate the statistical tests performed to check significant differences among methods. The first three rows show results for complexity metrics, where methods to the right of each graph are best. The last three rows display classification metrics, where methods are best when located on the left.}
+    \caption[Critical distance plots illustrating the statistical tests]{\label{p6fig.critclassifier}These critical distance plots illustrate the statistical tests performed to check significant differences among methods. The first three rows show results for complexity metrics, where methods to the right of each graph are best. The last three rows display classification metrics, where methods are best when located on the left.}
   \end{figure*}
 \fi
 
@@ -1308,7 +1312,7 @@ was performed with its corresponding post-hoc test where the winning algorithm w
     \includegraphics[width=.25\textwidth]{joyplot_errorlin}%
     \includegraphics[width=.25\textwidth]{joyplot_nonlin}%
     \includegraphics[width=.25\textwidth]{joyplot_errorknn}%
-    \caption{\label{p6fig.joyplotscomplexity}These joyplots represent a density estimation for the values achieved by each method for each evaluated metric. The first three graphs correspond to a normalized version of the F1 metric as well as morphology metrics $\textit{ONB}_{\text{tot}}$ and $\textit{ONB}_{\text{avg}}$. The plots in the second row refer to complexity metrics F3, L2, L3 and N3,  respectively. Lower values are better in all cases.}
+    \caption[Density estimation for the values achieved by each method for each evaluated metric (I).]{\label{p6fig.joyplotscomplexity}These joyplots represent a density estimation for the values achieved by each method for each evaluated metric. The first three graphs correspond to a normalized version of the F1 metric as well as morphology metrics $\textit{ONB}_{\text{tot}}$ and $\textit{ONB}_{\text{avg}}$. The plots in the second row refer to complexity metrics F3, L2, L3 and N3,  respectively. Lower values are better in all cases.}
   \end{figure*}
 
   \begin{figure*}[htpb]\centering
@@ -1323,7 +1327,7 @@ was performed with its corresponding post-hoc test where the winning algorithm w
     \includegraphics[width=.25\textwidth]{joyplot_mlp_auc}%
     \includegraphics[width=.25\textwidth]{joyplot_mlp_fscore}%
     \includegraphics[width=.25\textwidth]{joyplot_mlp_kappa}%
-    \caption{\label{p6fig.joyplotsclassifiers}These joyplots represent a density estimation for the values achieved by each method for each classification metric. From left to right, the evaluated metrics are AUC, F-score and Kappa. From top to bottom, each row corresponds to kNN, SVM and MLP respectively. Higher values are better in all cases.}
+    \caption[Density estimation for the values achieved by each method for each classification metric (II).]{\label{p6fig.joyplotsclassifiers}These joyplots represent a density estimation for the values achieved by each method for each classification metric. From left to right, the evaluated metrics are AUC, F-score and Kappa. From top to bottom, each row corresponds to kNN, SVM and MLP respectively. Higher values are better in all cases.}
   \end{figure*}
 \fi
 
@@ -1332,7 +1336,7 @@ As a last summary, we have gathered all results and performed the Friedman's Ali
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=.9\linewidth]{alignedranks_global}
-  \caption{\label{p6fig.cdglobal}Critical distance plot for all results. Horizontal lines join methods where significant differences were not detected.}
+  \caption[Critical distance plot for all results.]{\label{p6fig.cdglobal}Critical distance plot for all results. Horizontal lines join methods where significant differences were not detected.}
 \end{figure}
 
 The supplementary material for this paper also includes density estimation plots which provide a visual account of the overall results of each method for each metric.

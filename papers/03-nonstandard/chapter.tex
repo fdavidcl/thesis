@@ -60,11 +60,12 @@
 % Remove the following line to remove highlights
 % \renewcommand{}[1]{\textcolor{blue}{#1}}
 
-
+\setchapterpreamble[u]{\margintoc}
 % \renewcommand*{\thechapter}{\Roman{chapter}}
 % \addtocounter{chapter}{2}
 \makearticle{A snapshot on nonstandard supervised learning problems}{charte2019snapshot}
 \label{ch:paper3}
+
 % \chapter{}
 
 % \begin{widepar}
@@ -302,7 +303,7 @@ A first categorization of the variations analyzed in this work can be made accor
 \begin{figure}[ht]
 \centering
 \includegraphics[width=.65\textwidth]{problems2}
-\caption{\label{p3fig.multiples}Extensions of the standard supervised problem: multiple inputs or outputs, presence of orders and rankings, and partial information.}
+\caption[Extensions of the standard supervised problem.]{\label{p3fig.multiples}Extensions of the standard supervised problem: multiple inputs or outputs, presence of orders and rankings, and partial information.}
 \end{figure}
 
 Problems introducing multiple inputs are MI and MV, whereas multiple outputs can be found on ML, MD, LR, LDL and MTR. Problems where orders are present are OR, MC and IR. Likewise, tasks with only partial information are, among others, semi-supervised learning {(SSL), positive-unlabeled (PU) learning}, one-shot classification and zero-shot classification.
@@ -359,7 +360,7 @@ Further subdivision of problems allows to separate these traits according to whe
 Fig.~\ref{p3fig.moutputstr} organizes these traits in a hierarchy based on the previous criteria. Each leaf of the tree also includes problems where each one is present.
 
 \begin{figure*}[h]
-\centering\scriptsize
+\centering\scriptsize\resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[node distance=.6cm, auto]
  %nodes
  \node[titlebox] (title) {Output structure traits};
@@ -397,7 +398,7 @@ Fig.~\ref{p3fig.moutputstr} organizes these traits in a hierarchy based on the p
      edge[] (mult2.south);
      \node[box, right=.3cm of dummy6] (ord) {Unrestricted (MTR)}
      edge[] (mult2.south);
-\end{tikzpicture}
+\end{tikzpicture}}
 \caption{\label{p3fig.moutputstr}Traits that can be found on the output structure of supervised problems.}
 \end{figure*} % Este tipo de diagrama jerárquico se entiende mejor. Por coherencia, creo que también sería el adecuado para las entradas
 
@@ -433,7 +434,7 @@ As shown in the graph, an inclusion of more target variables of the same type tr
  edge[pil2,->] (mtreg.west)
  edge[pil2,bend right=45] (mlabel.east);
 \end{tikzpicture}
-\caption{\label{p3fig.mouttax}Relations among supervised problems according to output structure. Arrows follow natural generalizations from one problem to another. Continuous arrows denote generalizations based on adding more variables of the same type. Dashed arrows indicate generalizations based on modifying existing target variables.}
+\caption[Relations among supervised problems according to output structure.]{\label{p3fig.mouttax}Relations among supervised problems according to output structure. Arrows follow natural generalizations from one problem to another. Continuous arrows denote generalizations based on adding more variables of the same type. Dashed arrows indicate generalizations based on modifying existing target variables.}
 \end{figure}
 
 \subsection{Summary}

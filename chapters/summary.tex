@@ -11,28 +11,30 @@ This part of the document reproduces five articles published in peer-reviewed jo
 
 A quick look at the infographic reveals that the focus of this thesis has not only been to produce novel scientific research, but also useful software tools to apply and improve our developments, as well as didactic material which brings this area of computer science closer to different audiences.
 
-In order to not only measure the work by its quantity but also by its impact, mainly within the research community, we can observe the joint number of citations through time in \autoref{fig:citations} as well as its position relative to the rest of publications in the same field in \autoref{fig:beamplot}.
+In order to not only measure the work by its quantity but also by its impact, mainly within the research community, the joint number of citations through time is shown in \autoref{fig:citations} as well as its position relative to the rest of publications in the same field in \autoref{fig:beamplot}.~
 
-\begin{figure}[htbp]
-    \includegraphics[width=\linewidth]{pubs}
-    \caption{\label{fig:citations}Graph of the number of publications and citations across years (source: Web of Science).}
-\end{figure}
-
-\begin{figure}[h!]
+\begin{figure*}[ht!]
+    \includegraphics[width=.9\linewidth]{pubs}
+    \caption[Graph of the number of publications and citations across years.]{\label{fig:citations}Graph of the number of publications and citations across years (source: Web of Science).}
+\end{figure*}
+\begin{figure}[hb!]
     \includegraphics[width=\linewidth]{beamplot}
-    \caption{\label{fig:beamplot}Beamplot displaying the impact of the candidate's publications since 2015 to 2020 (source: Web of Science). Each purple point corresponds to a publication and the horizontal position describes its citation level with respect to the rest of publications in the same area and year (higher is better).}
+    \caption[Beamplot displaying the impact of the candidate's publications.]{\label{fig:beamplot}Beamplot displaying the impact of the candidate's publications since 2015 to 2020 (source: Web of Science). Each purple point corresponds to a publication and the horizontal position describes its citation level with respect to the rest of publications in the same area and year (higher is better).}
 \end{figure}
 
-\subsection{Relation of all published material}
+\clearpage
+\section{Relation of all published material}
 
 The following tables detail all of the candidate's publications as of the time of writing. First, \autoref{tbl:journals} indicates articles published in journals ranked within Journal Citation Reports (JCR), including quality metrics such as journal position in the ranking, quartile and number of citations. 
 
 The rest of publications such as articles in other journals, conference works, talks and one book are broken down in \autoref{tbl:otherpubs}.
-
+\begingroup
+\renewcommand{\arraystretch}{1.3}
 \begin{table*}[htbp]\scriptsize
+    \resizebox{\linewidth}{!}{%
     \begin{tabular}{crp{5.5cm}p{3cm}p{1.6cm}p{0.9cm}rc}
         \toprule
-        & Year & Title & Journal & Position & Cat. & Cit. & Ref. \\
+        & \bfseries Year &\bfseries  Title &\bfseries  Journal &\bfseries  Position &\bfseries  Cat. &\bfseries  Cit. &\bfseries  Ref. \\
         \midrule
         & 2015
         &  Working with Multilabel Datasets in R: The mldr Package 
@@ -81,7 +83,7 @@ The rest of publications such as articles in other journals, conference works, t
         $\bigstar$ & 2021 
         &  Reducing Data Complexity using Autoencoders with Class-informed Loss Functions 
         & Pattern Analysis and Machine Intelligence
-        & 1/139 (Q1)$\ast$ & CS AI & - & \cite{charte2021reducing} \\
+        & 1/139 (Q1)$\ast$ & CS AI & n/a & \cite{charte2021reducing} \\
 
         & 2022 
         &  A tutorial on the segmentation of metallographic images: Taxonomy, new MetalDAM dataset, deep learning-based ensemble model, experimental analysis and challenges 
@@ -89,14 +91,15 @@ The rest of publications such as articles in other journals, conference works, t
         & {1/110 (Q1)$\ast$\newline 3/139 (Q1)$\ast$} 
         & {CS TM\newline CS AI} & 0 & \cite{metallography} \\
         \bottomrule
-    \end{tabular}
-    \caption{\label{tbl:journals}Quality metrics of the articles published in JCR journals during the research period of the candidate. The position of each journal is taken from the JCR of the corresponding year, except for those marked with an asterisk ($\ast$) which are taken from JCR 2020. The source for the number of citations is Web of Science. Category legends: Statistics and Probability (STAT), Computer Science/Artificial Intelligence (CS AI), Computer Science/Theory and Methods (CS TM), Computer Science/Information Systems (CS IS). Articles marked with a star ($\bigstar$) are part of the core of this thesis.}
+    \end{tabular}}
+    \caption[Quality metrics of the articles published in JCR journals during the research period.]{\label{tbl:journals}Quality metrics of the articles published in JCR journals during the research period of the candidate. The position of each journal is taken from the JCR of the corresponding year, except for those marked with an asterisk ($\ast$) which are taken from JCR 2020. The source for the number of citations is Web of Science. Category legends: Statistics and Probability (STAT), Computer Science/Artificial Intelligence (CS AI), Computer Science/Theory and Methods (CS TM), Computer Science/Information Systems (CS IS). Articles marked with a star ($\bigstar$) are part of the core of this thesis.}
 \end{table*}
 
 \begin{table*}[htbp]\scriptsize
+    \resizebox{\linewidth}{!}{%
     \begin{tabular}{crp{5.5cm}p{2cm}p{4.8cm}c}
         \toprule
-        & Year & Title & Type & Published in & Ref. \\
+        & \bfseries Year &\bfseries  Title &\bfseries  Type &\bfseries  Published in &\bfseries  Ref. \\
         \midrule
         & 2015
         & mldr: Paquete R para exploración de datos multietiqueta
@@ -164,10 +167,10 @@ The rest of publications such as articles in other journals, conference works, t
         & Hybrid Artificial Intelligence Systems
         & \cite{charte2021slicer} \\
         \bottomrule
-    \end{tabular}
-    \caption{\label{tbl:otherpubs}Other publications, conferences and talks authored by the candidate. Articles marked with a star ($\bigstar$) are part of the core of this thesis.}
+    \end{tabular}}
+    \caption[Other publications, conferences and talks authored by the candidate.]{\label{tbl:otherpubs}Other publications, conferences and talks authored by the candidate. Articles marked with a star ($\bigstar$) are part of the core of this thesis.}
 \end{table*}
-
+\endgroup
 % \begin{table*}
 %     \begin{tabular}[htbp]{lrrrr}
 %         \toprule
@@ -194,14 +197,14 @@ The rest of publications such as articles in other journals, conference works, t
 % \end{table*}
 
 \clearpage
-\subsection{Main articles}
+\section{Main articles}
 
 From the works previously mentioned, five peer-review articles have been selected as the main core of this thesis for advancing our fundamental objectives.
 
-The first objective, as described previously in \autoref{sec:objectives}, was to study autoencoders and contribute to more people being able to use them to solve their tasks. \autoref{ch:paper1} addresses this by describing autoencoder fundamentals, its variants, implementations and providing tips on autoencoder design depending on the problem at hand.
+The first objective, as described previously in Section~\ref{sec:objectives}, was to study autoencoders and contribute to more people being able to use them to solve their tasks. Article~\ref{ch:paper1} \sidecite{INFFUS18-AutoencoderTutorial} addresses this by describing autoencoder fundamentals, its variants, implementations and providing tips on autoencoder design depending on the problem at hand.
 
-Continuing with the objective of facilitating access to autoencoders, \autoref{ch:paper2} presents Ruta, a software library which simplifies the creation and training process. It is programmed in the R language to ease the transition from other tools for users with little programming knowledge.
+Continuing with the objective of facilitating access to autoencoders, Article~\ref{ch:paper2} \sidecite{charte2019ruta} presents Ruta, a software library which simplifies the creation and training process. It is programmed in the R language to ease the transition from other tools for users with little programming knowledge.
 
-Next, part of the time was devoted to exploring a diverse range of problems where autoencoders could be applicable. \autoref{ch:paper3} organizes the knowledge around a variety of supervised problems, for example, multi-instance classification and multi-output regression. For its part, \autoref{ch:paper5} analyzes another list of problems, mostly unsupervised, where autoencoder-based models have already been applied as a valid solution, from anomaly detection to instance generation.
+Next, part of the time was devoted to exploring a diverse range of problems where autoencoders could be applicable. Article~\ref{ch:paper3} \sidecite{charte2019snapshot} organizes the knowledge around a variety of supervised problems, for example, multi-instance classification and multi-output regression. For its part, Article~\ref{ch:paper5} \sidecite{charte2020analysis} analyzes another list of problems, mostly unsupervised, where autoencoder-based models have already been applied as a valid solution, from anomaly detection to instance generation.
 
-Some preliminary work was accomplished into approaching one of the nonstandard supervised problems, label distribution learning, using an autoencoder-based solution. This did not improve on current, simpler techniques so our focus changed onto tackling a more general situation that could be then applied to multiple supervised problems. This new development, consisting of a model which is able to extract features with better class separability than most traditional feature learners, is detailed in \autoref{ch:paper6}. We also demonstrate the usefulness of this novel solution by applying it to a specific problem, detection of COVID-related pulmonar symptoms in X-ray images, in \sidecite{charte2021slicer}.
+Some preliminary work was accomplished into approaching one of the nonstandard supervised problems, label distribution learning, using an autoencoder-based solution. This did not improve on current, simpler techniques so our focus changed onto tackling a more general situation that could be then applied to multiple supervised problems. This new development, consisting of a model which is able to extract features with better class separability than most traditional feature learners, is detailed in Article~\ref{ch:paper6} \sidecite{charte2021reducing}. We also demonstrate the usefulness of this novel solution by applying it to a specific problem, detection of COVID-related pulmonar symptoms in X-ray images, in \sidecite{charte2021slicer}.

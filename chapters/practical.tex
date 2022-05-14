@@ -6,7 +6,7 @@ Bringing all previous theoretical concepts into a working model is not straightf
 
 This chapter is dedicated to illustrating the reader on the different possibilities that exist for designing and implementing autoencoder networks. Detailed examples on how to code simple autoencoders are provided.
 
-\section{Design}
+\section{Design}\label{sec:design}
 
 Designing an autoencoder for a certain task can be challenging, since the objective is to find a more useful representation of the data but we cannot know the size of the optimal representation beforehand, thus difficulting decisions about the number of layers and the size of each one.
 
@@ -45,6 +45,11 @@ Using the appropriate activation function in the output layer can facilitate the
     \item \textbf{Bounded interval}: Data in the $[0,1]$ range can be produced as the result of a sigmoid activation. Similarly, the $\tanh$ activation function can provide data in the $[-1,1]$ range.
 \end{itemize}
 
+\subsection{Architecture search}
+
+Even if the previous guidelines can provide a starting point for the design of an appropriate autoencoder for a certain task, many hyperparameters remain for the user to set: number of total layers, number of neurons in each layer, loss function penalties to add, etc. The search for an optimal model can become difficult if performed by trial and error, even for experienced practitioners. There are some solutions in order to facilitate this process. An extensive experimentation serving to identify which autoencoder variants and structures are more suitable to tackle different types of problems is available at \sidecite{pulgar2020choosing}. The alternative is running an automatic search for an adequate architecture under some heuristic, for example, an evolutionary method \sidecite{charte2020evoaaa}. This option falls under the category of algorithms known as neural architecture search \sidecite{JMLR:v20:18-598}.
+
+
 \section{Training deep models}
 
 The training process of a deep learning model can be very resource-intensive, since it requires computing hundreds of arithmetic operations, usually across several thousands of parameters. 
@@ -73,19 +78,6 @@ The expression for the derivative of each layer in a feedforward neural network 
 The derivatives are computed for the last layer and, using the chain rule, those values can be reused to find the derivatives for the second-to-last layer, then the layer before, and the rest successively. This backward pass is what allows the optimizer to calculate the gradient of the objective function with respect to all the weights. 
 
 After one or more backward passes, the errors and derivatives obtained are combined and used to update the weights in the direction of steepest descent. Certain properties of the optimizer, such as momentum, may also be applied in order to compensate for potential noise and side effects of using only a small part of the dataset for each update.
-
-\subsection{GPU parallelization}
-
-From a hardware point of view, neural network training is a relatively easy task since it mostly involves great amounts of floating point matrix products. Thus, it does not require the complexity of a whole CPU to run the optimization task. Instead, most of the bulk of the process can be carried out by the simpler, more dense computing chips that are present in current graphical processing units (GPU). These allow very fast parallel calculations and, as a result, are ideal to accelerate the training process.
-
-Both tensor libraries, Tensorflow and Pytorch, are implemented with GPU execution in mind as well as CPU execution (usually as fallback) of the models. If the correct drivers and the CUDA platform are installed, the selected library will be able to automatically connect to the GPU in order to copy data to the dedicated memory and send instructions to carry out the necessary computations.
-
-\begin{marginfigure}
-    \includegraphics{nvidiaa100}
-    \caption{\label{fig:nvidia}NVIDIA A100 GPU including 108 Tensor cores. Source: \cite{nvidiaa100}.}
-\end{marginfigure}
- 
-The potential of GPUs is further leveraged in dedicated multi-GPU servers where the calculations can be spread across several accelerators, resulting in proportional time savings with no loss in quality of results. Graphics cards manufacturers currently produce variants of the cards that are specific for computing purposes and discard the video output, sometimes including dedicated circuitry for tensor operations (e.g. Tensor Cores in the NVIDIA A100 lineup \sidecite{nvidiaa100} as can be seen in Figure~\ref{fig:nvidia}).
 
 \section{Implementation}
 
@@ -190,3 +182,17 @@ for i in range(100):
 autoencoder.eval()
 encoder(x_test)
 \end{lstlisting}
+
+
+\subsection{GPU parallelization}
+
+From a hardware point of view, neural network training is a relatively easy task since it mostly involves great amounts of floating point matrix products. Thus, it does not require the complexity of a whole CPU to run the optimization task. Instead, most of the bulk of the process can be carried out by the simpler, more dense computing chips that are present in current graphical processing units (GPU). These allow very fast parallel calculations and, as a result, are ideal to accelerate the training process.
+
+Most tensor libraries, including Tensorflow and Pytorch, are implemented with GPU execution in mind as well as CPU execution (usually as fallback) of the models. The most popular platform for parallel execution is CUDA from NVIDIA \sidecite{cudadocs}, which provides access to an instruction set that is executed on a GPU, and OpenCL \sidecite{opencl} is an equivalent standard. If the correct drivers and the CUDA platform are installed, the selected library will be able to automatically connect to the GPU in order to copy data to the dedicated memory and send instructions to carry out the necessary computations.
+
+\begin{marginfigure}
+    \includegraphics{nvidiaa100}
+    \caption[NVIDIA A100 GPU including 108 Tensor cores.]{\label{fig:nvidia}NVIDIA A100 GPU including 108 Tensor cores. Source: \cite{nvidiaa100}.}
+\end{marginfigure}
+ 
+The potential of GPUs is further leveraged in dedicated multi-GPU servers where the calculations can be spread across several accelerators, resulting in proportional time savings with no loss in quality of results. Graphics cards manufacturers currently produce variants of the cards that are specific for computing purposes and discard the video output, sometimes including dedicated circuitry for tensor operations (e.g. Tensor Cores in the NVIDIA A100 lineup \sidecite{nvidiaa100} as can be seen in Figure~\ref{fig:nvidia}).
