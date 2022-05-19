@@ -2,63 +2,13 @@
 \chapter{Theoretical foundation}
 \labch{theory}
 
-
-% The main purpose of this chapter is to make it obvious for
-% the reader that the report authors have made an effort to read
-% up on related research and other information of relevance for
-% the research questions. It is a question of trust. Can I as a
-% reader rely on what the authors are saying? If it is obvious
-% that the authors know the topic area well and clearly present
-% their lessons learned, it raises the perceived quality of the
-% entire report.
-
-% \begin{kaobox}[frametitle=Remark]
-% After having read the theory chapter it shall be obvious for
-% the reader that the research questions are both well
-% formulated and relevant.
-% \end{kaobox}
-
-% The chapter must contain theory of use for the intended
-% study, both in terms of technique and method. If a final thesis
-% project is about the development of a new search engine for
-% a certain application domain, the theory must bring up related
-% work on search algorithms and related techniques, but also
-% methods for evaluating search engines, including
-% performance measures such as precision, accuracy and
-% recall.
-
-% The chapter shall be structured thematically, not per author.
-% A good approach to making a review of scientific literature
-% is to use \emph{Google Scholar} (which also has the useful function
-% \emph{Cite}). By iterating between searching for articles and reading
-% abstracts to find new terms to guide further searches, it is
-% fairly straight forward to locate good and relevant
-% information, such as \cite{test}.
-
-% Having found a relevant article one can use the function for
-% viewing other articles that have cited this particular article,
-% and also go through the article’s own reference list. Among
-% these articles on can often find other interesting articles and
-% thus proceed further.
-
-% It can also be a good idea to consider which sources seem
-% most relevant for the problem area at hand. Are there any
-% special conference or journal that often occurs one can search
-% in more detail in lists of published articles from these venues
-% in particular. One can also search for the web sites of
-% important authors and investigate what they have published
-% in general.
-
-% This chapter is called either \emph{Theory, Related Work}, or
-% \emph{Related Research}. Check with your supervisor.
-
 Machine learning covers a set of problems and tools that overlaps several disciplines. As such, in order to tackle machine learning problems, it is necessary to lay some foundations which help grasp all the concepts involved. Even though this is a rapidly evolving field, there are fundamental topics that remain applicable.
 
 The objective of this chapter is to provide the reader with the definitions, descriptions and examples that allow to understand the rest of this work. We will try to assume little-to-no prior knowledge about machine learning, thus making it as accessible as possible. The following sections go over the basic subjects of machine learning, build the core concepts of deep learning and arrive to the main tools that will be used along the rest of this book, autoencoders.
 
 \section{Machine learning fundamentals}[ML fundamentals]
 
-Machine learning differs from other kinds of computer science disciplines in that its objective is not to give precise instructions for the machine to follow, but instead to provide some form of experience that the machine must learn from in order to extract some information or display some behavior \sidecite{deisenroth2020mathematics}. The algorithms developed for machine learning are essentially mechanisms that take in a certain amount of data, process it and compute the necessary steps to fulfill a specific objetive related to the data. Their output is usually a model, that is, a representation of an approximate solution to the problem. 
+Machine learning\index{machine learning} differs from other kinds of computer science disciplines in that its objective is not to give precise instructions for the machine to follow, but instead to provide some form of experience that the machine must learn from in order to extract some information or display some behavior \sidecite{deisenroth2020mathematics}. The algorithms developed for machine learning are essentially mechanisms that take in a certain amount of data, process it and compute the necessary steps to fulfill a specific objetive related to the data. Their output is usually a model, that is, a representation of an approximate solution to the problem. 
  
 \subsection{Data and models}
 
@@ -72,15 +22,15 @@ Length & Legs & Wings & Species\\\midrule
 \end{tabular}
 \end{margintable}
 
-Datum (plural \textit{data}) usually refers to the minimal unit of machine-readable information, for example, the height of a person (numerical value), whether they are an adult or not (binary categorical value), their country of origin (categorical value) or their given name (character string).
+Datum (plural \textit{data})\index{data} usually refers to the minimal unit of machine-readable information, for example, the height of a person (numerical value), whether they are an adult or not (binary categorical value), their country of origin (categorical value) or their given name (character string).
 
-A \textit{dataset} is a collection of data, usually organized into a table. It contains several \textit{samples}, which correspond to each one of the cases of the problem from which the machine will be able to learn before being presented with new cases. \textit{Variables} are each one of the aspects that have been measured or that characterize each sample. They determine the type of data (character strings, numbers, dates) and the range where values are taken. A usual distinction of numerical variables is between continuous and discrete ones, the former corresponding to real intervals and the latter with a countable set of possible values. 
+A \textit{dataset}\index{dataset} is a collection of data, usually organized into a table. It contains several \textit{samples}\index{sample}, which correspond to each one of the cases of the problem from which the machine will be able to learn before being presented with new cases. \textit{Variables}\index{variable} are each one of the aspects that have been measured or that characterize each sample. They determine the type of data (character strings, numbers, dates) and the range where values are taken. A usual distinction of numerical variables is between continuous and discrete ones, the former corresponding to real intervals and the latter with a countable set of possible values. 
 
 Samples are typically distributed in rows and variables in columns. \autoref{tbl:dataset} shows an example of dataset with 3 samples and 4 variables, where each variable corresponds to a specific kind of data: \textit{length} is a continuous numerical variable, \textit{legs} is discrete numerical, \textit{wings} is binary categorical and \textit{species} is categorical.
 
 % \subsection{Models}
 
-A \textit{model} is an abstraction of a dataset that enables the machine to perform the desired operations, for example, generating new data similar to the available, or assigning a category to new data points. A good model should be faithful to the available data, incorporating enough information to describe its behavior and potential relations between variables, so that it can be used as a description of the data and as a tool for solving tasks related to it. Models typically follow some template which includes a range of parameters that can be adjusted in order for the resulting model to represent the data. We will call these templates \textit{untrained models}, whereas the final results will be \textit{trained models}.
+A \textit{model}\index{model} is an abstraction of a dataset that enables the machine to perform the desired operations, for example, generating new data similar to the available, or assigning a category to new data points. A good model should be faithful to the available data, incorporating enough information to describe its behavior and potential relations between variables, so that it can be used as a description of the data and as a tool for solving tasks related to it. Models typically follow some template which includes a range of parameters that can be adjusted in order for the resulting model to represent the data. We will call these templates \textit{untrained models}, whereas the final results will be \textit{trained models}.
 
 
 
@@ -97,13 +47,13 @@ In the context of machines learning from data, several types of learning are usu
 
 \subsubsection{Supervised learning}
 
-In a supervised learning setting \sidecite{Caruana2006AnEC}, every observed case of the problem in the dataset is coupled with its solution, so that the machine can learn a mapping out of those associations, from the space of the instances (input space) to the one of the labels (output space). Models generated by learning algorithms in this contexts are usually known as \textit{predictors}, since for each new data point they must guess a label in the output space. For example, in \autoref{tbl:dataset}, an appropriate objective task for a supervised learning algorithm is to predict the species of an animal, knowing the rest of its characteristics. 
+In a supervised learning\index{supervised learning} setting \sidecite{Caruana2006AnEC}, every observed case of the problem in the dataset is coupled with its solution, so that the machine can learn a mapping out of those associations, from the space of the instances (input space) to the one of the labels (output space). Models generated by learning algorithms in this contexts are usually known as \textit{predictors}, since for each new data point they must guess a label in the output space. For example, in \autoref{tbl:dataset}, an appropriate objective task for a supervised learning algorithm is to predict the species of an animal, knowing the rest of its characteristics. 
 
 Common supervised learning problems are \textit{classification} and \textit{regression}. They differ in the type of output that the predictor must produce: classification implies that the output space is finite, thus the label is just one of a certain number of available \textit{classes}, whereas regression involves guessing a real value from a continuous interval. 
 
 \subsubsection{Unsupervised learning}
 
-The scenario of unsupervised learnin \sidecite{celebi2016unsupervised} covers problems where the solution is not known for the data that is available and, as a result, the model cannot be provided with supervision. Instead, the user of an unsupervised learning algorithm looks to find some sort of inner structure or hidden patterns in the data.
+The scenario of unsupervised learning\index{unsupervised learning} \sidecite{celebi2016unsupervised} covers problems where the solution is not known for the data that is available and, as a result, the model cannot be provided with supervision. Instead, the user of an unsupervised learning algorithm looks to find some sort of inner structure or hidden patterns in the data.
 
 One case where unsupervised learning methods are convenient is when trying to find the most useful variables in a dataset, or even transform the original features onto a more compact set of variables which prevent redundancy and maximize efficiency in relation to information provided per feature. Another typical task is finding associations between items present in the data points, like related articles in a shopping bag or recommended moviess. 
 
@@ -111,11 +61,11 @@ One case where unsupervised learning methods are convenient is when trying to fi
 
 There are special cases where the task that is being approached is not entirely supervised but not completely unsupervised either, but a mix of both.
 
-The most common combination emerges when the presence of labels in the observed data is mixed, that is, there are instances with associated labels and others with missing labels. This learning paradigm, known as \textit{semi-supervised learning} \sidecite{van2020survey}, is of interest in many real-world problems, since annotating each one of the collected data instances with its corresponding label can be costly and time-consuming~\sidecite{vanEngelen2019ASO}. 
+The most common combination emerges when the presence of labels in the observed data is mixed, that is, there are instances with associated labels and others with missing labels. This learning paradigm, known as \textit{semi-supervised learning}\index{semi-supervised learning} \sidecite{van2020survey}, is of interest in many real-world problems, since annotating each one of the collected data instances with its corresponding label can be costly and time-consuming~\sidecite{vanEngelen2019ASO}. 
 
-Another relevant area that combines predictive and descriptive learning is that of \textit{subgroup discovery} \sidecite{Herrera2010AnOO}, a task where the objective is to find unusual relations (rules) between the input variables and the target variable. Instead of learning to predict this variable, the idea is to identify interesting subsets of instances according to their relation to the target variable and the rest of samples.
+Another relevant area that combines predictive and descriptive learning is that of \textit{subgroup discovery}\index{subgroup discovery} \sidecite{Herrera2010AnOO}, a task where the objective is to find unusual relations (rules) between the input variables and the target variable. Instead of learning to predict this variable, the idea is to identify interesting subsets of instances according to their relation to the target variable and the rest of samples.
 
-\subsubsection{Reinforcement learning}
+\subsubsection{Reinforcement learning}\index{reinforcement learning}
 
 A different strategy for machines to learn consists in providing them with positive or negative reinforcements according to their behavior \sidecite{kaelbling1996reinforcement}. Instead of providing the algorithm with the complete solution for each problem instance, usually a score is given, evaluating the current solution against some criteria. This learning paradigm fits well with problems where multiple solutions can be acceptable, so the actual solving process is not as important as obtaining the desired result, as well as situations where the aim is to find the most efficient solution. Notable examples of this kind of learning are tabletop games like AlphaGo for Go \sidecite{silver2016mastering} and even strategy videogames like AlphaStar for StarCraft II \sidecite{vinyals2019grandmaster}.
 
@@ -145,14 +95,14 @@ Moreover, combinations of the previous nonstandard inputs and outputs structures
 
 % - small intro to nonstandard problems
 
-Different issues can arise that make certain classes hard to learn by classifiers due to their size, location or lack of representation within the training set itself. This phenomenon is broadly known as data complexity \sidecite{ho2002complexity}, and in some cases as difficult classes \sidecite{galar2014empowering}, if the complications are related to a specific class. Data complexity can be caused by the feature set not fully being able to separate instances of different classes, class boundaries being highly nonlinear or composed of several disjoint subsets, or a class being notably underrepresented with respect to the rest, among other factors.
+Different issues can arise that make certain classes hard to learn by classifiers due to their size, location or lack of representation within the training set itself. This phenomenon is broadly known as data complexity\index{data complexity} \sidecite{ho2002complexity}, and in some cases as difficult classes \sidecite{galar2014empowering}, if the complications are related to a specific class. Data complexity can be caused by the feature set not fully being able to separate instances of different classes, class boundaries being highly nonlinear or composed of several disjoint subsets, or a class being notably underrepresented with respect to the rest, among other factors.
 
 % - small intro to difficult classes
 
 \section{Deep learning}
 
 An alternative approach to extracting features before training a predictor 
-is to embed the feature extraction stage within the untrained model itself, and learn the best features at the same time that the final model (a classifier, regressor, segmentor...) is trained. When this process is organized layer-wise, the overall model is called a \textit{deep learning} model \sidecite{goodfellow2016deep}.
+is to embed the feature extraction stage within the untrained model itself, and learn the best features at the same time that the final model (a classifier, regressor, segmentor...) is trained. When this process is organized layer-wise, the overall model is called a \textit{deep learning} model \sidecite{goodfellow2016deep}\index{deep learning}.
 
 Deep learning model design comprises two complementary elements: the type of \textit{layers} that build up the network and determine the type of data that can be processed, and the \textit{architecture} itself, that is, the way these layers are organized and allow to perform one task or another with the provided data. For example, one could build a classification network out of recurrent units for sentiment analysis, or an encoder-decoder network out of convolutional layers for image segmentation. The fundamental types of layers as well as the most relevant architectures are explained next.
 
@@ -162,7 +112,7 @@ Not every kind of neural network is prepared to deal with every type of dataset.
 
 \subsubsection{Dense networks}
 
-Dense deep networks, also known as fully connected networks, are essentially the same as MLPs. Their main operation in each layer is matrix product, where a parameter matrix is used to extract the values of each layer out of those of the previous one. More formally, is $x$ is an input vector, $W$ is the parameter matrix and $b$ is a bias parameter, the dense layer performs the following computation:
+Dense deep networks, also known as fully connected\index{fully connected} networks, are essentially the same as MLPs. Their main operation in each layer is matrix product, where a parameter matrix is used to extract the values of each layer out of those of the previous one. More formally, is $x$ is an input vector, $W$ is the parameter matrix and $b$ is a bias parameter, the dense layer performs the following computation:
 
 \begin{equation}
     f(x)=Wx + b\quad W\in \mathcal M_{n\times m}(\mathbb R), x\in\mathbb R^m, b\in\mathbb R^n~.
@@ -178,7 +128,7 @@ These networks are called fully connected because each value in the output is ab
 \end{marginfigure}
 
 
-Convolutional networks (CNNs) emerge out of the need to adapt operations to bidimensional data, as well as reduce the computational complexity of dense networks when treating this type of high-dimensional data. Since the matrix used in a dense layer has $n\times m$ parameters, $m$ being the number of variables in the input vector and $n$ the number of variables in the output vector, the amount of floating point operations required to compute the result is $O\left(nm\right)$.
+Convolutional networks\index{convolutional network} (CNNs) emerge out of the need to adapt operations to bidimensional data, as well as reduce the computational complexity of dense networks when treating this type of high-dimensional data. Since the matrix used in a dense layer has $n\times m$ parameters, $m$ being the number of variables in the input vector and $n$ the number of variables in the output vector, the amount of floating point operations required to compute the result is $O\left(nm\right)$.
 
 In a CNN, a certain number of matrices typically named \textit{channels} is computed out of the input matrix. Each one is composed of values calculated by convoluting the original matrix with a weight matrix, called \textit{kernel}, which is usually of a fixed small size: $3\times 3$ up to $9\times 9$. Each pixel $(i, j)$ in a filter resulting from convoluting a kernel $K$ over the input $I$ can be computed as follows:
 \begin{equation}
@@ -192,48 +142,48 @@ Most current neural network libraries implement cross correlation instead of the
     f(i,j)=\left(I\ast K\right)(i,j)=\sum_{m}\sum_{n}I(i+m,j+n)K(m,n)~.
 \end{equation}
 
-Convolution is not the only stage performed by CNN. The other important step is \textit{pooling}. This function outputs a smaller version of its input by summarizing nearby values. For example, max pooling \sidecite{zhou1988computation} takes the maximum out of a rectangle of the input matrix and outputs that as a single value, reducing in this way the size of the matrix.
+Convolution is not the only stage performed by CNN. The other important step is \textit{pooling}\index{pooling}. This function outputs a smaller version of its input by summarizing nearby values. For example, max pooling \sidecite{zhou1988computation} takes the maximum out of a rectangle of the input matrix and outputs that as a single value, reducing in this way the size of the matrix.
 
 Computer vision has been one of the fundamental applications of deep learning and CNNs have evolved greatly as a result, with many improvements and extensions such as residual connections (see Figure~\ref{fig:resnet}), breakdown of convolutions into smaller ones \sidecite{7780677}, and pruning strategies \sidecite{lin2019towards}.
 
 
 \subsubsection{Recurrent networks}
 
-{In a recurrent neural network (RNN), some parts of the computation of the network at each step, e.g. the output, are fed as input in the next one. This creates a ``memory'' which allows the RNN to remember previous outputs when making predictions. RNNs are used for tasks such as speech recognition and language translation, where the order of the input is important and past outputs are relevant for the next predictions.}
+{In a recurrent neural network (RNN)\index{recurrent network}, some parts of the computation of the network at each step, e.g. the output, are fed as input in the next one. This creates a ``memory'' which allows the RNN to remember previous outputs when making predictions. RNNs are used for tasks such as speech recognition and language translation, where the order of the input is important and past outputs are relevant for the next predictions.}
 
 \begin{marginfigure}
     \includegraphics[width=\linewidth]{lstm}
     \caption[Diagram for an LSTM.]{\label{fig:lstm}Diagram for an LSTM where blue units are gates (sigmoidal or tanh activations), green units are products and pink units are sums. Triangles over data flows indicate values that are fed at the next step.}
 \end{marginfigure}
 
-A popular kind of RNN units are long short-term memory (LSTM) units \sidecite{hochreiter1997long}, which add a self-loop controlled (\textit{gated}) by another unit so that the memorized information can be eventually forgotten. See Figure~\ref{fig:lstm} for a detailed schematic of this type of unit.
+A popular kind of RNN units are long short-term memory\index{long short-term memory} (LSTM) units \sidecite{hochreiter1997long}, which add a self-loop controlled (\textit{gated}) by another unit so that the memorized information can be eventually forgotten. See Figure~\ref{fig:lstm} for a detailed schematic of this type of unit.
 
 
 \subsubsection{Attention and transformers}
 
-Attention mechanisms started in encoder-decoder recurrent networks as a system to identify parts of speech that are more relevant than others within the input data while decoding is in process \sidecite{bahdanau2014neural,luong2015effective}. Instead of compacting all the inputs into an encoded vector and decoding from there, attention allows to have all information available and focus on just the important pieces at each decoding step. There exist several ways of applying attention according to the elements that interact with one another, including self-attention, local attention and global attention.
+Attention\index{attention} mechanisms started in encoder-decoder recurrent networks as a system to identify parts of speech that are more relevant than others within the input data while decoding is in process \sidecite{bahdanau2014neural,luong2015effective}. Instead of compacting all the inputs into an encoded vector and decoding from there, attention allows to have all information available and focus on just the important pieces at each decoding step. There exist several ways of applying attention according to the elements that interact with one another, including self-attention, local attention and global attention.
 
 \begin{marginfigure}
     \includegraphics{transformer}
     \caption[Original architecture diagram of the Transformer.]{\label{fig:transformer}Original architecture diagram of the Transformer. Source: \cite{vaswani2017attention}.}
 \end{marginfigure}
 
-Based on the concept of attention, transformers \sidecite{vaswani2017attention} were conceptualized by simply avoiding recurrent units and building the whole network around stacked self-attention operations. Figure~\ref{fig:transformer} shows how a transformer is organized. 
+Based on the concept of attention, transformers\index{transformer} \sidecite{vaswani2017attention} were conceptualized by simply avoiding recurrent units and building the whole network around stacked self-attention operations. Figure~\ref{fig:transformer} shows how a transformer is organized. 
 Transformers have been applied beyond machine translation to many other natural language tasks, where they are currently the state of the art \sidecite{devlin-etal-2019-bert}. Some proposals have tackled computer vision as well \sidecite{liu2021swin}, but are being matched in performance by attention-free models such as \sidecite{chen2021cyclemlp}.
 
 \subsection{Network architectures}
 
-Neural layers can be organized in different formations and connected in various ways in order to achieve specific solutions. The structure and connections of a network are known as its architecture.
+Neural layers can be organized in different formations and connected in various ways in order to achieve specific solutions. The structure and connections of a network are known as its architecture\index{architecture}.
 
 \subsubsection{Classifiers and regressors}
 
 Classifiers and regressors are very common types of neural network architectures. The key to obtaining a label output from a network is to stack layers which transform and progressively reduce the dimension of the original data, up to the last layer where the class is selected or a numerical value is predicted. 
 
-Some classification networks are trained and tested against well known benchmarks, becoming a reference for further works and even a basis for other tasks, leveraging the already extracted knowledge by means of \textit{transfer learning}. For instance, the VGG-19 and ResNet networks shown in Figure~\ref{fig:resnet} are standard tools for general image classification.
+Some classification networks are trained and tested against well known benchmarks, becoming a reference for further works and even a basis for other tasks, leveraging the already extracted knowledge by means of \textit{transfer learning}\index{transfer learning}. For instance, the VGG-19 and ResNet networks shown in Figure~\ref{fig:resnet} are standard tools for general image classification.
 
 \subsubsection{Encoder-decoder structures}
 
-There exists a category of deep architectures composed of two components, an \textit{encoder} and a \textit{decoder}, where there is an interest in the model operating first with the features in order to obtain higher-level features (encoding) and then developing these features back onto more detailed and specific versions.
+There exists a category of deep architectures composed of two components, an \textit{encoder}\index{encoder} and a \textit{decoder}\index{decoder}, where there is an interest in the model operating first with the features in order to obtain higher-level features (encoding) and then developing these features back onto more detailed and specific versions.
 
 For example, when the objective task is to segment the pixels in an image, that is, label each pixel with one of several classes, a possible solution is to compute abstract, high-level features for the image, and use those to classify each pixel next \sidecite{minaee2021image}. This allows to analyze the neighborhoods of each pixel before assigning it to a class, which will probably lead to more cohesive segmentations. Using an encoder-decoder structure, the encoder would compute these low-resolution but high-level features, and the decoder would perform the detailed labeling task out of the extracted information.
 
@@ -248,7 +198,7 @@ A special subset of encoder-decoder architectures are autoencoders, which are fu
     \caption{\label{fig:basicae}Schematic structure of a fully connected autoencoder.}
 \end{marginfigure}
 
-Essentially, an \textit{autoencoder} is an encoder-decoder architecture which is trained to map its inputs onto its outputs. Being $f$ the encoder network and $g$ the decoder one, the main objective of an autoencoder would be to match the input data as closely as possible (see Figure~\ref{fig:basicae}):
+Essentially, an \textit{autoencoder}\index{autoencoder} is an encoder-decoder architecture which is trained to map its inputs onto its outputs. Being $f$ the encoder network and $g$ the decoder one, the main objective of an autoencoder would be to match the input data as closely as possible (see Figure~\ref{fig:basicae}):
 
 \begin{equation}
     x\approx g(f(x))

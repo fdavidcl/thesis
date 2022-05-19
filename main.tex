@@ -36,7 +36,7 @@
 %----------------------------------------------------------------------------------------
 
 \makeatletter
-\uppertitleback{\@title} % Header
+\uppertitleback{\@title\\\@plainauthor} % Header
 
 \lowertitleback{
 	%\textbf{Disclaimer} \\
@@ -50,12 +50,18 @@
 	\medskip
 
 	\textbf{Copyright} \\
-	Part of this book is released under a CC-BY-SA copyright license. This allows you to share and modify it as long as the modifications are released under a similar license.
+	The published articles included in this document are printed with permission of their corresponding copyright holders:
+
+	\begin{itemize}
+		\item Articles~\ref{ch:paper1}, \ref{ch:paper2} and \ref{ch:paper5} are made available under the CC-BY-NC-ND 4.0 license according to Elsevier policy: \url{https://creativecommons.org/licenses/by-nc-nd/4.0}.
+  		\item Copyright notice relative to Article~\ref{ch:paper3}: Reprinted by permission from Springer Nature: Springer Progress in Artificial Intelligence, A snapshot on nonstandard supervised learning problems: taxonomy, relationships, problem transformations and algorithm adaptations. David Charte, Francisco Charte, Salvador García, Francisco Herrera \textcopyright{} 2019.
+    \item Copyright notice relative to Article~\ref{ch:paper6}: \textcopyright{} 2021 IEEE. Reprinted, with permission, from David Charte, Francisco Charte, Francisco Herrera. Reducing Data Complexity using Autoencoders with Class-informed Loss Functions. IEEE Transactions on Pattern Analysis and Machine Intelligence.
+	\end{itemize}
+	
+	The rest of the contents of this book are released under the CC-BY-SA 4.0 copyright license. This allows you to share and modify it as long as the modifications are released under a similar license.
 
 	To view a copy of the CC-BY-SA code, visit: \\\url{https://creativecommons.org/licenses/by-sa/4.0/}
 
-	The published articles included in this document are printed under permission of their corresponding copyright holders.
-	
 	\medskip
 	
 	\textbf{Colophon} \\
@@ -180,7 +186,7 @@
 
 % The index needs to be compiled on the command line with 'makeindex main' from the template directory
 
-% \printindex % Output the index
+\printindex % Output the index
 % \printnomenclature
 
 \end{document}

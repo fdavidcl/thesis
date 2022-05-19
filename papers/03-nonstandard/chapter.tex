@@ -1,117 +1,8 @@
-%%%%%%%%%%%%%%%%%%%%%%% file template.tex %%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% This is a general template file for the LaTeX package SVJour3
-% for Springer journals.          Springer Heidelberg 2010/09/16
-%
-% Copy it to a new file with a new name and use it as the basis
-% for your article. Delete % signs as needed.
-%
-% This template includes a few options for different layouts and
-% content for various journals. Please consult a previous issue of
-% your journal as needed.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% First comes an example EPS file -- just ignore it and
-% proceed on the \documentclass line
-% your LaTeX will extract the file if required
-
-%
-% \RequirePackage{fix-cm}
-%
-%\documentclass{svjour3}                     % onecolumn (standard format)
-%\documentclass[smallcondensed]{svjour3}     % onecolumn (ditto)
-%\documentclass[smallextended]{svjour3}       % onecolumn (second format)
-% \documentclass[twocolumn]{svjour3}          % twocolumn
-% \documentclass[
-% 	fontsize=11pt, % Base font size
-% 	twoside=false, % Use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
-% 	open=any, % If twoside=true, uncomment this to force new chapters to start on any page, not only on right (odd) pages
-% 	secnumdepth=1, % How deep to number headings. Defaults to 1 (sections)
-% ]{kaobook}
-% \setchapterstyle{kao} % Choose the default chapter heading style
-% % change draft by referee for submission!!
-% %
-% \usepackage{kaobiblio}
-
-% \bibliography{references.bib}
-% \smartqed  % flush right qed marks, e.g. at end of proof
-
-% \usepackage[utf8]{inputenc}
-%
-% \usepackage{graphicx}
-%
-% \usepackage{mathptmx}      % use Times fonts if available on your TeX system
-%
-% insert here the call for the packages your document requires
-%\usepackage{latexsym}
-% etc.
-%
-% please place your own definitions here and don't use \def but
-% \newcommand{}{}
-%
-% Insert the name of "your journal" with
-% \journalname{myjournal}
-%
-% \begin{document}
-
-%%% Highlight revisions in blue
-% \newcommand{}[1]{#1}
-% Remove the following line to remove highlights
-% \renewcommand{}[1]{\textcolor{blue}{#1}}
 
 \setchapterpreamble[u]{\margintoc}
-% \renewcommand*{\thechapter}{\Roman{chapter}}
-% \addtocounter{chapter}{2}
 \makearticle{A snapshot on nonstandard supervised learning problems}{charte2019snapshot}
 \label{ch:paper3}
 
-% \chapter{}
-
-% \begin{widepar}
-%   \begin{kaobox}[frametitle=Source]
-%     Charte, D., Charte, F., García, S., \& Herrera, F. (2019). A snapshot on nonstandard supervised learning problems: taxonomy, relationships, problem transformations and algorithm adaptations. \textit{Progress in Artificial Intelligence, 8(1)}, 1-14.
-%   \end{kaobox}
-% \end{widepar}
-% aka The Zoo of Supervised Learning
-
-%\titlerunning{Short form of title}        % if too long for running head
-
-% \author{David Charte
-%   \and Francisco Charte
-%   \and Salvador Garc{\'i}a
-%   \and Francisco Herrera
-% }
-
-
-%\authorrunning{Short form of author list} % if too long for running head
-
-% \institute{D. Charte \at
-%               CITIC IB14, Universidad de Granada, Granada, Spain \\
-%               Tel.: +34-958241719\\ % (Tfno de conserjería del CITIC)
-%               \email{fdavidcl@ugr.es}           %  \\
-% %             \emph{Present address:} of F. Author  %  if needed
-%            \and
-%            F. Charte \at
-%            \email{fcharte@ujaen.es}
-%            \and
-%            S. Garc{\'i}a \at
-%            \email{salvagl@decsai.ugr.es}
-%            \and
-%            F. Herrera \at
-%            \email{herrera@decsai.ugr.es}
-% }
-
-%\author{}
-%\institute{F. Author \at address \\ Tel.: +123-45-678910\\Fax: +123-45-678910\\ \email{email}}
-
-% \date{Received: date / Accepted: date}
-% The correct dates will be entered by the editor
-
-
-% \maketitle
-
-% \begin{abstract}
   \section*{Abstract}
 Machine learning is a field which studies how machines can alter and adapt their behavior, improving their actions according to the information they are given. This field is subdivided into multiple areas, among which the best known are supervised learning (e.g. classification and regression) and unsupervised learning (e.g. clustering and association rules).
 
@@ -130,15 +21,15 @@ Machine learning - Supervised learning - Nonstandard learning
 
 According to Mitchell \sidecite{learning-mitchell}, a machine is said to learn from experience $E$ related to a class of tasks $T$ and performance metric $P$, when its performance at tasks in $T$  improves according to $P$ after experience $E$.
 
-Supervised learning is one of the fundamental areas of machine learning \sidecite{learning-marsland}. From object detection to ecological modeling to emotion recognition, it covers all kinds of applications. It essentially consists in learning a function by training with a set of input-output pairs. The training stage can be seen as $E$ in the previous definition, and the specific task $T$ may vary, but usually involves predicting an appropriate output given a new input.
+Supervised learning\index{supervised learning} is one of the fundamental areas of machine learning \sidecite{learning-marsland}. From object detection to ecological modeling to emotion recognition, it covers all kinds of applications. It essentially consists in learning a function by training with a set of input-output pairs. The training stage can be seen as $E$ in the previous definition, and the specific task $T$ may vary, but usually involves predicting an appropriate output given a new input.
 
 Traditionally, supervised learning problems have been spread into two categories: classification and regression \sidecite{classification,pattern-rec}. In the first, information is divided into discrete categories, while the latter involves patterns associated to a value in a continuous spectrum.
 
 These problems can be processed by learning from a training dataset, which is composed of instances. Typically, these instances or samples take the form $(x, y)$ where $x$ is a vector of values in the space of input variables and $y$ is a value in the target variable. Each problem can be described by the type of its instances: inputs will usually belong to a subset of $\mathbb R^n$, and outputs will take values in a specific one-dimensional set, finite or continuous. Once trained, the obtained model can be used to predict the target variable on unseen instances.
 
-Standard classification problems are those where labels are either binary or multiclass \sidecite{classification-duda,multiclass}. In the binary case, an instance can only be associated with one of two values: positive or negative, which is equivalent to 0 or 1. For example, email messages may be classified into spam or legit, and tumours can be categorized as either benign or malign. Multiclass problems, on the other hand, involve any finite number of classes. That is, any given instance will belong to one of possibly many categories, which is equivalent to it being assigned a natural number below a convenient threshold. As an example, a photograph of a plant or a sound recording from an animal could correspond to one of a variety of species. 
+Standard classification\index{classification} problems are those where labels are either binary or multiclass \sidecite{classification-duda,multiclass}. In the binary case, an instance can only be associated with one of two values: positive or negative, which is equivalent to 0 or 1. For example, email messages may be classified into spam or legit, and tumours can be categorized as either benign or malign. Multiclass problems, on the other hand, involve any finite number of classes. That is, any given instance will belong to one of possibly many categories, which is equivalent to it being assigned a natural number below a convenient threshold. As an example, a photograph of a plant or a sound recording from an animal could correspond to one of a variety of species. 
 
-A standard regression problem \sidecite{learning-tibshirani,regression} consists in finding a function which is able to predict, for a given example, a real value among a continuous range, usually an interval or the set of real numbers $\mathbb R$. For example, the height of a person may be estimated out of several characteristics such as age or country of origin.
+A standard regression\index{regression} problem \sidecite{learning-tibshirani,regression} consists in finding a function which is able to predict, for a given example, a real value among a continuous range, usually an interval or the set of real numbers $\mathbb R$. For example, the height of a person may be estimated out of several characteristics such as age or country of origin.
 
 Even though these standard problems are applicable in a multitude of cases, there are situations whose correct modeling requires modifications of their structure. For example, a newspaper article can be categorized according to its contents, but it could be desirable to assign several categories simultaneously. Similarly, a social media post could be described by not one but two input vectors, an image and a piece of text. These special circumstances cannot be covered by the traditional one-vector input and one-dimensional output schema. As a consequence, since performance metrics which measure improvements in standard tasks assume the common structure, they lose applicability or sense in these cases. Thus, not only new techniques are needed to tackle the problems, but also new ways of measuring and comparing their success.
 
@@ -172,7 +63,7 @@ Other usual notations are based in probability theory, thus involving random var
 \subsection{Multi-instance}
 \label{p3sec:minstance}
 
-The multi-instance (MI) framework \sidecite{mil} assumes a single feature space for all instances, but each training pattern may consist of more than one instance. In this case, a training pattern is composed of a finite multiset or \emph{bag} of instances and a label. Formally, assuming instances are drawn from a set $A\subset\mathbb R^n$, the domain can be described as follows:
+The multi-instance (MI)\index{multi-instance} framework \sidecite{mil} assumes a single feature space for all instances, but each training pattern may consist of more than one instance. In this case, a training pattern is composed of a finite multiset or \emph{bag} of instances and a label. Formally, assuming instances are drawn from a set $A\subset\mathbb R^n$, the domain can be described as follows:
 \begin{equation}
   X=\left\{b\subset A\mid b \mbox{ finite}\right\}~.
   \end{equation} 
@@ -187,7 +78,7 @@ Other MI problems differ in that a per-instance labeling may not be possible or 
 \subsection{Multi-view}
 \label{p3sec:mview}
 
-A learning problem is considered to be multi-view (MV) \sidecite{mviewl} when inputs are composed of several components of very different nature. 
+A learning problem is considered to be multi-view\index{multi-view} (MV) \sidecite{mviewl} when inputs are composed of several components of very different nature. 
 
 For example, if a learning pattern consists of an image as well as a piece of text representing the same instance, they can be seen as two \emph{views} on it. In that case, images and texts would belong to distinct feature spaces $A$ and $B$ respectively, an input pattern being $(a,b)\in A\times B$ . More generally, we can describe the input space as:
 \begin{equation}
@@ -198,7 +89,7 @@ where $t$ is the number of views offered by the problem and $n_i$ is the dimensi
 \subsection{Multi-label}
 \label{p3sec:mlabel}
 
-The multi-label (ML) learning field \sidecite{mlc,mltutorial} studies problems related to simultaneously assigning multiple labels to a single instance. That is, if $\mathcal L = \{l_1,\dots,l_p\}$ the codomain consists of all possible selections of these $p$ labels, also known as \emph{labelsets}:
+The multi-label (ML)\index{multi-label} learning field \sidecite{mlc,mltutorial} studies problems related to simultaneously assigning multiple labels to a single instance. That is, if $\mathcal L = \{l_1,\dots,l_p\}$ the codomain consists of all possible selections of these $p$ labels, also known as \emph{labelsets}:
 \begin{equation}
   Y=2^{\mathcal L}\cong\left\{0,1\right\}^p~.
   \end{equation} 
@@ -214,7 +105,7 @@ The difference that arises when comparing ML problems to binary or multiclass on
 \subsection{Multi-dimensional}
 \label{p3sec:mdim}
 
-Multi-dimensional (MD) learning \sidecite{mdc} is a generalized classification problem where categorization is performed simultaneously along several dimensions. Each instance can belong to one of many classes in each dimension, thus the output space can be formally described as:
+Multi-dimensional (MD)\index{multi-dimensional} learning \sidecite{mdc} is a generalized classification problem where categorization is performed simultaneously along several dimensions. Each instance can belong to one of many classes in each dimension, thus the output space can be formally described as:
 \begin{equation}
   Y=\mathcal L_1\times\mathcal L_2\times\dots\times\mathcal L_p,
   \end{equation}
@@ -225,7 +116,7 @@ As with ML learning, label dimensions may be related in some way and treating th
 \subsection{Label distribution learning}
 \label{p3sec:ldl}
 
-In label distribution learning (LDL) problems \sidecite{ldl}, otherwise known as probabilistic class label problems \sidecite{ldl-prob}, any instance can be described in different degrees by each label. This can be modeled as a discrete distribution over the labels, where the probability of a label given a specific instance is called its \emph{degree of description}. Analitically, the objective is, for each instance, to predict a real-valued vector which sums exactly 1:
+In label distribution learning (LDL)\index{label distribution learning} problems \sidecite{ldl}, otherwise known as probabilistic class label problems \sidecite{ldl-prob}, any instance can be described in different degrees by each label. This can be modeled as a discrete distribution over the labels, where the probability of a label given a specific instance is called its \emph{degree of description}. Analitically, the objective is, for each instance, to predict a real-valued vector which sums exactly 1:
 \begin{equation}
   Y=\left\{y\in\left[0,1\right]^p:\sum_{i=1}^p y_i = 1\right\}~.
   \end{equation}
@@ -234,7 +125,7 @@ In this case, we would say that the $i$-th label in $\mathcal L$ describes an in
 
 \subsection{Label ranking}
 
-In a label ranking (LR) problem \sidecite{lrankpairwise,lranksurvey} the objective is not to find a function able to choose one or several labels from the label space. Instead, it must evaluate their relevance for each unseen instance. The most general version of the problem involves a training set where $Y$ is the set of all partial orders of $\mathcal L$, and the obtained function also maps individual instances to partial orders. This way, for each test instance the function will output a sequence of preferences where some labels will be seen as more relevant than others. 
+In a label ranking (LR)\index{label ranking} problem \sidecite{lrankpairwise,lranksurvey} the objective is not to find a function able to choose one or several labels from the label space. Instead, it must evaluate their relevance for each unseen instance. The most general version of the problem involves a training set where $Y$ is the set of all partial orders of $\mathcal L$, and the obtained function also maps individual instances to partial orders. This way, for each test instance the function will output a sequence of preferences where some labels will be seen as more relevant than others. 
 
 However, the typical situation in label ranking problems is that the orders are total, which means any two labels can always be compared. This is called a \emph{ranking} and does not exclude the possibility of ties. When ties are not allowed it is said to be a \emph{sorting} or \emph{permutation}, and can be formulated as follows:
 \begin{equation}
@@ -245,7 +136,7 @@ where $p$ is the amount of labels. $Y$ can also be seen as the set of all permut
 \subsection{Multi-target regression}
 \label{p3sec:mtarget}
 
-A regression problem where the output space has more than just one dimension is usually called multi-target regression (MTR) and is also known as multi-output, multi-variate or multi-response \sidecite{moutr}. In this case, a formal description is simply that the codomain is a continuous multi-dimensional real set:
+A regression problem where the output space has more than just one dimension is usually called multi-target regression (MTR)\index{multi-target regression} and is also known as multi-output, multi-variate or multi-response \sidecite{moutr}. In this case, a formal description is simply that the codomain is a continuous multi-dimensional real set:
 \begin{equation}
   Y=\prod_{i=1}^p Y_i~\mbox{, where }Y_i\subset\mathbb R~\forall i
   \end{equation}
@@ -263,7 +154,7 @@ As with other multiple target extensions, the key difference with single-target 
   
 \subsection{Ordinal regression}
 
-A problem where the target space is discrete but ordered is called ordinal regression (OR) or, alternatively, ordinal classification \sidecite{ord-survey}. It can be located midway between classification and regression. More specifically, it consists in labeling instances with a finite number of choices where these are ordered
+A problem where the target space is discrete but ordered is called ordinal regression (OR)\index{ordinal regression} or, alternatively, ordinal classification \sidecite{ord-survey}. It can be located midway between classification and regression. More specifically, it consists in labeling instances with a finite number of choices where these are ordered
 \begin{equation}
 Y=\left\{1,2,\dots,c\right\},~1<2<\dots<c~.
 \end{equation}
@@ -279,11 +170,11 @@ When inputs as well as outputs are at least partially ordered, it is common to l
 x_1<x_2\Rightarrow f(x_1)<f(x_2)~\forall x_1,x_2\in X~.
 \end{equation}
 
-When $Y$ is discrete the problem is usually called \emph{monotone classification} (MC), monotonic classification or ordinal classification with monotonicity constraints \sidecite{mc-salva}. If, on the contrary, $Y$ is continuous, it is known as \emph{isotonic regression} (IR) \sidecite{ir-book}.
+When $Y$ is discrete the problem is usually called \emph{monotone classification} (MC)\index{monotone classification}, monotonic classification or ordinal classification with monotonicity constraints \sidecite{mc-salva}. If, on the contrary, $Y$ is continuous, it is known as \emph{isotonic regression} (IR) \sidecite{ir-book}.
 
 \subsection{Absence or partiality of information}
 
-Some problems do not directly alter the structure of $X$ and $Y$ from the standard supervised problem. Instead, they restrict which data can belong to a training set, or remove labelings from training examples. In this case, training information is presented partially or with some exclusions.
+Some problems do not directly alter the structure of $X$ and $Y$ from the standard supervised problem. Instead, they restrict which data can belong to a training set, or remove labelings from training examples. In this case, training information is presented partially\index{partial information} or with some exclusions.
 
 According to which kind of information is missing from the training set, a learning task  can usually be categorized as semi-supervised \sidecite{semi-sup}, one-class learning \sidecite{oneclass}, PU-learning \sidecite{pu-learn}, zero-shot learning \sidecite{zeroshot} or one-shot learning \sidecite{oneshot}. These are described further in Section \ref{p3sec:partial}.
 

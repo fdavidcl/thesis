@@ -1,75 +1,9 @@
-% \documentclass[preprint,5p,compress]{elsarticle}
-% \documentclass[
-% 	fontsize=11pt, % Base font size
-% 	twoside=false, % Use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
-% 	open=any, % If twoside=true, uncomment this to force new chapters to start on any page, not only on right (odd) pages
-% 	secnumdepth=1, % How deep to number headings. Defaults to 1 (sections)
-% ]{kaobook}
-% \setchapterstyle{kao} % Choose the default chapter heading style
-% \usepackage{kaobiblio}
-% \bibliography{references.bib}
-
-% \usepackage{xcolor}
-% \usepackage{tikz}
-% \usepackage{amssymb}
-% \usepackage{amsmath}
-% \usepackage{booktabs}
-% \usepackage{makecell}
-% \renewcommand\theadgape{\Gape[1pt]}
-% \usetikzlibrary{shapes.misc, positioning, shapes.multipart, arrows.meta}
-% \tikzset{
-%     layer/.style={
-%         draw, 
-%         rectangle split,
-%         minimum width=2cm,
-%         rectangle split parts=3, 
-%         rectangle split part fill={black!10,white,black!10},
-%         rounded corners,
-%         inner sep=5pt,
-%     }
-% }
-
-% \usepackage{lineno,hyperref}
-% \modulolinenumbers[5]
-
-% \journal{Neurocomputing}
-% \bibliographystyle{elsarticle-num}
-
-% \begin{document}
 \setchapterpreamble[u]{\margintoc}
 \newcommand{\revision}[1]{#1}
 \newcommand{\revisioncolor}{}
 
-% \begin{frontmatter}
-    \makearticle{An analysis on the use of autoencoders for representation learning}{charte2020analysis}
-    \label{ch:paper5}
-    
-    %   \renewcommand*{\thechapter}{\Roman{chapter}}
-%   \addtocounter{chapter}{4}
-%   \chapter{An analysis on the use of autoencoders for representation learning}
-  
-%   \begin{widepar}
-%     \begin{kaobox}[frametitle=Source]
-%       Charte, D., Charte, F., del Jesus, M. J., \& Herrera, F. (2020). An analysis on the use of autoencoders for representation learning: Fundamentals, learning task case studies, explainability and challenges. \textit{Neurocomputing, 404}, 93-107.
-%   \end{kaobox}
-%   \end{widepar}
-
-
-% \author[UGR]{David Charte\corref{cor1}}
-% \ead{fdavidcl@ugr.es}
-
-% \author[UJA]{Francisco Charte}
-% \ead{fcharte@ujaen.es}
-
-% \author[UJA]{Mar\'ia J. del Jesus}
-% \ead{mjjesus@ujaen.es}
-
-% \author[UGR]{Francisco Herrera}
-% \ead{herrera@decsai.ugr.es}
-
-% \cortext[cor1]{Corresponding author.}
-% \address[UGR]{Department of Computer Science and A.I., University of Granada, 18071 Granada, Spain}
-% \address[UJA]{Department of Computer Science, University of Ja\'en, 23071 Ja\'en, Spain}
+\makearticle{An analysis on the use of autoencoders for representation learning}{charte2020analysis}
+\label{ch:paper5}
 
 \section*{Abstract}
 In many machine learning tasks, learning a good representation of the data can be the key to building a well-performant solution. This is because most learning algorithms operate with the features in order to find models for the data. For instance, classification performance can improve if the data is mapped to a space where classes are easily separated, and regression can be facilitated by finding a manifold of data in the feature space. As a general rule, features are transformed by means of statistical methods such as principal component analysis, or manifold learning techniques such as Isomap or locally linear embedding. From a plethora of representation learning methods, one of the most versatile tools is the autoencoder. In this paper we aim to demonstrate how to influence its learned representations to achieve the desired learning behavior. To this end, we present a series of learning tasks: data embedding for visualization, image denoising, semantic hashing, detection of abnormal behaviors and instance generation. We model them from the representation learning perspective, following the state of the art methodologies in each field. A solution is proposed for each task employing autoencoders as the only learning method. The theoretical developments are put into practice using a selection of datasets for the different problems and implementing each solution, followed by a discussion of the results in each case study {and a brief explanation of other six learning applications. We also explore the current challenges and approaches to explainability in the context of autoencoders.} All of this helps conclude that, thanks to alterations in their structure as well as their objective function, autoencoders may be the core of a possible solution to many problems which can be modeled as a transformation of the feature space.
@@ -133,7 +67,7 @@ Traditionally, feature extraction methods have been developed with linear as wel
 
 \paragraph{Nonlinear methods} Some well known nonlinear approaches to feature extraction are kernel PCA, restricted Boltzmann machines and manifold learning methods. Kernel PCA~\sidecite{KernelPCA} extends PCA to nonlinear combinations of features by projecting samples onto higher-dimensional spaces and using the kernel trick~\sidecite{kernelmethods}. Restricted Boltzmann machines are undirected graphical probabilistic models, also known as harmoniums~\sidecite{Harmonium}, with one visible layer and one hidden layer that acts as the set of extracted features. They can be trained using the contrastive divergence algorithm~\sidecite{ContrastiveDivergence}. Many nonlinear feature learning methods attempt to find coordinates for a lower dimensional structure embedded in the original features, namely, a manifold. Multidimensional scaling (MDS) is one of the first techniques that can be considered manifold learning, as its objective is projecting samples in a low-dimensional space while translating as much information of pairwise distances as possible. There are several variants of MDS, one of them is Sammon mapping~\sidecite{Sammon}, which improves on MDS by using a different cost function which stresses large distances similarly to small ones. Isomap~\sidecite{Isomap} is a more recent extension of MDS which looks for the coordinates that describe the actual degrees of freedom of the data while preserving distances among neighbors and geodesic distances (the length of the shortest path that connects two points in the manifold). Locally Linear Embedding~\sidecite{LLE} also seeks a manifold which preserves neighbors but, in order to maintain the local structure, it linearly reconstructs each point from its neighbors. Laplacian eigenmaps~\sidecite{LaplacianEigenmaps} is a procedure that builds a graph based on the neighborhood structure of the data, and from it a weight matrix whose eigenvectors can be used to compute new coordinates for each point.
 
-\subsection{Deep representation learning}
+\subsection{Deep representation learning}\index{representation learning!deep}
 
 Deep learning architectures are hierarchies of abstractions of the input feature space and, as such, they compute several transformations of the features before reaching a response. In some cases, these can be seen as learned representations, since they must be able to capture the relevant information from each instance in order to output an accurate result. This effect can be observed especially in convolutional neural network classifiers, which are usually split into a feature extraction component formed by convolutional layers and a decision module composed by fully connected layers~\sidecite{imagenet}. Apart from neural networks with other objectives such as supervised classification or regression, there have been different approaches to shallow as well as deep neural structures for unsupervised feature learning~\sidecite{reviewdl}, such as self-organizing Kohonen maps~\sidecite{kohonen1990self,koikkalainen1990self}, predictability minimization~\sidecite{schmidhuber1996semilinear}, restricted Boltzmann machines~\sidecite{DLBookRBM}, \revision{deep belief networks~\sidecite{hinton,dbngics,improvedpart} }and AEs~\sidecite{kramer1991nonlinear,oja1991}. There have been many instances of these unsupervised techniques being used to either pre-train or provide feature transformations for supervised models~\sidecite{bengio2012deep}.
 
@@ -199,7 +133,7 @@ Similarly, the binary cross entropy for the same input and output is computed as
 where $\bullet$ denotes element-wise product and all other operations are also performed element-wise.
 
 
-\subsection{Modeling the coding layer}\label{sec:modelcode}
+\subsection{Modeling the coding layer}\label{sec:modelcode}\index{encoding layer}
 
 The main objective of the AE (Eq.~\ref{eq:objective}) only promotes faithful reconstructions without explicitly considering any aspect about the codes used. This can be enough in many cases where the codes are low dimensional and they can capture only the relevant information of the instances just by training to reconstruct accurately. Notwithstanding, there are situations that require considering a more general case of the objective, which allows penalizing certain behaviors of the encoding found by the network, or even the values of the parameters themselves (Eq.~\ref{eq:penalty}).
 
@@ -238,7 +172,7 @@ Although the objective of an AE usually does not involve direct prediction of la
 \end{equation}
 would give more importance to reconstructing one of the classes, which may help if the aim is to find a manifold for that class and the other one is less relevant.
 
-Several uses of label information can be found in the proposal of the adversarial AE~\sidecite{adv}. This AE has a similar behavior to the variational AE in that it also forces the codes to follow a given distribution. Instead of using just a loss penalty, it adds a generator which samples the distribution, and a discriminator which attempts to distinguish distribution samples from codes belonging to actual instances, analogous to a generative adversarial network~\sidecite{gan}. The label information can be used then to locate each label in a region of the distribution, by feeding labels as well as codes to the discriminator. Alternatively, labels can be feeded to the decoder, which causes the codes to discard label information and instead model style in the data.
+Several uses of label information can be found in the proposal of the adversarial AE~\sidecite{adv}\index{autoencoder!adversarial}. This AE has a similar behavior to the variational AE in that it also forces the codes to follow a given distribution. Instead of using just a loss penalty, it adds a generator which samples the distribution, and a discriminator which attempts to distinguish distribution samples from codes belonging to actual instances, analogous to a generative adversarial network~\sidecite{gan}. The label information can be used then to locate each label in a region of the distribution, by feeding labels as well as codes to the discriminator. Alternatively, labels can be feeded to the decoder, which causes the codes to discard label information and instead model style in the data.
 
 Another step forward in introducing label information in AEs would be for them to be able to predict labels as well. Some work has been already done along these lines, by training an encoder and decoder simultaneously to reconstruct and to produce codes as similar as possible to the labels in a one-hot format~\sidecite{zhuang2015supervised}.
 
@@ -294,7 +228,7 @@ The models described below are each associated to a diagram describing the layer
 All examples have been implemented and executed employing the following setup: Tensorflow~\sidecite{tensorflow} 1.14.0 and Keras~\sidecite{keras} 2.2.4 on top of Python 3.7 and R 3.6, running on an Intel Core i5-8400 CPU and a NVIDIA GeForce RTX 2060 GPU. The associated software can be found at the following GitHub repository: \url{https://github.com/ari-dasci/autoencoder-case-studies/}.
 
 
-\subsection{Data visualization}
+\subsection{Data visualization}\index{data visualization}
 
 Most of the data collected nowadays, either from industries or from the web, is high-dimensional. Visualization techniques can help its interpretability, but the data generally needs to be summarized for this purpose. Traditionally, an alternative representation would be a subset of its features or its principal components~\sidecite{jolliffe-pca}. An AE, however, is able to automatically compute a representation that fits each dataset. This representation can be 2 or 3-dimensional if the AE is configured conveniently~\sidecite{yu2013embedding}, or if another embedding technique (such as t-SNE~\sidecite{tsne}) is used after a higher-dimensional encoding.
 
@@ -394,11 +328,11 @@ In order to verify to a certain degree that these embeddings, in addition to pro
     \caption[MSE comparison between contractive AE and PCA]{\label{tbl:mse}Mean squared error comparison between the reconstructions of a contractive AE with a 2-variable encoding and the projections to the original feature space from the two principal components of the data. Lower values are better.}
 \end{table}
 
-\subsection{Noise reduction}
+\subsection{Noise reduction}\index{noise reduction}
 
 Similar to searching for interesting representations of data in the encodings of an AE, we can look for a reconstruction that adds value to the input data. One way an AE can help with this is to remove noise from its inputs. This is especially useful when dealing with images~\sidecite{xie}, sound~\sidecite{speech} and other kinds of signals~\sidecite{ecg}, since capture methods usually may introduce some noise and it would be desirable to have a clearer and sharper output.
 
-In general, an AE can be trained to be resilient to input perturbations with a  mere random additive noise at the input. Throughout the optimization stage, the AE only takes as input partially corrupted versions of the training examples and attempts to reconstruct the original ones. Once trained, this AE does not necessarily expect more noisy data, but instead it will have learned to be robust against small changes in its inputs. This type of AE is usually called a denoising AE, and performs well in many scenarios that do not necessarily involve treatment of noisy data~\sidecite{sdae}.
+In general, an AE can be trained to be resilient to input perturbations with a  mere random additive noise at the input. Throughout the optimization stage, the AE only takes as input partially corrupted versions of the training examples and attempts to reconstruct the original ones. Once trained, this AE does not necessarily expect more noisy data, but instead it will have learned to be robust against small changes in its inputs. This type of AE is usually called a denoising AE\index{autoencoder!denoising}, and performs well in many scenarios that do not necessarily involve treatment of noisy data~\sidecite{sdae}.
 
 In this case, nonetheless, the goal is to eliminate potential perturbations in the inputs. Unlike a generic noise reduction filter, which will perform similar operations no matter what data it receives, a denoising AE can be fitted to a specific training set and may thus be more reliable with different kinds of data. More formally, we consider a noise function $\nu$, which generates the corrupted data that the autoencoder trains with to minimize \[\sum_{x\revision{\in\mathcal X}} d(x, g(f(\nu(x))))~.\] The following are some possible noise functions that may be applied:
 
@@ -483,7 +417,7 @@ The results can be analyzed in Table~\ref{tbl:noisered}, which shows the designe
 \end{table}
 
 
-\subsection{Semantic hashing}
+\subsection{Semantic hashing}\index{semantic hashing}
 
 Hashing usually refers to the process of summarizing large batches of data in smaller or simpler codes. Hashes are employed in data structures for fast search times, they can be used to find duplicates and to protect data against corruption and manipulation.
 
@@ -567,7 +501,7 @@ Hash & Relevant words \\
 \caption[The first 15 hashes used as semantic codes for clusters found by the AE.]{\label{tab:semhashwords} The first 15 hashes used as semantic codes for clusters found by the AE, ordered in Gray code. The most relevant words are selected according to tf-idf computed for each cluster. They show some common topics between hashes 0001110 and 0001010, and between 0000001, 0001001 and 0001000.}
 \end{table}
 
-\subsection{Anomaly detection}\label{sec:anomaly}
+\subsection{Anomaly detection}\label{sec:anomaly}\index{anomaly detection}
 
 Sometimes the objective of a machine learning task is to find unusual behaviors or abnormalities in data, for example, detecting a possible security attack by analyzing server logs, or identifying rare patterns in medical checks. This is known as anomaly detection because the cases of interest are few in contrast to the amount of normal instances, and even in some cases there are no anomalies to train with. In this situation, a traditional classifier cannot solve the problem since it will not be able to assign a class it has not seen before.
 
@@ -624,11 +558,11 @@ Indeed, Fig.~\ref{fig.anomaly-hist} graphs the reconstruction error for each tes
 \end{figure*}
 
 
-\subsection{Instance generation}
+\subsection{Instance generation}\index{instance generation}
 
 The representation learned by an AE may be useful to encode or reconstruct individual instances from a training set, but in certain cases it will be very convenient to ensure that this representation is actually attempting to perform some kind of manifold learning, mapping the feature space onto a smaller space in a way that makes sense to work with the whole encoding space. This encoding space would allow to predict a reconstruction for encodings that do not come from an instance in the original feature space, and still produce a coherent result. For instance, an useful application would be to generate new images of faces similar to those in a training set but not identical to any of them. This is usually harder to achieve with simple operations such as interpolation, because they would compute many images that do not represent faces.
 
-There are several variants of AEs that can fulfill this purpose, namely variational~\sidecite{variational}, adversarial and contractive AEs. Variational as well as adversarial AEs force a prior distribution in the encodings in different ways, which allows to sample new instances by taking points from this space and projecting them onto the original feature space via reconstruction ($g$). The contractive AE, on the contrary, only imposes a regularization which promotes instances to be mapped to encodings near their neighbors. This helps the autoencoder perform transformations that find manifolds in the data, since local structure is preserved. The manifold can then be traversed in order for the decoder to generate new instances.
+There are several variants of AEs that can fulfill this purpose, namely variational~\sidecite{variational}\index{autoencoder!variational}, adversarial and contractive AEs. Variational as well as adversarial AEs force a prior distribution in the encodings in different ways, which allows to sample new instances by taking points from this space and projecting them onto the original feature space via reconstruction ($g$). The contractive AE, on the contrary, only imposes a regularization which promotes instances to be mapped to encodings near their neighbors. This helps the autoencoder perform transformations that find manifolds in the data, since local structure is preserved. The manifold can then be traversed in order for the decoder to generate new instances.
 
 Variational AEs are stochastic in the sense that they do not map each instance to a single point in the embedding space, but a distribution instead. This is usually a normal distribution, defined by its mean and standard deviation. Then, a reconstruction is produced by sampling that distribution and propagating the results through the decoder network. The objective function in this AE combines the clustering behavior of the reconstruction loss function with a regularization loss which forces the distribution to be as similar as possible to, generally, a multivariate unit Gaussian. This helps the AE extract a very compact representation which only preserves the necessary information to provide a reconstruction of the input.
 
@@ -697,17 +631,17 @@ In this example, a variational AE following the structure in Fig.~\ref{fig:varia
 
 Apart from the previous selection of applications approached with representation learning techniques based on AEs, there are many other situations where AEs can be applied to extract features from data. The following are learning applications present in the literature that fell out of the scope of this article.
 
-\subsubsection{Image superresolution} This problem consists in building a high resolution image from a low resolution sample, such as a thumbnail. By using an AE trained with low resolution images and another with the high resolution ones, a map can be trained from the first encoding to the second~\sidecite{superresolution}. This way, the encoder from the first AE can be connected to the decoder from the second AE and the resulting network can be fine-tuned. During prediction it suffices with feeding a low resolution image through the new network, which will encode it and decode it through the high resolution decoder, producing a higher quality image.
+\subsubsection{Image superresolution}\index{superresolution} This problem consists in building a high resolution image from a low resolution sample, such as a thumbnail. By using an AE trained with low resolution images and another with the high resolution ones, a map can be trained from the first encoding to the second~\sidecite{superresolution}. This way, the encoder from the first AE can be connected to the decoder from the second AE and the resulting network can be fine-tuned. During prediction it suffices with feeding a low resolution image through the new network, which will encode it and decode it through the high resolution decoder, producing a higher quality image.
 
-\subsubsection{Image compression} Images are usually compressed with algorithms designed for this specific purpose, e.g. the JPEG standard~\sidecite{jpeg}. Since a compression mechanism must include a component which compresses the image and another which performs decompression, AEs can be trained in different ways to treat this problem as well~\sidecite{balle2016end,compression,cheng2018deep}, even surpassing the capacity of JPEG2000 especially at low bit rates.
+\subsubsection{Image compression}\index{image compression} Images are usually compressed with algorithms designed for this specific purpose, e.g. the JPEG standard~\sidecite{jpeg}. Since a compression mechanism must include a component which compresses the image and another which performs decompression, AEs can be trained in different ways to treat this problem as well~\sidecite{balle2016end,compression,cheng2018deep}, even surpassing the capacity of JPEG2000 especially at low bit rates.
 
-\subsubsection{Transfer learning} In a transfer learning task, the learner must make use of the knowledge extracted from data in a given domain to apply it to a different domain. This may consist in using pre-trained networks with a large dataset to use them with a small dataset by a fine-tuning process. However, when labels for the large dataset are not available, the first stage will necessarily be unsupervised~\sidecite{bengio2012deep}, in which case an AE can be trained and its extracted features can initialize a network for a supervised problem with a dataset from other domain.
+\subsubsection{Transfer learning}\index{transfer learning} In a transfer learning task, the learner must make use of the knowledge extracted from data in a given domain to apply it to a different domain. This may consist in using pre-trained networks with a large dataset to use them with a small dataset by a fine-tuning process. However, when labels for the large dataset are not available, the first stage will necessarily be unsupervised~\sidecite{bengio2012deep}, in which case an AE can be trained and its extracted features can initialize a network for a supervised problem with a dataset from other domain.
 
-\subsubsection{Human pose \revision{and facial features}} Human pose recovery is an application specific to image and video data where people appear and the aim is to recognize the pose of each person from the visual information, i.e., to generate a skeleton describing the position and orientation of the legs, arms and the rest of the body. One of the challenges is to model this skeleton as a 3D object while images are only 2D. AEs have been used as the core of a human pose recovery model~\sidecite{hong2015multimodal} for extracting an inner pose representation which then maps onto a representation of the 3D pose and is decoded as a 3D pose. This process is, in fact, achieved with two AEs, one for each inner representation required, which are then connected through the representation mapping. \revision{In a similar way, facial expression recognition aims to identify the human emotional state from facial images. An approach based on deep sparse autoencoders \sidecite{facialexpr}, which are used to extract robust and discriminative features, has been developed to tackle this task.}
+\subsubsection{Human pose \revision{and facial features}}\index{human pose recovery} Human pose recovery is an application specific to image and video data where people appear and the aim is to recognize the pose of each person from the visual information, i.e., to generate a skeleton describing the position and orientation of the legs, arms and the rest of the body. One of the challenges is to model this skeleton as a 3D object while images are only 2D. AEs have been used as the core of a human pose recovery model~\sidecite{hong2015multimodal} for extracting an inner pose representation which then maps onto a representation of the 3D pose and is decoded as a 3D pose. This process is, in fact, achieved with two AEs, one for each inner representation required, which are then connected through the representation mapping. \revision{In a similar way, facial expression recognition aims to identify the human emotional state from facial images. An approach based on deep sparse autoencoders \sidecite{facialexpr}, which are used to extract robust and discriminative features, has been developed to tackle this task.}
 
-\subsubsection{3D shape learning} Extracting features from three-dimen\-sional shapes usually has a high computational cost but it is fundamental for tasks such as 3D object retrieval and matching. There are several AE-based models for automatic feature extraction that can help model this type of data~\sidecite{3d1,3d2,3d3}. These range from simple stacked AEs to combinations of convolutional AEs and extreme learning machines. In general, retrieving similar objects to a given input consists in encoding the input and comparing the result to the codes of known objects in order to find the nearest or most similar ones.
+\subsubsection{3D shape learning}\index{3D shape learning} Extracting features from three-dimen\-sional shapes usually has a high computational cost but it is fundamental for tasks such as 3D object retrieval and matching. There are several AE-based models for automatic feature extraction that can help model this type of data~\sidecite{3d1,3d2,3d3}. These range from simple stacked AEs to combinations of convolutional AEs and extreme learning machines. In general, retrieving similar objects to a given input consists in encoding the input and comparing the result to the codes of known objects in order to find the nearest or most similar ones.
 
-\subsubsection{Recommender systems and tagging systems} Recommender systems are filters that seek to predict user preferences for products, taking into account previous choices or ratings. Collaborative filters for recommendation combine the information of different users to build predictions. In~\sidecite{li2017collaborative}, a collaborative variational AE for recommendation is developed. It models the implicit relationships among items and users by making use of a shared latent representation and the variational regularization. A task similar to recommendation is tagging, since tags can be ranked for an item according to its similarity to other items. AEs have been also used as the core of tagging systems~\sidecite{wang2015relational} using denoising AEs and relational denoising AEs.
+\subsubsection{Recommender systems and tagging systems}\index{recommender system} Recommender systems are filters that seek to predict user preferences for products, taking into account previous choices or ratings. Collaborative filters for recommendation combine the information of different users to build predictions. In~\sidecite{li2017collaborative}, a collaborative variational AE for recommendation is developed. It models the implicit relationships among items and users by making use of a shared latent representation and the variational regularization. A task similar to recommendation is tagging, since tags can be ranked for an item according to its similarity to other items. AEs have been also used as the core of tagging systems~\sidecite{wang2015relational} using denoising AEs and relational denoising AEs.
 
 \section{Challenges for autoencoder progress and prospects on explainability}\label{sec:ch}
 
@@ -721,7 +655,7 @@ Explainable AI \sidecite{arrieta2020explainable} encompasses many concepts aroun
 
 The recent surge in interest in explainable models derives from the bias found in existing models as well as the search for AI safety \sidecite{aisafety}. The first issue involves models that make decisions potentially affecting human beings and those decisions can discriminate against certain population groups, e.g. people of color or women. For instance, a prediction model for criminal recidivism was found to be heavily biased against African-American people \sidecite{angwin2016machine}. The second concept relates to the presence of relatively autonomous agents, such as robots, which execute the actions computed by a machine learning model. These models sometimes find unexpected ways to optimize their reward function (reward hacking) \sidecite{bird2002evolved}, even without completing the objective or having other potential consequences (side effects).
 
-\subsubsection{Model transparency}
+\subsubsection{Model transparency}\index{transparency}
 
 The issues above reflect the fact that we should not completely trust trained models unless we can comprehend the ways they are making decisions and predictions. This has attracted the interest of researchers, domain experts and users to more explainable models and strategies to explain \textit{black-box} models, a category which includes most deep learning techniques.
 
@@ -733,7 +667,7 @@ One way deep learning models can increase transparency is by highlighting which 
 
 A different proposal for transparent image classification is a convolutional neural network-based classifier which identifies prototypes in similar images \sidecite{chen2019looks}, that is, it provides examples on images of the same class that justify the prediction.
 
-\subsubsection{Explainability techniques}
+\subsubsection{Explainability techniques}\index{explainability}
 
 When an opaque model is used, there are still ways to improve our understanding of its inner workings or its predictions. In many cases, a post-hoc explainability technique may be applied. % But, if this were infeasible, there are other approaches to improving our trust in the model, such as auditing its predictions or finding counterfactuals.
 The different methods that can render a model more interpretable are usually categorized into two groups. They can be either model-agnostic, if they work independently of the model used, or model-specific, otherwise. 
@@ -769,11 +703,11 @@ As discussed in the previous section, most of the well-known explainability tech
 
 \subsubsection{Improving features: disentanglement and fairness}
 
-One way extracted features can improve their quality is by holding an understandable meaning by themselves, e.g. a model could train with face pictures and extract a feature for hair color, another one for nose size, etc. These new features would be much more useful than the original ones which represent individual pixels. This task is usually known as \textit{feature disentanglement}.
+One way extracted features can improve their quality is by holding an understandable meaning by themselves, e.g. a model could train with face pictures and extract a feature for hair color, another one for nose size, etc. These new features would be much more useful than the original ones which represent individual pixels. This task is usually known as \textit{feature disentanglement}\index{disentanglement}.
 
 Some recent AE models whose objective is to disentangle features are Total Correlation VAE \sidecite{chen2018isolating}, Wasserstein AE \sidecite{rubenstein2018learning} and InfoGAN \sidecite{chen2016infogan}. All of these are generative models, so, as a result, extracted features not only provide interpretable meaning to instances, but can also be sampled in order to generate unseen examples in a way that resembles the manipulation of existing instances: for example, a model could generate a realistic face similar to an existing image but changing blonde hair to black.
 
-Another step forward in improving learned representations is forcing these to become fair \sidecite{zemel2013learning}, which means that the extracted features obfuscate information about membership to potentially discriminated groups, e.g. gender or ethnicity. Fairness usually applies only in contexts where model predictions affect human lives, e.g. job applications, legal proceedings, etc. A statistic can be defined to measure the discrimination of a classifier with respect to a binary variable. The objective is then to optimize a tradeoff between classification accuracy and discrimination~\sidecite{edwards2015censoring}.
+Another step forward in improving learned representations is forcing these to become fair \sidecite{zemel2013learning}, which means that the extracted features obfuscate information about membership to potentially discriminated groups, e.g. gender or ethnicity. Fairness\index{fairness} usually applies only in contexts where model predictions affect human lives, e.g. job applications, legal proceedings, etc. A statistic can be defined to measure the discrimination of a classifier with respect to a binary variable. The objective is then to optimize a tradeoff between classification accuracy and discrimination~\sidecite{edwards2015censoring}.
 
 There already exist AE-based models for learning fair representations. In \sidecite{madras2018learning}, an adversarial AE-based classifier is proposed where the adversary attempts to predict the sensitive (potentially discriminatory) attributes from the encoding, but its prediction ability is minimized by the AE and classifier. The objective function can be adjusted according to the desired type of fairness. Another model in~\sidecite{creager2019flexibly} consists in a variational AE which disentangles sensitive information from the non-sensitive latent features and is flexible in the sense that potentially sensitive information can be retained or removed from the encoding during inference.
 

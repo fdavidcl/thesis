@@ -42,480 +42,15 @@
 %%*************************************************************************
 
 
-% *** Authors should verify (and, if needed, correct) their LaTeX system  ***
-% *** with the testflow diagnostic prior to trusting their LaTeX platform ***
-% *** with production work. The IEEE's font choices and paper sizes can   ***
-% *** trigger bugs that do not appear when using other class files.       ***                          ***
-% The testflow support page is at:
-% http://www.michaelshell.org/tex/testflow/
-
-%  \documentclass[10pt,journal,compsoc]{IEEEtran}
-%  \documentclass[
-% 	fontsize=11pt, % Base font size
-% 	twoside=false, % Use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
-% 	open=any, % If twoside=true, uncomment this to force new chapters to start on any page, not only on right (odd) pages
-% 	secnumdepth=1, % How deep to number headings. Defaults to 1 (sections)
-% ]{kaobook}
-% \setchapterstyle{kao} % Choose the default chapter heading style
-% \usepackage{kaobiblio}
-% \bibliography{references.bib}
-%\documentclass[10pt,draft,compsoc,onecolumn]{IEEEtran}
-%
-% If IEEEtran.cls has not been installed into the LaTeX system files,
-% manually specify the path to it like:
-% \documentclass[10pt,journal,compsoc]{../sty/IEEEtran}
-
-
-
-
-
-% Some very useful LaTeX packages include:
-% (uncomment the ones you want to load)
-
-
-% *** MISC UTILITY PACKAGES ***
-%
-%\usepackage{ifpdf}
-% Heiko Oberdiek's ifpdf.sty is very useful if you need conditional
-% compilation based on whether the output is pdf or dvi.
-% usage:
-% \ifpdf
-%   % pdf code
-% \else
-%   % dvi code
-% \fi
-% The latest version of ifpdf.sty can be obtained from:
-% http://www.ctan.org/pkg/ifpdf
-% Also, note that IEEEtran.cls V1.7 and later provides a builtin
-% \ifCLASSINFOpdf conditional that works the same way.
-% When switching from latex to pdflatex and vice-versa, the compiler may
-% have to be run twice to clear warning/error messages.
-
-
-
-% *** CITATION PACKAGES ***
-%
-% \ifCLASSOPTIONcompsoc
-%   % IEEE Computer Society needs nocompress option
-%   % requires cite.sty v4.0 or later (November 2003)
-%   \usepackage[nocompress]{cite}
-% \else
-%   % normal IEEE
-%   \usepackage{cite}
-% \fi
-% cite.sty was written by Donald Arseneau
-% V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
-% \sidecite{} output to follow that of the IEEE. Loading the cite package will
-% result in citation numbers being automatically sorted and properly
-% "compressed/ranged". e.g., [1], [9], [2], [7], [5], [6] without using
-% cite.sty will become [1], [2], [5]--[7], [9] using cite.sty. cite.sty's
-% \cite will automatically add leading space, if needed. Use cite.sty's
-% noadjust option (cite.sty V3.8 and later) if you want to turn this off
-% such as if a citation ever needs to be enclosed in parenthesis.
-% cite.sty is already installed on most LaTeX systems. Be sure and use
-% version 5.0 (2009-03-20) and later if using hyperref.sty.
-% The latest version can be obtained at:
-% http://www.ctan.org/pkg/cite
-% The documentation is contained in the cite.sty file itself.
-%
-% Note that some packages require special options to format as the Computer
-% Society requires. In particular, Computer Society  papers do not use
-% compressed citation ranges as is done in typical IEEE papers
-% (e.g., [1]-[4]). Instead, they list every citation separately in order
-% (e.g., [1], [2], [3], [4]). To get the latter we need to load the cite
-% package with the nocompress option which is supported by cite.sty v4.0
-% and later. Note also the use of a CLASSOPTION conditional provided by
-% IEEEtran.cls V1.7 and later.
-
-
-
-
-
-% *** GRAPHICS RELATED PACKAGES ***
-%
-% \ifCLASSINFOpdf
-  % \usepackage[pdftex]{graphicx}
-  % declare the path(s) where your graphic files are
-  % \graphicspath{{../pdf/}{../jpeg/}}
-  % and their extensions so you won't have to specify these with
-  % every instance of \includegraphics
-  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
-% \else
-  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
-  % will default to the driver specified in the system graphics.cfg if no
-  % driver is specified.
-  % \usepackage[dvips]{graphicx}
-  % declare the path(s) where your graphic files are
-  % \graphicspath{{../eps/}}
-  % and their extensions so you won't have to specify these with
-  % every instance of \includegraphics
-  % \DeclareGraphicsExtensions{.eps}
-% \fi
-% graphicx was written by David Carlisle and Sebastian Rahtz. It is
-% required if you want graphics, photos, etc. graphicx.sty is already
-% installed on most LaTeX systems. The latest version and documentation
-% can be obtained at: 
-% http://www.ctan.org/pkg/graphicx
-% Another good source of documentation is "Using Imported Graphics in
-% LaTeX2e" by Keith Reckdahl which can be found at:
-% http://www.ctan.org/pkg/epslatex
-%
-% latex, and pdflatex in dvi mode, support graphics in encapsulated
-% postscript (.eps) format. pdflatex in pdf mode supports graphics
-% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
-% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
-% not a bitmapped formats (.jpeg, .png). The IEEE frowns on bitmapped formats
-% which can result in "jaggedy"/blurry rendering of lines and letters as
-% well as large increases in file sizes.
-%
-% You can find documentation about the pdfTeX application at:
-% http://www.tug.org/applications/pdftex
-
-
-
-
-
-
-% *** MATH PACKAGES ***
-%
-% \usepackage{amsmath}
-% A popular package from the American Mathematical Society that provides
-% many useful and powerful commands for dealing with mathematics.
-%
-% Note that the amsmath package sets \interdisplaylinepenalty to 10000
-% thus preventing page breaks from occurring within multiline equations. Use:
-%\interdisplaylinepenalty=2500
-% after loading amsmath to restore such page breaks as IEEEtran.cls normally
-% does. amsmath.sty is already installed on most LaTeX systems. The latest
-% version and documentation can be obtained at:
-% http://www.ctan.org/pkg/amsmath
-
-
-
-
-
-% *** SPECIALIZED LIST PACKAGES ***
-%
-%\usepackage{algorithmic}
-% algorithmic.sty was written by Peter Williams and Rogerio Brito.
-% This package provides an algorithmic environment fo describing algorithms.
-% You can use the algorithmic environment in-text or within a figure
-% environment to provide for a floating algorithm. Do NOT use the algorithm
-% floating environment provided by algorithm.sty (by the same authors) or
-% algorithm2e.sty (by Christophe Fiorio) as the IEEE does not use dedicated
-% algorithm float types and packages that provide these will not provide
-% correct IEEE style captions. The latest version and documentation of
-% algorithmic.sty can be obtained at:
-% http://www.ctan.org/pkg/algorithms
-% Also of interest may be the (relatively newer and more customizable)
-% algorithmicx.sty package by Szasz Janos:
-% http://www.ctan.org/pkg/algorithmicx
-
-
-
-
-% *** ALIGNMENT PACKAGES ***
-%
-%\usepackage{array}
-% Frank Mittelbach's and David Carlisle's array.sty patches and improves
-% the standard LaTeX2e array and tabular environments to provide better
-% appearance and additional user controls. As the default LaTeX2e table
-% generation code is lacking to the point of almost being broken with
-% respect to the quality of the end results, all users are strongly
-% advised to use an enhanced (at the very least that provided by array.sty)
-% set of table tools. array.sty is already installed on most systems. The
-% latest version and documentation can be obtained at:
-% http://www.ctan.org/pkg/array
-
-
-% IEEEtran contains the IEEEeqnarray family of commands that can be used to
-% generate multiline equations as well as matrices, tables, etc., of high
-% quality.
-
-
-
-
-% *** SUBFIGURE PACKAGES ***
-% \ifCLASSOPTIONcompsoc
-% \else
-%  \usepackage[caption=false,font=footnotesize]{subfig}
-% \fi
-% subfig.sty, written by Steven Douglas Cochran, is the modern replacement
-% for subfigure.sty, the latter of which is no longer maintained and is
-% incompatible with some LaTeX packages including fixltx2e. However,
-% subfig.sty requires and automatically loads Axel Sommerfeldt's caption.sty
-% which will override IEEEtran.cls' handling of captions and this will result
-% in non-IEEE style figure/table captions. To prevent this problem, be sure
-% and invoke subfig.sty's "caption=false" package option (available since
-% subfig.sty version 1.3, 2005/06/28) as this is will preserve IEEEtran.cls
-% handling of captions.
-% Note that the Computer Society format requires a sans serif font rather
-% than the serif font used in traditional IEEE formatting and thus the need
-% to invoke different subfig.sty package options depending on whether
-% compsoc mode has been enabled.
-%
-% The latest version and documentation of subfig.sty can be obtained at:
-% http://www.ctan.org/pkg/subfig
-
-
-
-
-% *** FLOAT PACKAGES ***
-%
-%\usepackage{fixltx2e}
-% fixltx2e, the successor to the earlier fix2col.sty, was written by
-% Frank Mittelbach and David Carlisle. This package corrects a few problems
-% in the LaTeX2e kernel, the most notable of which is that in current
-% LaTeX2e releases, the ordering of single and double column floats is not
-% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
-% single column figure to be placed prior to an earlier double column
-% figure.
-% Be aware that LaTeX2e kernels dated 2015 and later have fixltx2e.sty's
-% corrections already built into the system in which case a warning will
-% be issued if an attempt is made to load fixltx2e.sty as it is no longer
-% needed.
-% The latest version and documentation can be found at:
-% http://www.ctan.org/pkg/fixltx2e
-
-
-%\usepackage{stfloats}
-% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
-% the ability to do double column floats at the bottom of the page as well
-% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
-% LaTeX2e). It also provides a command:
-%\fnbelowfloat
-% to enable the placement of footnotes below bottom floats (the standard
-% LaTeX2e kernel puts them above bottom floats). This is an invasive package
-% which rewrites many portions of the LaTeX2e float routines. It may not work
-% with other packages that modify the LaTeX2e float routines. The latest
-% version and documentation can be obtained at:
-% http://www.ctan.org/pkg/stfloats
-% Do not use the stfloats baselinefloat ability as the IEEE does not allow
-% \baselineskip to stretch. Authors submitting work to the IEEE should note
-% that the IEEE rarely uses double column equations and that authors should try
-% to avoid such use. Do not be tempted to use the cuted.sty or midfloat.sty
-% packages (also by Sigitas Tolusis) as the IEEE does not format its papers in
-% such ways.
-% Do not attempt to use stfloats with fixltx2e as they are incompatible.
-% Instead, use Morten Hogholm'a dblfloatfix which combines the features
-% of both fixltx2e and stfloats:
-%
-% \usepackage{dblfloatfix}
-% The latest version can be found at:
-% http://www.ctan.org/pkg/dblfloatfix
-
-
-
-
-%\ifCLASSOPTIONcaptionsoff
-%  \usepackage[nomarkers]{endfloat}
-% \let\MYoriglatexcaption\caption
-% \renewcommand{\caption}[2][\relax]{\MYoriglatexcaption[#2]{#2}}
-%\fi
-% endfloat.sty was written by James Darrell McCauley, Jeff Goldberg and 
-% Axel Sommerfeldt. This package may be useful when used in conjunction with 
-% IEEEtran.cls'  captionsoff option. Some IEEE journals/societies require that
-% submissions have lists of figures/tables at the end of the paper and that
-% figures/tables without any captions are placed on a page by themselves at
-% the end of the document. If needed, the draftcls IEEEtran class option or
-% \CLASSINPUTbaselinestretch interface can be used to increase the line
-% spacing as well. Be sure and use the nomarkers option of endfloat to
-% prevent endfloat from "marking" where the figures would have been placed
-% in the text. The two hack lines of code above are a slight modification of
-% that suggested by in the endfloat docs (section 8.4.1) to ensure that
-% the full captions always appear in the list of figures/tables - even if
-% the user used the short optional argument of \caption[]{}.
-% IEEE papers do not typically make use of \caption[]'s optional argument,
-% so this should not be an issue. A similar trick can be used to disable
-% captions of packages such as subfig.sty that lack options to turn off
-% the subcaptions:
-% For subfig.sty:
-% \let\MYorigsubfloat\subfloat
-% \renewcommand{\subfloat}[2][\relax]{\MYorigsubfloat[]{#2}}
-% However, the above trick will not work if both optional arguments of
-% the \subfloat command are used. Furthermore, there needs to be a
-% description of each subfigure *somewhere* and endfloat does not add
-% subfigure captions to its list of figures. Thus, the best approach is to
-% avoid the use of subfigure captions (many IEEE journals avoid them anyway)
-% and instead reference/explain all the subfigures within the main caption.
-% The latest version of endfloat.sty and its documentation can obtained at:
-% http://www.ctan.org/pkg/endfloat
-%
-% The IEEEtran \ifCLASSOPTIONcaptionsoff conditional can also be used
-% later in the document, say, to conditionally put the References on a 
-% page by themselves.
-
-
-
-
-% *** PDF, URL AND HYPERLINK PACKAGES ***
-%
-%\usepackage{url}
-% url.sty was written by Donald Arseneau. It provides better support for
-% handling and breaking URLs. url.sty is already installed on most LaTeX
-% systems. The latest version and documentation can be obtained at:
-% http://www.ctan.org/pkg/url
-% Basically, \url{my_url_here}.
-
-
-
-
-
-% *** Do not adjust lengths that control margins, column widths, etc. ***
-% *** Do not use packages that alter fonts (such as pslatex).         ***
-% There should be no need to do such things with IEEEtran.cls V1.6 and later.
-% (Unless specifically asked to do so by the journal or conference you plan
-% to submit to, of course. )
-% \usepackage{stmaryrd}
-
-% correct bad hyphenation here
-% \hyphenation{op-tical net-works semi-conduc-tor}
-
-%%%%%%%%%%%%%%%%%%%
-% % USER INCLUDES
-% \usepackage{multirow}
-% \usepackage{amssymb}
-% \usepackage{booktabs}
-% \usepackage{xcolor}
-
 \newcommand{\change}[1]{{\color{blue}#1}}
 \renewcommand{\change}[1]{#1}
 \newcommand{\rechange}[1]{{\color{blue}#1}}
 \renewcommand{\rechange}[1]{#1}
 
-% \begin{document}
-%
-% paper title
-% Titles are generally capitalized except for words such as a, an, and, as,
-% at, but, by, for, in, nor, of, on, or, the, to and up, which are usually
-% not capitalized unless they are the first or last word of the title.
-% Linebreaks \\ can be used within to get better formatting as desired.
-% Do not put math or special symbols in the title.
 \setchapterpreamble[u]{\margintoc}
 \makearticle{Reducing data complexity using autoencoders with class-informed loss functions}{charte2021reducing}
 \label{ch:paper6}
 
-% \renewcommand*{\thechapter}{\Roman{chapter}}
-% \addtocounter{chapter}{5}
-% \chapter{Reducing data complexity using autoencoders with class-informed loss functions}
-
-% \begin{widepar}
-%   \begin{kaobox}[frametitle=Source]
-%     Charte, D., Charte, F., \& Herrera, F. (2021). Reducing Data Complexity using Autoencoders with Class-informed Loss Functions. \textit{IEEE Transactions on Pattern Analysis and Machine Intelligence.}
-% \end{kaobox}
-% \end{widepar}
-%
-%
-% author names and IEEE memberships
-% note positions of commas and nonbreaking spaces ( ~ ) LaTeX will not break
-% a structure at a ~ so this keeps an author's name from being broken across
-% two lines.
-% use \thanks{} to gain access to the first footnote area
-% a separate \thanks must be used for each paragraph as LaTeX2e's \thanks
-% was not built to handle multiple paragraphs
-%
-%
-%\IEEEcompsocitemizethanks is a special \thanks that produces the bulleted
-% lists the Computer Society journals use for "first footnote" author
-% affiliations. Use \IEEEcompsocthanksitem which works much like \item
-% for each affiliation group. When not in compsoc mode,
-% \IEEEcompsocitemizethanks becomes like \thanks and
-% \IEEEcompsocthanksitem becomes a line break with idention. This
-% facilitates dual compilation, although admittedly the differences in the
-% desired content of \author between the different types of papers makes a
-% one-size-fits-all approach a daunting prospect. For instance, compsoc 
-% journal papers have the author affiliations above the "Manuscript
-% received ..."  text while in non-compsoc journals this is reversed. Sigh.
-
-% \author{David~Charte,
-%   Francisco~Charte,~\IEEEmembership{Member,~IEEE,}
-%   and~Francisco~Herrera,~\IEEEmembership{Senior~Member,~IEEE}%
-%   \IEEEcompsocitemizethanks{%
-%     \IEEEcompsocthanksitem D. Charte is with the Computer Science and A.I. Dept., University of Granada, 18071 Granada, Spain. E-mail: fdavidcl@ugr.es.%\protect\\
-%     \IEEEcompsocthanksitem F. Charte is with the Computer Science Dept., University of Ja{\'e}n, 23071 Ja{\'e}n, Spain. E-mail: fcharte@ujaen.es.%\protect\\
-%     \IEEEcompsocthanksitem F. Herrera is with the Computer Science and A.I. Dept., University of Granada, 18071 Granada, Spain, and with the Faculty of Computing and Information Technology, King Abdulaziz University, 21589 Jeddah, Saudi Arabia. E-mail: herrera@decsai.ugr.es.%\protect\\
-%   }
-% }
-% DONE mirar dónde van los códigos de financiación (FPU, nacional de Paco, el de Simidat)
-% NOFIX comparar complejidad de cross entropy con los nuevos penalties
-
-% \author{Michael~Shell,~\IEEEmembership{Member,~IEEE,}
-%         John~Doe,~\IEEEmembership{Fellow,~OSA,}
-%         and~Jane~Doe,~\IEEEmembership{Life~Fellow,~IEEE}% <-this % stops a space
-% \IEEEcompsocitemizethanks{\IEEEcompsocthanksitem M. Shell was with the Department
-% of Electrical and Computer Engineering, Georgia Institute of Technology, Atlanta,
-% GA, 30332.\protect\\
-% % note need leading \protect in front of \\ to get a newline within \thanks as
-% % \\ is fragile and will error, could use \hfil\break instead.
-% E-mail: see http://www.michaelshell.org/contact.html
-% \IEEEcompsocthanksitem J. Doe and J. Doe are with Anonymous University.}% <-this % stops an unwanted space
-% \thanks{Manuscript received April 19, 2005; revised August 26, 2015.}}
-
-% note the % following the last \IEEEmembership and also \thanks - 
-% these prevent an unwanted space from occurring between the last author name
-% and the end of the author line. i.e., if you had this:
-% 
-% \author{....lastname \thanks{...} \thanks{...} }
-%                     ^------------^------------^----Do not want these spaces!
-%
-% a space would be appended to the last name and could cause every name on that
-% line to be shifted left slightly. This is one of those "LaTeX things". For
-% instance, "\textbf{A} \textbf{B}" will typeset as "A B" not "AB". To get
-% "AB" then you have to do: "\textbf{A}\textbf{B}"
-% \thanks is no different in this regard, so shield the last } of each \thanks
-% that ends a line with a % and do not let a space in before the next \thanks.
-% Spaces after \IEEEmembership other than the last one are OK (and needed) as
-% you are supposed to have spaces between the names. For what it is worth,
-% this is a minor point as most people would not even notice if the said evil
-% space somehow managed to creep in.
-
-
-
-% The paper headers
-% \ifCLASSOPTIONpeerreview
-%   %\markboth{IEEE Transactions on Pattern Analysis and Machine Intelligence}%
-%   %{Reducing Data Complexity using Autoencoders with Class-informed Loss Functions}
-% \else
-%   %\markboth{IEEE Transactions on Pattern Analysis and Machine Intelligence}%
-%   %{Charte \MakeLowercase{\textit{et al.}}: Reducing Data Complexity using Autoencoders with Class-informed Loss Functions}
-% \fi
-% The only time the second header will appear is for the odd numbered pages
-% after the title page when using the twoside option.
-% 
-% *** Note that you probably will NOT want to include the author's ***
-% *** name in the headers of peer review papers.                   ***
-% You can use \ifCLASSOPTIONpeerreview for conditional compilation here if
-% you desire.
-
-
-
-% The publisher's ID mark at the bottom of the page is less important with
-% Computer Society journal papers as those publications place the marks
-% outside of the main text columns and, therefore, unlike regular IEEE
-% journals, the available text space is not reduced by their presence.
-% If you want to put a publisher's ID mark on the page you can do it like
-% this:
-%\IEEEpubid{0000--0000/00\$00.00~\copyright~2015 IEEE}
-% or like this to get the Computer Society new two part style.
-%\IEEEpubid{\makebox[\columnwidth]{\hfill 0000--0000/00/\$00.00~\copyright~2015 IEEE}%
-%\hspace{\columnsep}\makebox[\columnwidth]{Published by the IEEE Computer Society\hfill}}
-% Remember, if you use this you must call \IEEEpubidadjcol in the second
-% column for its text to clear the IEEEpubid mark (Computer Society jorunal
-% papers don't need this extra clearance.)
-
-
-
-% use for special paper notices
-%\IEEEspecialpapernotice{(Invited Paper)}
-
-
-
-% for Computer Society papers, we must declare the abstract and index terms
-% PRIOR to the title within the \IEEEtitleabstractindextext IEEEtran
-% command as these need to go into the title area created by \maketitle.
-% As a general rule, do not put math, special symbols or citations
-% in the abstract or keywords.
-% \IEEEtitleabstractindextext{%
   \section*{Abstract}
     Available data in machine learning applications is becoming increasingly complex, due to higher dimensionality and difficult classes. There exists a wide variety of approaches to measuring complexity of labeled data, according to class overlap, separability or boundary shapes, as well as \rechange{group morphology}. Many techniques can transform the data in order to find better features, but few focus on specifically reducing data complexity. Most \rechange{data transformation} methods mainly treat the dimensionality aspect, leaving aside the available information \rechange{within} class labels which can be useful when classes are somehow complex.
 
@@ -584,7 +119,7 @@ Although data cleaning techniques can be of good use in order to identify and fi
 
 Many real world situations can be modeled as supervised classification problems, those where each instance belongs to one of several classes, and the objective is to learn from the observed data from each class in order to automatically assign the corresponding class labels to new, unobserved instances. Some examples of classification problems are text categorization~\sidecite{Yang1999ARO}, spam filtering~\sidecite{Dada2019MachineLF}, object recognition in images~\sidecite{Russakovsky2015ImageNetLS} and automatic interpretation of medical data to facilitate diagnostics~\sidecite{deo2015machine}. \rechange{Many of these problems correspond to the simplest case, binary classification, where there are only two categories.}
 
-One of the type of issues that is very commonly overlooked in classification problems is the complexity of data~\sidecite{ho2000measuring,lorena2019complex}. Consider a clean dataset with no presence of errors or abnormalities. There can still be aspects related to the geometrical shapes and overlap among classes which can hinder the performance of a learning technique. For example, there could be no separability between classes, or even regions of the feature space with a mix of instances from different classes. In cases where separability is achievable, boundaries can present complex shapes that can be difficult for a parameterized model to fit. Figure~\ref{p6fig.boundaries} illustrates some of these cases, more concretely, one where the features do not allow to separate the classes, and another where class boundaries are difficult to model due to there being several small groups from one class, sometimes known as small disjuncts~\sidecite{weiss1995learning},  within a group of the other.
+One of the type of issues that is very commonly overlooked in classification problems is the complexity of data~\sidecite{ho2000measuring,lorena2019complex}\index{data complexity}. Consider a clean dataset with no presence of errors or abnormalities. There can still be aspects related to the geometrical shapes and overlap among classes which can hinder the performance of a learning technique. For example, there could be no separability between classes, or even regions of the feature space with a mix of instances from different classes. In cases where separability is achievable, boundaries can present complex shapes that can be difficult for a parameterized model to fit. Figure~\ref{p6fig.boundaries} illustrates some of these cases, more concretely, one where the features do not allow to separate the classes, and another where class boundaries are difficult to model due to there being several small groups from one class, sometimes known as small disjuncts~\sidecite{weiss1995learning},  within a group of the other.
 
 \begin{figure*}[hbtp]\centering
   \includegraphics[width=.32\linewidth,trim={1cm 2cm 1cm 1cm},clip]{separable}%
@@ -641,7 +176,7 @@ Ho and Basu \sidecite{basubook} identify three possible sources of difficulty: (
 
 In order to quantitatively assess how complex a dataset is, a wide variety of complexity metrics have been proposed over the years \sidecite{ho2000measuring,lorena2019complex}. The following sections briefly describe the most relevant approaches to measure complexity, paying special attention to the metrics that will be \rechange{applied} throughout the experimentation. Each metric is abbreviated according to the original nomenclature in \sidecite{ho2000measuring} and \sidecite{lorena2019complex}.
 
-\subsubsection{Class overlap}
+\subsubsection{Class overlap}\index{class overlap}
 
 Geometrical complexity in a dataset can be characterized in several ways. One approach is to measure the overlap in feature values among different classes. Each feature can be assessed as to how much it contributes to distinguishing the classes. In this case, measures usually focus on binary problems. \change{The following measures follow this approach}:
 
@@ -673,7 +208,7 @@ Fisher's discriminant ratio is a measure of class overlap, based on the simplest
 and $\left\llbracket\dots\right\rrbracket$ is the Iverson bracket, which evaluates to 1 if the inner statement is true, and to 0 otherwise. As a result, $n_o$ counts the number of values observed for the $i$-th feature that fall within its overlapping region. \fi
 
 
-\subsubsection{Class separability and nonlinearity}
+\subsubsection{Class separability and nonlinearity}\index{class separability}
 
 Instead of measuring the importance of the overlapping regions in features, an alternative approach is to look for complexity of the boundary separating classes, that is, its ability to actually isolate both classes and its nonlinearity. Several measures have been developed regarding the shape and separation degree of classes.
 
@@ -684,7 +219,7 @@ Instead of measuring the importance of the overlapping regions in features, an a
 
 
 
-\subsubsection{Neighborhoods and morphology}
+\subsubsection{Neighborhoods and morphology}\index{morphology}
 
 The previous traditional measures for data complexity come from a statistical or geometrical point of view. Other metrics look at how instances are located around each other, so they study local behavior instead of global properties.
 
@@ -706,7 +241,7 @@ These metrics can turn into a very general way of describing the geometrical com
 
 
 
-\subsubsection{Feature space dimensionality}
+\subsubsection{Feature space dimensionality}\index{feature!space dimensionality}
 
 One of the main issues that occur in many datasets and has been tackled from many perspectives is dimensionality. Dimensionality refers to the number of variables where each instance takes values. High dimensionality has long been considered a problem for classification algorithms, known as curse of dimensionality \sidecite{aggarwal2001surprising}. It is not directly related to the way classes interact with each other, but a high number of features can hinder the performance of a classifier with a dataset that is otherwise not considered complex, due to the fact that most distance metrics lose meaning when measuring across many variables.
 
@@ -739,7 +274,7 @@ Dimensionality of data has been one of the most diversely tackled issues. A mult
 
 However, there are other emerging methods that may be able to modify other aspects of the data and reduce complexity along the way. Some of those are distance metric learning methods.
 
-\subsubsection{Feature selection}
+\subsubsection{Feature selection}\index{feature!selection}
 
 Assuming that not every variable has the same relevance for the purposes of classification, an initial approach to dimensionality reduction can be to simply discard some of them, retaining only the ones that help the classifier the most. This process is known as feature selection \sidecite{garcia2015data}. Of course, there exist a plethora of criteria that can apply for this purpose.
 
@@ -761,7 +296,7 @@ Another way of reducing the number of variables is to attempt to summarize most 
 
 % DONE: completar estos dos
 
-\subsubsection{Nonlinear feature extraction}
+\subsubsection{Nonlinear feature extraction}\index{feature!extraction}
 
 The most advanced methods for dimensionality reduction base their new variables on nonlinear transformations of the original ones.
 
@@ -783,7 +318,7 @@ It consists on assigning, for each pair of points, the probability that one poin
 
 % DONE terminar de explicar estos
 
-\subsubsection{Distance metric learning}
+\subsubsection{Distance metric learning}\index{distance metric learning}
 
 Distance metric learning \sidecite{suarez2018tutorial} is an area of machine learning dedicated to learning distances from datasets. These distances are built to better represent the similarities and differences among examples than standard distances, such as the Euclidean distance.
 
@@ -883,7 +418,7 @@ Along the rest of this section, each one of these AE-based models is thoroughly 
 
 
 
-\subsection{Scorer}
+\subsection{Scorer}\index{Scorer}
 
 %Scorer (\textbf{s}upervised \textbf{c}lass \textbf{o}ve\textbf{r}lap [rat\textbf{e}?] \textbf{r}eduction)
 
@@ -911,7 +446,7 @@ The penalty term, drawing inputs from the encoding layer and the class label, is
 \end{marginfigure}
 
 
-\subsection{Skaler}
+\subsection{Skaler}\index{Skaler}
 
 The next step in inducing a class-separating behavior in an AE is to use information theory-based measures. In this case, the AE is not forced to directly optimize a complexity metric. Instead, it receives information about the current relation among class distributions, and is assessed according to the similarity of those.
 
@@ -940,7 +475,7 @@ Now, in order to compute valid probabilities for each case of the categorical di
 
 Some preliminary tests revealed that it is easy for this penalty to force encodings onto a single class-dependent value for any inputs. It was observed, however, that maximizing the entropy of the encoding variables helped prevent this issue, so it is added as a negative term to the penalty in the implementation.
 
-\subsection{Slicer}
+\subsection{Slicer}\index{Slicer}
 
 The third proposal of this work goes a bit further than the two previous ones, since it incorporates not only a different penalty function, but also additional learnable parameters.
 

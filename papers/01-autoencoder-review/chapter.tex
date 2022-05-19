@@ -32,22 +32,22 @@ While many machine learning algorithms are able to work with raw input features,
 
 Feature selection is only one of the approaches to reduce input space dimensionality. Selecting the best subset of input variables is an NP-hard combinatorial problem. Moreover, feature selection techniques usually evaluate each variable independently, but it is known that variables that separately do not provide useful information may do so when they are used together. For this reason other alternatives, primarily feature construction or extraction \sidecite{FeatureExtraction}, emerged. In addition to these two denominations, feature selection and feature extraction, when dealing with dimensionality reduction it is also frequent to use other terms. The most common are as follows:
 
-	\paragraph{Feature engineering \sidecite{Domingos2012AFU}}
+	\paragraph{Feature engineering \sidecite{Domingos2012AFU}}\index{feature!engineering}
 	This is probably the broadest term, encompassing most of the others. Feature engineering can be carried out by manual or automated means, and be based on the selection of original characteristics or the construction of new ones through transformations. 
 
-	\paragraph{Feature learning \sidecite{bengio_representation_2013}}
+	\paragraph{Feature learning \sidecite{bengio_representation_2013}}\index{feature!learning}
 	It is the denomination used when the process to select among the existing features or construct new ones is automated. Thus, we can perform both feature selection and feature extraction through algorithms such as the ones mentioned below. Despite the use of automatic methods, sometimes an expert is needed to decide which algorithm is the most appropriate depending on data traits, to evaluate the optimum amount of variables to extract, etc.
 	
-    \paragraph{Representation learning \sidecite{bengio_representation_2013}}
+    \paragraph{Representation learning \sidecite{bengio_representation_2013}}\index{representation learning}
     Although this term is sometimes interchangeably used with the previous one, it is mostly used to refer to the use of ANNs to fully automate the feature generation process. Applying ANNs to learn distributed representations of concepts was proposed by Hinton in \sidecite{DistributedRepresentations}. Today, learning representations is mainly linked to processing natural language, images and other signals with specific kinds of ANNs, such as CNNs \sidecite{CNNs}.
   
-    \paragraph{Feature selection \sidecite{DataPreprocessing}} 
+    \paragraph{Feature selection \sidecite{DataPreprocessing}} \index{feature!selection}
     Picking the most informative subset of variables started as a manual process usually in charge of domain experts. It can be considered a special case of feature weighting, as discussed in \sidecite{FeatureWeighting}. Although in certain fields the expert is still an important factor, nowadays the selection of variables is usually carried out using computer algorithms. These can operate in supervised or unsupervised manner. The former approach usually relies on correlation or mutual information between input and output variables \sidecite{CorrelationFS,MutualInformationDS}, while the latter tends to avoid redundancy among features \sidecite{UnsupervisedFS}. Feature selection is overall an essential strategy in the data preprocessing \sidecite{PreprocTutorial, DataPreprocessing} phase.
     
-    \paragraph{Feature extraction \sidecite{FeatureExtractionIntro}} 
+    \paragraph{Feature extraction \sidecite{FeatureExtractionIntro}} \index{feature!extraction}
     The goal of this technique is to find a better data representation for the machine learning algorithm intended to use, since the original representation might not be the best one. It can be faced both manually, in which case the \textit{feature construction} term is of common use, and automatically. Some elemental techniques such as normalization, discretization or scaling of variables, as well as basic transformations applied to certain data types\footnote{e.g. Take the original field containing a date and divide it into three new variables, year, month and day.}, are also considered within this field. New features can be extracted by finding linear combinations of the original ones, as in PCA (\textit{Principal Component Analysis}) \sidecite{PCA,PCAHotelling} or LDA (\textit{Linear Discriminant Analysis}) \sidecite{LDA}, as well as nonlinear combinations, like Kernel PCA \sidecite{KernelPCA}  or Isomap \sidecite{Isomap}. The latter ones are usually known as \textit{manifold learning} \sidecite{ManifoldLearning} algorithms, and fall in the scope of nonlinear dimensionality reduction techniques \sidecite{NonlinearDimRec}. Feature extraction methods can also be categorized as supervised (e.g. LDA) or non-supervised (e.g. PCA).
     
-    \paragraph{Feature fusion \sidecite{FeatureFusion}}
+    \paragraph{Feature fusion \sidecite{FeatureFusion}}\index{feature!fusion}
     This more recent term has emerged with the growth of multimedia data processing by machine learning algorithms, especially images, text and sound. As stated in \sidecite{FeatureFusion}, feature fusion methods aim to combine variables to remove redundant and irrelevant information. Manifold learning algorithms, and especially those based on ANNs, fall into this category. \\
 
     Among the existing AE models there are several that are useful to perform feature fusion. This is the aim of the most basic one, which can be extended via several regularizations and adaptations to different kinds of data. These options will be explored through the present work, whose aim is to provide the reader with a didactic review on the inner workings of these distinct AE models and the ways they can be used to learn new representations of data.
@@ -226,7 +226,7 @@ This structure is captured in a feedforward neural network. Since the objective 
 
 In this case the encoder is made up of three layers, including the middle encoding one, while the decoder starts in the middle one and also spans three layers. 
 
-\subsection{Activation functions of common use in autoencoders}
+\subsection{Activation functions of common use in autoencoders}\index{activation function}
 \begin{figure*}[htp!]
 	\centering
   \subfloat[Linear]{\label{p1Fig.Linear}\includegraphics[width=.3\linewidth]{Linear.pdf} }\hfill
@@ -374,7 +374,7 @@ Besides feature extraction, which is our main focus, there are AE models designe
 
 As has been already established, AEs are tools originally designed for finding useful representations of data by learning nonlinear ways to combine their features. Usually, this leads to a lower-dimensional space, but different modifications can be applied in order to discover features which satisfy certain requirements. All of these possibilities are discussed in this section, which begins by establishing the foundations of the most basic AE, and later encompasses several diverse variants, following the proposed taxonomy: those that provide regularizations are followed by AEs presenting noise tolerance, generative models are explained afterwards, then some domain specific AEs and finally two variations which do not fit into any previous category.
 
-\subsection{Basic autoencoder}\label{p1Sec.BasicAE}
+\subsection{Basic autoencoder}\label{p1Sec.BasicAE}\index{autoencoder!basic}
 
 The main objective of most AEs is to perform a feature fusion process where learned features present some desired traits, such as lower dimensionality, higher sparsity or desirable analytical properties. The resulting model is able to map new instances onto the latent feature space. All AEs thus share a common origin, which may be called the basic AE \sidecite{bourlard_auto-association_1988}.
 
@@ -431,7 +431,7 @@ where $w_i$ traverses all the weights in $W$ and $\lambda$ is a parameter determ
 
 Further restrictions and regularizations can be applied. A specific constraint that can be imposed is to tie the weight matrices symmetrically, that is, in a shallow AE, to set $W^{(1)}=(W^{(2)})^T$, and the natural extension to deep AEs. This allows to optimize a lower amount of parameters, so the AE can be trained faster, while maintaining the desired architecture.
 
-\subsubsection{Stacking}
+\subsubsection{Stacking}\index{stacking}
 
 When AEs are deep, the success of the training process relies heavily on a good weight initialization, since there can be from tens to hundreds of thousands of them. This weight initialization can be performed by \textit{stacking} successive shallow AEs \sidecite{LayerwiseTraining}, that is, training the AE layer by layer in a greedy fashion.
 
@@ -449,14 +449,14 @@ Finally, a fine-tuning phase can be performed, optimizing the weights by backpro
 
 
 
-\subsection{Regularization}\label{p1Sec.Regularization}
+\subsection{Regularization}\label{p1Sec.Regularization}\index{regularization}
 
 Encodings produced by basic AEs do not generally present any special properties. When learned features are required to verify some desirable traits, some regularizations may be achieved by adding a penalization for certain behaviors $\Omega$ to the objetive function: 
 \begin{equation}
   \mathcal J(W,b;S)=\sum_{x\in S} \mathcal L(x, (g\circ f)(x)) + \lambda\Omega(W,b;S)~.
 \end{equation}
 
-\subsubsection{Sparse autoencoder}\label{p1Sec.SparseAE}
+\subsubsection{Sparse autoencoder}\label{p1Sec.SparseAE}\index{autoencoder!sparse}
 
 Sparsity in a representation means most values for a given sample are zero or close to zero. Sparse representations are resembling of the behavior of simple cells in the mammalian primary visual cortex, which is believed to have evolved to discover efficient coding strategies \sidecite{olshausen1997sparse}. This motivates the use of transformations of samples into sparse codes in machine learning. A model of sparse coding based on this behavior was first proposed in \sidecite{olshausen1996emergence}.
 
@@ -493,7 +493,7 @@ where the average activation value $\hat\rho_i$ depends on the parameters of the
 
 There are other modifications that can lead an encoder-decoder architecture to produce a sparse code. For example, applying a sparsifying logistic activation function in the encoding layer of a similar energy-based model, which forces a low activation average \sidecite{SparsifyingLogistic}, or using a Sparse Encoding Symmetric Machine \sidecite{SESM} which optimizes a loss function with a different sparsifying penalty.
 
-\subsubsection{Contractive autoencoder}
+\subsubsection{Contractive autoencoder}\index{autoencoder!contractive}
 
 High sensitivity to perturbations in input samples could lead an AE to generate very different encodings. This is usually inconvenient, which is the motivation behind the contractive AE. It achieves local invariance to changes in many directions around the training samples, and is able to more easily discover lower-dimensional manifold structures in the data.
 
@@ -514,11 +514,11 @@ A particular case of this induced contraction is the usage of L2 weight decay wi
 The contractive AE can be sampled \sidecite{generativeCAE}, that is, it can generate new instances from the learned model, by using the Jacobian of the encoder to add a small noise to another point and computing its codification. Intuitively, this can be seen as moving small steps along the tangent plane defined by the encoder in a point on the manifold modeled.
 
 
-\subsection{Noise tolerance}\label{p1Sec.NoiseTolerance}
+\subsection{Noise tolerance}\label{p1Sec.NoiseTolerance}\index{noise tolerance}
 
 A standard AE can learn a latent feature space from a set of samples, but it does not guarantee stability in the presence of noisy instances, nor it is able to remove noise when reconstructing new samples. In this section, two variants that tackle this problem are discussed: denoising and robust AEs.
 
-\subsubsection{Denoising autoencoder}
+\subsubsection{Denoising autoencoder}\index{autoencoder!denoising}
 
 A denoising AE or DAE \sidecite{vincent_denoising_2008} learns to generate robust features from inputs by reconstructing partially destroyed samples. The use of AEs for denoising had been introduced earlier \sidecite{yann1987modeles}, but this technique leverages the denoising ability of the AE to build a latent feature space which is more resistant to corrupted inputs, thus its applications are broader than just denoising. 
 
@@ -545,7 +545,7 @@ The training technique allows for other possible corruption processes, apart fro
 \end{equation}
 which randomly offsets each component of $x$ with the same variance, or \textit{salt-and-pepper} noise, which sets a fraction of the elements of the input to their minimum or maximum value, according to a uniform distribution.
 
-\subsubsection{Robust autoencoder}
+\subsubsection{Robust autoencoder}\index{autoencoder!robust}
 
 Training an AE to recover from corrupted data is not the only way to induce noise tolerance in the generated model. An alternative is to modify the loss function used to minimize the reconstruction error in order to dampen the sensitivity to different types of noise.
 
@@ -569,11 +569,11 @@ The following two AEs are based on the standard type, but are designed to model 
 \paragraph{LSTM autoencoder \sidecite{LSTMAE}} A basic AE is not designed to model sequential data, an LSTM AE achieves this by placing Long-Short-Term Memory (LSTM) \sidecite{LSTM} units as encoder and decoder of the network. The encoder LSTM reads and compresses a sequence into a fixed-size representation, from which the decoder attempts to extract the original sequence in inverse order. This is especially useful when data is sequential and large, for example video data. A further possible task is to predict the future of the sequence from the representation, which can be achieved by attaching an additional decoder trained for this purpose.
 
 
-\subsection{Generative models}\label{p1Sec.Generative}
+\subsection{Generative models}\label{p1Sec.Generative}\index{generative model}
 
 In addition to the models already described, which essentially provide different mechanisms to reduce the dimensionality of a set of variables, the following ones also produce a generative model from the training data. Generative models learn a distribution in order to be able to draw new samples, different from those observed. AEs can generally reconstruct encoded data, but are not necessarily able to build meaningful outputs from arbitrary encodings. Variational and adversarial AEs learn a model of the data from which new instances can be generated.
 
-\paragraph{Variational autoencoder \sidecite{VariationalAE}} This kind of AE applies a variational Bayesian \sidecite{VariationalBayes} approach to encoding. It assumes that a latent, unobserved random variable $\mathbf{y}$ exists, which by some random process leads to the observations, $\mathbf{x}$. Its objective is thus to approximate the distribution of the latent variable given the observations. Variational AEs replace deterministic functions in the encoder and decoder by stochastic mappings, and compute the objective function in virtue of the density functions of the random variables:
+\paragraph{Variational autoencoder \sidecite{VariationalAE}}\index{autoencoder!variational} This kind of AE applies a variational Bayesian \sidecite{VariationalBayes} approach to encoding. It assumes that a latent, unobserved random variable $\mathbf{y}$ exists, which by some random process leads to the observations, $\mathbf{x}$. Its objective is thus to approximate the distribution of the latent variable given the observations. Variational AEs replace deterministic functions in the encoder and decoder by stochastic mappings, and compute the objective function in virtue of the density functions of the random variables:
 \begin{multline}
   \mathcal L_{\mathrm{VAE}}(\theta, \phi; \mathbf{x})=\\\mathrm{KL}(
   q_{\phi}(\mathbf{y}\vert\mathbf{x})
@@ -585,7 +585,7 @@ In addition to the models already described, which essentially provide different
 \end{multline}
 where $q$ is the distribution approximating the true latent distribution of $\mathbf{y}$, and $\theta,\phi$ are the parameters of each distribution. Since variational AEs allow sampling from the learned distribution, applications usually involve generating new instances \sidecite{VAEgenerating,rezende2014stochastic}.
 
-\paragraph{Adversarial autoencoder \sidecite{AdversarialAE}} It brings the concept of Generative Adversarial Networks \sidecite{GAN} to the field of AEs. It models the encoding by imposing a prior distribution, then training a standard AE and, concurrently, a discriminative network trying to distinguish codifications from samples from the imposed prior. Since the generator (the encoder) is trained to fool the discriminator as well, encodings will tend to follow the imposed distribution. Therefore, adversarial AEs are also able generate new meaningful samples. \\
+\paragraph{Adversarial autoencoder \sidecite{AdversarialAE}}\index{autoencoder!adversarial} It brings the concept of Generative Adversarial Networks \sidecite{GAN} to the field of AEs. It models the encoding by imposing a prior distribution, then training a standard AE and, concurrently, a discriminative network trying to distinguish codifications from samples from the imposed prior. Since the generator (the encoder) is trained to fool the discriminator as well, encodings will tend to follow the imposed distribution. Therefore, adversarial AEs are also able generate new meaningful samples. \\
 
 Other generative models based on similar principles are Variational Recurrent AEs \sidecite{VRAE}, PixelGAN AEs \sidecite{PixelGAN} and Adversarial Symmetric Variational AEs \sidecite{ASVAE}.
 
@@ -636,7 +636,7 @@ Lastly, feature fusion procedures can be carried out by means of linear or nonli
 
 \subsection{Linear approaches}
 
-Principal component analysis is a statistical technique developed geometrically by Pearson \sidecite{PCA} and algebraically by Hotelling \sidecite{PCAHotelling}. It consists in the extraction of the \textit{principal components} of a vector of random variables. Principal components are linear combinations of the original variables in a specific order, so that the first one has maximum variance, the second one has maximum possible variance while being uncorrelated to the first (equivalently, orthogonal), the third has maximum possible variance while being uncorrelated to the first and second, and so on. A modern analytical derivation of principal components can be found in \sidecite{PCABook}.
+Principal component analysis\index{principal component analysis} is a statistical technique developed geometrically by Pearson \sidecite{PCA} and algebraically by Hotelling \sidecite{PCAHotelling}. It consists in the extraction of the \textit{principal components} of a vector of random variables. Principal components are linear combinations of the original variables in a specific order, so that the first one has maximum variance, the second one has maximum possible variance while being uncorrelated to the first (equivalently, orthogonal), the third has maximum possible variance while being uncorrelated to the first and second, and so on. A modern analytical derivation of principal components can be found in \sidecite{PCABook}.
 
 The use of PCA for dimensionality reduction is very common, and can lead to reasonably good results. It is known that AEs with linear activations that minimize the mean quadratic error learn the principal components of the data \sidecite{ANNsPCA}. From this perspective, AEs can be regarded as generalizations of PCA. However, as opposed to PCA, AEs can learn nonlinear combinations of the variables and even overcomplete representations of data.
 
@@ -658,25 +658,25 @@ Fig.~\ref{p1Fig.AEvsPCA} shows a particular occurrence of these facts in the cas
   \caption[Test samples, PCA reconstructions and AE reconstructions]{\label{p1Fig.AEvsPCA}Row 1 shows test samples, second row corresponds to PCA reconstructions, the third one shows those from a linear AE optimizing MSE, row 4 displays reconstructions from a basic AE with $\tanh$ activation and cross-entropy as loss function, and last row corresponds to a robust AE.}  
 \end{figure}
 
-A procedure similar to PCA but from a different theoretical perspective is Factor Analysis (FA) \sidecite{PCAandFA}, which assumes a set of latent variables or \textit{factors} which are not observable but are linearly combined to produce the observed variables. The difference between PCA and FA is similar to that between the basic AE and the variational AE: the latter assumes that hypothetical, underlying variables exist and cause the observed data. Variational AEs and FA attempt to find the model that best describes these variables, whereas the basic AE and PCA only aim for a lower-dimensional representation.
+A procedure similar to PCA but from a different theoretical perspective is Factor Analysis (FA)\index{factor analysis} \sidecite{PCAandFA}, which assumes a set of latent variables or \textit{factors} which are not observable but are linearly combined to produce the observed variables. The difference between PCA and FA is similar to that between the basic AE and the variational AE: the latter assumes that hypothetical, underlying variables exist and cause the observed data. Variational AEs and FA attempt to find the model that best describes these variables, whereas the basic AE and PCA only aim for a lower-dimensional representation.
 
-Linear Discriminant Analysis (LDA) \sidecite{FisherLDA} is a supervised statistical method to find linear combinations of features that achieve good separation of classes. It makes some assumptions of normality and homoscedasticity over the data, and projects samples onto new coordinates that best discriminate classes. It can be easily seen that AEs are very different in theory to this method: they usually perform unsupervised learning, and they do not necessarily make previous assumptions of the data. In contrast, AEs may not find the best separation of classes but they might encode further meaningful information from the data. Therefore, these techniques may be convenient, each in very different types of problems.
+Linear Discriminant Analysis (LDA)\index{linear discriminant analysis} \sidecite{FisherLDA} is a supervised statistical method to find linear combinations of features that achieve good separation of classes. It makes some assumptions of normality and homoscedasticity over the data, and projects samples onto new coordinates that best discriminate classes. It can be easily seen that AEs are very different in theory to this method: they usually perform unsupervised learning, and they do not necessarily make previous assumptions of the data. In contrast, AEs may not find the best separation of classes but they might encode further meaningful information from the data. Therefore, these techniques may be convenient, each in very different types of problems.
 
 \subsection{Nonlinear approaches}
 
-Kernel PCA \sidecite{KernelPCA} is an extension of PCA which applies kernel methods in order to extract nonlinear combinations of variables. Since principal components can be computed by projecting samples onto the eigenvectors of the covariance matrix, the kernel trick can be applied in order to calculate the covariance matrix of the data in a higher-dimensional space, given by the kernel function. Therefore, kernel PCA can compute nonlinear combinations of variables and overcomplete representations. The choice of kernel, however, can determine the success of the method and may behave differently with each problem, and hence AEs are a more general and easily applicable framework for nonlinear feature fusion.
+Kernel PCA \sidecite{KernelPCA}\index{principal component analysis!kernel PCA} is an extension of PCA which applies kernel methods in order to extract nonlinear combinations of variables. Since principal components can be computed by projecting samples onto the eigenvectors of the covariance matrix, the kernel trick can be applied in order to calculate the covariance matrix of the data in a higher-dimensional space, given by the kernel function. Therefore, kernel PCA can compute nonlinear combinations of variables and overcomplete representations. The choice of kernel, however, can determine the success of the method and may behave differently with each problem, and hence AEs are a more general and easily applicable framework for nonlinear feature fusion.
 
-Multidimensional Scaling (MDS) \sidecite{MDS} is a well known technique and a foundation for other algorithms. It consists in finding new coordinates in a lower-dimensional space, while maintaining relative distances among data points as accurately as possible. For this to be achieved, it computes pairwise distances among points and then estimates an origin or zero point for these, which allows to transform relative distances into absolute distances that can be fitted into a real Euclidean space. Sammon mapping \sidecite{Sammon} modifies the classical cost function of MDS, in an attempt to similarly weigh retaining large distances as well as small ones. It achieves better preservation of local structure than classic MDS, at the cost of giving more importance to very small distances than large ones.  
+Multidimensional Scaling (MDS) \sidecite{MDS}\index{multidimensional scaling} is a well known technique and a foundation for other algorithms. It consists in finding new coordinates in a lower-dimensional space, while maintaining relative distances among data points as accurately as possible. For this to be achieved, it computes pairwise distances among points and then estimates an origin or zero point for these, which allows to transform relative distances into absolute distances that can be fitted into a real Euclidean space. Sammon mapping \sidecite{Sammon} modifies the classical cost function of MDS, in an attempt to similarly weigh retaining large distances as well as small ones. It achieves better preservation of local structure than classic MDS, at the cost of giving more importance to very small distances than large ones.  
 
 The approach of MDS to nonlinear feature fusion is opposite to that of AEs, which generally do not directly take into account distances among pairs of samples, and instead optimize a global measure of fitness. However, the objective function of an AE can be combined with that of MDS in order to produce a nonlinear embedding which considers pairwise distances among points \sidecite{EmbeddingAEReg}.
 
-Isomap \sidecite{Isomap} is a manifold learning method which extends MDS in order to find coordinates that describe the actual degrees of freedom of the data while preserving distances among neighbors and geodesic distances between the rest of points. In addition, Locally Linear Embedding (LLE) \sidecite{LLE} has a similar goal, to learn a manifold which preserves neighbors, but a very different approach: it linearly reconstructs each point from its neighbors in order to maintain the local structure of the manifold.
+Isomap \sidecite{Isomap}\index{Isomap} is a manifold learning method which extends MDS in order to find coordinates that describe the actual degrees of freedom of the data while preserving distances among neighbors and geodesic distances between the rest of points. In addition, Locally Linear Embedding (LLE) \sidecite{LLE}\index{locally linear embedding} has a similar goal, to learn a manifold which preserves neighbors, but a very different approach: it linearly reconstructs each point from its neighbors in order to maintain the local structure of the manifold.
 
 Both of these techniques can be compared to the contractive AE, as it also attempts to preserve the local behavior of the data in its encoding. Denoising AEs may also be indirectly forced to learn manifolds, when they exist, and corrupted examples will be projected back onto their surface \sidecite{vincent2010stacked}. However, AEs are able to map new instances onto the latent space after they have been trained, a task Isomap and LLE are not designed for.
 
-Laplacian Eigenmaps \sidecite{LaplacianEigenmaps} is a framework aiming to retain local properties as well. It consists in constructing an adjacency graph where instances are nodes and neighbors are connected by edges. Then, a weight matrix similar to an adjacency matrix is built. Last, eigenvalues and eigenvectors are obtained for the Laplacian matrix associated to the weight matrix, and those eigenvectors (except 0) are used to compute new coordinates for each point. As previously mentioned, AEs do not usually consider the local structure of the data, except for contractive AEs and further regularizations which incorporate measures of local properties into the objective function, such as Laplacian AEs \sidecite{LaplacianAE}.
+Laplacian Eigenmaps \sidecite{LaplacianEigenmaps}\index{Laplacian eigenmap} is a framework aiming to retain local properties as well. It consists in constructing an adjacency graph where instances are nodes and neighbors are connected by edges. Then, a weight matrix similar to an adjacency matrix is built. Last, eigenvalues and eigenvectors are obtained for the Laplacian matrix associated to the weight matrix, and those eigenvectors (except 0) are used to compute new coordinates for each point. As previously mentioned, AEs do not usually consider the local structure of the data, except for contractive AEs and further regularizations which incorporate measures of local properties into the objective function, such as Laplacian AEs \sidecite{LaplacianAE}.
 
-A Restricted Boltzmann Machine (RBM) \sidecite{DLBookRBM}, introduced originally as \textit{harmonium} in \sidecite{Harmonium}, is an undirected graphical model, with one visible layer and one hidden layer. They are defined by a joint probability distribution determined by an energy function.
+A Restricted Boltzmann Machine (RBM) \sidecite{DLBookRBM}\index{restricted Boltzmann machine}, introduced originally as \textit{harmonium} in \sidecite{Harmonium}, is an undirected graphical model, with one visible layer and one hidden layer. They are defined by a joint probability distribution determined by an energy function.
 However, computing probabilities is unfeasible since the distribution is intractable, and they have been proved to be hard to simulate \sidecite{RBMHard}. Instead, Contrastive Divergence \sidecite{ContrastiveDivergence} is used to train an RBM. RBMs are an alternative to AEs for greedy layer-wise initialization of weights in ANNs including AEs. AEs, however, are trained with more classical methods and are more easily adaptable to different tasks than RBMs.
 
 \section{Applications in feature learning and beyond}\label{p1Sec.Applications}

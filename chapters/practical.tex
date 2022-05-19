@@ -21,11 +21,11 @@ As explained in greater detail in Section~\ref{sec:layers}, different layers are
     \item \textbf{Sound, time series and sequential data}: many data sources impose a one-dimensional structure to the values, e.g. recorded sounds, stock prices, sensor signals across time, etc. Convolutional operations can also apply in this case, since they can operate in one dimension analogously to the two-dimensional version. However, other layers have been specifically designed for this kind of data, such as long short-term memory (LSTM) units or gated recurrent units (GRU). These are encompassed under the term \textit{recurrent units}.
 \end{itemize}
 
-\subsection{Model depth}
+\subsection{Model depth}\index{depth}
 
 Determining how deep a model should become, i.e., how many layers to stack, is a process influenced by the amount of variables and instances in the dataset. Taking into account that deep learning models are usually data-hungry, defining a model with many layers will require a large dataset in order to optimize all parameters. This inconvenience is especially present in the case of dense layer-based models, since these have many more parameters than convolutional models.
 
-\subsection{Encoding layer}
+\subsection{Encoding layer} \index{encoding layer}
 
 Autoencoders being mainly feature learners, the most important layer is that where the new representation of the data will be extracted. Some aspects that are important to evaluate are the dimension or shape of the encoding and the activation function.
 
@@ -33,7 +33,7 @@ The dimension of the encoding layer will determine the compactness of the new re
 
 For its part, the activation function will determine the range of the values that will be obtained. This is relevant if, for instance, bounded values are needed for a later purpose. In that case, a sigmoid or a $\tanh$ activation function would be helpful in providing values within the $[0,1]$ and $[-1,1]$ ranges, respectively.
 
-\subsection{Output layer}
+\subsection{Output layer} \index{output layer}
 
 Finally, the output layer needs to preserve the same structure of the input data. This means that, if an instance is composed of $n$ values, this layer needs to produce $n$ outputs.
 
@@ -45,9 +45,9 @@ Using the appropriate activation function in the output layer can facilitate the
     \item \textbf{Bounded interval}: Data in the $[0,1]$ range can be produced as the result of a sigmoid activation. Similarly, the $\tanh$ activation function can provide data in the $[-1,1]$ range.
 \end{itemize}
 
-\subsection{Architecture search}
+\subsection{Architecture search} 
 
-Even if the previous guidelines can provide a starting point for the design of an appropriate autoencoder for a certain task, many hyperparameters remain for the user to set: number of total layers, number of neurons in each layer, loss function penalties to add, etc. The search for an optimal model can become difficult if performed by trial and error, even for experienced practitioners. There are some solutions in order to facilitate this process. An extensive experimentation serving to identify which autoencoder variants and structures are more suitable to tackle different types of problems is available at \sidecite{pulgar2020choosing}. The alternative is running an automatic search for an adequate architecture under some heuristic, for example, an evolutionary method \sidecite{charte2020evoaaa}. This option falls under the category of algorithms known as neural architecture search \sidecite{JMLR:v20:18-598}.
+Even if the previous guidelines can provide a starting point for the design of an appropriate autoencoder for a certain task, many hyperparameters remain for the user to set: number of total layers, number of neurons in each layer, loss function penalties to add, etc. The search for an optimal model can become difficult if performed by trial and error, even for experienced practitioners. There are some solutions in order to facilitate this process. An extensive experimentation serving to identify which autoencoder variants and structures are more suitable to tackle different types of problems is available at \sidecite{pulgar2020choosing}. The alternative is running an automatic search for an adequate architecture under some heuristic, for example, an evolutionary method \sidecite{charte2020evoaaa}. This option falls under the category of algorithms known as neural architecture search \sidecite{JMLR:v20:18-598}.\index{neural architecture search}
 
 
 \section{Training deep models}
@@ -56,7 +56,7 @@ The training process of a deep learning model can be very resource-intensive, si
 
 \subsection{Stochastic gradient descent}
 
-Deep learning models are usually optimized by differentiating the objective function with respect to the model parameters and updating those in the direction of steepest descent. This optimization scheme is known as \textit{gradient descent}, but it suffers from high time complexity when datasets become large. An approximation called \textit{stochastic gradient descent} (SGD) is used instead as a result \sidecite{goodfellow2016deep}. It simply runs gradient descent on successive minibatches of data, estimating the true gradient as the overall expectation of all gradients computed. This fixes the time required for each parameter update, depending only on the size of the minibatch and independently from the training set size.
+Deep learning models are usually optimized by differentiating the objective function with respect to the model parameters and updating those in the direction of steepest descent. This optimization scheme is known as \textit{gradient descent}, but it suffers from high time complexity when datasets become large. An approximation called \textit{stochastic gradient descent} (SGD)\index{stochastic gradient descent} is used instead as a result \sidecite{goodfellow2016deep}. It simply runs gradient descent on successive minibatches of data, estimating the true gradient as the overall expectation of all gradients computed. This fixes the time required for each parameter update, depending only on the size of the minibatch and independently from the training set size.
 
 Gradient descent is prone to converging to local minima and SGD is just an approximation which will also tend to stabilize in local minima or locations with small gradients. However, neural networks do not represent convex functions, on the contrary, they almost always present a large amount of local minima. As a consequence, many improvements have been proposed to find better solutions with lower values of the objective function. Of course, they still do not ensure that a global minimum is reached, but they are more likely to find an overall well optimized point in parameter space. Some of these improvements on SGD are AdaBoost \sidecite{freund1997decision}, Adadelta \sidecite{zeiler2012adadelta} and Adam \sidecite{kingma2014adam}.
 
@@ -68,12 +68,12 @@ the training stage is usually divided into a series of epochs, during which a ba
 
 \subsubsection{Forward pass}
 
-The value of the objective function is the result of transforming the input data through the network up to the application of the loss function, that is, the metric that evaluates the obtained output with respect to the desired one. This sequence of operations is known as a \textit{forward pass} of a batch of data. 
+The value of the objective function is the result of transforming the input data through the network up to the application of the loss function, that is, the metric that evaluates the obtained output with respect to the desired one. This sequence of operations is known as a \textit{forward pass}\index{forward pass} of a batch of data. 
 
 
 \subsubsection{Backward pass}
 
-The expression for the derivative of each layer in a feedforward neural network turns out to be dependent on the values for the derivatives in the next layer. The strategy, as a result, is to perform the computations starting from the output layer back to the input layer. This technique is known as \textit{backpropagation of errors}. 
+The expression for the derivative of each layer in a feedforward neural network turns out to be dependent on the values for the derivatives in the next layer. The strategy, as a result, is to perform the computations starting from the output layer back to the input layer. This technique is known as \textit{backpropagation of errors}\index{backpropagation}. 
 
 The derivatives are computed for the last layer and, using the chain rule, those values can be reused to find the derivatives for the second-to-last layer, then the layer before, and the rest successively. This backward pass is what allows the optimizer to calculate the gradient of the objective function with respect to all the weights. 
 
@@ -184,7 +184,7 @@ encoder(x_test)
 \end{lstlisting}
 
 
-\subsection{GPU parallelization}
+\subsection{GPU parallelization}\index{parallelization}
 
 From a hardware point of view, neural network training is a relatively easy task since it mostly involves great amounts of floating point matrix products. Thus, it does not require the complexity of a whole CPU to run the optimization task. Instead, most of the bulk of the process can be carried out by the simpler, more dense computing chips that are present in current graphical processing units (GPU). These allow very fast parallel calculations and, as a result, are ideal to accelerate the training process.
 
