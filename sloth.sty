@@ -32,6 +32,7 @@
 
 % Load the package for hyperreferences
 \usepackage{kaorefs}
+\hypersetup{colorlinks = false, allcolors = black}
 
 \graphicspath{{images/}{./}{assets/}%
 {papers/01-autoencoder-review/}%
@@ -215,7 +216,7 @@
       % \hspace{.5em}
       \centering
       % Indicar la imagen de fondo en el siguiente comando
-      \includegraphics[width=\paperwidth,height=1.05\paperheight,%
+      \includegraphics[width=\paperwidth,height=\paperheight,%
       keepaspectratio]{portada-ugr-color}%
       \vspace{-1cm}
 }}}
@@ -227,14 +228,13 @@
     \AddToShipoutPicture*{\BackgroundPic}
     \phantomsection 
     \pdfbookmark[1]{Título}{title}
-    \begin{addmargin}[2.95cm]{0cm}
+    \begin{addmargin}[2.2cm]{0cm}
     \begin{flushleft}
-      \vfill
-      \large{\textsf{\@department}}
+      \large{~\\~\\\textsf{\@department}}
       \vfill\vfill
       {\large\textsc{tesis doctoral}}
       \begin{flushleft}
-        \Huge
+        \huge
         %\setstretch{0.8}
         \@title
       \end{flushleft}
